@@ -21,6 +21,7 @@ import com.kunminx.architecture.ui.scope.ViewModelScope;
  */
 public class BaseActivity extends AppCompatActivity {
 
+    protected String TAG = this.getClass().getSimpleName();
     private final ViewModelScope mViewModelScope = new ViewModelScope();
 
     @Override
@@ -29,8 +30,16 @@ public class BaseActivity extends AppCompatActivity {
         BarUtils.setStatusBarLightMode(this, true);
 
         super.onCreate(savedInstanceState);
+        ActivityStack.getInstance().add(this);
 
         getLifecycle().addObserver(NetworkStateManager.getInstance());
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        ActivityStack.getInstance().remove(this);
+        super.onDestroy();
     }
 
     protected <T extends ViewModel> T getActivityScopeViewModel(@NonNull Class<T> modelClass) {
@@ -40,6 +49,5 @@ public class BaseActivity extends AppCompatActivity {
     protected <T extends ViewModel> T getApplicationScopeViewModel(@NonNull Class<T> modelClass) {
         return mViewModelScope.getApplicationScopeViewModel(modelClass);
     }
-
 
 }

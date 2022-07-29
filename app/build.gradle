@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.sunmi.lightarchitecture"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -25,10 +25,16 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
 
     implementation project(":architecture")
+//    implementation 'com.github.LingChenJie:LightArchitecture:v0.0.2'
+
 
 }
