@@ -1,4 +1,4 @@
-package com.sunmi.lightarchitecture;
+package com.architecture.sample;
 
 import org.junit.Test;
 

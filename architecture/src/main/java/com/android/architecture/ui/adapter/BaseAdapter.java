@@ -49,9 +49,9 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
         onBindingData(holder, data.get(position), position);
     }
 
-    protected abstract void onBindingData(BaseHolder<V> holder, T t, int position);
-
     protected abstract V onBindingView(ViewGroup viewGroup);
+
+    protected abstract void onBindingData(BaseHolder<V> holder, T data, int position);
 
     @Override
     public int getItemCount() {

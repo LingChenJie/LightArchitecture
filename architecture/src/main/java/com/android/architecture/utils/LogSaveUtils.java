@@ -83,7 +83,7 @@ public class LogSaveUtils {
             try {
                 if (!dirFile.exists()) {
                     boolean result = dirFile.mkdirs();
-                    Log.e(TAG, "创建目录" + logSavePath + "; 结果:" + result);
+                    Log.e(TAG, "创建目录:" + logSavePath + "; 结果:" + result);
                 } else {
                     File[] files = dirFile.listFiles();
                     if (files != null) {
@@ -117,12 +117,15 @@ public class LogSaveUtils {
                 String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
                 String logPath = sdPath + "/" + LOG_DIR_NAME + "/" + Utils.getApp().getPackageName() + "/";
                 File file = new File(logPath);
+                boolean mkdirs = false;
                 if (!file.exists()) {
-                    boolean mkdirs = file.mkdirs();
-                    Log.e(TAG, "创建目录结果: " + mkdirs);
+                    mkdirs = file.mkdirs();
+                    Log.e(TAG, "创建目录: " + logPath + "; 结果：" + mkdirs);
                 }
-                LOG_DIR_PATH = logPath;
-                return logPath;
+                if (mkdirs) {
+                    LOG_DIR_PATH = logPath;
+                    return logPath;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,7 +135,7 @@ public class LogSaveUtils {
         File file = new File(logPath);
         if (!file.exists()) {
             boolean mkdirs = file.mkdirs();
-            Log.e(TAG, "创建目录结果: " + mkdirs);
+            Log.e(TAG, "创建目录: " + logPath + "; 结果：" + mkdirs);
         }
         LOG_DIR_PATH = logPath;
         return logPath;
