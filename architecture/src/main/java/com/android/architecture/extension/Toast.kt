@@ -3,7 +3,7 @@ package com.android.architecture.extension
 import android.widget.Toast
 import androidx.annotation.StringRes
 import com.android.architecture.helper.MainThreadHelper
-import com.android.architecture.utils.Utils
+import com.android.architecture.utils.AppUtils
 
 /**
  * File describe:
@@ -15,13 +15,13 @@ import com.android.architecture.utils.Utils
 @JvmOverloads
 fun toast(@StringRes resId: Int, duration: Int = Toast.LENGTH_SHORT) {
     MainThreadHelper.run {
-        Toast.makeText(Utils.getApp(), resId, duration).show()
+        Toast.makeText(AppUtils.getApp(), resId, duration).show()
     }
 }
 
 @JvmOverloads
 fun toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
     MainThreadHelper.run {
-        Toast.makeText(Utils.getApp(), text, duration).show()
+        Toast.makeText(AppUtils.getApp(), text, duration).show()
     }
 }

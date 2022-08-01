@@ -404,9 +404,9 @@ public final class BarUtils {
      */
     public static int getActionBarHeight() {
         TypedValue tv = new TypedValue();
-        if (Utils.getApp().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+        if (AppUtils.getApp().getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
             return TypedValue.complexToDimensionPixelSize(
-                    tv.data, Utils.getApp().getResources().getDisplayMetrics()
+                    tv.data, AppUtils.getApp().getResources().getDisplayMetrics()
             );
         }
         return 0;
@@ -436,7 +436,7 @@ public final class BarUtils {
     private static void invokePanels(final String methodName) {
         try {
             @SuppressLint("WrongConstant")
-            Object service = Utils.getApp().getSystemService("statusbar");
+            Object service = AppUtils.getApp().getSystemService("statusbar");
             @SuppressLint("PrivateApi")
             Class<?> statusBarManager = Class.forName("android.app.StatusBarManager");
             Method expand = statusBarManager.getMethod(methodName);
@@ -487,7 +487,7 @@ public final class BarUtils {
             final View child = decorView.getChildAt(i);
             final int id = child.getId();
             if (id != View.NO_ID) {
-                String resourceEntryName = Utils.getApp()
+                String resourceEntryName = AppUtils.getApp()
                         .getResources()
                         .getResourceEntryName(id);
                 if ("navigationBarBackground".equals(resourceEntryName)) {
@@ -530,7 +530,7 @@ public final class BarUtils {
             final View child = decorView.getChildAt(i);
             final int id = child.getId();
             if (id != View.NO_ID) {
-                String resourceEntryName = Utils.getApp()
+                String resourceEntryName = AppUtils.getApp()
                         .getResources()
                         .getResourceEntryName(id);
                 if ("navigationBarBackground".equals(resourceEntryName)
@@ -597,7 +597,7 @@ public final class BarUtils {
      * @return {@code true}: yes<br>{@code false}: no
      */
     public static boolean isSupportNavBar() {
-        WindowManager wm = (WindowManager) Utils.getApp().getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) AppUtils.getApp().getSystemService(Context.WINDOW_SERVICE);
         if (wm == null) {
             return false;
         }

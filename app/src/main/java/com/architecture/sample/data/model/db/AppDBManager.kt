@@ -1,7 +1,7 @@
 package com.architecture.sample.data.model.db
 
 import androidx.room.Room
-import com.android.architecture.utils.Utils
+import com.android.architecture.utils.AppUtils
 
 /**
  * File describe:
@@ -22,7 +22,7 @@ class AppDBManager private constructor() {
     }
 
     private val database: AppDB = Room.databaseBuilder(
-        Utils.getApp(),
+        AppUtils.getApp(),
         AppDB::class.java,
         DATABASE_NAME
     ).build()

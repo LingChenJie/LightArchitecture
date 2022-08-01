@@ -1,6 +1,4 @@
-package com.android.architecture.utils;
-
-import com.android.architecture.helper.AppExecutors;
+package com.android.architecture.helper;
 
 /**
  * File describe:

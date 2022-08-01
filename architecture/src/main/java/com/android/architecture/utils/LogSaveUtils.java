@@ -5,9 +5,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
-import java.io.Closeable;
 import java.io.File;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -115,7 +113,7 @@ public class LogSaveUtils {
             if (Environment.MEDIA_MOUNTED.equals(Environment
                     .getExternalStorageState())) {
                 String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-                String logPath = sdPath + "/" + LOG_DIR_NAME + "/" + Utils.getApp().getPackageName() + "/";
+                String logPath = sdPath + "/" + LOG_DIR_NAME + "/" + AppUtils.getApp().getPackageName() + "/";
                 File file = new File(logPath);
                 boolean mkdirs = false;
                 if (!file.exists()) {
@@ -130,8 +128,8 @@ public class LogSaveUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String cachePath = Utils.getApp().getCacheDir().getAbsolutePath();
-        String logPath = cachePath + "/" + LOG_DIR_NAME + "/" + Utils.getApp().getPackageName() + "/";
+        String cachePath = AppUtils.getApp().getCacheDir().getAbsolutePath();
+        String logPath = cachePath + "/" + LOG_DIR_NAME + "/" + AppUtils.getApp().getPackageName() + "/";
         File file = new File(logPath);
         if (!file.exists()) {
             boolean mkdirs = file.mkdirs();

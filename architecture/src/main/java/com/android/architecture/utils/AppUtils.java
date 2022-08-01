@@ -40,7 +40,7 @@ import java.util.Set;
  *     desc  : utils about initialization
  * </pre>
  */
-public final class Utils {
+public final class AppUtils {
 
     private static final String PERMISSION_ACTIVITY_CLASS_NAME =
             "com.blankj.utilcode.util.PermissionUtils$PermissionActivity";
@@ -50,7 +50,7 @@ public final class Utils {
     @SuppressLint("StaticFieldLeak")
     private static Application sApplication;
 
-    private Utils() {
+    private AppUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
@@ -151,7 +151,7 @@ public final class Utils {
                 return;
             }
             InputMethodManager imm =
-                    (InputMethodManager) Utils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    (InputMethodManager) AppUtils.getApp().getSystemService(Context.INPUT_METHOD_SERVICE);
             if (imm == null) {
                 return;
             }
@@ -356,7 +356,7 @@ public final class Utils {
 
         @Override
         public boolean onCreate() {
-            Utils.init(getContext());
+            AppUtils.init(getContext());
             return true;
         }
     }

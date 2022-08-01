@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 
-import com.android.architecture.utils.Utils;
+import com.android.architecture.utils.AppUtils;
 
 /**
  * File describe:
@@ -32,12 +32,12 @@ public class NetworkStateManager implements DefaultLifecycleObserver {
     public void onResume(@NonNull LifecycleOwner owner) {
         DefaultLifecycleObserver.super.onResume(owner);
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        Utils.getApp().getApplicationContext().registerReceiver(mNetworkStateReceiver, filter);
+        AppUtils.getApp().getApplicationContext().registerReceiver(mNetworkStateReceiver, filter);
     }
 
     @Override
     public void onPause(@NonNull LifecycleOwner owner) {
-        Utils.getApp().getApplicationContext().unregisterReceiver(mNetworkStateReceiver);
+        AppUtils.getApp().getApplicationContext().unregisterReceiver(mNetworkStateReceiver);
     }
 
 }

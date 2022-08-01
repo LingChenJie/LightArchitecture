@@ -1,7 +1,7 @@
 package com.android.architecture.data.response;
 
 import com.android.architecture.R;
-import com.android.architecture.utils.Utils;
+import com.android.architecture.utils.AppUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,8 +21,8 @@ public class ResultCode {
     public static final String FAIL = "01";
 
     static {
-        map.put(SUCCESS, Utils.getApp().getString(R.string.code_success));
-        map.put(FAIL, Utils.getApp().getString(R.string.code_fail));
+        map.put(SUCCESS, AppUtils.getApp().getString(R.string.code_success));
+        map.put(FAIL, AppUtils.getApp().getString(R.string.code_fail));
     }
 
     public static String getMessage(String code) {

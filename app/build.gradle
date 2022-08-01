@@ -50,6 +50,8 @@ dependencies {
     kapt "androidx.room:room-compiler:2.4.3"
 //    implementation 'com.github.LingChenJie:LightArchitecture:v0.0.2'
 
+    debugApi 'com.guolindev.glance:glance:1.1.0'
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
