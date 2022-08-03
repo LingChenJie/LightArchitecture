@@ -1,4 +1,4 @@
-package com.android.architecture.transaction;
+package com.android.architecture.domain.transaction;
 
 import com.android.architecture.R;
 import com.android.architecture.utils.AppUtils;

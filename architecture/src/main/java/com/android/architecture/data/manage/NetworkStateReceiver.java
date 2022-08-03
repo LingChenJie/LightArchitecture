@@ -1,4 +1,4 @@
-package com.android.architecture.data.response.manage;
+package com.android.architecture.data.manage;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

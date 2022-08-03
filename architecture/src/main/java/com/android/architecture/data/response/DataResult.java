@@ -11,10 +11,10 @@ public class DataResult<T> {
 
     private String code;
     private String message;
-    private T entity;
+    private T data;
 
     public DataResult(T entity) {
-        this.entity = entity;
+        this.data = entity;
         this.code = ResultCode.SUCCESS;
         this.message = ResultCode.getMessage(code);
     }
@@ -45,12 +45,12 @@ public class DataResult<T> {
         this.message = message;
     }
 
-    public T getEntity() {
-        return entity;
+    public T getData() {
+        return data;
     }
 
-    public void setEntity(T entity) {
-        this.entity = entity;
+    public void setData(T data) {
+        this.data = data;
     }
 
 }

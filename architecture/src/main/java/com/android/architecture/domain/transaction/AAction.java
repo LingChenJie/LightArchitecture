@@ -1,10 +1,13 @@
-package com.android.architecture.transaction;
+package com.android.architecture.domain.transaction;
 
 /**
- * Describe:抽象类，定义交易的每一操作步骤
+ * File describe:定义交易的每一步骤
+ * Author: SuQi
+ * Create date: 2022/8/3
+ * Modify date: 2022/8/3
+ * Version: 1
  */
 public abstract class AAction {
-
     protected String TAG = getClass().getSimpleName();
     private final ActionStartListener actionStartListener;
     private ActionEndListener actionEndListener;
@@ -104,5 +107,4 @@ public abstract class AAction {
     public interface ActionEndListener {
         void onEnd(AAction action, ActionResult result);
     }
-
 }

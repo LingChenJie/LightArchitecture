@@ -1,4 +1,4 @@
-package com.android.architecture.transaction;
+package com.android.architecture.domain.transaction;
 
 import android.os.Handler;
 import android.os.Looper;

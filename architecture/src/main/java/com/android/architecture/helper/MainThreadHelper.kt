@@ -19,4 +19,11 @@ object MainThreadHelper {
         }
     }
 
+    fun judgeMainThread(): Boolean {
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            return true
+        }
+        return false
+    }
+
 }

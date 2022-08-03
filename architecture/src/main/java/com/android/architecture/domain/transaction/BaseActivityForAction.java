@@ -1,4 +1,4 @@
-package com.android.architecture.transaction;
+package com.android.architecture.domain.transaction;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -10,10 +10,13 @@ import com.android.architecture.helper.Logger;
 import com.android.architecture.ui.page.BaseActivity;
 
 /**
- * File describe:为Action提供的基类Activity
+ * File describe:为Action提供服务的Activity基类
+ * Author: SuQi
+ * Create date: 2022/8/3
+ * Modify date: 2022/8/3
+ * Version: 1
  */
 public abstract class BaseActivityForAction extends BaseActivity {
-
     public static final String SINGLE_ACTION = "SINGLE_ACTION";
 
     private boolean hasFinished = false;

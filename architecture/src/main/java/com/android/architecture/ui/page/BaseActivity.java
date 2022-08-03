@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModel;
 
-import com.android.architecture.data.response.manage.NetworkStateManager;
+import com.android.architecture.data.manage.NetworkStateManager;
 import com.android.architecture.ui.scope.ViewModelScope;
 
 /**
