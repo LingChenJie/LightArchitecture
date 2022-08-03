@@ -8,7 +8,7 @@ package com.android.architecture.domain.transaction;
  * Version: 1
  */
 public abstract class AAction {
-    protected String TAG = getClass().getSimpleName();
+    protected String ACTION_NAME = getClass().getSimpleName();
     private final ActionStartListener actionStartListener;
     private ActionEndListener actionEndListener;
 
@@ -38,7 +38,7 @@ public abstract class AAction {
      */
     public void execute() {
         if (isSingleAction()) {
-            TransactionConstant.getInstance().addSingleAction(TAG, this);
+            TransactionConstant.getInstance().addSingleAction(ACTION_NAME, this);
         } else {
             TransactionConstant.getInstance().setCurrentAction(this);
         }
@@ -67,14 +67,29 @@ public abstract class AAction {
      *
      * @param result
      */
-    public void setResult(ActionResult result) {
-        clear();
+    protected void setResult(ActionResult result) {
+        setResult(result, true);
+    }
+
+    /**
+     * 设置action结果, 此接口内部调用{@link ActionEndListener#onEnd(AAction, ActionResult)} 方法
+     *
+     * @param result
+     */
+    protected void setResult(ActionResult result, boolean isClear) {
+        if (isClear) {
+            clear();
+        }
         if (actionEndListener != null) {
             actionEndListener.onEnd(this, result);
         }
     }
 
-    public void clear() {
+    /**
+     * 释放资源
+     */
+    void clear() {
+        removeAction();
         onClear();
     }
 
@@ -86,11 +101,10 @@ public abstract class AAction {
 
     /**
      * 移除当前Action
-     * 有对应Activity的不用调用这个方法，会在对应Activity的onDestroy移除当前Action
      */
-    protected void removeCurrentAction() {
+    private void removeAction() {
         if (isSingleAction()) {
-            TransactionConstant.getInstance().removeSingleAction(TAG);
+            TransactionConstant.getInstance().removeSingleAction(ACTION_NAME);
         }
     }
 

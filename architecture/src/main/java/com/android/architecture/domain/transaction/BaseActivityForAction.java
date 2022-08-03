@@ -20,13 +20,13 @@ public abstract class BaseActivityForAction extends BaseActivity {
     public static final String SINGLE_ACTION = "SINGLE_ACTION";
 
     private boolean hasFinished = false;
-    private boolean isSingleAction = false;
+    private boolean isForSingleAction = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        isSingleAction = getIntent().getBooleanExtra(SINGLE_ACTION, false);
-        if (isSingleAction) {
+        isForSingleAction = getIntent().getBooleanExtra(SINGLE_ACTION, false);
+        if (isForSingleAction) {
             AAction action = TransactionConstant.getInstance().getSingleAction(getSingleActionName());
             if (action == null) {
                 Logger.e(LightConstant.TAG, TAG + " can't find a match Action");
@@ -73,17 +73,19 @@ public abstract class BaseActivityForAction extends BaseActivity {
 
     private void doFinish(ActionResult result) {
         AAction currentAction;
-        if (isSingleAction) {
+        if (isForSingleAction) {
             currentAction = TransactionConstant.getInstance().getSingleAction(getSingleActionName());
         } else {
             currentAction = TransactionConstant.getInstance().getCurrentAction();
         }
         Logger.d(TAG, "doFinish action: " + currentAction);
         if (currentAction != null) {
-            currentAction.setResult(result);
+            if (isForSingleAction) {
+                currentAction.setResult(result, false);
+            } else {
+                currentAction.setResult(result);
+            }
         } else {
-            Logger.e(LightConstant.TAG, TAG + " can't find a match Action");
-            Logger.e(LightConstant.TAG, TAG + " can't find a match Action");
             finish();
         }
     }
@@ -102,12 +104,11 @@ public abstract class BaseActivityForAction extends BaseActivity {
     }
 
     private void clearAction() {
-        if (isSingleAction) {
+        if (isForSingleAction) {
             AAction action = TransactionConstant.getInstance().getSingleAction(getSingleActionName());
             if (action != null) {
                 action.clear();
             }
-            TransactionConstant.getInstance().removeSingleAction(getSingleActionName());
         }
     }
 

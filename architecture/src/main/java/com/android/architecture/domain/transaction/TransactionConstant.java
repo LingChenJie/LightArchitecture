@@ -1,7 +1,5 @@
 package com.android.architecture.domain.transaction;
 
-import android.annotation.SuppressLint;
-
 import com.android.architecture.helper.Logger;
 import com.android.architecture.ui.page.BaseActivity;
 
@@ -10,13 +8,14 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Describe:交易过程常量
+ * File describe:交易过程中的常量，交易初始进行赋值，交易结束进行置为null，防止内存泄漏
+ * Author: SuQi
+ * Create date: 2022/8/3
+ * Modify date: 2022/8/3
+ * Version: 1
  */
 public class TransactionConstant {
-
     private static final String TAG = TransactionConstant.class.getSimpleName();
-
-    @SuppressLint("StaticFieldLeak")
     private static final TransactionConstant INSTANCE = new TransactionConstant();
 
     private BaseActivity currentActivity;
@@ -70,5 +69,4 @@ public class TransactionConstant {
         singleActionMap.remove(name);
         Logger.d(TAG, "removeSingleAction: " + name + "; size:" + singleActionMap.size());
     }
-
 }
