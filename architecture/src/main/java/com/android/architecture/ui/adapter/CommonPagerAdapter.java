@@ -14,13 +14,13 @@ import androidx.viewpager.widget.PagerAdapter;
  * Modify date: 2022/7/28
  * Version: 1
  */
-public class CommonViewPagerAdapter extends PagerAdapter {
+public class CommonPagerAdapter extends PagerAdapter {
 
     private final int count;
     private final boolean enableDestroyItem;
     private final String[] title;
 
-    public CommonViewPagerAdapter(boolean enableDestroyItem, String[] title) {
+    public CommonPagerAdapter(boolean enableDestroyItem, String[] title) {
         this.enableDestroyItem = enableDestroyItem;
         this.title = title;
         this.count = title.length;

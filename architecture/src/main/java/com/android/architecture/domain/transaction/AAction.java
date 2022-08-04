@@ -8,7 +8,7 @@ package com.android.architecture.domain.transaction;
  * Version: 1
  */
 public abstract class AAction {
-    protected String ACTION_NAME = getClass().getSimpleName();
+    private final String ACTION_NAME = getClass().getSimpleName();
     private final ActionStartListener actionStartListener;
     private ActionEndListener actionEndListener;
 

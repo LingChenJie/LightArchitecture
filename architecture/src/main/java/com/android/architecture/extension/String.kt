@@ -1,8 +1,5 @@
 package com.android.architecture.extension
 
-import androidx.annotation.StringRes
-import com.android.architecture.utils.AppUtils
-
 /**
  * File describe:
  * Author: SuQi
@@ -10,8 +7,6 @@ import com.android.architecture.utils.AppUtils
  * Modify date: 2022/5/7
  * Version: 1
  */
-fun getString(@StringRes resId: Int) = AppUtils.getApp().getString(resId)
-
 val String?.empty: Boolean
     get() {
         if (this == null) {
