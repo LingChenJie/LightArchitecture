@@ -1,6 +1,7 @@
 package com.android.architecture.extension
 
 import android.content.Context
+import androidx.core.content.ContextCompat
 
 //屏幕宽度(px)
 inline val Context.screenWidth: Int
@@ -14,6 +15,9 @@ inline val Context.screenHeight: Int
 inline val Context.density: Float
     get() = resources.displayMetrics.density
 
+fun <S> getSystemService(serviceClass: Class<S>): S? {
+    return ContextCompat.getSystemService(getContext(), serviceClass)
+}
 
 //dp 转为 px
 fun Context.dp2px(value: Int): Int = (density * value).toInt()

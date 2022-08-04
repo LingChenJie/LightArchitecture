@@ -3,6 +3,8 @@ package com.android.architecture.extension
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.annotation.NonNull
+import androidx.core.content.ContextCompat
 
 fun <T : View> T.click(block: (T) -> Unit) {
     setOnClickListener {
