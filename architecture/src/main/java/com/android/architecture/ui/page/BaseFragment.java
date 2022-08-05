@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,16 +24,16 @@ import com.android.architecture.ui.scope.ViewModelScope;
  * Modify date: 2022/7/28
  * Version: 1
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
 
     protected String TAG = this.getClass().getSimpleName();
-    protected AppCompatActivity mActivity;
+    protected A mActivity;
     private final ViewModelScope mViewModelScope = new ViewModelScope();
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        mActivity = (AppCompatActivity) context;
+        mActivity = (A) requireActivity();
     }
 
     @Override
