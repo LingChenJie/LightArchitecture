@@ -28,7 +28,7 @@ import com.architecture.sample.domain.request.NoteRequester
  * Modify date: 2022/7/31
  * Version: 1
  */
-class EditorFragment : BaseFragment() {
+class EditorFragment : BaseFragment<MainActivity>() {
 
     companion object {
         private const val NOTE = "NOTE"

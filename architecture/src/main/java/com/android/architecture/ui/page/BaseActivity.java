@@ -1,5 +1,6 @@
 package com.android.architecture.ui.page;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.android.architecture.data.manage.NetworkStateManager;
 import com.android.architecture.extension.ViewKt;
 import com.android.architecture.ui.page.action.BundleAction;
 import com.android.architecture.ui.scope.ViewModelScope;
+import com.android.architecture.utils.AdaptScreenUtils;
+import com.android.architecture.utils.ScreenUtils;
 
 /**
  * File describe:
@@ -49,6 +52,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
     }
 
     protected void input() {
+    }
+
+    @Override
+    public Resources getResources() {
+        if (ScreenUtils.isPortrait()) {
+            return AdaptScreenUtils.adaptWidth(super.getResources(), 360);
+        } else {
+            return AdaptScreenUtils.adaptHeight(super.getResources(), 640);
+        }
     }
 
     @Override

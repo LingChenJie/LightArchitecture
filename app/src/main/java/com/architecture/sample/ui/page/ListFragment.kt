@@ -26,7 +26,7 @@ import com.architecture.sample.ui.adapter.NoteAdapter
  * Modify date: 2022/7/30
  * Version: 1
  */
-class ListFragment : BaseFragment() {
+class ListFragment : BaseFragment<MainActivity>() {
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!

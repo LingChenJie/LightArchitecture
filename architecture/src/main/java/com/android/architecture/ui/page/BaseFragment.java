@@ -59,6 +59,12 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     protected void input() {
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mActivity = null;
+    }
+
     protected NavController nav() {
         return NavHostFragment.findNavController(this);
     }
