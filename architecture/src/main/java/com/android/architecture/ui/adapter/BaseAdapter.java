@@ -16,9 +16,10 @@ import java.util.List;
  * Modify date: 2022/7/28
  * Version: 1
  */
-public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView.Adapter<BaseAdapter.BaseHolder<V>> {
+public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView.Adapter<BaseAdapter.ViewHolder<V>> {
     private final List<T> data;
     protected OnItemClickListener<T> listener;
+    protected OnItemLongClickListener<T> longListener;
 
     public BaseAdapter() {
         data = new ArrayList<>();
@@ -30,8 +31,17 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
         notifyDataSetChanged();
     }
 
-    public void setItemListener(OnItemClickListener<T> listener) {
+    public void addData(List<T> data) {
+        this.data.addAll(data);
+        notifyItemRangeInserted(this.data.size() - data.size(), data.size());
+    }
+
+    public void setItemClickListener(OnItemClickListener<T> listener) {
         this.listener = listener;
+    }
+
+    public void setItemLongClickListener(OnItemLongClickListener<T> listener) {
+        this.longListener = listener;
     }
 
     protected List<T> getData() {
@@ -40,28 +50,28 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
 
     @NonNull
     @Override
-    public BaseHolder<V> onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new BaseHolder<>(onBindingView(viewGroup));
+    public ViewHolder<V> onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new ViewHolder<>(onBindingView(viewGroup));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BaseHolder<V> holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder<V> holder, int position) {
         onBindingData(holder, data.get(position), position);
     }
 
     protected abstract V onBindingView(ViewGroup viewGroup);
 
-    protected abstract void onBindingData(BaseHolder<V> holder, T data, int position);
+    protected abstract void onBindingData(ViewHolder<V> holder, T data, int position);
 
     @Override
     public int getItemCount() {
         return data.size();
     }
 
-    public static class BaseHolder<V extends ViewBinding> extends RecyclerView.ViewHolder {
+    public static class ViewHolder<V extends ViewBinding> extends RecyclerView.ViewHolder {
         private final V binding;
 
-        public BaseHolder(V viewBinding) {
+        public ViewHolder(V viewBinding) {
             super(viewBinding.getRoot());
             this.binding = viewBinding;
         }
@@ -72,6 +82,11 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
     }
 
     public interface OnItemClickListener<T> {
-        void onItemClick(int viewId, int position, T t);
+        void onItemClick(int viewId, int position, T item);
     }
+
+    public interface OnItemLongClickListener<T> {
+        void onItemClick(int viewId, int position, T item);
+    }
+
 }

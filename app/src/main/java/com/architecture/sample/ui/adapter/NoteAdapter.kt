@@ -25,7 +25,7 @@ class NoteAdapter : BaseAdapter<Note, AdapterNoteListBinding>() {
     }
 
     override fun onBindingData(
-        holder: BaseHolder<AdapterNoteListBinding>,
+        holder: ViewHolder<AdapterNoteListBinding>,
         data: Note,
         position: Int
     ) {
