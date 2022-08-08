@@ -28,8 +28,7 @@ import com.architecture.sample.ui.adapter.NoteAdapter
  */
 class ListFragment : BaseFragment<MainActivity>() {
 
-    private var _binding: FragmentListBinding? = null
-    private val binding get() = _binding!!
+    private lateinit var binding: FragmentListBinding
     private val state by viewModels<ListViewModel>()
     private val noteRequester by viewModels<NoteRequester>()
     private val messenger by activityViewModels<PageMessenger>()
@@ -40,7 +39,7 @@ class ListFragment : BaseFragment<MainActivity>() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentListBinding.inflate(inflater, container, false)
+        binding = FragmentListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -51,9 +50,9 @@ class ListFragment : BaseFragment<MainActivity>() {
 
     override fun output() {
         messenger.output(this) {
-            if (it is Messages.RefreshNoteList) {
-                noteRequester.input(NoteEvent.GetNoteList())
-            }
+//            if (it is Messages.RefreshNoteList) {
+//                noteRequester.input(NoteEvent.GetNoteList())
+//            }
         }
         noteRequester.output(this) {
             when (it) {
@@ -74,6 +73,7 @@ class ListFragment : BaseFragment<MainActivity>() {
     }
 
     override fun input() {
+        Logger.e("suqi", "input")
         noteRequester.input(NoteEvent.GetNoteList())
         binding.fab.click {
             EditorFragment.start(nav(), Note())

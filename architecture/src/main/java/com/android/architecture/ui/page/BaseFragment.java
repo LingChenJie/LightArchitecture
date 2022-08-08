@@ -2,7 +2,9 @@ package com.android.architecture.ui.page;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultCallback;
@@ -15,6 +17,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.android.architecture.helper.Logger;
 import com.android.architecture.ui.scope.ViewModelScope;
 
 /**
@@ -26,25 +29,28 @@ import com.android.architecture.ui.scope.ViewModelScope;
  */
 public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
 
-    protected String TAG = this.getClass().getSimpleName();
+    protected final String TAG = this.getClass().getSimpleName();
     protected A mActivity;
     private final ViewModelScope mViewModelScope = new ViewModelScope();
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        Logger.d(TAG, "----onAttach");
         mActivity = (A) requireActivity();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Logger.d(TAG, "----onCreate");
         addOnBackPressed();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Logger.d(TAG, "----onViewCreated");
         initView();
         output();
         input();
@@ -60,8 +66,21 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Logger.d(TAG, "----onDestroyView");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Logger.d(TAG, "----onDestroy");
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
+        Logger.d(TAG, "----onDetach");
         mActivity = null;
     }
 
