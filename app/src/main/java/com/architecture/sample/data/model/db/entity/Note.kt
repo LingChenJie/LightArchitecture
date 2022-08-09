@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 /**
@@ -27,6 +28,31 @@ data class Note(
     val modifyTime: Long,
     val type: Int,
 ) : Parcelable {
+
+    @IgnoredOnParcel
+    @Ignore
+    var mutableType: Int = type
+
+    @Ignore
+    fun toggleType(param: Int) {
+        mutableType = if (mutableType and param != 0) {
+            mutableType and param.inv()
+        } else {
+            mutableType or param
+        }
+    }
+
+    @get:Ignore
+    val isMarked: Boolean
+        get() = mutableType and TYPE_MARKED != 0
+
+    @get:Ignore
+    val isTopping: Boolean
+        get() = mutableType and TYPE_TOPPING != 0
+
+    fun copy(): Note {
+        return Note(nId, title, content, creteTime, modifyTime, mutableType)
+    }
 
     companion object {
         const val TYPE_TOPPING = 0x0001

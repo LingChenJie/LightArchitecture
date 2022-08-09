@@ -66,6 +66,8 @@ class ListFragment : BaseFragment<MainActivity>() {
                         if (state.list.isEmpty()) View.VISIBLE else View.GONE
                 }
                 is NoteEvent.RemoveItem -> {}
+                is NoteEvent.MarkItem -> {}
+                is NoteEvent.ToppingItem -> {}
                 else -> {}
             }
         }
@@ -78,8 +80,17 @@ class ListFragment : BaseFragment<MainActivity>() {
         }
         adapter.setItemClickListener { viewId, position, item ->
             when (viewId) {
+                R.id.layout_item -> {
+                    EditorFragment.start(nav(), item)
+                }
                 R.id.btn_delete -> {
                     noteRequester.input(NoteEvent.RemoveItem.setNote(item.copy()))
+                }
+                R.id.btn_mark -> {
+                    noteRequester.input(NoteEvent.MarkItem.setNote(item.copy()))
+                }
+                R.id.btn_topping -> {
+                    noteRequester.input(NoteEvent.ToppingItem.setNote(item.copy()))
                 }
             }
         }

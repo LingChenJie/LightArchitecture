@@ -44,7 +44,10 @@ class NoteRequester : MviDispatcher<NoteEvent>() {
             }
             is NoteEvent.ToppingItem -> {
                 Logger.d(TAG, "ToppingItem")
-                NoteModel.update(event.note!!)
+                val update = NoteModel.update(event.note!!)
+                if (update) {
+                    sendResult(NoteEvent.GetNoteList(NoteModel.getNotes().firstOrNull()))
+                }
             }
         }
     }

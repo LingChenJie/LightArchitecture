@@ -20,22 +20,25 @@ object NoteModel {
         AppDBManager.instance.getDataBase().noteDao()
     }
 
-    suspend fun insert(note: Note) {
-        withContext(Dispatchers.IO) {
+    suspend fun insert(note: Note): Long {
+        val nId = withContext(Dispatchers.IO) {
             dao.insert(note)
         }
+        return nId
     }
 
-    suspend fun update(note: Note) {
-        withContext(Dispatchers.IO) {
+    suspend fun update(note: Note): Boolean {
+        val update = withContext(Dispatchers.IO) {
             dao.update(note)
         }
+        return update > 0
     }
 
-    suspend fun delete(note: Note) {
-        withContext(Dispatchers.IO) {
+    suspend fun delete(note: Note): Boolean {
+        val delete = withContext(Dispatchers.IO) {
             dao.delete(note)
         }
+        return delete > 0
     }
 
     fun getNotes(): Flow<List<Note>> {

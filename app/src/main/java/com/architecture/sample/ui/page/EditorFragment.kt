@@ -35,7 +35,7 @@ class EditorFragment : BaseFragment<MainActivity>() {
         fun start(controller: NavController, note: Note?) {
             val bundle = Bundle()
             bundle.putParcelable(NOTE, note)
-            controller.navigate(R.id.action_listFragment_to_editorFragment)
+            controller.navigate(R.id.action_listFragment_to_editorFragment, bundle)
         }
     }
 
@@ -57,7 +57,7 @@ class EditorFragment : BaseFragment<MainActivity>() {
     override fun initView() {
         if (arguments != null) {
             states.originNote = requireArguments().getParcelable(NOTE)!!
-            states.originNote?.apply {
+            states.originNote.apply {
                 states.title = this.title
                 states.content = this.content
                 if (this.nId == 0L) {
