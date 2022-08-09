@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.android.architecture.data.manage.NetworkStateManager;
 import com.android.architecture.extension.ViewKt;
+import com.android.architecture.helper.Logger;
 import com.android.architecture.ui.page.action.BundleAction;
 import com.android.architecture.ui.scope.ViewModelScope;
 import com.android.architecture.utils.AdaptScreenUtils;
@@ -36,6 +37,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         transparentStatusBar();
         super.onCreate(savedInstanceState);
+        Logger.e(TAG, "--onCreate");
         ActivityStack.getInstance().add(this);
 
         getLifecycle().addObserver(NetworkStateManager.getInstance());
@@ -64,7 +66,32 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        Logger.e(TAG, "--onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Logger.e(TAG, "--onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Logger.e(TAG, "--onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Logger.e(TAG, "--onStop");
+    }
+
+    @Override
     protected void onDestroy() {
+        Logger.e(TAG, "--onDestroy");
         ActivityStack.getInstance().remove(this);
         super.onDestroy();
     }

@@ -2,6 +2,7 @@ package com.architecture.sample.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.android.architecture.extension.click
 import com.android.architecture.helper.DateHelper
 import com.android.architecture.ui.adapter.BaseAdapter
 import com.architecture.sample.data.model.db.entity.Note
@@ -26,12 +27,20 @@ class NoteAdapter : BaseAdapter<Note, AdapterNoteListBinding>() {
 
     override fun onBindingData(
         holder: ViewHolder<AdapterNoteListBinding>,
-        data: Note,
+        item: Note,
         position: Int
     ) {
         val binding = holder.binding
-        binding.tvTitle.text = data.title
+        binding.tvTitle.text = item.title
         binding.layoutItem.clipToOutline = true
-        binding.tvTime.text = DateHelper.getDateFormatString(data.modifyTime)
+        binding.tvTime.text = DateHelper.getDateFormatString(item.modifyTime)
+        binding.btnDelete.click {
+            notifyItemRemoved(position)
+            data.removeAt(position)
+            notifyItemRangeRemoved(position, data.size - position)
+            if (listener != null) {
+                listener.onItemClick(it.id, position, item)
+            }
+        }
     }
 }

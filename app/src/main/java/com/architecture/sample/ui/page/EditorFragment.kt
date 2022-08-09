@@ -77,7 +77,7 @@ class EditorFragment : BaseFragment<MainActivity>() {
         super.output()
         noteRequester.output(this) { noteEvent ->
             if (noteEvent is NoteEvent.AddItem) {
-//                messenger.input(Messages.RefreshNoteList)
+                messenger.input(Messages.RefreshNoteList)
                 toast(getString(R.string.saved))
                 nav().navigateUp()
             }

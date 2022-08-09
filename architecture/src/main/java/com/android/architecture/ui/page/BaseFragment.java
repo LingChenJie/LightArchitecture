@@ -36,21 +36,21 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        Logger.d(TAG, "----onAttach");
+        Logger.i(TAG, "----onAttach");
         mActivity = (A) requireActivity();
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Logger.d(TAG, "----onCreate");
+        Logger.i(TAG, "----onCreate");
         addOnBackPressed();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Logger.d(TAG, "----onViewCreated");
+        Logger.i(TAG, "----onViewCreated");
         initView();
         output();
         input();
@@ -68,19 +68,19 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Logger.d(TAG, "----onDestroyView");
+        Logger.i(TAG, "----onDestroyView");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Logger.d(TAG, "----onDestroy");
+        Logger.i(TAG, "----onDestroy");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        Logger.d(TAG, "----onDetach");
+        Logger.i(TAG, "----onDetach");
         mActivity = null;
     }
 

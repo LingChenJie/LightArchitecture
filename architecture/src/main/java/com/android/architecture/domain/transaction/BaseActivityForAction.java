@@ -45,7 +45,6 @@ public abstract class BaseActivityForAction extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        Logger.d(TAG, "--onDestroy");
         clearAction();
         super.onDestroy();
     }

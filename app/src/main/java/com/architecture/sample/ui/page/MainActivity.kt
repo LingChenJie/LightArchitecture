@@ -6,6 +6,8 @@ import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.BaseActivity
 import com.architecture.sample.databinding.ActivityMainBinding
 import com.architecture.sample.domain.event.ComplexEvent
+import com.architecture.sample.domain.event.Messages
+import com.architecture.sample.domain.message.PageMessenger
 import com.architecture.sample.domain.request.ComplexRequester
 
 /**
@@ -19,6 +21,7 @@ class MainActivity : BaseActivity() {
 
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val complexRequester by viewModels<ComplexRequester>()
+    private val messenger by viewModels<PageMessenger>()
 
     override fun initView() {
         setContentView(binding.root)
@@ -51,6 +54,11 @@ class MainActivity : BaseActivity() {
                 is ComplexEvent.ResultTest4 -> {
                     Logger.d(TAG, "--4 " + it.count)
                 }
+            }
+        }
+        messenger.output(this) {
+            if (it is Messages.FinishActivity) {
+                finish()
             }
         }
     }

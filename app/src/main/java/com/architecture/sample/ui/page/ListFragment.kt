@@ -50,34 +50,44 @@ class ListFragment : BaseFragment<MainActivity>() {
 
     override fun output() {
         messenger.output(this) {
-//            if (it is Messages.RefreshNoteList) {
-//                noteRequester.input(NoteEvent.GetNoteList())
-//            }
+            if (it is Messages.RefreshNoteList) {
+                noteRequester.input(NoteEvent.GetNoteList())
+            }
         }
         noteRequester.output(this) {
             when (it) {
                 is NoteEvent.GetNoteList -> {
-                    it.notes?.apply {
-                        this.forEach { note ->
-                            Logger.d(TAG, note.toString())
-                        }
+                    it.notes?.onEach { note ->
+                        Logger.d(TAG, note.toString())
                     }
                     state.list = it.notes!!.toMutableList()
                     adapter.setData(state.list)
                     binding.ivEmpty.visibility =
                         if (state.list.isEmpty()) View.VISIBLE else View.GONE
                 }
+                is NoteEvent.RemoveItem -> {}
                 else -> {}
             }
         }
     }
 
     override fun input() {
-        Logger.e("suqi", "input")
         noteRequester.input(NoteEvent.GetNoteList())
         binding.fab.click {
             EditorFragment.start(nav(), Note())
         }
+        adapter.setItemClickListener { viewId, position, item ->
+            when (viewId) {
+                R.id.btn_delete -> {
+                    noteRequester.input(NoteEvent.RemoveItem.setNote(item.copy()))
+                }
+            }
+        }
+    }
+
+    override fun onBackPressed(): Boolean {
+        messenger.input(Messages.FinishActivity)
+        return true
     }
 
     class ListViewModel : ViewModel() {
