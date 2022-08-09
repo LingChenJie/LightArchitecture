@@ -3,6 +3,7 @@ package com.android.architecture.domain.dispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import com.android.architecture.helper.Logger
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -17,6 +18,7 @@ abstract class MviDispatcher<E> : ViewModel() {
         private const val DEFAULT_QUEUE_LENGTH = 10
     }
 
+    protected val TAG = this.javaClass.simpleName
     private var _sharedFlow: MutableSharedFlow<E>? = null
     private val delayMap: MutableMap<Int, Boolean> = mutableMapOf()
 
@@ -36,6 +38,7 @@ abstract class MviDispatcher<E> : ViewModel() {
         delayMap[System.identityHashCode(activity)] = true
         activity.lifecycleScope.launch {
             activity.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                Logger.d(TAG, "Lifecycle.State.STARTED")
                 delayMap.remove(System.identityHashCode(activity))
                 _sharedFlow?.collect { observer.invoke(it) }
             }

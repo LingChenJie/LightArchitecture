@@ -28,7 +28,7 @@ import com.android.architecture.utils.ScreenUtils;
  */
 public abstract class BaseActivity extends AppCompatActivity implements BundleAction {
 
-    protected String TAG = this.getClass().getSimpleName();
+    protected final String TAG = this.getClass().getSimpleName();
     private static final int STATUS_BAR_TRANSPARENT_COLOR = 0x00000000;
     private final ViewModelScope mViewModelScope = new ViewModelScope();
 
