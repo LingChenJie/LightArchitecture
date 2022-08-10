@@ -53,4 +53,8 @@ public class DataResult<T> {
         this.data = data;
     }
 
+    public interface Result<T> {
+        void onResult(DataResult<T> dataResult);
+    }
+
 }

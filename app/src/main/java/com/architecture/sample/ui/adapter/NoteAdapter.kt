@@ -53,6 +53,8 @@ class NoteAdapter : BaseAdapter<Note, AdapterNoteListBinding>() {
         }
         binding.btnTopping.click {
             item.toggleType(Note.TYPE_TOPPING)
+            notifyItemChanged(position)
+            notifyItemRangeChanged(position, 1)
             listener?.onItemClick(it.id, position, item)
         }
     }

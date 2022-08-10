@@ -30,6 +30,9 @@ interface NoteDao {
     fun count(): Int
 
     @Query("SELECT * FROM note ORDER BY type & 0x0001 = 0x0001 DESC, modify_time DESC")
-    fun getNotes(): Flow<List<Note>>
+    fun getNotes(): List<Note>
+
+    @Query("SELECT * FROM note ORDER BY type & 0x0001 = 0x0001 DESC, modify_time DESC")
+    fun getNotesFlow(): Flow<List<Note>>
 
 }

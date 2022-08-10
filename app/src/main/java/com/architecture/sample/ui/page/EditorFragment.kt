@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import com.android.architecture.extension.click
 import com.android.architecture.extension.empty
 import com.android.architecture.extension.toast
+import com.android.architecture.extension.toggleSoftInput
 import com.android.architecture.helper.DateHelper
 import com.android.architecture.ui.page.BaseFragment
 import com.architecture.sample.R
@@ -62,6 +63,7 @@ class EditorFragment : BaseFragment<MainActivity>() {
                 states.content = this.content
                 if (this.nId == 0L) {
                     binding.etTitle.requestFocus()
+                    binding.etTitle.toggleSoftInput()
                 } else {
                     binding.etTitle.setText(this.title)
                     binding.etContent.setText(this.content)

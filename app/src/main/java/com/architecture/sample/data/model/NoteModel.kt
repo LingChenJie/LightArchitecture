@@ -41,8 +41,14 @@ object NoteModel {
         return delete > 0
     }
 
-    fun getNotes(): Flow<List<Note>> {
-        return dao.getNotes()
+    suspend fun getNotes(): List<Note> {
+        return withContext(Dispatchers.IO) {
+            dao.getNotes()
+        }
+    }
+
+    fun getNotesFlow(): Flow<List<Note>> {
+        return dao.getNotesFlow()
     }
 
 }

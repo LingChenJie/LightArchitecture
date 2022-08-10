@@ -1,11 +1,9 @@
 package com.architecture.sample.domain.request
 
-import android.util.Log
 import com.android.architecture.domain.dispatcher.MviDispatcher
 import com.android.architecture.helper.Logger
 import com.architecture.sample.data.model.NoteModel
 import com.architecture.sample.domain.event.NoteEvent
-import kotlinx.coroutines.flow.firstOrNull
 
 /**
  * File describe:
@@ -20,7 +18,7 @@ class NoteRequester : MviDispatcher<NoteEvent>() {
         when (event) {
             is NoteEvent.GetNoteList -> {
                 Logger.d(TAG, "GetNoteList")
-                sendResult(NoteEvent.GetNoteList(NoteModel.getNotes().firstOrNull()))
+                sendResult(NoteEvent.GetNoteList(NoteModel.getNotes()))
             }
             is NoteEvent.AddItem -> {
                 Logger.d(TAG, "AddItem")
@@ -46,7 +44,7 @@ class NoteRequester : MviDispatcher<NoteEvent>() {
                 Logger.d(TAG, "ToppingItem")
                 val update = NoteModel.update(event.note!!)
                 if (update) {
-                    sendResult(NoteEvent.GetNoteList(NoteModel.getNotes().firstOrNull()))
+                    sendResult(NoteEvent.GetNoteList(NoteModel.getNotes()))
                 }
             }
         }

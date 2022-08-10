@@ -38,10 +38,9 @@ abstract class MviDispatcher<E> : ViewModel() {
         delayMap[System.identityHashCode(activity)] = true
         activity.lifecycleScope.launch {
             activity.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                Logger.d(TAG, "Lifecycle.State.STARTED")
                 delayMap.remove(System.identityHashCode(activity))
                 _sharedFlow?.collect {
-                    Logger.d(TAG, "---collect")
+                    Logger.i(TAG, "----collect: $activity")
                     observer.invoke(it)
                 }
             }
@@ -53,10 +52,9 @@ abstract class MviDispatcher<E> : ViewModel() {
         delayMap[System.identityHashCode(fragment)] = true
         fragment.viewLifecycleOwner.lifecycleScope.launch {
             fragment.viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                Logger.d(TAG, "Lifecycle.State.STARTED")
                 delayMap.remove(System.identityHashCode(fragment))
                 _sharedFlow?.collect {
-                    Logger.d(TAG, "---collect")
+                    Logger.i(TAG, "----collect: $fragment")
                     observer.invoke(it)
                 }
             }
