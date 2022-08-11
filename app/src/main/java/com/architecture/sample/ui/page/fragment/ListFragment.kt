@@ -1,4 +1,4 @@
-package com.architecture.sample.ui.page
+package com.architecture.sample.ui.page.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,6 +18,7 @@ import com.architecture.sample.domain.event.NoteEvent
 import com.architecture.sample.domain.message.PageMessenger
 import com.architecture.sample.domain.request.NoteRequester
 import com.architecture.sample.ui.adapter.NoteAdapter
+import com.architecture.sample.ui.page.activity.MviActivity
 
 /**
  * File describe:
@@ -26,7 +27,7 @@ import com.architecture.sample.ui.adapter.NoteAdapter
  * Modify date: 2022/7/30
  * Version: 1
  */
-class ListFragment : BaseFragment<MainActivity>() {
+class ListFragment : BaseFragment<MviActivity>() {
 
     private lateinit var binding: FragmentListBinding
     private val state by viewModels<ListViewModel>()

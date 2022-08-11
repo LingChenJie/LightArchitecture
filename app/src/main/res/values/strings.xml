@@ -12,5 +12,7 @@
 
     <string name="common_confirm">确定</string>
     <string name="common_cancel">取消</string>
+    <string name="mvi">MVI</string>
+    <string name="common">Common</string>
 
 </resources>

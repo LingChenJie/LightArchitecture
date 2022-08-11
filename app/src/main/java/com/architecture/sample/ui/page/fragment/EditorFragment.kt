@@ -1,4 +1,4 @@
-package com.architecture.sample.ui.page
+package com.architecture.sample.ui.page.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +21,7 @@ import com.architecture.sample.domain.event.Messages
 import com.architecture.sample.domain.event.NoteEvent
 import com.architecture.sample.domain.message.PageMessenger
 import com.architecture.sample.domain.request.NoteRequester
+import com.architecture.sample.ui.page.activity.MviActivity
 
 /**
  * File describe:
@@ -29,7 +30,7 @@ import com.architecture.sample.domain.request.NoteRequester
  * Modify date: 2022/7/31
  * Version: 1
  */
-class EditorFragment : BaseFragment<MainActivity>() {
+class EditorFragment : BaseFragment<MviActivity>() {
 
     companion object {
         private const val NOTE = "NOTE"

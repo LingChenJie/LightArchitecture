@@ -1,10 +1,9 @@
-package com.architecture.sample.ui.page
+package com.architecture.sample.ui.page.activity
 
-import android.os.Bundle
 import androidx.activity.viewModels
 import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.BaseActivity
-import com.architecture.sample.databinding.ActivityMainBinding
+import com.architecture.sample.databinding.ActivityMviBinding
 import com.architecture.sample.domain.event.ComplexEvent
 import com.architecture.sample.domain.event.Messages
 import com.architecture.sample.domain.message.PageMessenger
@@ -17,9 +16,9 @@ import com.architecture.sample.domain.request.ComplexRequester
  * Modify date: 2022/7/29
  * Version: 1
  */
-class MainActivity : BaseActivity() {
+class MviActivity : BaseActivity() {
 
-    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val binding: ActivityMviBinding by lazy { ActivityMviBinding.inflate(layoutInflater) }
     private val complexRequester by viewModels<ComplexRequester>()
     private val messenger by viewModels<PageMessenger>()
 
