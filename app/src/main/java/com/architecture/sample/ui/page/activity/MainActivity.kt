@@ -22,7 +22,7 @@ class MainActivity : BaseActivity() {
             startActivity(Intent(this, MviActivity::class.java))
         }
         binding.layoutCommon.click {
-
+            startActivity(Intent(this, CommonActivity::class.java))
         }
     }
 
