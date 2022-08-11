@@ -10,4 +10,7 @@
     <string name="last_time_modify">最后编辑于</string>
     <string name="copyright">Product by LingChenJie with love</string>
 
+    <string name="common_confirm">确定</string>
+    <string name="common_cancel">取消</string>
+
 </resources>

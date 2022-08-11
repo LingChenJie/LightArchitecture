@@ -1,90 +1,106 @@
 package com.architecture.sample.ui.dialog
 
 import android.content.Context
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
+import com.android.architecture.extension.click
+import com.android.architecture.extension.getString
 import com.android.architecture.ui.page.BaseDialog
+import com.architecture.sample.R
 
 /**
- * Created by SuQi on 2022/8/10.
- * Describe:
+ * File describe:
+ * Author: SuQi
+ * Create date: 2022/8/11
+ * Modify date: 2022/8/11
+ * Version: 1
  */
 class CommonDialog {
 
-    class Builder<B : Builder<BaseDialog.Builder<*>>>(context: Context?) :
-        BaseDialog.Builder<B>(context) {
+    @Suppress("UNCHECKED_CAST")
+    open class Builder<B : Builder<B>>(context: Context) : BaseDialog.Builder<B>(context) {
 
-        private var mAutoDismiss = true
-        private val mContainerLayout: ViewGroup
-        private val mTitleView: TextView
-        private val mCancelView: TextView
-        private val mLineView: View
-        private val mConfirmView: TextView
+        private val llContainer: LinearLayout by lazy { findViewById(R.id.ll_ui_container) }
+        private val tvTitle: TextView by lazy { findViewById(R.id.tv_ui_title) }
+        private val tvConfirm: TextView by lazy { findViewById(R.id.tv_ui_confirm) }
+        private val tvCancel: TextView by lazy { findViewById(R.id.tv_ui_cancel) }
+
+        private var confirmListener: (() -> Unit)? = null
+        private var cancelListener: (() -> Unit)? = null
+        private var autoDismiss = true
+
+        init {
+            setContentView(R.layout.dialog_common)
+            tvConfirm.click {
+                autoDismiss()
+                confirmListener?.invoke()
+            }
+            tvCancel.click {
+                autoDismiss()
+                cancelListener?.invoke()
+            }
+        }
+
         fun setCustomView(@LayoutRes id: Int): B {
-            return setCustomView(LayoutInflater.from(context).inflate(id, mContainerLayout, false))
+            return setCustomView(LayoutInflater.from(context).inflate(id, llContainer, false))
         }
 
-        fun setCustomView(view: View?): B {
-            mContainerLayout.addView(view, 1)
+        fun setCustomView(view: View): B {
+            llContainer.addView(view, 1)
             return this as B
         }
 
-        fun setTitle(@StringRes id: Int): B {
-            return setTitle(getString(id))
+        fun title(@StringRes id: Int): B {
+            return title(getString(id))
         }
 
-        fun setTitle(text: CharSequence?): B {
-            mTitleView.text = text
+        fun title(text: CharSequence): B {
+            tvTitle.text = text
             return this as B
         }
 
-        fun setCancel(@StringRes id: Int): B {
-            return setCancel(getString(id))
+        fun cancelText(@StringRes id: Int): B {
+            return cancelText(getString(id))
         }
 
-        fun setCancel(text: CharSequence?): B {
-            mCancelView.text = text
-            mLineView.visibility =
-                if (text == null || "" == text.toString()) View.GONE else View.VISIBLE
+        fun cancelText(text: CharSequence): B {
+            tvCancel.text = text
             return this as B
         }
 
-        fun setConfirm(@StringRes id: Int): B {
-            return setConfirm(getString(id))
+        fun confirmText(@StringRes id: Int): B {
+            return confirmText(getString(id))
         }
 
-        fun setConfirm(text: CharSequence?): B {
-            mConfirmView.text = text
+        fun confirmText(text: CharSequence): B {
+            tvConfirm.text = text
             return this as B
         }
 
-        fun setAutoDismiss(dismiss: Boolean): B {
-            mAutoDismiss = dismiss
-            return this as B
+        fun autoDismiss(dismiss: Boolean) {
+            autoDismiss = dismiss
         }
 
-        fun autoDismiss() {
-            if (mAutoDismiss) {
+        protected fun autoDismiss() {
+            if (autoDismiss) {
                 dismiss()
             }
         }
 
-        init {
-            setContentView(R.layout.ui_dialog)
-            setAnimStyle(BaseDialog.ANIM_IOS)
-            setGravity(Gravity.CENTER)
-            mContainerLayout = findViewById(R.id.ll_ui_container)
-            mTitleView = findViewById(R.id.tv_ui_title)
-            mCancelView = findViewById(R.id.tv_ui_cancel)
-            mLineView = findViewById(R.id.v_ui_line)
-            mConfirmView = findViewById(R.id.tv_ui_confirm)
-            setOnClickListener(mCancelView, mConfirmView)
+        fun onConfirm(listener: () -> Unit): B {
+            confirmListener = listener
+            return this as B
         }
+
+        fun onCancel(listener: () -> Unit): B {
+            cancelListener = listener
+            return this as B
+        }
+
     }
 
 }
