@@ -546,10 +546,6 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
          */
         private SparseArray<OnClickListener<?>> mClickArray;
 
-        public Builder(Activity activity) {
-            this((Context) activity);
-        }
-
         public Builder(Context context) {
             mContext = context;
             mActivity = getActivity();
@@ -572,12 +568,12 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         /**
          * 设置布局
          */
-        public B setContentView(@LayoutRes int id) {
+        public final B setContentView(@LayoutRes int id) {
             // 这里解释一下，为什么要传 new FrameLayout，因为如果不传的话，XML 的根布局获取到的 LayoutParams 对象会为空，也就会导致宽高参数解析不出来
             return setContentView(LayoutInflater.from(mContext).inflate(id, new FrameLayout(mContext), false));
         }
 
-        public B setContentView(View view) {
+        private B setContentView(View view) {
             // 请不要传入空的布局
             if (view == null) {
                 throw new IllegalArgumentException("are you ok?");
@@ -1083,7 +1079,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         /**
          * 根据 id 查找 View
          */
-        public <V extends View> V findViewById(@IdRes int id) {
+        public final <V extends View> V findViewById(@IdRes int id) {
             if (mContentView == null) {
                 // 没有 setContentView 就想 findViewById ?
                 throw new IllegalStateException("are you ok?");
