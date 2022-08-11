@@ -546,9 +546,9 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
          */
         private SparseArray<OnClickListener<?>> mClickArray;
 
-        public Builder(Activity activity) {
-            this((Context) activity);
-        }
+//        public Builder(Activity activity) {
+//            this((Context) activity);
+//        }
 
         public Builder(Context context) {
             mContext = context;
