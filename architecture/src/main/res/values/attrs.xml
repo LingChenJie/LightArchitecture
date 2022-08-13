@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <declare-styleable name="CustomItemView">
+        <attr name="back_icon" format="reference" />
+        <attr name="arrow_icon" format="reference" />
+        <attr name="back_text" format="reference|string" />
+        <attr name="arrow_text" format="reference|string" />
+        <attr name="title_text" format="reference|string" />
+        <attr name="title_text_all_caps" format="boolean" />
+        <attr name="action1_icon" format="reference" />
+        <attr name="action2_icon" format="reference" />
+    </declare-styleable>
+
     <!-- 仿 ios 开关按钮 -->
     <declare-styleable name="SwitchButton">
         <!-- 是否选中 -->
@@ -14,7 +25,7 @@
         <!-- 正则输入限制 -->
         <attr name="inputRegex" format="string" />
         <!-- 常用正则类型 -->
-        <attr name="regexType" >
+        <attr name="regexType">
             <!-- 手机号（只能以 1 开头）-->
             <enum name="mobile" value="0x01" />
             <!-- 中文（普通的中文字符）-->
@@ -35,10 +46,10 @@
     <!-- 设置栏 -->
     <declare-styleable name="SettingBar">
         <!-- 左边 -->
-        <attr name="bar_leftText" format="string"/>
+        <attr name="bar_leftText" format="string" />
         <attr name="bar_leftTextColor" format="color" />
         <attr name="bar_leftTextSize" format="dimension" />
-        <attr name="bar_leftTextHint" format="string"/>
+        <attr name="bar_leftTextHint" format="string" />
         <attr name="bar_leftDrawable" format="reference" />
         <attr name="bar_leftDrawablePadding" format="dimension" />
         <attr name="bar_leftDrawableSize" format="dimension" />
@@ -47,7 +58,7 @@
         <attr name="bar_rightText" format="string" />
         <attr name="bar_rightTextColor" format="color" />
         <attr name="bar_rightTextSize" format="dimension" />
-        <attr name="bar_rightTextHint" format="string"/>
+        <attr name="bar_rightTextHint" format="string" />
         <attr name="bar_rightDrawable" format="reference" />
         <attr name="bar_rightDrawablePadding" format="dimension" />
         <attr name="bar_rightDrawableSize" format="dimension" />

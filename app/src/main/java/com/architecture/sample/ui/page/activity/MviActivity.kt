@@ -3,11 +3,14 @@ package com.architecture.sample.ui.page.activity
 import androidx.activity.viewModels
 import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.BaseActivity
+import com.architecture.sample.app.AppActivity
 import com.architecture.sample.databinding.ActivityMviBinding
 import com.architecture.sample.domain.event.ComplexEvent
 import com.architecture.sample.domain.event.Messages
 import com.architecture.sample.domain.message.PageMessenger
 import com.architecture.sample.domain.request.ComplexRequester
+import com.gyf.immersionbar.ImmersionBar
+import com.gyf.immersionbar.ktx.fitsTitleBar
 
 /**
  * File describe:
@@ -16,11 +19,15 @@ import com.architecture.sample.domain.request.ComplexRequester
  * Modify date: 2022/7/29
  * Version: 1
  */
-class MviActivity : BaseActivity() {
+class MviActivity : AppActivity() {
 
     private val binding: ActivityMviBinding by lazy { ActivityMviBinding.inflate(layoutInflater) }
     private val complexRequester by viewModels<ComplexRequester>()
     private val messenger by viewModels<PageMessenger>()
+
+    override fun isStatusBarEnabled(): Boolean {
+        return false
+    }
 
     override fun initView() {
         setContentView(binding.root)

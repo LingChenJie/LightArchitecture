@@ -15,6 +15,7 @@ import com.android.architecture.extension.toggleSoftInput
 import com.android.architecture.helper.DateHelper
 import com.android.architecture.ui.page.BaseFragment
 import com.architecture.sample.R
+import com.architecture.sample.app.AppFragment
 import com.architecture.sample.data.model.db.entity.Note
 import com.architecture.sample.databinding.FragmentEditorBinding
 import com.architecture.sample.domain.event.Messages
@@ -22,6 +23,7 @@ import com.architecture.sample.domain.event.NoteEvent
 import com.architecture.sample.domain.message.PageMessenger
 import com.architecture.sample.domain.request.NoteRequester
 import com.architecture.sample.ui.page.activity.MviActivity
+import com.gyf.immersionbar.ImmersionBar
 
 /**
  * File describe:
@@ -30,7 +32,7 @@ import com.architecture.sample.ui.page.activity.MviActivity
  * Modify date: 2022/7/31
  * Version: 1
  */
-class EditorFragment : BaseFragment<MviActivity>() {
+class EditorFragment : AppFragment<MviActivity>() {
 
     companion object {
         private const val NOTE = "NOTE"
@@ -46,17 +48,17 @@ class EditorFragment : BaseFragment<MviActivity>() {
     private val noteRequester by viewModels<NoteRequester>()
     private val messenger by activityViewModels<PageMessenger>()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun isStatusBarEnabled(): Boolean {
+        return true
+    }
+
+    override fun getContentView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = FragmentEditorBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-
     override fun initView() {
+        ImmersionBar.setTitleBar(this, binding.titleView)
         if (arguments != null) {
             states.originNote = requireArguments().getParcelable(NOTE)!!
             states.originNote.apply {
@@ -72,7 +74,6 @@ class EditorFragment : BaseFragment<MviActivity>() {
                     binding.tvTime.text = DateHelper.getDateFormatString(this.modifyTime)
                 }
             }
-
         }
     }
 

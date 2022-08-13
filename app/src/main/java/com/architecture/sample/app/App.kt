@@ -1,8 +1,6 @@
-package com.architecture.sample
+package com.architecture.sample.app
 
-import android.app.Application
 import com.android.architecture.app.BaseApplication
-import com.android.architecture.utils.AppUtils
 
 /**
  * File describe:

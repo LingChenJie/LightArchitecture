@@ -1,6 +1,5 @@
 package com.architecture.sample.ui.page.fragment
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import com.android.architecture.extension.click
 import com.android.architecture.helper.Logger
-import com.android.architecture.ui.page.BaseFragment
 import com.architecture.sample.R
+import com.architecture.sample.app.AppFragment
 import com.architecture.sample.data.model.db.entity.Note
 import com.architecture.sample.databinding.FragmentListBinding
 import com.architecture.sample.domain.event.Messages
@@ -19,6 +18,7 @@ import com.architecture.sample.domain.message.PageMessenger
 import com.architecture.sample.domain.request.NoteRequester
 import com.architecture.sample.ui.adapter.NoteAdapter
 import com.architecture.sample.ui.page.activity.MviActivity
+import com.gyf.immersionbar.ImmersionBar
 
 /**
  * File describe:
@@ -27,7 +27,7 @@ import com.architecture.sample.ui.page.activity.MviActivity
  * Modify date: 2022/7/30
  * Version: 1
  */
-class ListFragment : BaseFragment<MviActivity>() {
+class ListFragment : AppFragment<MviActivity>() {
 
     private lateinit var binding: FragmentListBinding
     private val state by viewModels<ListViewModel>()
@@ -35,17 +35,17 @@ class ListFragment : BaseFragment<MviActivity>() {
     private val messenger by activityViewModels<PageMessenger>()
     private val adapter by lazy { NoteAdapter() }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun isStatusBarEnabled(): Boolean {
+        return true
+    }
+
+    override fun getContentView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = FragmentListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-
     override fun initView() {
+        ImmersionBar.setTitleBar(this, binding.titleView)
         binding.recyclerView.adapter = adapter
     }
 

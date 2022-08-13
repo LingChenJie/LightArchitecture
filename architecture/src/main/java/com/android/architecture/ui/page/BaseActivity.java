@@ -35,7 +35,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        transparentStatusBar();
         super.onCreate(savedInstanceState);
         Logger.e(TAG, "--onCreate");
         ActivityStack.getInstance().add(this);
@@ -43,7 +42,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
         getLifecycle().addObserver(NetworkStateManager.getInstance());
 
         initView();
-        initSoftKeyboard();
         output();
         input();
     }

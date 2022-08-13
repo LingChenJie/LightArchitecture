@@ -31,6 +31,7 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
 
     protected final String TAG = this.getClass().getSimpleName();
     protected A mActivity;
+    private View mRootView;
     private final ViewModelScope mViewModelScope = new ViewModelScope();
 
     @Override
@@ -47,6 +48,13 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
         addOnBackPressed();
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        mRootView = getContentView(inflater, container);
+        return mRootView;
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -55,6 +63,8 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
         output();
         input();
     }
+
+    protected abstract View getContentView(LayoutInflater inflater, ViewGroup container);
 
     protected void initView() {
     }
@@ -68,6 +78,7 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        mRootView = null;
         Logger.i(TAG, "----onDestroyView");
     }
 
@@ -82,6 +93,10 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
         super.onDetach();
         Logger.i(TAG, "----onDetach");
         mActivity = null;
+    }
+
+    public View getRootView() {
+        return mRootView;
     }
 
     protected NavController nav() {
