@@ -3,7 +3,6 @@ package com.architecture.sample.app
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import com.android.architecture.ui.page.BaseActivity
 import com.android.architecture.ui.page.BaseFragment
 import com.android.architecture.ui.widget.layout.TitleView
 import com.gyf.immersionbar.ImmersionBar
@@ -15,7 +14,7 @@ import com.gyf.immersionbar.ImmersionBar
  * Modify date: 2022/8/13
  * Version: 1
  */
-abstract class AppFragment<A : BaseActivity> : BaseFragment<A>() {
+abstract class AppFragment<A : AppActivity> : BaseFragment<A>() {
 
     override fun onResume() {
         super.onResume()
@@ -49,6 +48,14 @@ abstract class AppFragment<A : BaseActivity> : BaseFragment<A>() {
      */
     open fun isStatusBarDarkFont(): Boolean {
         return true
+    }
+
+    fun showLoading() {
+        mActivity?.showLoading()
+    }
+
+    fun hideLoading() {
+        mActivity?.hideLoading()
     }
 
     /**

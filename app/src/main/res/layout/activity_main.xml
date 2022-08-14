@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.page.activity.MviActivity">
+    android:orientation="vertical">
 
     <com.android.architecture.ui.widget.layout.TitleView
         android:id="@+id/title_view"

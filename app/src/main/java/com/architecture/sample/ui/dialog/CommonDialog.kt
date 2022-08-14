@@ -54,26 +54,14 @@ class CommonDialog {
             return this as B
         }
 
-        fun title(@StringRes id: Int): B {
-            return title(getString(id))
-        }
-
         fun title(text: CharSequence): B {
             tvTitle.text = text
             return this as B
         }
 
-        fun cancelText(@StringRes id: Int): B {
-            return cancelText(getString(id))
-        }
-
-        fun cancelText(text: CharSequence): B {
+        fun cancelText(text: String): B {
             tvCancel.text = text
             return this as B
-        }
-
-        fun confirmText(@StringRes id: Int): B {
-            return confirmText(getString(id))
         }
 
         fun confirmText(text: CharSequence): B {

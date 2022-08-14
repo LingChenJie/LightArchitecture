@@ -7,11 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModel;
 import androidx.navigation.NavController;
@@ -51,6 +48,7 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Logger.i(TAG, "----onCreateView");
         mRootView = getContentView(inflater, container);
         return mRootView;
     }
@@ -66,8 +64,7 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
 
     protected abstract View getContentView(LayoutInflater inflater, ViewGroup container);
 
-    protected void initView() {
-    }
+    protected abstract void initView();
 
     protected void output() {
     }
@@ -104,18 +101,25 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     }
 
     private void addOnBackPressed() {
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(isInterceptBackEvent()) {
             @Override
             public void handleOnBackPressed() {
-                if (!onBackPressed()) {
-                    requireActivity().getOnBackPressedDispatcher().onBackPressed();
-                }
+                Logger.d(TAG, "handleOnBackPressed()");
+                onBackPressed();
             }
         });
     }
 
-    protected boolean onBackPressed() {
-        return true;
+    /**
+     * 是否拦截返回事件
+     *
+     * @return
+     */
+    protected boolean isInterceptBackEvent() {
+        return false;
+    }
+
+    protected void onBackPressed() {
     }
 
 

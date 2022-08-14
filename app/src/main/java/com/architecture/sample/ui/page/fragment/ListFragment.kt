@@ -97,9 +97,12 @@ class ListFragment : AppFragment<MviActivity>() {
         }
     }
 
-    override fun onBackPressed(): Boolean {
-        messenger.input(Messages.FinishActivity)
+    override fun isInterceptBackEvent(): Boolean {
         return true
+    }
+
+    override fun onBackPressed() {
+        messenger.input(Messages.FinishActivity)
     }
 
     class ListViewModel : ViewModel() {

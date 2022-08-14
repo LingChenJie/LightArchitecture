@@ -93,9 +93,12 @@ class EditorFragment : AppFragment<MviActivity>() {
         binding.ivBack.click { save() }
     }
 
-    override fun onBackPressed(): Boolean {
-        save()
+    override fun isInterceptBackEvent(): Boolean {
         return true
+    }
+
+    override fun onBackPressed() {
+        save()
     }
 
     private fun save() {

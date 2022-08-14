@@ -3,7 +3,10 @@ package com.architecture.sample.app
 import android.os.Bundle
 import android.view.ViewGroup
 import com.android.architecture.ui.page.BaseActivity
+import com.android.architecture.ui.page.BaseDialog
 import com.android.architecture.ui.widget.layout.TitleView
+import com.architecture.sample.R
+import com.architecture.sample.ui.dialog.LoadingDialog
 import com.gyf.immersionbar.ImmersionBar
 
 /**
@@ -14,6 +17,9 @@ import com.gyf.immersionbar.ImmersionBar
  * Version: 1
  */
 abstract class AppActivity : BaseActivity() {
+
+    private var mLoadingDialog: BaseDialog? = null
+    private var mLoadingDialogBuilder: LoadingDialog.Builder<*>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +43,30 @@ abstract class AppActivity : BaseActivity() {
      */
     open fun isStatusBarDarkFont(): Boolean {
         return true
+    }
+
+    fun showLoading(message: String = getString(R.string.common_loading)) {
+        if (mLoadingDialog == null) {
+            mLoadingDialogBuilder = LoadingDialog.Builder(this)
+                .message(message)
+                .setCancelable(false)
+            mLoadingDialog = mLoadingDialogBuilder!!.create()
+        }
+        mLoadingDialog?.apply {
+            if (isShowing) {
+                mLoadingDialogBuilder?.message(message)
+            } else {
+                show()
+            }
+        }
+    }
+
+    fun hideLoading() {
+        mLoadingDialog?.apply {
+            if (isShowing) {
+                dismiss()
+            }
+        }
     }
 
     /**

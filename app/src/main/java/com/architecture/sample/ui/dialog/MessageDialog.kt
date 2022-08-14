@@ -17,6 +17,7 @@ import com.architecture.sample.R
  */
 class MessageDialog {
 
+    @Suppress("UNCHECKED_CAST")
     class Builder<B : Builder<B>>(context: Context) : CommonDialog.Builder<B>(context) {
 
         private val tvMessage: TextView
@@ -26,11 +27,7 @@ class MessageDialog {
             tvMessage = findViewById(R.id.tv_message_message)
         }
 
-        fun message(@StringRes id: Int): B {
-            return message(getString(id))
-        }
-
-        fun message(text: CharSequence): B {
+        fun message(text: String): B {
             tvMessage.text = text
             return this as B
         }
