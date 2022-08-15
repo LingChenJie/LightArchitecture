@@ -10,10 +10,11 @@
     <color name="theme_color_90">#E6EC652C</color>
     <color name="theme_color_50">#80EC652C</color>
 
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
     <color name="common_line_color">#ECECEC</color>
-
     <color name="common_confirm_text_color">#1B1A1A</color>
     <color name="common_cancel_text_color">#4B4746</color>
+    <color name="common_button_pressed_color">#AA5A8DDF</color>
+    <color name="common_button_disable_color">#BBBBBB</color>
+    <color name="common_icon_color">#7C7C7C</color>
+
 </resources>

@@ -2,7 +2,7 @@ package com.architecture.sample.app
 
 import android.os.Bundle
 import android.view.ViewGroup
-import com.android.architecture.ui.page.BaseActivity
+import com.android.architecture.domain.transaction.BaseActivityForAction
 import com.android.architecture.ui.page.BaseDialog
 import com.android.architecture.ui.widget.layout.TitleView
 import com.architecture.sample.R
@@ -12,11 +12,11 @@ import com.gyf.immersionbar.ImmersionBar
 /**
  * File describe:
  * Author: SuQi
- * Create date: 2022/8/13
- * Modify date: 2022/8/13
+ * Create date: 2022/8/15
+ * Modify date: 2022/8/15
  * Version: 1
  */
-abstract class AppActivity : BaseActivity() {
+abstract class AppActivityForAction : BaseActivityForAction() {
 
     private var mLoadingDialog: BaseDialog? = null
     private var mLoadingDialogBuilder: LoadingDialog.Builder<*>? = null
@@ -106,5 +106,4 @@ abstract class AppActivity : BaseActivity() {
         }
         return null
     }
-
 }

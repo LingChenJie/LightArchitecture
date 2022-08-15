@@ -67,7 +67,7 @@
             android:padding="5dp"
             android:scaleType="centerInside"
             android:visibility="gone"
-            tools:src="@drawable/icon_add" />
+            tools:src="@drawable/icon_add_white" />
 
         <ImageView
             android:id="@+id/action2_icon"
@@ -78,7 +78,7 @@
             android:padding="5dp"
             android:scaleType="centerInside"
             android:visibility="gone"
-            tools:src="@drawable/icon_save" />
+            tools:src="@drawable/icon_ok_white" />
 
         <TextView
             android:id="@+id/arrow_text"

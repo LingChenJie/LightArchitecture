@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModel;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.android.architecture.helper.AppExecutors;
+import com.android.architecture.helper.DelayTaskHelper;
 import com.android.architecture.helper.Logger;
 import com.android.architecture.ui.scope.ViewModelScope;
 
@@ -73,6 +75,30 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        Logger.i(TAG, "----onStart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Logger.i(TAG, "----onResume");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Logger.i(TAG, "----onPause");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Logger.i(TAG, "----onStop");
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         mRootView = null;
@@ -101,25 +127,19 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     }
 
     private void addOnBackPressed() {
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(isInterceptBackEvent()) {
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                Logger.d(TAG, "handleOnBackPressed()");
-                onBackPressed();
+                if (!onBackPressed()) {
+                    setEnabled(false);
+                    requireActivity().getOnBackPressedDispatcher().onBackPressed();
+                }
             }
         });
     }
 
-    /**
-     * 是否拦截返回事件
-     *
-     * @return
-     */
-    protected boolean isInterceptBackEvent() {
+    protected boolean onBackPressed() {
         return false;
-    }
-
-    protected void onBackPressed() {
     }
 
 
