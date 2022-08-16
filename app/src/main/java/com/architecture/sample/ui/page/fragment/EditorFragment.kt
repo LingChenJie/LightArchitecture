@@ -6,14 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.android.architecture.extension.click
 import com.android.architecture.extension.empty
 import com.android.architecture.extension.toast
 import com.android.architecture.extension.toggleSoftInput
 import com.android.architecture.helper.DateHelper
-import com.android.architecture.ui.page.BaseFragment
+import com.android.architecture.ui.page.StateHolder
 import com.architecture.sample.R
 import com.architecture.sample.app.AppFragment
 import com.architecture.sample.data.model.db.entity.Note
@@ -44,7 +43,7 @@ class EditorFragment : AppFragment<MviActivity>() {
     }
 
     private lateinit var binding: FragmentEditorBinding
-    private val states by viewModels<EditorViewModel>()
+    private val states by viewModels<EditorState>()
     private val noteRequester by viewModels<NoteRequester>()
     private val messenger by activityViewModels<PageMessenger>()
 
@@ -123,7 +122,7 @@ class EditorFragment : AppFragment<MviActivity>() {
         noteRequester.input(NoteEvent.AddItem.setNote(states.tempNote))
     }
 
-    class EditorViewModel : ViewModel() {
+    class EditorState : StateHolder() {
         var originNote: Note = Note()
         var tempNote: Note = Note()
         var title: String = ""

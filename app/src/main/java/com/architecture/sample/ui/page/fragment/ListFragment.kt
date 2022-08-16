@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import com.android.architecture.extension.click
 import com.android.architecture.helper.Logger
+import com.android.architecture.ui.page.StateHolder
 import com.architecture.sample.R
 import com.architecture.sample.app.AppFragment
 import com.architecture.sample.data.model.db.entity.Note
@@ -30,7 +30,7 @@ import com.gyf.immersionbar.ImmersionBar
 class ListFragment : AppFragment<MviActivity>() {
 
     private lateinit var binding: FragmentListBinding
-    private val state by viewModels<ListViewModel>()
+    private val state by viewModels<ListState>()
     private val noteRequester by viewModels<NoteRequester>()
     private val messenger by activityViewModels<PageMessenger>()
     private val adapter by lazy { NoteAdapter() }
@@ -102,7 +102,7 @@ class ListFragment : AppFragment<MviActivity>() {
         return true
     }
 
-    class ListViewModel : ViewModel() {
+    class ListState : StateHolder() {
         var list = mutableListOf<Note>()
     }
 

@@ -3,6 +3,7 @@ package com.android.architecture.domain.dispatcher
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
+import com.android.architecture.extension.flowOnLifecycleConsumeOnce
 import com.android.architecture.helper.Logger
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.delay
@@ -24,6 +25,7 @@ abstract class MviDispatcher<E> : ViewModel() {
 
     private fun initQueue() {
         if (_sharedFlow == null) _sharedFlow = MutableSharedFlow(
+            replay = 1,
             onBufferOverflow = BufferOverflow.DROP_OLDEST,
             extraBufferCapacity = initQueueMaxLength()
         )
@@ -39,7 +41,11 @@ abstract class MviDispatcher<E> : ViewModel() {
         activity.lifecycleScope.launch {
             activity.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 delayMap.remove(System.identityHashCode(activity))
-                _sharedFlow?.collect {
+//                _sharedFlow?.collect {
+//                    Logger.i(TAG, "----collect: $activity")
+//                    observer.invoke(it)
+//                }
+                _sharedFlow?.flowOnLifecycleConsumeOnce(activity.lifecycle)?.collect{
                     Logger.i(TAG, "----collect: $activity")
                     observer.invoke(it)
                 }
@@ -53,7 +59,11 @@ abstract class MviDispatcher<E> : ViewModel() {
         fragment.viewLifecycleOwner.lifecycleScope.launch {
             fragment.viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 delayMap.remove(System.identityHashCode(fragment))
-                _sharedFlow?.collect {
+//                _sharedFlow?.collect {
+//                    Logger.i(TAG, "----collect: $fragment")
+//                    observer.invoke(it)
+//                }
+                _sharedFlow?.flowOnLifecycleConsumeOnce(fragment.lifecycle)?.collect{
                     Logger.i(TAG, "----collect: $fragment")
                     observer.invoke(it)
                 }
