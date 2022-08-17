@@ -1,6 +1,7 @@
 package com.architecture.sample.ui.page.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.android.architecture.extension.empty
 import com.android.architecture.extension.toast
 import com.android.architecture.extension.toggleSoftInput
 import com.android.architecture.helper.DateHelper
+import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.StateHolder
 import com.architecture.sample.R
 import com.architecture.sample.app.AppFragment
@@ -43,7 +45,7 @@ class EditorFragment : AppFragment<MviActivity>() {
     }
 
     private lateinit var binding: FragmentEditorBinding
-    private val states by viewModels<EditorState>()
+    private val state by viewModels<State>()
     private val noteRequester by viewModels<NoteRequester>()
     private val messenger by activityViewModels<PageMessenger>()
 
@@ -59,10 +61,10 @@ class EditorFragment : AppFragment<MviActivity>() {
     override fun initView() {
         ImmersionBar.setTitleBar(this, binding.titleView)
         if (arguments != null) {
-            states.originNote = requireArguments().getParcelable(NOTE)!!
-            states.originNote.apply {
-                states.title = this.title
-                states.content = this.content
+            state.originNote = requireArguments().getParcelable(NOTE)!!
+            state.originNote.apply {
+                state.title = this.title
+                state.content = this.content
                 if (this.nId == 0L) {
                     binding.etTitle.requestFocus()
                     binding.etTitle.toggleSoftInput()
@@ -85,6 +87,9 @@ class EditorFragment : AppFragment<MviActivity>() {
                 nav().navigateUp()
             }
         }
+        messenger.output(this) {
+            Logger.e(TAG, "it:$it")
+        }
     }
 
     override fun input() {
@@ -105,11 +110,11 @@ class EditorFragment : AppFragment<MviActivity>() {
             return
         }
         val time = System.currentTimeMillis()
-        if (states.originNote.nId == 0L) {
-            states.tempNote = Note(0, title, content, time, time, 0)
+        if (state.originNote.nId == 0L) {
+            state.tempNote = Note(0, title, content, time, time, 0)
         } else {
-            states.originNote.apply {
-                states.tempNote = Note(
+            state.originNote.apply {
+                state.tempNote = Note(
                     this.nId,
                     title,
                     content,
@@ -119,10 +124,10 @@ class EditorFragment : AppFragment<MviActivity>() {
                 )
             }
         }
-        noteRequester.input(NoteEvent.AddItem.setNote(states.tempNote))
+        noteRequester.input(NoteEvent.AddItem.setNote(state.tempNote))
     }
 
-    class EditorState : StateHolder() {
+    class State : StateHolder() {
         var originNote: Note = Note()
         var tempNote: Note = Note()
         var title: String = ""

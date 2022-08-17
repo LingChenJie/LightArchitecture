@@ -30,7 +30,7 @@ import com.gyf.immersionbar.ImmersionBar
 class ListFragment : AppFragment<MviActivity>() {
 
     private lateinit var binding: FragmentListBinding
-    private val state by viewModels<ListState>()
+    private val state by viewModels<State>()
     private val noteRequester by viewModels<NoteRequester>()
     private val messenger by activityViewModels<PageMessenger>()
     private val adapter by lazy { NoteAdapter() }
@@ -51,6 +51,7 @@ class ListFragment : AppFragment<MviActivity>() {
 
     override fun output() {
         messenger.output(this) {
+            Logger.e(TAG, "it:$it")
             if (it is Messages.RefreshNoteList) {
                 noteRequester.input(NoteEvent.GetNoteList())
             }
@@ -102,7 +103,7 @@ class ListFragment : AppFragment<MviActivity>() {
         return true
     }
 
-    class ListState : StateHolder() {
+    class State : StateHolder() {
         var list = mutableListOf<Note>()
     }
 
