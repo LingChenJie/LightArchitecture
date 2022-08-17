@@ -12,9 +12,11 @@ import com.architecture.sample.R
 import com.architecture.sample.app.AppFragment
 import com.architecture.sample.data.model.db.entity.Note
 import com.architecture.sample.databinding.FragmentListBinding
+import com.architecture.sample.domain.event.ComplexEvent
 import com.architecture.sample.domain.event.Messages
 import com.architecture.sample.domain.event.NoteEvent
 import com.architecture.sample.domain.message.PageMessenger
+import com.architecture.sample.domain.request.ComplexRequester
 import com.architecture.sample.domain.request.NoteRequester
 import com.architecture.sample.ui.adapter.NoteAdapter
 import com.architecture.sample.ui.page.activity.MviActivity
@@ -33,6 +35,7 @@ class ListFragment : AppFragment<MviActivity>() {
     private val state by viewModels<State>()
     private val noteRequester by viewModels<NoteRequester>()
     private val messenger by activityViewModels<PageMessenger>()
+    private val complexRequester by activityViewModels<ComplexRequester>()
     private val adapter by lazy { NoteAdapter() }
 
     override fun isStatusBarEnabled(): Boolean {
@@ -47,6 +50,29 @@ class ListFragment : AppFragment<MviActivity>() {
     override fun initView() {
         ImmersionBar.setTitleBar(this, binding.titleView)
         binding.recyclerView.adapter = adapter
+    }
+
+    override fun input() {
+        noteRequester.input(NoteEvent.GetNoteList())
+        binding.fab.click {
+            EditorFragment.start(nav(), Note())
+        }
+        adapter.setItemClickListener { viewId, position, item ->
+            when (viewId) {
+                R.id.layout_item -> {
+                    EditorFragment.start(nav(), item)
+                }
+                R.id.btn_delete -> {
+                    noteRequester.input(NoteEvent.RemoveItem.setNote(item.copy()))
+                }
+                R.id.btn_mark -> {
+                    noteRequester.input(NoteEvent.MarkItem.setNote(item.copy()))
+                }
+                R.id.btn_topping -> {
+                    noteRequester.input(NoteEvent.ToppingItem.setNote(item.copy()))
+                }
+            }
+        }
     }
 
     override fun output() {
@@ -73,26 +99,19 @@ class ListFragment : AppFragment<MviActivity>() {
                 else -> {}
             }
         }
-    }
-
-    override fun input() {
-        noteRequester.input(NoteEvent.GetNoteList())
-        binding.fab.click {
-            EditorFragment.start(nav(), Note())
-        }
-        adapter.setItemClickListener { viewId, position, item ->
-            when (viewId) {
-                R.id.layout_item -> {
-                    EditorFragment.start(nav(), item)
+        complexRequester.output(this) {
+            when (it) {
+                is ComplexEvent.ResultTest1 -> {
+                    Logger.d(TAG, "--1")
                 }
-                R.id.btn_delete -> {
-                    noteRequester.input(NoteEvent.RemoveItem.setNote(item.copy()))
+                is ComplexEvent.ResultTest2 -> {
+                    Logger.d(TAG, "--2")
                 }
-                R.id.btn_mark -> {
-                    noteRequester.input(NoteEvent.MarkItem.setNote(item.copy()))
+                is ComplexEvent.ResultTest3 -> {
+                    Logger.d(TAG, "--3")
                 }
-                R.id.btn_topping -> {
-                    noteRequester.input(NoteEvent.ToppingItem.setNote(item.copy()))
+                is ComplexEvent.ResultTest4 -> {
+                    Logger.d(TAG, "--4 " + it.count)
                 }
             }
         }

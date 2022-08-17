@@ -14,8 +14,6 @@ import androidx.lifecycle.ViewModel;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.android.architecture.helper.AppExecutors;
-import com.android.architecture.helper.DelayTaskHelper;
 import com.android.architecture.helper.Logger;
 import com.android.architecture.ui.scope.ViewModelScope;
 
@@ -33,6 +31,7 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     private View mRootView;
     private final ViewModelScope mViewModelScope = new ViewModelScope();
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -68,10 +67,10 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
 
     protected abstract void initView();
 
-    protected void output() {
+    protected void input() {
     }
 
-    protected void input() {
+    protected void output() {
     }
 
     @Override

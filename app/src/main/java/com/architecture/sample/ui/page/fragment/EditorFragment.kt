@@ -78,6 +78,11 @@ class EditorFragment : AppFragment<MviActivity>() {
         }
     }
 
+    override fun input() {
+        super.input()
+        binding.ivBack.click { save() }
+    }
+
     override fun output() {
         super.output()
         noteRequester.output(this) { noteEvent ->
@@ -90,11 +95,6 @@ class EditorFragment : AppFragment<MviActivity>() {
         messenger.output(this) {
             Logger.e(TAG, "it:$it")
         }
-    }
-
-    override fun input() {
-        super.input()
-        binding.ivBack.click { save() }
     }
 
     override fun onBackPressed(): Boolean {

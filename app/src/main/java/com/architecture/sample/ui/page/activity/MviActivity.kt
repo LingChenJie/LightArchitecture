@@ -34,15 +34,15 @@ class MviActivity : AppActivity() {
     }
 
     override fun input() {
-//        complexRequester.input(ComplexEvent.ResultTest1())
-//        complexRequester.input(ComplexEvent.ResultTest2())
-//        complexRequester.input(ComplexEvent.ResultTest2())
-//        complexRequester.input(ComplexEvent.ResultTest2())
-//        complexRequester.input(ComplexEvent.ResultTest2())
-//        complexRequester.input(ComplexEvent.ResultTest3())
-//        complexRequester.input(ComplexEvent.ResultTest3())
-//        complexRequester.input(ComplexEvent.ResultTest3())
-//        complexRequester.input(ComplexEvent.ResultTest3())
+        complexRequester.input(ComplexEvent.ResultTest1())
+        complexRequester.input(ComplexEvent.ResultTest2())
+        complexRequester.input(ComplexEvent.ResultTest2())
+        complexRequester.input(ComplexEvent.ResultTest2())
+        complexRequester.input(ComplexEvent.ResultTest2())
+        complexRequester.input(ComplexEvent.ResultTest3())
+        complexRequester.input(ComplexEvent.ResultTest3())
+        complexRequester.input(ComplexEvent.ResultTest3())
+        complexRequester.input(ComplexEvent.ResultTest3())
     }
 
     override fun output() {

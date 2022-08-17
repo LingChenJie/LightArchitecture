@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import androidx.activity.ComponentActivity;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,10 +48,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
 
     protected abstract void initView();
 
-    protected void output() {
+    protected void input() {
     }
 
-    protected void input() {
+    protected void output() {
     }
 
     @Override

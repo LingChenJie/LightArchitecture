@@ -44,7 +44,7 @@ abstract class MviDispatcher<E> : ViewModel() {
             activity.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 delayArray.remove(System.identityHashCode(activity))
                 _sharedFlow.collect {
-                    Logger.i(TAG, "----collect: $activity")
+                    Logger.i(TAG, "----collect: ${activity.javaClass.simpleName}")
                     observerWrapper.onChanged(it)
                 }
             }
@@ -58,7 +58,7 @@ abstract class MviDispatcher<E> : ViewModel() {
             fragment.viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 delayArray.remove(System.identityHashCode(fragment))
                 _sharedFlow.collect {
-                    Logger.i(TAG, "----collect: $fragment")
+                    Logger.i(TAG, "----collect: ${fragment.javaClass.simpleName}")
                     observerWrapper.onChanged(it)
                 }
             }
