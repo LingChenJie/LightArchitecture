@@ -1,7 +1,6 @@
 package com.architecture.sample.ui.page.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -89,7 +88,7 @@ class EditorFragment : AppFragment<MviActivity>() {
             if (noteEvent is NoteEvent.AddItem) {
                 messenger.input(Messages.RefreshNoteList)
                 toast(getString(R.string.saved))
-                nav().navigateUp()
+                navController.navigateUp()
             }
         }
         messenger.output(this) {
@@ -106,7 +105,7 @@ class EditorFragment : AppFragment<MviActivity>() {
         val title = binding.etTitle.text.toString()
         val content = binding.etContent.text.toString()
         if (title.empty || content.empty) {
-            nav().navigateUp()
+            navController.navigateUp()
             return
         }
         val time = System.currentTimeMillis()

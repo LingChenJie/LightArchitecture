@@ -121,7 +121,7 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
         return mRootView;
     }
 
-    protected NavController nav() {
+    protected NavController getNavController() {
         return NavHostFragment.findNavController(this);
     }
 

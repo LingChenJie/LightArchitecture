@@ -55,12 +55,12 @@ class ListFragment : AppFragment<MviActivity>() {
     override fun input() {
         noteRequester.input(NoteEvent.GetNoteList())
         binding.fab.click {
-            EditorFragment.start(nav(), Note())
+            EditorFragment.start(navController, Note())
         }
         adapter.setItemClickListener { viewId, position, item ->
             when (viewId) {
                 R.id.layout_item -> {
-                    EditorFragment.start(nav(), item)
+                    EditorFragment.start(navController, item)
                 }
                 R.id.btn_delete -> {
                     noteRequester.input(NoteEvent.RemoveItem.setNote(item.copy()))
