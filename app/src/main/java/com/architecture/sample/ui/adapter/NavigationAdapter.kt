@@ -14,8 +14,8 @@ import com.architecture.sample.databinding.ItemCommonNavigationBinding
  * Modify date: 2022/8/13
  * Version: 1
  */
-class CommonNavigationAdapter :
-    BaseAdapter<CommonNavigationAdapter.MenuItem, ItemCommonNavigationBinding>() {
+class NavigationAdapter :
+    BaseAdapter<NavigationAdapter.MenuItem, ItemCommonNavigationBinding>() {
 
     class MenuItem(val text: String, val drawable: Drawable)
 

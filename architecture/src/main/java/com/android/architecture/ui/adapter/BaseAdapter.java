@@ -17,6 +17,7 @@ import java.util.List;
  * Version: 1
  */
 public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView.Adapter<BaseAdapter.ViewHolder<V>> {
+    private RecyclerView recyclerView;
     private final List<T> data;
     protected OnItemClickListener<T> listener;
     protected OnItemLongClickListener<T> longListener;
@@ -59,14 +60,30 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
         onBindingData(holder, data.get(position), position);
     }
 
-    protected abstract V onBindingView(ViewGroup viewGroup);
-
-    protected abstract void onBindingData(ViewHolder<V> holder, T item, int position);
-
     @Override
     public int getItemCount() {
         return data.size();
     }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        this.recyclerView = recyclerView;
+        if (recyclerView.getLayoutManager() == null) {
+
+        }
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onDetachedFromRecyclerView(recyclerView);
+        this.recyclerView = null;
+    }
+
+    protected abstract V onBindingView(ViewGroup viewGroup);
+
+    protected abstract void onBindingData(ViewHolder<V> holder, T item, int position);
+
 
     public static class ViewHolder<V extends ViewBinding> extends RecyclerView.ViewHolder {
         private final V binding;

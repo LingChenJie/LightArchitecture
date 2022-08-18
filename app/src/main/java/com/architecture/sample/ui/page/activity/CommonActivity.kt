@@ -6,7 +6,7 @@ import com.architecture.sample.R
 import com.architecture.sample.app.AppActivity
 import com.architecture.sample.app.AppFragment
 import com.architecture.sample.databinding.ActivityCommonBinding
-import com.architecture.sample.ui.adapter.CommonNavigationAdapter
+import com.architecture.sample.ui.adapter.NavigationAdapter
 import com.architecture.sample.ui.page.fragment.FoundFragment
 import com.architecture.sample.ui.page.fragment.HomeFragment
 import com.architecture.sample.ui.page.fragment.MeFragment
@@ -25,10 +25,9 @@ class CommonActivity : AppActivity() {
         ActivityCommonBinding.inflate(layoutInflater)
     }
 
-    private val mPagerAdapter: FragmentPagerAdapter<AppFragment<CommonActivity>> by lazy {
+    private val pagerAdapter: FragmentPagerAdapter<AppFragment<CommonActivity>> =
         FragmentPagerAdapter(this)
-    }
-    private val mNavigationAdapter: CommonNavigationAdapter by lazy { CommonNavigationAdapter() }
+    private val navigationAdapter = NavigationAdapter()
 
     override fun isStatusBarEnabled(): Boolean {
         return false
@@ -36,35 +35,35 @@ class CommonActivity : AppActivity() {
 
     override fun initView() {
         setContentView(binding.root)
-        mPagerAdapter.addFragment(HomeFragment.newInstance())
-        mPagerAdapter.addFragment(FoundFragment.newInstance())
-        mPagerAdapter.addFragment(MessageFragment.newInstance())
-        mPagerAdapter.addFragment(MeFragment.newInstance())
-        binding.viewPager.adapter = mPagerAdapter
+        pagerAdapter.addFragment(HomeFragment.newInstance())
+        pagerAdapter.addFragment(FoundFragment.newInstance())
+        pagerAdapter.addFragment(MessageFragment.newInstance())
+        pagerAdapter.addFragment(MeFragment.newInstance())
+        binding.viewPager.adapter = pagerAdapter
         val data = listOf(
-            CommonNavigationAdapter.MenuItem(
+            NavigationAdapter.MenuItem(
                 getString(R.string.common_nav_index),
                 getDrawable(R.drawable.common_home_selector)!!
             ),
-            CommonNavigationAdapter.MenuItem(
+            NavigationAdapter.MenuItem(
                 getString(R.string.common_nav_found),
                 getDrawable(R.drawable.common_found_selector)!!
             ),
-            CommonNavigationAdapter.MenuItem(
+            NavigationAdapter.MenuItem(
                 getString(R.string.common_nav_message),
                 getDrawable(R.drawable.common_message_selector)!!
             ),
-            CommonNavigationAdapter.MenuItem(
+            NavigationAdapter.MenuItem(
                 getString(R.string.common_nav_me),
                 getDrawable(R.drawable.common_me_selector)!!
             )
         )
-        mNavigationAdapter.setData(data)
-        mNavigationAdapter.setOnNavigationListener { position ->
+        navigationAdapter.setData(data)
+        navigationAdapter.setOnNavigationListener { position ->
             binding.viewPager.currentItem = position
         }
         binding.rvNavigation.layoutManager = GridLayoutManager(this, 4)
-        binding.rvNavigation.adapter = mNavigationAdapter
+        binding.rvNavigation.adapter = navigationAdapter
     }
 
 }
