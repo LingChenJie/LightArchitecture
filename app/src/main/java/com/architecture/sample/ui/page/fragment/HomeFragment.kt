@@ -24,7 +24,7 @@ class HomeFragment : AppFragment<CommonActivity>() {
 
     private lateinit var binding: FragmentHomeBinding
 
-    override fun getContentView(inflater: LayoutInflater, container: ViewGroup?): View {
+    override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }

@@ -25,7 +25,7 @@ class MeFragment : AppFragment<CommonActivity>() {
 
     private lateinit var binding: FragmentMeBinding
 
-    override fun getContentView(inflater: LayoutInflater, container: ViewGroup?): View {
+    override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = FragmentMeBinding.inflate(inflater, container, false)
         return binding.root
     }

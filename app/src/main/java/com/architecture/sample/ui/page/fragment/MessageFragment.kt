@@ -24,7 +24,7 @@ class MessageFragment : AppFragment<CommonActivity>() {
 
     private lateinit var binding: FragmentMessageBinding
 
-    override fun getContentView(inflater: LayoutInflater, container: ViewGroup?): View {
+    override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = FragmentMessageBinding.inflate(inflater, container, false)
         return binding.root
     }

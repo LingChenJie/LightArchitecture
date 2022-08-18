@@ -50,7 +50,7 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Logger.i(TAG, "----onCreateView");
-        mRootView = getContentView(inflater, container);
+        mRootView = getRootView(inflater, container);
         return mRootView;
     }
 
@@ -63,7 +63,7 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
         input();
     }
 
-    protected abstract View getContentView(LayoutInflater inflater, ViewGroup container);
+    protected abstract View getRootView(LayoutInflater inflater, ViewGroup container);
 
     protected abstract void initView();
 

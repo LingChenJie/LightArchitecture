@@ -52,7 +52,7 @@ class EditorFragment : AppFragment<MviActivity>() {
         return true
     }
 
-    override fun getContentView(inflater: LayoutInflater, container: ViewGroup?): View {
+    override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = FragmentEditorBinding.inflate(inflater, container, false)
         return binding.root
     }

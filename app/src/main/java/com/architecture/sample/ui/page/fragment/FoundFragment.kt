@@ -25,7 +25,7 @@ class FoundFragment : AppFragment<CommonActivity>() {
 
     private lateinit var binding: FragmentFoundBinding
 
-    override fun getContentView(inflater: LayoutInflater, container: ViewGroup?): View {
+    override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
         binding = FragmentFoundBinding.inflate(inflater, container, false)
         return binding.root
     }
