@@ -3,8 +3,12 @@ package com.android.architecture.ui.adapter;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
+
+import com.android.architecture.extension.ResourcesKt;
+import com.android.architecture.utils.AppUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,12 +56,12 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
     @NonNull
     @Override
     public ViewHolder<V> onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder<>(onBindingView(viewGroup));
+        return new ViewHolder<>(getViewBinding(viewGroup));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder<V> holder, int position) {
-        onBindingData(holder, data.get(position), position);
+        bindViewHolder(holder, data.get(position), position);
     }
 
     @Override
@@ -69,8 +73,11 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         this.recyclerView = recyclerView;
-        if (recyclerView.getLayoutManager() == null) {
-
+        if (this.recyclerView.getLayoutManager() == null) {
+            RecyclerView.LayoutManager layoutManager = generateDefaultLayoutManager();
+            if (layoutManager != null) {
+                this.recyclerView.setLayoutManager(layoutManager);
+            }
         }
     }
 
@@ -80,10 +87,13 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
         this.recyclerView = null;
     }
 
-    protected abstract V onBindingView(ViewGroup viewGroup);
+    protected abstract V getViewBinding(ViewGroup viewGroup);
 
-    protected abstract void onBindingData(ViewHolder<V> holder, T item, int position);
+    protected abstract void bindViewHolder(ViewHolder<V> holder, T item, int position);
 
+    protected RecyclerView.LayoutManager generateDefaultLayoutManager() {
+        return new LinearLayoutManager(ResourcesKt.getContext());
+    }
 
     public static class ViewHolder<V extends ViewBinding> extends RecyclerView.ViewHolder {
         private final V binding;
@@ -103,7 +113,7 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
     }
 
     public interface OnItemLongClickListener<T> {
-        void onItemClick(int viewId, int position, T item);
+        void onItemLongClick(int viewId, int position, T item);
     }
 
 }

@@ -19,7 +19,7 @@ import com.architecture.sample.databinding.AdapterNoteListBinding
  */
 class NoteAdapter : BaseAdapter<Note, AdapterNoteListBinding>() {
 
-    override fun onBindingView(viewGroup: ViewGroup): AdapterNoteListBinding {
+    override fun getViewBinding(viewGroup: ViewGroup): AdapterNoteListBinding {
         return AdapterNoteListBinding.inflate(
             LayoutInflater.from(viewGroup.context),
             viewGroup,
@@ -27,7 +27,7 @@ class NoteAdapter : BaseAdapter<Note, AdapterNoteListBinding>() {
         )
     }
 
-    override fun onBindingData(
+    override fun bindViewHolder(
         holder: ViewHolder<AdapterNoteListBinding>,
         item: Note,
         position: Int

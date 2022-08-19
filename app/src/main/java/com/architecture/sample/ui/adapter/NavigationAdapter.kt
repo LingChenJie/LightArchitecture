@@ -23,7 +23,7 @@ class NavigationAdapter :
     private var mSelectPosition = 0
     private var mNavigationListener: ((position: Int) -> Unit)? = null
 
-    override fun onBindingView(viewGroup: ViewGroup): ItemCommonNavigationBinding {
+    override fun getViewBinding(viewGroup: ViewGroup): ItemCommonNavigationBinding {
         return ItemCommonNavigationBinding.inflate(
             LayoutInflater.from(viewGroup.context),
             viewGroup,
@@ -31,7 +31,7 @@ class NavigationAdapter :
         )
     }
 
-    override fun onBindingData(
+    override fun bindViewHolder(
         holder: ViewHolder<ItemCommonNavigationBinding>,
         item: MenuItem,
         position: Int
