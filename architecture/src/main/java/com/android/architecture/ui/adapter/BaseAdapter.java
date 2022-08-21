@@ -21,7 +21,7 @@ import java.util.List;
  * Version: 1
  */
 public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView.Adapter<BaseAdapter.ViewHolder<V>> {
-    private RecyclerView recyclerView;
+    protected RecyclerView recyclerView;
     private final List<T> data;
     protected OnItemClickListener<T> listener;
     protected OnItemLongClickListener<T> longListener;
