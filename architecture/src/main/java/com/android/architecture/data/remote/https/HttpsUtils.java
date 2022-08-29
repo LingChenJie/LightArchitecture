@@ -31,6 +31,28 @@ public class HttpsUtils {
         public X509TrustManager trustManager;
     }
 
+    public static SSLParams getSslSocketFactory() {
+        return getSslSocketFactory(null, null, null);
+    }
+
+    /**
+     * https单向认证
+     *
+     * @param certificates 用含有服务端公钥的证书校验服务端证书
+     * @return
+     */
+    public static SSLParams getSslSocketFactory(InputStream... certificates) {
+        return getSslSocketFactory(certificates, null, null);
+    }
+
+    /**
+     * https双向认证
+     *
+     * @param certificates 用含有服务端公钥的证书校验服务端证书
+     * @param bksFile      客户端使用 bks 证书校验服务端证书，证书流
+     * @param password     客户端使用 bks 证书校验服务端证书，证书密码
+     * @return
+     */
     public static SSLParams getSslSocketFactory(InputStream[] certificates, InputStream bksFile, String password) {
         SSLParams sslParams = new SSLParams();
         try {
@@ -54,6 +76,12 @@ public class HttpsUtils {
         }
     }
 
+    /**
+     * @param certificates 用含有服务端公钥的证书校验服务端证书
+     * @param p12File      客户端使用 p12 证书校验服务端证书，证书流
+     * @param password     客户端使用 p12 证书校验服务端证书，证书密码
+     * @return
+     */
     public static SSLParams getSslSocketFactoryP12(InputStream[] certificates, InputStream p12File, String password) {
         SSLParams sslParams = new SSLParams();
         try {
@@ -69,6 +97,7 @@ public class HttpsUtils {
             sslContext.init(keyManagers, new TrustManager[]{trustManager}, new SecureRandom());
             sslParams.sslSocketFactory = sslContext.getSocketFactory();
             sslParams.trustManager = trustManager;
+
             return sslParams;
         } catch (NoSuchAlgorithmException | KeyManagementException | KeyStoreException e) {
             e.printStackTrace();
