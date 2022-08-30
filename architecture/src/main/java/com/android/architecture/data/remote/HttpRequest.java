@@ -1,5 +1,7 @@
 package com.android.architecture.data.remote;
 
+import androidx.annotation.NonNull;
+
 import com.android.architecture.data.remote.https.HttpsUtils;
 import com.android.architecture.data.remote.https.TrustAllHostname;
 import com.android.architecture.helper.Logger;
@@ -26,6 +28,11 @@ public class HttpRequest {
     private static final String TAG = HttpRequest.class.getSimpleName();
     private static final int CONNECT_TIME_OUT = 5;// 连接超时时间
     private static final int COMMUNICATION_TIME_OUT = 38;// 超时时间设置为38秒
+
+
+    public static OkHttpClient getOkHttpClient() {
+        return getOkHttpClient(COMMUNICATION_TIME_OUT);
+    }
 
     public static OkHttpClient getOkHttpClient(int timeout) {
         HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory();
@@ -142,9 +149,16 @@ public class HttpRequest {
     }
 
     private static HttpLoggingInterceptor getLogInterceptor() {
-        HttpLoggingInterceptor sLogInterceptor = new HttpLoggingInterceptor();
+        HttpLoggingInterceptor sLogInterceptor = new HttpLoggingInterceptor(new HttpLogger());
         sLogInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return sLogInterceptor;
+    }
+
+    private static class HttpLogger implements HttpLoggingInterceptor.Logger {
+        @Override
+        public void log(@NonNull String message) {
+            Logger.i(TAG, message);
+        }
     }
 
 }
