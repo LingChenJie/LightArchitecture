@@ -1,6 +1,6 @@
-package com.architecture.sample.domain.event
+package com.light.xhd.domain.event
 
-import com.architecture.sample.data.model.db.entity.Note
+import com.light.xhd.model.db.entity.Note
 
 /**
  * File describe:

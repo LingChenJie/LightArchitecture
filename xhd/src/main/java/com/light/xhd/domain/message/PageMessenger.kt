@@ -1,7 +1,7 @@
-package com.architecture.sample.domain.message
+package com.light.xhd.domain.message
 
 import com.android.architecture.domain.dispatcher.MviDispatcher
-import com.architecture.sample.domain.event.Messages
+import com.light.xhd.domain.event.Messages
 
 /**
  * File describe:

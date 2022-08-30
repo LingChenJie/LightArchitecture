@@ -1,7 +1,7 @@
-package com.architecture.sample.domain.request
+package com.light.xhd.domain.request
 
 import com.android.architecture.domain.dispatcher.MviDispatcher
-import com.architecture.sample.domain.event.ComplexEvent
+import com.light.xhd.domain.event.ComplexEvent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 

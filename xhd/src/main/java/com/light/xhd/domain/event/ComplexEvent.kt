@@ -1,4 +1,4 @@
-package com.architecture.sample.domain.event
+package com.light.xhd.domain.event
 
 /**
  * File describe:

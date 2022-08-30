@@ -1,8 +1,8 @@
-package com.architecture.sample.data.model
+package com.light.xhd.model
 
-import com.architecture.sample.data.model.db.AppDBManager
-import com.architecture.sample.data.model.db.dao.NoteDao
-import com.architecture.sample.data.model.db.entity.Note
+import com.light.xhd.model.db.AppDBManager
+import com.light.xhd.model.db.dao.NoteDao
+import com.light.xhd.model.db.entity.Note
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext

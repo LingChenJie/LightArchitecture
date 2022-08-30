@@ -1,7 +1,7 @@
-package com.architecture.sample.data.model.db.dao
+package com.light.xhd.model.db.dao
 
 import androidx.room.*
-import com.architecture.sample.data.model.db.entity.Note
+import com.light.xhd.model.db.entity.Note
 import kotlinx.coroutines.flow.Flow
 
 /**

@@ -1,9 +1,9 @@
-package com.architecture.sample.data.model.db
+package com.light.xhd.model.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.architecture.sample.data.model.db.dao.NoteDao
-import com.architecture.sample.data.model.db.entity.Note
+import com.light.xhd.model.db.dao.NoteDao
+import com.light.xhd.model.db.entity.Note
 
 /**
  * File describe:

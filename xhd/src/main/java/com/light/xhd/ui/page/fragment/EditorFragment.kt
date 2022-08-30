@@ -15,11 +15,11 @@ import com.android.architecture.helper.DateHelper
 import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.StateHolder
 import com.architecture.sample.app.AppFragment
-import com.architecture.sample.data.model.db.entity.Note
-import com.architecture.sample.domain.event.Messages
-import com.architecture.sample.domain.event.NoteEvent
-import com.architecture.sample.domain.message.PageMessenger
-import com.architecture.sample.domain.request.NoteRequester
+import com.light.xhd.model.db.entity.Note
+import com.light.xhd.domain.event.Messages
+import com.light.xhd.domain.event.NoteEvent
+import com.light.xhd.domain.message.PageMessenger
+import com.light.xhd.domain.request.NoteRequester
 import com.light.xhd.ui.page.activity.MviActivity
 import com.gyf.immersionbar.ImmersionBar
 import com.light.xhd.R

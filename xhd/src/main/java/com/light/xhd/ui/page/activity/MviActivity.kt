@@ -3,10 +3,10 @@ package com.light.xhd.ui.page.activity
 import androidx.activity.viewModels
 import com.android.architecture.helper.Logger
 import com.light.xhd.app.AppActivity
-import com.architecture.sample.domain.event.ComplexEvent
-import com.architecture.sample.domain.event.Messages
-import com.architecture.sample.domain.message.PageMessenger
-import com.architecture.sample.domain.request.ComplexRequester
+import com.light.xhd.domain.event.ComplexEvent
+import com.light.xhd.domain.event.Messages
+import com.light.xhd.domain.message.PageMessenger
+import com.light.xhd.domain.request.ComplexRequester
 import com.light.xhd.databinding.ActivityMviBinding
 
 /**

@@ -1,9 +1,9 @@
-package com.architecture.sample.domain.request
+package com.light.xhd.domain.request
 
 import com.android.architecture.domain.dispatcher.MviDispatcher
 import com.android.architecture.helper.Logger
-import com.architecture.sample.data.model.NoteModel
-import com.architecture.sample.domain.event.NoteEvent
+import com.light.xhd.model.NoteModel
+import com.light.xhd.domain.event.NoteEvent
 
 /**
  * File describe:

@@ -1,4 +1,4 @@
-package com.architecture.sample.data.model.db
+package com.light.xhd.model.db
 
 import androidx.room.Room
 import com.android.architecture.utils.AppUtils
@@ -13,7 +13,7 @@ import com.android.architecture.utils.AppUtils
 class AppDBManager private constructor() {
 
     companion object {
-        private const val DATABASE_NAME = "LIGHT_ARCHITECTURE.db"
+        private const val DATABASE_NAME = "xhd.db"
 
         @JvmStatic
         val instance by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
