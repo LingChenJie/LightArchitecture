@@ -1,4 +1,4 @@
-package com.android.architecture.domain.request;
+package com.android.architecture.domain.task;
 
 /**
  * File describe:
@@ -7,6 +7,6 @@ package com.android.architecture.domain.request;
  * Modify date: 2022/8/3
  * Version: 1
  */
-public interface IRequest<T, R> {
-    R execute(T param);
+public interface ITask<P, R> {
+    R execute(P param);
 }

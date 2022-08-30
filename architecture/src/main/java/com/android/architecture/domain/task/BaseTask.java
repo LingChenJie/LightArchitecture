@@ -1,4 +1,4 @@
-package com.android.architecture.domain.request;
+package com.android.architecture.domain.task;
 
 import com.android.architecture.helper.MainThreadHelper;
 
@@ -9,28 +9,28 @@ import com.android.architecture.helper.MainThreadHelper;
  * Modify date: 2022/8/3
  * Version: 1
  */
-public abstract class BaseRequest<T, R> implements IRequest<T, R> {
+public abstract class BaseTask<P, R> implements ITask<P, R> {
 
-    protected T param;
+    protected P param;
     protected R response;
 
     @Override
-    public R execute(T param) {
+    public R execute(P param) {
         if (MainThreadHelper.INSTANCE.judgeMainThread()) {
-            throw new RuntimeException("The request cannot be executed in the main thread.");
+            throw new RuntimeException("The task cannot be executed in the main thread.");
         }
         doExecute(param);
         return response;
     }
 
-    private void doExecute(T param) {
+    private void doExecute(P param) {
         this.param = param;
         initParams(param);
         onPreExecute();
         onExecute();
     }
 
-    protected abstract void initParams(T param);
+    protected abstract void initParams(P param);
 
     protected abstract void onPreExecute();
 
