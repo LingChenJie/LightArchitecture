@@ -224,11 +224,11 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         super.dismiss();
     }
 
-    @NonNull
-    @Override
-    public Lifecycle getLifecycle() {
-        return mLifecycle;
-    }
+//    @NonNull
+//    @Override
+//    public Lifecycle getLifecycle() {
+//        return mLifecycle;
+//    }
 
     /**
      * 设置一个显示监听器
