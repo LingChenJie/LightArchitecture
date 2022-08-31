@@ -1,4 +1,4 @@
-package com.android.architecture.data.remote.https;
+package com.android.architecture.data.remote.ssl;
 
 import android.annotation.SuppressLint;
 

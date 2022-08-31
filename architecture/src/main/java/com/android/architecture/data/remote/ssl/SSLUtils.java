@@ -1,4 +1,4 @@
-package com.android.architecture.data.remote.https;
+package com.android.architecture.data.remote.ssl;
 
 import android.annotation.SuppressLint;
 
@@ -22,9 +22,9 @@ import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 /**
- * Https工具类
+ * SSL工具类
  */
-public class HttpsUtils {
+public class SSLUtils {
 
     public static class SSLParams {
         public SSLSocketFactory sslSocketFactory;
@@ -36,7 +36,7 @@ public class HttpsUtils {
     }
 
     /**
-     * https单向认证
+     * SSL单向认证
      *
      * @param certificates 用含有服务端公钥的证书校验服务端证书
      * @return
@@ -46,7 +46,7 @@ public class HttpsUtils {
     }
 
     /**
-     * https双向认证
+     * SSL双向认证
      *
      * @param certificates 用含有服务端公钥的证书校验服务端证书
      * @param bksFile      客户端使用 bks 证书校验服务端证书，证书流

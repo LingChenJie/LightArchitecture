@@ -2,8 +2,8 @@ package com.android.architecture.data.remote;
 
 import androidx.annotation.NonNull;
 
-import com.android.architecture.data.remote.https.HttpsUtils;
-import com.android.architecture.data.remote.https.TrustAllHostname;
+import com.android.architecture.data.remote.ssl.SSLUtils;
+import com.android.architecture.data.remote.ssl.TrustAllHostname;
 import com.android.architecture.helper.Logger;
 
 import java.io.IOException;
@@ -39,7 +39,7 @@ public class HttpRequest {
     }
 
     public HttpRequest() {
-        HttpsUtils.SSLParams sslParams = HttpsUtils.getSslSocketFactory();
+        SSLUtils.SSLParams sslParams = SSLUtils.getSslSocketFactory();
         okHttpClient = new OkHttpClient()
                 .newBuilder()
                 .connectTimeout(timeout, TimeUnit.SECONDS)

@@ -29,6 +29,14 @@ data class Note(
     val type: Int,
 ) : Parcelable {
 
+    companion object {
+        const val TYPE_TOPPING = 0x0001
+        const val TYPE_MARKED = 0x0002
+    }
+
+    @Ignore
+    constructor() : this(0, "", "", 0, 0, 0)
+
     @IgnoredOnParcel
     @Ignore
     var mutableType: Int = type
@@ -54,11 +62,4 @@ data class Note(
         return Note(nId, title, content, creteTime, modifyTime, mutableType)
     }
 
-    companion object {
-        const val TYPE_TOPPING = 0x0001
-        const val TYPE_MARKED = 0x0002
-    }
-
-    @Ignore
-    constructor() : this(0, "", "", 0, 0, 0)
 }
