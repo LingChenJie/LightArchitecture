@@ -9,7 +9,7 @@ import com.android.architecture.extension.click
 import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.StateHolder
 import com.architecture.sample.app.AppFragment
-import com.light.xhd.model.db.entity.Note
+import com.light.xhd.data.model.db.entity.Note
 import com.light.xhd.domain.event.ComplexEvent
 import com.light.xhd.domain.event.Messages
 import com.light.xhd.domain.event.NoteEvent

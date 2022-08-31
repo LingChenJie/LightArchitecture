@@ -11,31 +11,19 @@ import retrofit2.converter.gson.GsonConverterFactory
  * Modify date: 2022/8/31
  * Version: 1
  */
-class RetrofitCreator {
+object RetrofitCreator {
 
-    companion object {
+    inline fun <reified T> create(baseUrl: String, okHttpClient: OkHttpClient? = null): T =
+        create(baseUrl, T::class.java, okHttpClient)
 
-        @JvmStatic
-        val instance by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
-            RetrofitCreator()
-        }
-    }
-
-    inline fun <reified T> create(baseUrl: String, okHttpClient: OkHttpClient? = null): T {
-        return if (okHttpClient != null) {
-            create(baseUrl, T::class.java, okHttpClient)
-        } else {
-            create(baseUrl, T::class.java, HttpRequest().okHttpClient)
-        }
-    }
-
-    fun <T> create(baseUrl: String, serviceClass: Class<T>, okHttpClient: OkHttpClient): T =
+    fun <T> create(baseUrl: String, serviceClass: Class<T>, okHttpClient: OkHttpClient? = null): T =
         getRetrofit(baseUrl, okHttpClient).create(serviceClass)
 
-    private fun getRetrofit(baseUrl: String, okHttpClient: OkHttpClient): Retrofit {
+    fun getRetrofit(baseUrl: String, okHttpClient: OkHttpClient? = null): Retrofit {
+        val client = okHttpClient ?: HttpRequest().okHttpClient
         return Retrofit.Builder()
             .baseUrl(baseUrl)
-            .client(okHttpClient)
+            .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

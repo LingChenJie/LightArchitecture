@@ -2,7 +2,7 @@ package com.light.xhd.domain.request
 
 import com.android.architecture.domain.dispatcher.MviDispatcher
 import com.android.architecture.helper.Logger
-import com.light.xhd.model.NoteModel
+import com.light.xhd.data.model.NoteModel
 import com.light.xhd.domain.event.NoteEvent
 
 /**

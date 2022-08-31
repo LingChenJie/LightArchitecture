@@ -1,6 +1,6 @@
 package com.light.xhd.domain.event
 
-import com.light.xhd.model.db.entity.Note
+import com.light.xhd.data.model.db.entity.Note
 
 /**
  * File describe:
