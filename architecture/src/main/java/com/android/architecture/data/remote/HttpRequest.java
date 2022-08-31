@@ -55,6 +55,10 @@ public class HttpRequest {
         this.okHttpClient = okHttpClient;
     }
 
+    public OkHttpClient getOkHttpClient() {
+        return okHttpClient;
+    }
+
     /**
      * GET 请求
      *
