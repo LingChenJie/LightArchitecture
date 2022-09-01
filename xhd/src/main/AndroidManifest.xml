@@ -29,8 +29,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.architecture.light.ui.page.activity.MviActivity"/>
-        <activity android:name="com.architecture.light.ui.page.activity.CommonActivity"/>
+        <activity android:name=".ui.page.activity.MviActivity" />
+        <activity android:name=".ui.page.activity.CommonActivity" />
+        <activity
+            android:name=".domain.transaction.action.activity.InputLoginInfoActivity"
+            android:launchMode="singleTop" />
 
     </application>
 

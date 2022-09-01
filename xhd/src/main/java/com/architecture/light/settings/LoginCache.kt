@@ -49,6 +49,20 @@ object LoginCache {
         return saveBean()
     }
 
+    fun getPassword() = bean.password
+
+    fun savePassword(password: String): Boolean {
+        bean.password = password
+        return saveBean()
+    }
+
+    fun getResponseData() = bean.responseData
+
+    fun saveResponseData(responseData: String): Boolean {
+        bean.responseData = responseData
+        return saveBean()
+    }
+
     fun getLastLoginTime() = bean.lastLoginTime
 
     fun saveLastLoginTime(lastLoginTime: String): Boolean {

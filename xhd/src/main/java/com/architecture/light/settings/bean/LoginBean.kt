@@ -9,5 +9,7 @@ package com.architecture.light.settings.bean
  */
 data class LoginBean(
     var username: String = "",
+    var password: String = "",
+    var responseData: String = "",
     var lastLoginTime: String = ""
 )

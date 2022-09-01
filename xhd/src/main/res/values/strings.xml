@@ -22,4 +22,10 @@
     <string name="common_nav_message">消息</string>
     <string name="common_nav_me">我的</string>
 
+    <!-- Login相关 -->
+    <string name="login_hint_username">请输入操作员号</string>
+    <string name="login_hint_password">请输入密码</string>
+    <string name="login_ok">登录</string>
+    <string name="login_please_input_correct_username_password">请输入正确账号和密码</string>
+
 </resources>

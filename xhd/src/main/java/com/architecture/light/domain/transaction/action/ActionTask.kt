@@ -6,9 +6,11 @@ import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.getString
 import com.android.architecture.helper.TaskTimer
+import com.android.architecture.ui.page.BaseActivity
 import com.android.architecture.utils.NetworkUtils
 import com.architecture.light.R
 import com.architecture.light.app.AppActivity
+import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.model.db.entity.TransData
 import kotlinx.coroutines.*
@@ -18,7 +20,7 @@ class ActionTask(listener: ActionStartListener) : AAction(listener) {
     private lateinit var job: Job
     private lateinit var task: ITask<TransData, TransData>
     private lateinit var transData: TransData
-    private var activity: AppActivity? = null
+    private var activity: BaseActivity? = null
     private var delayRequestTime: Long = 0
     private val timer = TaskTimer {
         job.cancel()
@@ -28,7 +30,7 @@ class ActionTask(listener: ActionStartListener) : AAction(listener) {
     fun setParam(
         task: ITask<TransData, TransData>,
         transData: TransData,
-        activity: AppActivity?,
+        activity: BaseActivity?,
         delayRequestTime: Long = 0
     ) {
         this.task = task
@@ -61,11 +63,15 @@ class ActionTask(listener: ActionStartListener) : AAction(listener) {
     }
 
     private fun showLoading() {
-        activity?.showLoading(getString(R.string.common_loading))
+        activity?.let {
+            if (it is AppActivityForAction) it.showLoading()
+        }
     }
 
     private fun hideLoading() {
-        activity?.hideLoading()
+        activity?.let {
+            if (it is AppActivityForAction) it.hideLoading()
+        }
     }
 
     override fun onClear() {
