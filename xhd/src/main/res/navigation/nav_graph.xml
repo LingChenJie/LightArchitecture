@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/listFragment"
-        android:name="com.light.xhd.ui.page.fragment.ListFragment"
+        android:name="com.architecture.light.ui.page.fragment.ListFragment"
         android:label="ListFragment"
         tools:layout="@layout/fragment_list">
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/editorFragment"
-        android:name="com.light.xhd.ui.page.fragment.EditorFragment"
+        android:name="com.architecture.light.ui.page.fragment.EditorFragment"
         android:label="EditorFragment"
         tools:layout="@layout/fragment_editor" />
 </navigation>

@@ -4,9 +4,10 @@ import android.content.Intent
 import android.view.View
 import com.android.architecture.extension.click
 import com.architecture.light.app.AppActivity
-import com.architecture.light.data.remote.bean.LoginRequest
+import com.architecture.light.constant.GlobalParams
+import com.architecture.light.data.model.db.entity.UserInfo
 import com.architecture.light.databinding.ActivityMainBinding
-import com.architecture.light.domain.task.LoginTask
+import com.architecture.light.domain.task.LogonTask
 import kotlin.concurrent.thread
 
 /**
@@ -28,10 +29,12 @@ class MainActivity : AppActivity() {
         binding.layoutMvi.click {
             //startActivity(Intent(this, MviActivity::class.java))
             thread {
-                val request = LoginRequest()
-                request.userCode = "shengxy"
-                request.password = "2"
-                LoginTask().execute(request)
+                val transData = GlobalParams.newTransData()
+                val userInfo = UserInfo()
+                transData.userInfo = userInfo
+                userInfo.username = "shengxy"
+                userInfo.password = "2"
+                LogonTask().execute(transData)
             }
         }
         binding.layoutCommon.click {

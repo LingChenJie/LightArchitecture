@@ -1,48 +1,88 @@
 package com.architecture.light.domain.task
 
+import com.android.architecture.constant.ErrorCode
 import com.android.architecture.data.remote.HttpRequest
 import com.android.architecture.domain.task.BaseTask
+import com.android.architecture.utils.NetworkUtils
 import com.architecture.light.constant.Config
+import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.data.remote.bean.base.RequestBean
 import com.architecture.light.data.remote.bean.base.RequestData
 import com.architecture.light.utils.Utils
 import com.google.gson.Gson
+import java.io.IOException
 import java.net.SocketTimeoutException
 
 /**
  * Created by SuQi on 2022/8/30.
  * Describe:
  */
-abstract class HttpTask<R> : BaseTask<RequestBean, R>() {
+abstract class HttpTask : BaseTask<TransData, TransData>() {
 
-    val httpRequest = HttpRequest()
-    lateinit var requestJson: String
+    private val httpRequest = HttpRequest()
 
-    override fun initParams(requestBean: RequestBean) {
+    override fun initParams(params: TransData) {
         httpRequest.setTimeout(30)
         httpRequest.setUrl(Config.getBaseUrl())
-        val requestData = RequestData()
-        requestData.data = requestBean
-        requestJson = Gson().toJson(requestData)
+        response = params
+    }
+
+    open fun onAssembly(): RequestBean? {
+        return null
     }
 
     override fun onPreExecute() {
     }
 
+    open fun onPostExecute(responseStr: String) {
+    }
+
     override fun onExecute() {
-        try {
-            val headers = mutableMapOf<String, String>()
-            headers["Authorization"] =
-                Utils.getOpenBodySig(Config.appId, Config.appKey, requestJson)
-            val response = httpRequest.postJson(headers, requestJson)
-            unpack(response)
-        } catch (e: SocketTimeoutException) {
-            e.printStackTrace()
-        } catch (e: Exception) {
-            e.printStackTrace()
+        val requestBean = onAssembly()
+        if (requestBean != null) {
+            val isNetworkConnected = NetworkUtils.isConnected()
+            if (!isNetworkConnected) {
+                setErrorCode(ErrorCode.NETWORK_NO_CONNECTION)
+                return
+            }
+
+            try {
+                val requestData = RequestData()
+                requestData.data = requestBean
+                val body = Gson().toJson(requestData)
+                val headers = getHeaders(body)
+                val response = httpRequest.postJson(headers, body)
+                onPostExecute(response)
+
+            } catch (e: SocketTimeoutException) {
+                e.printStackTrace()
+                setErrorCode(ErrorCode.NETWORK_TIMEOUT)
+                return
+
+            } catch (e: IOException) {
+                e.printStackTrace()
+                setErrorCode(ErrorCode.NETWORK_ERROR)
+                return
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                setErrorCode(ErrorCode.NETWORK_DATA_ERROR)
+                return
+
+            }
         }
     }
 
-    abstract fun unpack(response: String)
+    private fun getHeaders(body: String): Map<String, String> {
+        val headers = mutableMapOf<String, String>()
+        headers["Authorization"] =
+            Utils.getOpenBodySig(Config.appId, Config.appKey, body)
+        return headers
+    }
+
+    private fun setErrorCode(code: String) {
+        param.responseCode = code
+        param.responseMessage = ErrorCode.getMessage(code)
+    }
 
 }

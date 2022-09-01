@@ -2,6 +2,7 @@ package com.architecture.light.data.model.db.entity
 
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
@@ -13,6 +14,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class TransData(
     @PrimaryKey(autoGenerate = true)
-    val tId: Long,
-) : Parcelable {
-}
+    val tId: Long = 0,
+    var responseCode: String = "",
+    var responseMessage: String = "",
+    @Ignore
+    var userInfo: UserInfo? = null,
+) : Parcelable

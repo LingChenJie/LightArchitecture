@@ -25,7 +25,9 @@ class AppDBManager private constructor() {
         AppUtils.getApp(),
         AppDB::class.java,
         DATABASE_NAME
-    ).build()
+    )
+        .allowMainThreadQueries()
+        .build()
 
     fun getDataBase(): AppDB {
         return database

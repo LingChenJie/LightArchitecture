@@ -41,14 +41,18 @@ object UserInfoModel {
         return delete > 0
     }
 
-    suspend fun getNotes(): List<UserInfo> {
+    suspend fun getAllUser(): List<UserInfo> {
         return withContext(Dispatchers.IO) {
             dao.getAllUser()
         }
     }
 
-    fun getNotesFlow(): Flow<List<UserInfo>> {
-        return dao.getAllUserFlow()
+    fun queryUserInfoByUsername(username: String): UserInfo? {
+        return dao.queryUserInfoByUsername(username)
+    }
+
+    fun queryUserInfoByUsernameFlow(username: String): Flow<UserInfo> {
+        return dao.queryUserInfoByUsernameFlow(username)
     }
 
 }

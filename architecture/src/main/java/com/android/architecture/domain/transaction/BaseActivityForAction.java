@@ -5,6 +5,7 @@ import android.view.KeyEvent;
 
 import androidx.annotation.Nullable;
 
+import com.android.architecture.constant.ErrorCode;
 import com.android.architecture.constant.LightConstant;
 import com.android.architecture.helper.Logger;
 import com.android.architecture.ui.page.BaseActivity;
@@ -59,7 +60,7 @@ public abstract class BaseActivityForAction extends BaseActivity {
     }
 
     protected void clickBack() {
-        finish(new ActionResult(ActionCode.USER_CANCEL));
+        finish(new ActionResult(ErrorCode.USER_CANCEL));
     }
 
     protected void finish(ActionResult result) {
