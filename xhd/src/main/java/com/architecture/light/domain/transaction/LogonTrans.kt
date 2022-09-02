@@ -7,8 +7,6 @@ import com.architecture.light.data.model.db.entity.UserInfo
 import com.architecture.light.domain.task.LogonTask
 import com.architecture.light.domain.transaction.action.ActionInputLoginInfo
 import com.architecture.light.domain.transaction.action.ActionTask
-import com.architecture.light.settings.LoginCache
-import com.architecture.light.settings.bean.LoginBean
 
 
 class LogonTrans : BaseTransaction() {
@@ -47,7 +45,7 @@ class LogonTrans : BaseTransaction() {
                 gotoState(State.TASK_EXECUTE.name)
             }
             State.TASK_EXECUTE -> {
-                toast(transData.responseMessage + "[" + transData.responseMessage + "]")
+                toast(transData.responseMessage + "[" + transData.responseCode + "]")
                 if (transData.responseCode != ErrorCode.SUCCESS) {
                     gotoState(State.INPUT_LOGIN_INFO.name)
                 } else {

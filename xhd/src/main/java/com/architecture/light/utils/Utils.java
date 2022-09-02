@@ -2,8 +2,8 @@ package com.architecture.light.utils;
 
 import android.annotation.SuppressLint;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.codec.ext.binary.Base64;
+import org.apache.commons.codec.ext.digest.DigestUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

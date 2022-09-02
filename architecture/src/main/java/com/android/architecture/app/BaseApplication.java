@@ -2,7 +2,9 @@ package com.android.architecture.app;
 
 import android.app.Application;
 
+import com.android.architecture.ui.toast.ToastStyle;
 import com.android.architecture.utils.AppUtils;
+import com.hjq.toast.ToastUtils;
 import com.tencent.mmkv.MMKV;
 
 /**
@@ -19,6 +21,7 @@ public class BaseApplication extends Application {
         super.onCreate();
         AppUtils.init(this);
         MMKV.initialize(this);
+        ToastUtils.init(this, new ToastStyle());
     }
 
 }

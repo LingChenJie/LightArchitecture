@@ -112,6 +112,34 @@ public class ActivityStack {
     }
 
     /**
+     * 除少数外全部移除
+     *
+     * @param classArray 白名单 Activity
+     */
+    @SafeVarargs
+    public final void removeAllButFew(Class<? extends Activity>... classArray) {
+        if (activityStack == null) {
+            return;
+        }
+        for (Activity activity : activityStack) {
+            boolean whiteClazz = false;
+            if (classArray != null) {
+                for (Class<? extends Activity> clazz : classArray) {
+                    if (activity.getClass().equals(clazz)) {
+                        whiteClazz = true;
+                        break;
+                    }
+                }
+                if (whiteClazz) {
+                    continue;
+                }
+                activityStack.remove(activity);
+                activity.finish();
+            }
+        }
+    }
+
+    /**
      * 移除栈中的所有Activity
      */
     public void removeAll() {

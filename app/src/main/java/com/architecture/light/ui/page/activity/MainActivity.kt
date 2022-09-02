@@ -2,9 +2,12 @@ package com.architecture.light.ui.page.activity
 
 import android.content.Intent
 import android.view.View
+import com.android.architecture.aop.Permissions
 import com.android.architecture.extension.click
+import com.android.architecture.helper.Logger
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityMainBinding
+import com.hjq.permissions.Permission
 
 /**
  * File describe:
@@ -26,8 +29,14 @@ class MainActivity : AppActivity() {
             startActivity(Intent(this, MviActivity::class.java))
         }
         binding.layoutCommon.click {
-            startActivity(Intent(this, CommonActivity::class.java))
+            //startActivity(Intent(this, CommonActivity::class.java))
+            openCamera()
         }
+    }
+
+    @Permissions(Permission.CAMERA)
+    fun openCamera() {
+        Logger.e("suqi", "openCamera执行了...")
     }
 
 }
