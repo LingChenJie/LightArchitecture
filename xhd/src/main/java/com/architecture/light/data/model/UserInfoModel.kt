@@ -48,11 +48,11 @@ object UserInfoModel {
     }
 
     fun queryUserInfoByUsername(username: String): UserInfo? {
-        return dao.queryUserInfoByUsername(username)
+        return dao.queryUserInfoByAccount(username)
     }
 
     fun queryUserInfoByUsernameFlow(username: String): Flow<UserInfo> {
-        return dao.queryUserInfoByUsernameFlow(username)
+        return dao.queryUserInfoByAccountFlow(username)
     }
 
 }

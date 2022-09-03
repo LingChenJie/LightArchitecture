@@ -3,6 +3,7 @@ package com.architecture.light.domain.transaction
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.toast
+import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.model.db.entity.UserInfo
 import com.architecture.light.domain.task.LogonTask
 import com.architecture.light.domain.transaction.action.ActionInputLoginInfo
@@ -32,14 +33,16 @@ class LogonTrans : BaseTransaction() {
         val currentState = State.valueOf(state)
         val code = result.code
         if (code != ErrorCode.SUCCESS) {
-            transEnd(result)
-            return
+            if (currentState != State.TASK_EXECUTE) {
+                transEnd(result)
+                return
+            }
         }
         when (currentState) {
             State.INPUT_LOGIN_INFO -> {
                 val loginInfo = result.data as ActionInputLoginInfo.LoginInfo
                 val userInfo = UserInfo()
-                userInfo.username = loginInfo.username
+                userInfo.account = loginInfo.account
                 userInfo.password = loginInfo.password
                 transData.userInfo = userInfo
                 gotoState(State.TASK_EXECUTE.name)
@@ -49,7 +52,7 @@ class LogonTrans : BaseTransaction() {
                 if (transData.responseCode != ErrorCode.SUCCESS) {
                     gotoState(State.INPUT_LOGIN_INFO.name)
                 } else {
-                    transEnd(result)
+                    transEnd(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))
                 }
             }
         }

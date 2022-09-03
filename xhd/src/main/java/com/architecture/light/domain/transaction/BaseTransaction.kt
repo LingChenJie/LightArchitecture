@@ -6,7 +6,7 @@ import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.ActivityStack
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.GlobalParams
-import com.architecture.light.data.model.db.entity.TransData
+import com.architecture.light.ui.page.activity.MainActivity
 import com.google.gson.Gson
 
 abstract class BaseTransaction(listener: TransEndListener? = null) : ATransaction(listener) {
@@ -25,8 +25,13 @@ abstract class BaseTransaction(listener: TransEndListener? = null) : ATransactio
         Logger.e("TransEnd", "TransData: ${Gson().toJson(transData)}")
         super.transEnd(result)
         GlobalParams.resetTransData()
-        if (result.code == AppErrorCode.EXIT_APP) {
-            ActivityStack.getInstance().removeAll()
+        when (result.code) {
+            AppErrorCode.BACK_TO_MAIN_PAGE -> {
+                ActivityStack.getInstance().removeAllButFew(MainActivity::class.java)
+            }
+            AppErrorCode.EXIT_APP -> {
+                ActivityStack.getInstance().removeAll()
+            }
         }
     }
 

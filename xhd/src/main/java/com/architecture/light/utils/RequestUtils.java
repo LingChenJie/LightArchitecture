@@ -21,7 +21,7 @@ import javax.crypto.spec.SecretKeySpec;
  * Created by SuQi on 2022/9/1.
  * Describe:
  */
-public class Utils {
+public class RequestUtils {
 
     public static String getOpenBodySig(String appId, String appKey, String body) throws Exception {
         @SuppressLint("SimpleDateFormat")

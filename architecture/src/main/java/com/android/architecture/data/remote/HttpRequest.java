@@ -1,5 +1,7 @@
 package com.android.architecture.data.remote;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.android.architecture.data.remote.ssl.SSLUtils;
@@ -207,7 +209,7 @@ public class HttpRequest {
     private static class HttpLogger implements HttpLoggingInterceptor.Logger {
         @Override
         public void log(@NonNull String message) {
-            Logger.i(TAG, message);
+            Log.i(TAG, message);
         }
     }
 

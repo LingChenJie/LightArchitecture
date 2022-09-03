@@ -31,13 +31,13 @@ class InputLoginInfoActivity : AppActivityForAction() {
             if (ClickHelper.isDoubleClick()) {
                 return@click
             }
-            val username = binding.etUsername.text.toString()
-            val password = binding.etPassword.text.toString()
-            if (username.empty || password.empty) {
+            val account = binding.etAccount.text.toString()// shengxy
+            val password = binding.etPassword.text.toString()// 2
+            if (account.empty || password.empty) {
                 toast(getString(R.string.login_please_input_correct_username_password))
                 return@click
             }
-            val loginInfo = ActionInputLoginInfo.LoginInfo(username, password)
+            val loginInfo = ActionInputLoginInfo.LoginInfo(account, password)
             finish(ActionResult(ErrorCode.SUCCESS, loginInfo))
         }
     }

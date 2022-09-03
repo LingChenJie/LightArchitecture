@@ -1,16 +1,14 @@
 package com.architecture.light.ui.page.activity
 
 import android.content.Intent
-import android.os.Bundle
 import android.view.View
 import com.android.architecture.domain.transaction.TransactionConstant
 import com.android.architecture.extension.click
 import com.android.architecture.extension.empty
 import com.architecture.light.app.AppActivity
 import com.architecture.light.constant.GlobalParams
-import com.architecture.light.data.model.db.entity.UserInfo
 import com.architecture.light.databinding.ActivityMainBinding
-import com.architecture.light.domain.task.LogonTask
+import com.architecture.light.domain.task.SearchRoomTask
 import com.architecture.light.domain.transaction.LogonTrans
 import com.architecture.light.settings.LoginCache
 import kotlin.concurrent.thread
@@ -29,12 +27,13 @@ class MainActivity : AppActivity() {
     override fun onResume() {
         super.onResume()
         TransactionConstant.getInstance().currentActivity = this
-        if(LoginCache.getUsername().empty) {
+        if (LoginCache.getUsername().empty) {
             LogonTrans().execute()
         }
     }
 
     override fun initView() {
+        LoginCache.saveProjGUID("9b441684-9b73-c7a8-2faa-39f2d3efee8b")
         setContentView(binding.root)
         binding.titleView.apply {
             backIcon.visibility = View.GONE
@@ -42,12 +41,7 @@ class MainActivity : AppActivity() {
         binding.layoutMvi.click {
             //startActivity(Intent(this, MviActivity::class.java))
             thread {
-                val transData = GlobalParams.newTransData()
-                val userInfo = UserInfo()
-                transData.userInfo = userInfo
-                userInfo.username = "shengxy"
-                userInfo.password = "2"
-                LogonTask().execute(transData)
+                SearchRoomTask().execute(GlobalParams.newTransData())
             }
         }
         binding.layoutCommon.click {

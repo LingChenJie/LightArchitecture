@@ -1,12 +1,12 @@
 package com.architecture.light.domain.task
 
 import com.android.architecture.constant.ErrorCode
-import com.android.architecture.extension.toast
 import com.architecture.light.data.remote.ResponseCode
 import com.architecture.light.data.remote.bean.LoginRequest
 import com.architecture.light.data.remote.bean.LoginResponse
 import com.architecture.light.data.remote.bean.base.RequestBean
 import com.architecture.light.settings.LoginCache
+import com.architecture.light.settings.ProjectListCache
 import com.architecture.light.settings.bean.LoginBean
 import com.google.gson.Gson
 
@@ -19,7 +19,7 @@ class LogonTask : HttpTask() {
     override fun onAssembly(): RequestBean {
         val userInfo = param.userInfo!!
         val request = LoginRequest()
-        request.userCode = userInfo.username
+        request.userCode = userInfo.account
         request.password = userInfo.password
         return request
     }
@@ -31,11 +31,13 @@ class LogonTask : HttpTask() {
             param.responseMessage = response.msg
             val userInfo = param.userInfo!!
             val loginBean = LoginBean()
-            loginBean.username = userInfo.username
+            loginBean.account = userInfo.account
             loginBean.password = userInfo.password
-            loginBean.responseData = Gson().toJson(response.data)
+            loginBean.username = response.data.userName
+            loginBean.userGUID = response.data.userGUID
             loginBean.lastLoginTime = System.currentTimeMillis().toString()
             LoginCache.saveLoginBean(loginBean)
+            ProjectListCache.saveProjectList(response.data.projectList)
         } else {
             param.responseCode = response.code
             param.responseMessage = response.msg

@@ -29,6 +29,6 @@ class ActionInputLoginInfo(listener: ActionStartListener) : AAction(listener) {
         activity = null
     }
 
-    class LoginInfo(val username: String, val password: String)
+    class LoginInfo(val account: String, val password: String)
 
 }

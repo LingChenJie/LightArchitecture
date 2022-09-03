@@ -35,10 +35,10 @@ interface UserInfoDao {
     @Query("SELECT * FROM UserInfo")
     fun getAllUserFlow(): Flow<List<UserInfo>>
 
-    @Query("SELECT * FROM UserInfo WHERE username = :username")
-    fun queryUserInfoByUsername(username: String): UserInfo?
+    @Query("SELECT * FROM UserInfo WHERE account = :account")
+    fun queryUserInfoByAccount(account: String): UserInfo?
 
-    @Query("SELECT * FROM UserInfo WHERE username = :username")
-    fun queryUserInfoByUsernameFlow(username: String): Flow<UserInfo>
+    @Query("SELECT * FROM UserInfo WHERE account = :account")
+    fun queryUserInfoByAccountFlow(account: String): Flow<UserInfo>
 
 }
