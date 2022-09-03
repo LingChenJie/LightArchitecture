@@ -17,6 +17,13 @@ data class TransData(
     val tId: Long = 0,
     var responseCode: String = "",
     var responseMessage: String = "",
+
+    var zygwGUID: String = "",
+    var projGUID: String = "",
+    var cardID: String = "",
+    var tel: String = "",
+
+
     @Ignore
     var userInfo: UserInfo? = null,
 ) : Parcelable

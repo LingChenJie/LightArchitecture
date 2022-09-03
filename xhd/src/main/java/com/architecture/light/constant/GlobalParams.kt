@@ -38,7 +38,8 @@ object GlobalParams {
 
     fun newTransData(): TransData {
         val transData = TransData()
-
+        transData.zygwGUID = LoginCache.getUserGUID()
+        transData.projGUID = LoginCache.getProjGUID()
         return transData
     }
 

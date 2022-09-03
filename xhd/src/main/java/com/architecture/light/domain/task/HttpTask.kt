@@ -8,7 +8,7 @@ import com.architecture.light.constant.Config
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.data.remote.bean.base.RequestBean
 import com.architecture.light.data.remote.bean.base.RequestData
-import com.architecture.light.utils.Utils
+import com.architecture.light.utils.RequestUtils
 import com.google.gson.Gson
 import java.io.IOException
 import java.net.SocketTimeoutException
@@ -76,7 +76,7 @@ abstract class HttpTask : BaseTask<TransData, TransData>() {
     private fun getHeaders(body: String): Map<String, String> {
         val headers = mutableMapOf<String, String>()
         headers["Authorization"] =
-            Utils.getOpenBodySig(Config.appId, Config.appKey, body)
+            RequestUtils.getOpenBodySig(Config.appId, Config.appKey, body)
         return headers
     }
 

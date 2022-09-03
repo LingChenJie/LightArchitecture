@@ -8,8 +8,10 @@ package com.architecture.light.settings.bean
  * Version: 1
  */
 data class LoginBean(
-    var username: String = "",
+    var account: String = "",
     var password: String = "",
-    var responseData: String = "",
+    var username: String = "",
+    var userGUID: String = "",
+    var projGUID: String = "",
     var lastLoginTime: String = ""
 )

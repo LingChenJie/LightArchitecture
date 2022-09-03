@@ -42,10 +42,10 @@ object LoginCache {
         return bean
     }
 
-    fun getUsername() = bean.username
+    fun getAccount() = bean.account
 
-    fun saveUsername(username: String): Boolean {
-        bean.username = username
+    fun saveAccount(account: String): Boolean {
+        bean.account = account
         return saveBean()
     }
 
@@ -56,12 +56,26 @@ object LoginCache {
         return saveBean()
     }
 
-    fun getResponseData() = bean.responseData
+    fun getUsername() = bean.username
 
-    fun saveResponseData(responseData: String): Boolean {
-        bean.responseData = responseData
+    fun saveUsername(userGUID: String): Boolean {
+        bean.userGUID = userGUID
         return saveBean()
     }
+
+    fun saveUserGUID(userGUID: String): Boolean {
+        bean.userGUID = userGUID
+        return saveBean()
+    }
+
+    fun getProjGUID() = bean.projGUID
+
+    fun saveProjGUID(projGUID: String): Boolean {
+        bean.projGUID = projGUID
+        return saveBean()
+    }
+
+    fun getUserGUID() = bean.userGUID
 
     fun getLastLoginTime() = bean.lastLoginTime
 
