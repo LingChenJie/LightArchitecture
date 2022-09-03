@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     app:cardBackgroundColor="@color/white"
-    app:cardCornerRadius="@dimen/dialog_ui_round_size"
+    app:cardCornerRadius="@dimen/dp_6"
     app:cardElevation="0px"
     tools:context=".ui.dialog.CommonDialog">
 
@@ -53,7 +53,7 @@
 
             <View
                 android:id="@+id/v_ui_line"
-                android:layout_width="@dimen/line_size"
+                android:layout_width="@dimen/dp_1"
                 android:layout_height="match_parent"
                 android:background="@color/common_line_color" />
 

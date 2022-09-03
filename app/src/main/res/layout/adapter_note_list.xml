@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/swipe_container"
     android:layout_width="match_parent"
-    android:layout_height="80dp"
-    android:layout_margin="4dp"
+    android:layout_height="@dimen/dp_80"
+    android:layout_margin="@dimen/dp_4"
     android:clickable="true"
     android:focusable="true"
     app:ios="true"
@@ -15,18 +15,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_item"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:elevation="8dp">
+        android:layout_height="match_parent"
+        android:elevation="@dimen/dp_8">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_12"
             android:text="@{note.title}"
             android:textColor="@color/black"
-            android:textSize="24sp"
+            android:textSize="@dimen/sp_24"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_time"
@@ -35,11 +35,11 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btn_mark"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="@dimen/dp_48"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginEnd="@dimen/dp_8"
             android:background="@color/transparent"
-            android:padding="4dp"
+            android:padding="@dimen/dp_4"
             android:scaleType="centerInside"
             android:src="@drawable/icon_star_board"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -50,9 +50,9 @@
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginStart="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginBottom="@dimen/dp_4"
             android:textColor="@color/blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -64,8 +64,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginBottom="@dimen/dp_4"
             android:text="@string/top"
             android:textColor="@color/blue"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -75,14 +75,14 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <FrameLayout
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
         android:background="@color/blue">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_topping"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
             android:layout_gravity="center"
             android:src="@drawable/icon_pin"
             android:tint="@color/white" />
@@ -90,14 +90,14 @@
     </FrameLayout>
 
     <FrameLayout
-        android:layout_width="80dp"
-        android:layout_height="80dp"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80"
         android:background="@color/pink">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_delete"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
+            android:layout_width="@dimen/dp_36"
+            android:layout_height="@dimen/dp_36"
             android:layout_gravity="center"
             android:src="@drawable/icon_delete"
             android:tint="@color/white" />

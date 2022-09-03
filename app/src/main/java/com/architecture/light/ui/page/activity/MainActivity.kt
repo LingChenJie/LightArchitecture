@@ -29,14 +29,8 @@ class MainActivity : AppActivity() {
             startActivity(Intent(this, MviActivity::class.java))
         }
         binding.layoutCommon.click {
-            //startActivity(Intent(this, CommonActivity::class.java))
-            openCamera()
+            startActivity(Intent(this, CommonActivity::class.java))
         }
-    }
-
-    @Permissions(Permission.CAMERA)
-    fun openCamera() {
-        Logger.e("suqi", "openCamera执行了...")
     }
 
 }
