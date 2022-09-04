@@ -3,6 +3,7 @@ package com.architecture.light.app
 import com.android.architecture.app.BaseApplication
 import com.android.architecture.constant.ErrorCode
 import com.architecture.light.constant.AppErrorCode
+import com.architecture.light.helper.AidlServiceFactory
 
 /**
  * File describe:
@@ -20,6 +21,12 @@ class App : BaseApplication() {
 
     private fun init() {
         ErrorCode.add(AppErrorCode.errorCodeMap)
+        AidlServiceFactory.instance.init()
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        AidlServiceFactory.instance.release()
     }
 
 }
