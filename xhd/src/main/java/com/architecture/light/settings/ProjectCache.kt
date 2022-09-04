@@ -14,7 +14,7 @@ import com.google.gson.reflect.TypeToken
  * Modify date: 2022/5/9
  * Version: 1
  */
-object ProjectListCache {
+object ProjectCache {
     private const val KEY_PROJECT_LIST_BEAN = "key_project_list_bean_1"
     private var bean = initBean()
 
@@ -40,8 +40,23 @@ object ProjectListCache {
         return Gson().fromJson(bean.projectListStr, type)
     }
 
-    fun saveProjectList(projectListStr: List<LoginResponse.DataBean.ProjectListBean>): Boolean {
-        bean.projectListStr = Gson().toJson(projectListStr)
+    fun saveProjectList(projectList: List<LoginResponse.DataBean.ProjectListBean>): Boolean {
+        bean.projectListStr = Gson().toJson(projectList)
+        return saveBean()
+    }
+
+    fun getProject(): LoginResponse.DataBean.ProjectListBean? {
+        try {
+            val type = object : TypeToken<LoginResponse.DataBean.ProjectListBean>() {}.type
+            return Gson().fromJson(bean.projectStr, type)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
+
+    fun saveProject(project: LoginResponse.DataBean.ProjectListBean): Boolean {
+        bean.projectStr = Gson().toJson(project)
         return saveBean()
     }
 }

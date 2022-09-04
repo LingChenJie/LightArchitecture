@@ -4,6 +4,7 @@ import com.architecture.light.data.model.UserInfoModel
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.data.model.db.entity.UserInfo
 import com.architecture.light.settings.LoginCache
+import com.architecture.light.settings.ProjectCache
 
 /**
  * File describe:
@@ -39,7 +40,9 @@ object GlobalParams {
     fun newTransData(): TransData {
         val transData = TransData()
         transData.zygwGUID = LoginCache.getUserGUID()
-        transData.projGUID = LoginCache.getProjGUID()
+        if (ProjectCache.getProject() != null) {
+            transData.projGUID = ProjectCache.getProject()!!.projGUID
+        }
         return transData
     }
 

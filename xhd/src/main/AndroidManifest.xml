@@ -35,6 +35,9 @@
         <activity
             android:name=".domain.transaction.action.activity.InputLoginInfoActivity"
             android:launchMode="singleTop" />
+        <activity
+            android:name=".domain.transaction.action.activity.ProjectChooseActivity"
+            android:launchMode="singleTop" />
 
     </application>
 

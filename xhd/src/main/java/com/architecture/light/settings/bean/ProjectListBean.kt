@@ -9,4 +9,5 @@ package com.architecture.light.settings.bean
  */
 data class ProjectListBean(
     var projectListStr: String = "",
+    var projectStr: String = "",
 )

@@ -27,5 +27,6 @@
     <string name="login_hint_password">请输入密码</string>
     <string name="login_ok">登录</string>
     <string name="login_please_input_correct_username_password">请输入正确账号和密码</string>
+    <string name="login_project_choose">项目选择</string>
 
 </resources>

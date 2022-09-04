@@ -6,7 +6,7 @@ import com.architecture.light.data.remote.bean.LoginRequest
 import com.architecture.light.data.remote.bean.LoginResponse
 import com.architecture.light.data.remote.bean.base.RequestBean
 import com.architecture.light.settings.LoginCache
-import com.architecture.light.settings.ProjectListCache
+import com.architecture.light.settings.ProjectCache
 import com.architecture.light.settings.bean.LoginBean
 import com.google.gson.Gson
 
@@ -37,7 +37,7 @@ class LogonTask : HttpTask() {
             loginBean.userGUID = response.data.userGUID
             loginBean.lastLoginTime = System.currentTimeMillis().toString()
             LoginCache.saveLoginBean(loginBean)
-            ProjectListCache.saveProjectList(response.data.projectList)
+            ProjectCache.saveProjectList(response.data.projectList)
         } else {
             param.responseCode = response.code
             param.responseMessage = response.msg

@@ -12,6 +12,5 @@ data class LoginBean(
     var password: String = "",
     var username: String = "",
     var userGUID: String = "",
-    var projGUID: String = "",
     var lastLoginTime: String = ""
 )

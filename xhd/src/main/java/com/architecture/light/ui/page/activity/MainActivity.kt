@@ -33,7 +33,6 @@ class MainActivity : AppActivity() {
     }
 
     override fun initView() {
-        LoginCache.saveProjGUID("9b441684-9b73-c7a8-2faa-39f2d3efee8b")
         setContentView(binding.root)
         binding.titleView.apply {
             backIcon.visibility = View.GONE

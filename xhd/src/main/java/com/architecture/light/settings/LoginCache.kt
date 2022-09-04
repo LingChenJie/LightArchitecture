@@ -68,13 +68,6 @@ object LoginCache {
         return saveBean()
     }
 
-    fun getProjGUID() = bean.projGUID
-
-    fun saveProjGUID(projGUID: String): Boolean {
-        bean.projGUID = projGUID
-        return saveBean()
-    }
-
     fun getUserGUID() = bean.userGUID
 
     fun getLastLoginTime() = bean.lastLoginTime

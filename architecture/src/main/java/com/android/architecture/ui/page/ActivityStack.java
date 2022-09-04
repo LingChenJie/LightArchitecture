@@ -121,6 +121,7 @@ public class ActivityStack {
         if (activityStack == null) {
             return;
         }
+        Stack<Activity> removeStack = new Stack<>();
         for (Activity activity : activityStack) {
             boolean whiteClazz = false;
             if (classArray != null) {
@@ -130,12 +131,14 @@ public class ActivityStack {
                         break;
                     }
                 }
-                if (whiteClazz) {
-                    continue;
+                if (!whiteClazz) {
+                    removeStack.add(activity);
                 }
-                activityStack.remove(activity);
-                activity.finish();
             }
+        }
+        for (Activity activity : removeStack) {
+            activityStack.remove(activity);
+            activity.finish();
         }
     }
 

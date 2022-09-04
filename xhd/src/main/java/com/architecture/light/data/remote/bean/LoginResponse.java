@@ -24,6 +24,7 @@ public class LoginResponse extends ResponseBean {
             private String ProjGUID;
             private String BUGUID;
             private List<BankListBean> BankList;
+            private boolean isChecked = false;
 
             public static class BankListBean {
                 private String BankName;
@@ -85,6 +86,14 @@ public class LoginResponse extends ResponseBean {
 
             public void setBankList(List<BankListBean> bankList) {
                 BankList = bankList;
+            }
+
+            public boolean isChecked() {
+                return isChecked;
+            }
+
+            public void setChecked(boolean checked) {
+                isChecked = checked;
             }
         }
 

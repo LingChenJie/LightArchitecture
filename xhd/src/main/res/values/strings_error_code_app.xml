@@ -2,5 +2,6 @@
 <resources>
     <string name="error_code_back_to_main_page">回到主页</string>
     <string name="error_code_exit_app">退出程序</string>
+    <string name="error_code_exit_login">退出登录</string>
     <string name="error_code_task_timeout">任务超时</string>
 </resources>

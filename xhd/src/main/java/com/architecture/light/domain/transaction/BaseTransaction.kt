@@ -1,7 +1,9 @@
 package com.architecture.light.domain.transaction
 
+import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ATransaction
 import com.android.architecture.domain.transaction.ActionResult
+import com.android.architecture.extension.toast
 import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.ActivityStack
 import com.architecture.light.constant.AppErrorCode
@@ -34,5 +36,18 @@ abstract class BaseTransaction(listener: TransEndListener? = null) : ATransactio
             }
         }
     }
+
+    fun toastActionResult(result: ActionResult) {
+        val code = result.code
+        val message = result.message ?: ErrorCode.getMessage(code)
+        toast("$message[$code]")
+    }
+
+    fun toastTransResult() {
+        val code = transData.responseCode
+        val message = transData.responseMessage
+        toast("$message[$code]")
+    }
+
 
 }

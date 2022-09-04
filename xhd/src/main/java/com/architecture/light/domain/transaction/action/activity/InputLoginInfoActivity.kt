@@ -25,6 +25,12 @@ class InputLoginInfoActivity : AppActivityForAction() {
         ActivityInputLoginInfoBinding.inflate(layoutInflater)
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.etAccount.setText("")
+        binding.etPassword.setText("")
+    }
+
     override fun initView() {
         setContentView(binding.root)
         binding.btLogin.click {
