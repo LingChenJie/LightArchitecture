@@ -27,10 +27,10 @@ public class SearchRoomResponse extends ResponseBean {
         public static class FeeListDTO {
             private String FeeGUID;
             private String ItemType;
-            private Integer Amount;
+            private Double Amount;
             private String ItemNameGUID;
             private String ItemName;
-            private Integer YeAmount;
+            private Double YeAmount;
             private String ItemTypeGUID;
 
             public String getFeeGUID() {
@@ -49,11 +49,11 @@ public class SearchRoomResponse extends ResponseBean {
                 ItemType = itemType;
             }
 
-            public Integer getAmount() {
+            public Double getAmount() {
                 return Amount;
             }
 
-            public void setAmount(Integer amount) {
+            public void setAmount(Double amount) {
                 Amount = amount;
             }
 
@@ -73,11 +73,11 @@ public class SearchRoomResponse extends ResponseBean {
                 ItemName = itemName;
             }
 
-            public Integer getYeAmount() {
+            public Double getYeAmount() {
                 return YeAmount;
             }
 
-            public void setYeAmount(Integer yeAmount) {
+            public void setYeAmount(Double yeAmount) {
                 YeAmount = yeAmount;
             }
 
