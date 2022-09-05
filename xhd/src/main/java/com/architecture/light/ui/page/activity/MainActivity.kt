@@ -4,14 +4,11 @@ import android.content.Intent
 import android.view.View
 import com.android.architecture.domain.transaction.TransactionConstant
 import com.android.architecture.extension.click
-import com.android.architecture.extension.empty
+import com.android.architecture.helper.Logger
+import com.architecture.light.helper.PermissionsHelper
 import com.architecture.light.app.AppActivity
-import com.architecture.light.constant.GlobalParams
 import com.architecture.light.databinding.ActivityMainBinding
-import com.architecture.light.domain.task.SearchRoomTask
-import com.architecture.light.domain.transaction.LogonTrans
-import com.architecture.light.settings.LoginCache
-import kotlin.concurrent.thread
+import com.hjq.permissions.Permission
 
 /**
  * File describe:
@@ -27,9 +24,9 @@ class MainActivity : AppActivity() {
     override fun onResume() {
         super.onResume()
         TransactionConstant.getInstance().currentActivity = this
-        if (LoginCache.getUsername().empty) {
-            LogonTrans().execute()
-        }
+//        if (LoginCache.getUsername().empty) {
+//            LogonTrans().execute()
+//        }
     }
 
     override fun initView() {
@@ -39,8 +36,11 @@ class MainActivity : AppActivity() {
         }
         binding.layoutMvi.click {
             //startActivity(Intent(this, MviActivity::class.java))
-            thread {
-                SearchRoomTask().execute(GlobalParams.newTransData())
+//            thread {
+//                SearchRoomTask().execute(GlobalParams.newTransData())
+//            }
+            PermissionsHelper.requirePermissions(Permission.CAMERA) {
+                Logger.e("tag", "获得了权限")
             }
         }
         binding.layoutCommon.click {

@@ -3,13 +3,13 @@ package com.architecture.light.domain.task
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.data.remote.HttpRequest
 import com.android.architecture.domain.task.BaseTask
+import com.android.architecture.helper.JsonHelper
 import com.android.architecture.utils.NetworkUtils
 import com.architecture.light.constant.Config
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.data.remote.bean.base.RequestBean
 import com.architecture.light.data.remote.bean.base.RequestData
 import com.architecture.light.utils.RequestUtils
-import com.google.gson.Gson
 import java.io.IOException
 import java.net.SocketTimeoutException
 
@@ -49,7 +49,7 @@ abstract class HttpTask : BaseTask<TransData, TransData>() {
             try {
                 val requestData = RequestData()
                 requestData.data = requestBean
-                val body = Gson().toJson(requestData)
+                val body = JsonHelper.toJson(requestData)
                 val headers = getHeaders(body)
                 val response = httpRequest.postJson(headers, body)
                 onPostExecute(response)

@@ -1093,6 +1093,10 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         public BaseDialog getDialog() {
             return mDialog;
         }
+
+        public String getString(int resId) {
+            return getContext().getString(resId);
+        }
     }
 
     /**

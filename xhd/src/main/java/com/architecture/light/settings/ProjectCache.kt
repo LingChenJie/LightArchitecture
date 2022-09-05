@@ -2,11 +2,9 @@ package com.architecture.light.settings
 
 import com.android.architecture.extension.valid
 import com.android.architecture.helper.CacheHelper
+import com.android.architecture.helper.JsonHelper
 import com.architecture.light.data.remote.bean.LoginResponse
-import com.architecture.light.helper.GsonHelper
 import com.architecture.light.settings.bean.ProjectBean
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 
 /**
  * File describe:
@@ -23,7 +21,7 @@ object ProjectCache {
         try {
             val jsonString = CacheHelper.getString(KEY_PROJECT_BEAN)
             if (jsonString.valid) {
-                return Gson().fromJson(jsonString, ProjectBean::class.java)
+                return JsonHelper.toBean(jsonString)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -32,24 +30,31 @@ object ProjectCache {
     }
 
     private fun saveBean(): Boolean {
-        val jsonString = Gson().toJson(bean)
+        val jsonString = JsonHelper.toJson(bean)
         return CacheHelper.saveString(KEY_PROJECT_BEAN, jsonString)
     }
 
-    fun getProjectList(): List<LoginResponse.DataBean.ProjectListBean> {
-        val type = object : TypeToken<List<LoginResponse.DataBean.ProjectListBean>>() {}.type
-        return GsonHelper.gson.fromJson(bean.projectListStr, type)
+    fun getProjectList(): List<LoginResponse.DataBean.ProjectListBean>? {
+        try {
+            if (bean.projectListStr.valid) {
+                return JsonHelper.toList(bean.projectListStr)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
     }
 
     fun saveProjectList(projectList: List<LoginResponse.DataBean.ProjectListBean>): Boolean {
-        bean.projectListStr = GsonHelper.gson.toJson(projectList)
+        bean.projectListStr = JsonHelper.toJson(projectList)
         return saveBean()
     }
 
     fun getProject(): LoginResponse.DataBean.ProjectListBean? {
         try {
-            val type = object : TypeToken<LoginResponse.DataBean.ProjectListBean>() {}.type
-            return GsonHelper.gson.fromJson(bean.projectStr, type)
+            if (bean.projectStr.valid) {
+                return JsonHelper.toBean(bean.projectStr)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -57,7 +62,7 @@ object ProjectCache {
     }
 
     fun saveProject(project: LoginResponse.DataBean.ProjectListBean): Boolean {
-        bean.projectStr = GsonHelper.gson.toJson(project)
+        bean.projectStr = JsonHelper.toJson(project)
         return saveBean()
     }
 }

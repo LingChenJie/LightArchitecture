@@ -1,14 +1,12 @@
 package com.architecture.light.utils
 
-import com.android.architecture.extension.getString
-import com.architecture.light.R
+import com.android.architecture.helper.JsonHelper
 
 /**
  * Created by SuQi on 2022/8/3.
  * Describe:
  */
-class Test {
-    fun test() {
-        getString(R.string.app_name,"")
-    }
+fun main(args: Array<String>) {
+    val json = JsonHelper.toJson("su")
+    println(json)
 }

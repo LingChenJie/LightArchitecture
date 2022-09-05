@@ -1,9 +1,9 @@
 package com.architecture.light.domain.task
 
+import com.android.architecture.helper.JsonHelper
 import com.architecture.light.data.remote.bean.SearchRoomRequest
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.data.remote.bean.base.RequestBean
-import com.google.gson.Gson
 
 /**
  * Created by SuQi on 2022/9/1.
@@ -20,7 +20,7 @@ class SearchRoomTask : HttpTask() {
     }
 
     override fun onPostExecute(responseStr: String) {
-        val response = Gson().fromJson(responseStr, SearchRoomResponse::class.java)
+        val response = JsonHelper.toBean<SearchRoomResponse>(responseStr)
     }
 
 }

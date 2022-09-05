@@ -4,12 +4,12 @@ import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ATransaction
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.toast
+import com.android.architecture.helper.JsonHelper
 import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.ActivityStack
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.GlobalParams
 import com.architecture.light.ui.page.activity.MainActivity
-import com.google.gson.Gson
 
 abstract class BaseTransaction(listener: TransEndListener? = null) : ATransaction(listener) {
 
@@ -24,7 +24,7 @@ abstract class BaseTransaction(listener: TransEndListener? = null) : ATransactio
     }
 
     override fun transEnd(result: ActionResult) {
-        Logger.e("TransEnd", "TransData: ${Gson().toJson(transData)}")
+        Logger.e("TransEnd", "TransData: ${JsonHelper.toJson(transData)}")
         super.transEnd(result)
         GlobalParams.resetTransData()
         when (result.code) {

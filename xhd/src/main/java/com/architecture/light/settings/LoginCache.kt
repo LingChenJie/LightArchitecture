@@ -2,8 +2,8 @@ package com.architecture.light.settings
 
 import com.android.architecture.extension.valid
 import com.android.architecture.helper.CacheHelper
+import com.android.architecture.helper.JsonHelper
 import com.architecture.light.settings.bean.LoginBean
-import com.google.gson.Gson
 
 /**
  * File describe:
@@ -20,7 +20,7 @@ object LoginCache {
         try {
             val jsonString = CacheHelper.getString(KEY_LOGIN_BEAN)
             if (jsonString.valid) {
-                return Gson().fromJson(jsonString, LoginBean::class.java)
+                return JsonHelper.toBean(jsonString)
             }
         } catch (e: Exception) {
             e.printStackTrace()
@@ -29,7 +29,7 @@ object LoginCache {
     }
 
     private fun saveBean(): Boolean {
-        val jsonString = Gson().toJson(bean)
+        val jsonString = JsonHelper.toJson(bean)
         return CacheHelper.saveString(KEY_LOGIN_BEAN, jsonString)
     }
 

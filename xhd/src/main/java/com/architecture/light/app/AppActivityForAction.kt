@@ -19,7 +19,7 @@ import com.gyf.immersionbar.ImmersionBar
 abstract class AppActivityForAction : BaseActivityForAction() {
 
     private var mLoadingDialog: BaseDialog? = null
-    private var mLoadingDialogBuilder: LoadingDialog.Builder<*>? = null
+    private var mLoadingDialogBuilder: LoadingDialog.Builder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,13 +48,13 @@ abstract class AppActivityForAction : BaseActivityForAction() {
     fun showLoading(message: String = getString(R.string.common_loading)) {
         if (mLoadingDialog == null) {
             mLoadingDialogBuilder = LoadingDialog.Builder(this)
-                .message(message)
+                .setMessage(message)
                 .setCancelable(false)
             mLoadingDialog = mLoadingDialogBuilder!!.create()
         }
         mLoadingDialog?.apply {
             if (isShowing) {
-                mLoadingDialogBuilder?.message(message)
+                mLoadingDialogBuilder?.setMessage(message)
             } else {
                 show()
             }
