@@ -3,7 +3,8 @@ package com.architecture.light.settings
 import com.android.architecture.extension.valid
 import com.android.architecture.helper.CacheHelper
 import com.architecture.light.data.remote.bean.LoginResponse
-import com.architecture.light.settings.bean.ProjectListBean
+import com.architecture.light.helper.GsonHelper
+import com.architecture.light.settings.bean.ProjectBean
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -15,40 +16,40 @@ import com.google.gson.reflect.TypeToken
  * Version: 1
  */
 object ProjectCache {
-    private const val KEY_PROJECT_LIST_BEAN = "key_project_list_bean_1"
+    private const val KEY_PROJECT_BEAN = "key_project_bean_1"
     private var bean = initBean()
 
-    private fun initBean(): ProjectListBean {
+    private fun initBean(): ProjectBean {
         try {
-            val jsonString = CacheHelper.getString(KEY_PROJECT_LIST_BEAN)
+            val jsonString = CacheHelper.getString(KEY_PROJECT_BEAN)
             if (jsonString.valid) {
-                return Gson().fromJson(jsonString, ProjectListBean::class.java)
+                return Gson().fromJson(jsonString, ProjectBean::class.java)
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return ProjectListBean()
+        return ProjectBean()
     }
 
     private fun saveBean(): Boolean {
         val jsonString = Gson().toJson(bean)
-        return CacheHelper.saveString(KEY_PROJECT_LIST_BEAN, jsonString)
+        return CacheHelper.saveString(KEY_PROJECT_BEAN, jsonString)
     }
 
     fun getProjectList(): List<LoginResponse.DataBean.ProjectListBean> {
         val type = object : TypeToken<List<LoginResponse.DataBean.ProjectListBean>>() {}.type
-        return Gson().fromJson(bean.projectListStr, type)
+        return GsonHelper.gson.fromJson(bean.projectListStr, type)
     }
 
     fun saveProjectList(projectList: List<LoginResponse.DataBean.ProjectListBean>): Boolean {
-        bean.projectListStr = Gson().toJson(projectList)
+        bean.projectListStr = GsonHelper.gson.toJson(projectList)
         return saveBean()
     }
 
     fun getProject(): LoginResponse.DataBean.ProjectListBean? {
         try {
             val type = object : TypeToken<LoginResponse.DataBean.ProjectListBean>() {}.type
-            return Gson().fromJson(bean.projectStr, type)
+            return GsonHelper.gson.fromJson(bean.projectStr, type)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -56,7 +57,7 @@ object ProjectCache {
     }
 
     fun saveProject(project: LoginResponse.DataBean.ProjectListBean): Boolean {
-        bean.projectStr = Gson().toJson(project)
+        bean.projectStr = GsonHelper.gson.toJson(project)
         return saveBean()
     }
 }

@@ -7,7 +7,7 @@ package com.architecture.light.settings.bean
  * Modify date: 2022/5/10
  * Version: 1
  */
-data class ProjectListBean(
+data class ProjectBean(
     var projectListStr: String = "",
     var projectStr: String = "",
 )
