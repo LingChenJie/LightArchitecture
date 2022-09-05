@@ -6,6 +6,7 @@ import com.android.architecture.extension.click
 import com.android.architecture.extension.empty
 import com.android.architecture.extension.toast
 import com.android.architecture.helper.ClickHelper
+import com.android.architecture.helper.DelayHelper
 import com.architecture.light.R
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode

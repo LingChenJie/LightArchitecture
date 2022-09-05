@@ -6,17 +6,8 @@ import android.os.Message
 import android.util.Log
 import android.util.SparseArray
 
-class DelayTaskHelper private constructor() {
-
-    companion object {
-        const val TAG = "DelayTaskHelper"
-
-        @JvmStatic
-        val instance by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
-            DelayTaskHelper()
-        }
-    }
-
+object DelayHelper {
+    const val TAG = "DelayTaskHelper"
     private val delayTaskList = SparseArray<Task>()
 
     private val handler = object : Handler(Looper.getMainLooper()) {

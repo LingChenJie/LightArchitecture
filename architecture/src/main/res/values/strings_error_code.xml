@@ -6,6 +6,7 @@
     <string name="error_code_network_timeout">网络超时，请重试</string>
     <string name="error_code_network_error">网络错误，请重试</string>
     <string name="error_code_network_data_error">网络数据解析失败，请重试</string>
+    <string name="error_code_data_empty">数据为空，请重试</string>
 
     <string name="error_code_undefined">未定义</string>
 </resources>

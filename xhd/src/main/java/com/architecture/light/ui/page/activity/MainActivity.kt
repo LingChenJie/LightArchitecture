@@ -10,7 +10,9 @@ import com.architecture.light.constant.GlobalParams
 import com.architecture.light.databinding.ActivityMainBinding
 import com.architecture.light.domain.task.SearchRoomTask
 import com.architecture.light.domain.transaction.LogonTrans
+import com.architecture.light.domain.transaction.PaymentTrans
 import com.architecture.light.settings.LoginCache
+import com.architecture.light.settings.ProjectCache
 import kotlin.concurrent.thread
 
 /**
@@ -27,7 +29,7 @@ class MainActivity : AppActivity() {
     override fun onResume() {
         super.onResume()
         TransactionConstant.getInstance().currentActivity = this
-        if (LoginCache.getUsername().empty) {
+        if (LoginCache.getUsername().empty || ProjectCache.getProject() == null) {
             LogonTrans().execute()
         }
     }
@@ -42,6 +44,7 @@ class MainActivity : AppActivity() {
             thread {
                 SearchRoomTask().execute(GlobalParams.newTransData())
             }
+            PaymentTrans().execute()
         }
         binding.layoutCommon.click {
             startActivity(Intent(this, CommonActivity::class.java))

@@ -2,10 +2,13 @@ package com.architecture.light.app
 
 import android.os.Bundle
 import android.view.ViewGroup
+import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.domain.transaction.BaseActivityForAction
+import com.android.architecture.extension.click
 import com.android.architecture.ui.page.BaseDialog
 import com.android.architecture.ui.widget.layout.TitleView
 import com.architecture.light.R
+import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.ui.dialog.LoadingDialog
 import com.gyf.immersionbar.ImmersionBar
 
@@ -25,8 +28,12 @@ abstract class AppActivityForAction : BaseActivityForAction() {
         super.onCreate(savedInstanceState)
         if (isStatusBarEnabled()) {
             getStatusBarConfig().init()
-            getTitleView()?.let {
+            val titleView = getTitleView()
+            titleView?.let {
                 ImmersionBar.setTitleBar(this, it)
+            }
+            titleView?.backView?.click {
+                clickBack()
             }
         }
     }
@@ -106,4 +113,9 @@ abstract class AppActivityForAction : BaseActivityForAction() {
         }
         return null
     }
+
+    override fun clickBack() {
+        finish(ActionResult(AppErrorCode.BACK_TO_PREVIOUS_PAGE))
+    }
+
 }

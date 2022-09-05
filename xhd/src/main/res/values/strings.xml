@@ -29,4 +29,14 @@
     <string name="login_please_input_correct_username_password">请输入正确账号和密码</string>
     <string name="login_project_choose">项目选择</string>
 
+    <!-- Payment相关 -->
+    <string name="payment_select_query_method_title">查询缴款</string>
+    <string name="payment_select_query_method">请选择查询方式</string>
+    <string name="payment_select_query_method_idcard">身份证号查询</string>
+    <string name="payment_select_query_method_phone">电话号码查询</string>
+    <string name="payment_select_query_method_roomnum">房间号码查询</string>
+    <string name="payment_payment_id_card_induction_area">请将二代身份证放置身份证感应区</string>
+    <string name="payment_please_input_tel">请输入手机号码</string>
+    <string name="payment_please_input_room_info">请输入房间信息</string>
+
 </resources>
