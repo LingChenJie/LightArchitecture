@@ -22,6 +22,7 @@ data class TransData(
     var projGUID: String = "",
     var cardID: String = "",
     var tel: String = "",
+    var roomInfo: String = "",
 
 
     @Ignore

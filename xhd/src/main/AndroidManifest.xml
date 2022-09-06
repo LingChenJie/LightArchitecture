@@ -35,10 +35,22 @@
         <activity android:name=".ui.page.activity.CommonActivity" />
         <activity
             android:name=".domain.transaction.action.activity.InputLoginInfoActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTask" />
         <activity
             android:name=".domain.transaction.action.activity.ProjectChooseActivity"
-            android:launchMode="singleTop" />
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".domain.transaction.action.activity.SelectQueryMethodActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".domain.transaction.action.activity.ReadIdCardActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".domain.transaction.action.activity.InputTelActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".domain.transaction.action.activity.InputRoomInfoActivity"
+            android:launchMode="singleTask" />
 
     </application>
 

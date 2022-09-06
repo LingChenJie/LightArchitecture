@@ -16,9 +16,10 @@ public abstract class ATransaction {
     protected String TAG = this.getClass().getSimpleName();
 
     private Map<String, AAction> state2ActionMap;// state和action绑定关系表
+    private String previousState;// 前一个执行步骤
     private String currentState;// 当前执行步骤
     private final TransEndListener transEndListener;
-    protected final Handler handler = new Handler(Looper.getMainLooper());
+    protected static final Handler HANDLER = new Handler(Looper.getMainLooper());
     private static boolean transIsRunning = false;
 
     public ATransaction(TransEndListener transEndListener) {
@@ -69,7 +70,7 @@ public abstract class ATransaction {
         TransactionConstant.getInstance().setCurrentAction(null);
         TransactionConstant.getInstance().setCurrentActivity(null);
         setTransIsRunningState(false);
-        handler.post(() -> {
+        HANDLER.post(() -> {
             if (transEndListener != null) {
                 transEndListener.onEnd(result);
             }
@@ -103,7 +104,7 @@ public abstract class ATransaction {
         }
         state2ActionMap.put(state, action);
         action.setEndListener((action2, result) -> {
-            handler.post(() -> {
+            HANDLER.post(() -> {
                 Logger.d(TAG, "action " + currentState + " end.");
                 Logger.d(TAG, "action " + currentState + " result: (code:" + result.code + "; message:" + result.message + ")");
                 onActionResult(currentState, result);
@@ -118,6 +119,7 @@ public abstract class ATransaction {
      */
     protected void gotoState(String state) {
         Logger.d(TAG, "action " + state + " start.");
+        this.previousState = this.currentState;
         this.currentState = state;
         AAction action = getAction(state);
         if (action != null) {
@@ -172,4 +174,11 @@ public abstract class ATransaction {
         void onEnd(ActionResult result);
     }
 
+    public String getPreviousState() {
+        return previousState;
+    }
+
+    public void setCurrentState(String currentState) {
+        this.currentState = currentState;
+    }
 }

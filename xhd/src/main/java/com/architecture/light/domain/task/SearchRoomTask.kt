@@ -1,9 +1,22 @@
 package com.architecture.light.domain.task
 
+<<<<<<< HEAD
 import com.android.architecture.helper.JsonHelper
 import com.architecture.light.data.remote.bean.SearchRoomRequest
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.data.remote.bean.base.RequestBean
+=======
+import com.android.architecture.constant.ErrorCode
+import com.android.architecture.extension.getString
+import com.architecture.light.data.remote.ResponseCode
+import com.architecture.light.data.remote.bean.SearchRoomRequest
+import com.architecture.light.data.remote.bean.SearchRoomResponse
+import com.architecture.light.data.remote.bean.base.RequestBean
+import com.architecture.light.settings.LoginCache
+import com.architecture.light.settings.ProjectCache
+import com.architecture.light.settings.bean.LoginBean
+import com.google.gson.Gson
+>>>>>>> 4b55c9d66878ca35e024c4ef88cb36173d97927c
 
 /**
  * Created by SuQi on 2022/9/1.
@@ -15,12 +28,30 @@ class SearchRoomTask : HttpTask() {
         val request = SearchRoomRequest()
         request.zygwGUID = param.zygwGUID
         request.projGUID = param.projGUID
-        request.cardID = "34222419890827123X"
+        request.cardID = param.cardID//"34222419890827123X"
+        request.tel = param.tel
+        request.roomInfo = param.roomInfo
         return request
     }
 
     override fun onPostExecute(responseStr: String) {
+<<<<<<< HEAD
         val response = JsonHelper.toBean<SearchRoomResponse>(responseStr)
+=======
+        val response = Gson().fromJson(responseStr, SearchRoomResponse::class.java)
+        if (response.code == ResponseCode.SUCCESS) {
+            if (response.data != null && response.data.size > 0) {
+                param.responseCode = ErrorCode.SUCCESS
+                param.responseMessage = response.msg
+            } else {
+                param.responseCode = ErrorCode.DATA_EMPTY
+                param.responseMessage = ErrorCode.getMessage(param.responseCode)
+            }
+        } else {
+            param.responseCode = response.code
+            param.responseMessage = response.msg
+        }
+>>>>>>> 4b55c9d66878ca35e024c4ef88cb36173d97927c
     }
 
 }

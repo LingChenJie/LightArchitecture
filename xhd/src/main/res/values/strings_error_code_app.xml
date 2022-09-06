@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="error_code_back_to_previous_page">返回上一个页面</string>
     <string name="error_code_back_to_main_page">回到主页</string>
     <string name="error_code_exit_app">退出程序</string>
     <string name="error_code_exit_login">退出登录</string>

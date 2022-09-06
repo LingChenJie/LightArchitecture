@@ -15,7 +15,7 @@ class LogonTrans : BaseTransaction() {
 
     enum class State {
         INPUT_LOGIN_INFO,
-        LOGON_TASK_EXECUTE,
+        LOGON_TASK,
         PROJECT_CHOOSE,
     }
 
@@ -24,10 +24,10 @@ class LogonTrans : BaseTransaction() {
             (it as ActionInputLoginInfo).setParam(currentActivity)
         }
         bind(State.INPUT_LOGIN_INFO.name, actionInputLoginInfo)
-        val actionTask = ActionTask {
+        val actionLogonTask = ActionTask {
             (it as ActionTask).setParam(LogonTask(), transData, currentActivity)
         }
-        bind(State.LOGON_TASK_EXECUTE.name, actionTask)
+        bind(State.LOGON_TASK.name, actionLogonTask)
         val actionProjectChoose = ActionProjectChoose {
             (it as ActionProjectChoose).setParam(currentActivity)
         }
@@ -38,20 +38,21 @@ class LogonTrans : BaseTransaction() {
     override fun onActionResult(state: String, result: ActionResult) {
         val currentState = State.valueOf(state)
         val code = result.code
+        val data = result.data
         when (currentState) {
             State.INPUT_LOGIN_INFO -> {
                 if (code == ErrorCode.SUCCESS) {
-                    val loginInfo = result.data as ActionInputLoginInfo.LoginInfo
+                    val loginInfo = data as ActionInputLoginInfo.LoginInfo
                     val userInfo = UserInfo()
                     userInfo.account = loginInfo.account
                     userInfo.password = loginInfo.password
                     transData.userInfo = userInfo
-                    gotoState(State.LOGON_TASK_EXECUTE.name)
+                    gotoState(State.LOGON_TASK.name)
                 } else {
                     transEnd(result)
                 }
             }
-            State.LOGON_TASK_EXECUTE -> {
+            State.LOGON_TASK -> {
                 if (code == ErrorCode.SUCCESS) {
                     toastTransResult()
                     if (transData.responseCode == ErrorCode.SUCCESS) {
