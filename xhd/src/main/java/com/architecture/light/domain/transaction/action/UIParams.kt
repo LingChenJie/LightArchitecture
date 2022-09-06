@@ -1,0 +1,12 @@
+package com.architecture.light.domain.transaction.action
+
+/**
+ * File describe:
+ * Author: SuQi
+ * Create date: 2022/9/6
+ * Modify date: 2022/9/6
+ * Version: 1
+ */
+object UIParams {
+    const val TRANS_DATA = "TRANS_DATA"
+}

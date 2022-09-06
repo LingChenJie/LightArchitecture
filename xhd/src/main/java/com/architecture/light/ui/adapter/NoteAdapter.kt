@@ -38,24 +38,24 @@ class NoteAdapter : BaseAdapter<Note, AdapterNoteListBinding>() {
         binding.tvTime.text = DateHelper.getDateFormatString(item.modifyTime)
         binding.btnMark.setImageResource(if (item.isMarked) R.drawable.icon_star else R.drawable.icon_star_board)
         binding.tvTopped.visibility = if (item.isTopping) View.VISIBLE else View.GONE
-        binding.layoutItem.click { listener?.onItemClick(it.id, position, item) }
+        binding.layoutItem.click { mOnItemClickListener?.onItemClick(it.id, position, item) }
         binding.btnDelete.click {
             notifyItemRemoved(position)
             data.removeAt(position)
             notifyItemRangeRemoved(position, data.size - position)
-            listener?.onItemClick(it.id, position, item)
+            mOnItemClickListener?.onItemClick(it.id, position, item)
         }
         binding.btnMark.click {
             item.toggleType(Note.TYPE_MARKED)
             notifyItemChanged(position)
             notifyItemRangeChanged(position, 1)
-            listener?.onItemClick(it.id, position, item)
+            mOnItemClickListener?.onItemClick(it.id, position, item)
         }
         binding.btnTopping.click {
             item.toggleType(Note.TYPE_TOPPING)
             notifyItemChanged(position)
             notifyItemRangeChanged(position, 1)
-            listener?.onItemClick(it.id, position, item)
+            mOnItemClickListener?.onItemClick(it.id, position, item)
         }
     }
 }

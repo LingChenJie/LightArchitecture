@@ -8,7 +8,7 @@ import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.remote.bean.LoginResponse
 import com.architecture.light.databinding.ActivityProjectChooseBinding
 import com.architecture.light.settings.ProjectCache
-import com.architecture.light.ui.adapter.ProjectAdapter
+import com.architecture.light.ui.adapter.ProjectChooseAdapter
 
 /**
  * File describe:
@@ -23,8 +23,8 @@ class ProjectChooseActivity : AppActivityForAction() {
         ActivityProjectChooseBinding.inflate(layoutInflater)
     }
 
-    private val adapter by lazy { ProjectAdapter() }
-    private var project: LoginResponse.DataBean.ProjectListBean? = null
+    private val adapter by lazy { ProjectChooseAdapter() }
+    private var project: LoginResponse.Data.Project? = null
 
     override fun initView() {
         setContentView(binding.root)

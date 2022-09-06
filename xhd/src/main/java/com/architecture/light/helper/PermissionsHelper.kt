@@ -19,11 +19,13 @@ object PermissionsHelper {
         val currentActivity = ActivityStack.getInstance().top
         XXPermissions.with(currentActivity)
             .permission(permissions)
-            .request { _, all ->
-                if (all) {
-                    call()
+            .request(object : PermissionCallback() {
+                override fun onGranted(permissions: List<String>, all: Boolean) {
+                    if (all) {
+                        call.invoke()
+                    }
                 }
-            }
+            })
     }
 
 }

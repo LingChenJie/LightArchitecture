@@ -6,8 +6,7 @@ import com.android.architecture.extension.click
 import com.android.architecture.extension.getColor
 import com.android.architecture.ui.adapter.BaseAdapter
 import com.architecture.light.R
-import com.architecture.light.data.model.db.entity.Note
-import com.architecture.light.data.remote.bean.LoginResponse
+import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.databinding.AdapterProjectListBinding
 
 /**
@@ -17,8 +16,8 @@ import com.architecture.light.databinding.AdapterProjectListBinding
  * Modify date: 2022/7/31
  * Version: 1
  */
-class ProjectAdapter :
-    BaseAdapter<LoginResponse.DataBean.ProjectListBean, AdapterProjectListBinding>() {
+class ChooseRoomAdapter :
+    BaseAdapter<SearchRoomResponse.Data, AdapterProjectListBinding>() {
 
     override fun getViewBinding(viewGroup: ViewGroup): AdapterProjectListBinding {
         return AdapterProjectListBinding.inflate(
@@ -30,11 +29,11 @@ class ProjectAdapter :
 
     override fun bindViewHolder(
         holder: ViewHolder<AdapterProjectListBinding>,
-        item: LoginResponse.DataBean.ProjectListBean,
+        item: SearchRoomResponse.Data,
         position: Int
     ) {
         val binding = holder.binding
-        binding.tvTitle.text = item.projName
+        binding.tvTitle.text = item.roomInfo
         binding.root.setBackgroundColor(
             if (item.isChecked) getColor(R.color.theme_color) else
                 getColor(com.android.architecture.R.color.transparent)
@@ -43,7 +42,7 @@ class ProjectAdapter :
             data.forEach { it.isChecked = false }
             data[position].isChecked = true
             notifyDataSetChanged()
-            listener?.onItemClick(it.id, position, item)
+            mOnItemClickListener?.onItemClick(it.id, position, item)
         }
     }
 }

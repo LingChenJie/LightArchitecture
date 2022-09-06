@@ -1,4 +1,4 @@
-package com.android.architecture.aop;
+package com.architecture.light.aop;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

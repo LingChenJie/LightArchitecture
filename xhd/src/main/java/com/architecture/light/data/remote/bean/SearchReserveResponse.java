@@ -12,9 +12,9 @@ public class SearchReserveResponse extends ResponseBean {
 
     private String msg;
     private String code;
-    private List<DataDTO> data;
+    private List<Data> data;
 
-    public static class DataDTO {
+    public static class Data {
         private String ProjNum;
         private String ProjGUID;
         private String CstName;
@@ -96,11 +96,11 @@ public class SearchReserveResponse extends ResponseBean {
         this.code = code;
     }
 
-    public List<DataDTO> getData() {
+    public List<Data> getData() {
         return data;
     }
 
-    public void setData(List<DataDTO> data) {
+    public void setData(List<Data> data) {
         this.data = data;
     }
 }

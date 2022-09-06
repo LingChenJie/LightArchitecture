@@ -1,4 +1,4 @@
-package com.android.architecture.aop;
+package com.architecture.light.aop;
 
 import com.android.architecture.R;
 import com.android.architecture.extension.ToastKt;
@@ -21,7 +21,7 @@ public class CheckNetAspect {
     /**
      * 方法切入点
      */
-    @Pointcut("execution(@com.android.architecture.aop.CheckNet * *(..))")
+    @Pointcut("execution(@com.architecture.light.aop.CheckNet * *(..))")
     public void method() {
     }
 

@@ -1,4 +1,4 @@
-package com.android.architecture.aop;
+package com.architecture.light.aop;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -28,7 +28,7 @@ public class SingleClickAspect {
     /**
      * 方法切入点
      */
-    @Pointcut("execution(@com.android.architecture.aop.SingleClick * *(..))")
+    @Pointcut("execution(@com.architecture.light.aop.SingleClick * *(..))")
     public void method() {
     }
 

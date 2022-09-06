@@ -15,6 +15,8 @@ class PaymentTrans : BaseTransaction() {
         INPUT_TEL,
         INPUT_ROOM_INFO,
         SEARCH_ROOM_TASK,
+        CHOOSE_ROOM,
+        CHOOSE_PAYMENT,
     }
 
     override fun bindStateOnAction() {
@@ -38,6 +40,14 @@ class PaymentTrans : BaseTransaction() {
             (it as ActionTask).setParam(SearchRoomTask(), transData, currentActivity)
         }
         bind(State.SEARCH_ROOM_TASK.name, actionSearchRoomTask)
+        val actionChooseRoom = ActionChooseRoom {
+            (it as ActionChooseRoom).setParam(currentActivity, transData)
+        }
+        bind(State.CHOOSE_ROOM.name, actionChooseRoom)
+        val actionChoosePayment = ActionChoosePayment {
+            (it as ActionChoosePayment).setParam(currentActivity, transData)
+        }
+        bind(State.CHOOSE_PAYMENT.name, actionChoosePayment)
         gotoState(State.SELECT_QUERY_METHOD.name)
     }
 
@@ -107,6 +117,20 @@ class PaymentTrans : BaseTransaction() {
                 } else {
                     toastActionResult(result)
                     setCurrentState(previousState)
+                }
+            }
+            State.CHOOSE_ROOM -> {
+                if (code == ErrorCode.SUCCESS) {
+                    gotoState(State.CHOOSE_PAYMENT.name)
+                } else {
+                    gotoState(State.SELECT_QUERY_METHOD.name)
+                }
+            }
+            State.CHOOSE_PAYMENT -> {
+                if (code == ErrorCode.SUCCESS) {
+
+                } else {
+                    gotoState(State.CHOOSE_ROOM.name)
                 }
             }
         }

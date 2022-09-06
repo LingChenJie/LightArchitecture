@@ -5,19 +5,10 @@ import android.view.View
 import com.android.architecture.domain.transaction.TransactionConstant
 import com.android.architecture.extension.click
 import com.android.architecture.helper.Logger
-import com.architecture.light.helper.PermissionsHelper
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityMainBinding
-<<<<<<< HEAD
+import com.architecture.light.helper.PermissionsHelper
 import com.hjq.permissions.Permission
-=======
-import com.architecture.light.domain.task.SearchRoomTask
-import com.architecture.light.domain.transaction.LogonTrans
-import com.architecture.light.domain.transaction.PaymentTrans
-import com.architecture.light.settings.LoginCache
-import com.architecture.light.settings.ProjectCache
-import kotlin.concurrent.thread
->>>>>>> 4b55c9d66878ca35e024c4ef88cb36173d97927c
 
 /**
  * File describe:
@@ -33,15 +24,9 @@ class MainActivity : AppActivity() {
     override fun onResume() {
         super.onResume()
         TransactionConstant.getInstance().currentActivity = this
-<<<<<<< HEAD
-//        if (LoginCache.getUsername().empty) {
+//        if (LoginCache.getUsername().empty || ProjectCache.getProject() == null) {
 //            LogonTrans().execute()
 //        }
-=======
-        if (LoginCache.getUsername().empty || ProjectCache.getProject() == null) {
-            LogonTrans().execute()
-        }
->>>>>>> 4b55c9d66878ca35e024c4ef88cb36173d97927c
     }
 
     override fun initView() {
@@ -54,13 +39,17 @@ class MainActivity : AppActivity() {
 //            thread {
 //                SearchRoomTask().execute(GlobalParams.newTransData())
 //            }
-            PermissionsHelper.requirePermissions(Permission.CAMERA) {
-                Logger.e("tag", "获得了权限")
-            }
-            PaymentTrans().execute()
+            permissionCamera()
+            //PaymentTrans().execute()
         }
         binding.layoutCommon.click {
             startActivity(Intent(this, CommonActivity::class.java))
+        }
+    }
+
+    fun permissionCamera() {
+        PermissionsHelper.requirePermissions(Permission.CAMERA) {
+            Logger.e("tag", "获得了权限")
         }
     }
 

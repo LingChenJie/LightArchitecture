@@ -865,6 +865,10 @@ public class BasePopupWindow extends PopupWindow
                 addOnShowListener(new ShowPostAtTimeWrapper(runnable, uptimeMillis));
             }
         }
+
+        public String getString(int resId) {
+            return getContext().getString(resId);
+        }
     }
 
     /**

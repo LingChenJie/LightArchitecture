@@ -2,6 +2,7 @@ package com.architecture.light.data.remote.bean;
 
 import com.architecture.light.data.remote.bean.base.ResponseBean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -12,19 +13,20 @@ public class SearchRoomResponse extends ResponseBean {
 
     private String msg;
     private String code;
-    private List<DataDTO> data;
+    private List<Data> data;
 
-    public static class DataDTO {
+    public static class Data {
         private String ProjGUID;
-        private List<FeeListDTO> FeeList;
+        private List<Fee> FeeList;
         private String CstName;
         private String RoomInfo;
         private String Tel;
         private String CardID;
         private String RoomGUID;
         private String CstGUID;
+        private boolean isChecked;
 
-        public static class FeeListDTO {
+        public static class Fee {
             private String FeeGUID;
             private String ItemType;
             private Double Amount;
@@ -32,6 +34,7 @@ public class SearchRoomResponse extends ResponseBean {
             private String ItemName;
             private Double YeAmount;
             private String ItemTypeGUID;
+            private boolean isChecked;
 
             public String getFeeGUID() {
                 return FeeGUID;
@@ -88,6 +91,14 @@ public class SearchRoomResponse extends ResponseBean {
             public void setItemTypeGUID(String itemTypeGUID) {
                 ItemTypeGUID = itemTypeGUID;
             }
+
+            public boolean isChecked() {
+                return isChecked;
+            }
+
+            public void setChecked(boolean checked) {
+                isChecked = checked;
+            }
         }
 
         public String getProjGUID() {
@@ -98,11 +109,11 @@ public class SearchRoomResponse extends ResponseBean {
             ProjGUID = projGUID;
         }
 
-        public List<FeeListDTO> getFeeList() {
+        public List<Fee> getFeeList() {
             return FeeList;
         }
 
-        public void setFeeList(List<FeeListDTO> feeList) {
+        public void setFeeList(List<Fee> feeList) {
             FeeList = feeList;
         }
 
@@ -153,6 +164,14 @@ public class SearchRoomResponse extends ResponseBean {
         public void setCstGUID(String cstGUID) {
             CstGUID = cstGUID;
         }
+
+        public boolean isChecked() {
+            return isChecked;
+        }
+
+        public void setChecked(boolean checked) {
+            isChecked = checked;
+        }
     }
 
     public String getMsg() {
@@ -171,11 +190,11 @@ public class SearchRoomResponse extends ResponseBean {
         this.code = code;
     }
 
-    public List<DataDTO> getData() {
+    public List<Data> getData() {
         return data;
     }
 
-    public void setData(List<DataDTO> data) {
+    public void setData(List<Data> data) {
         this.data = data;
     }
 }

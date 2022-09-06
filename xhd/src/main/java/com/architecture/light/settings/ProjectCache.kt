@@ -34,7 +34,7 @@ object ProjectCache {
         return CacheHelper.saveString(KEY_PROJECT_BEAN, jsonString)
     }
 
-    fun getProjectList(): List<LoginResponse.DataBean.ProjectListBean>? {
+    fun getProjectList(): List<LoginResponse.Data.Project>? {
         try {
             if (bean.projectListStr.valid) {
                 return JsonHelper.toList(bean.projectListStr)
@@ -45,12 +45,12 @@ object ProjectCache {
         return null
     }
 
-    fun saveProjectList(projectList: List<LoginResponse.DataBean.ProjectListBean>): Boolean {
+    fun saveProjectList(projectList: List<LoginResponse.Data.Project>): Boolean {
         bean.projectListStr = JsonHelper.toJson(projectList)
         return saveBean()
     }
 
-    fun getProject(): LoginResponse.DataBean.ProjectListBean? {
+    fun getProject(): LoginResponse.Data.Project? {
         try {
             if (bean.projectStr.valid) {
                 return JsonHelper.toBean(bean.projectStr)
@@ -61,7 +61,7 @@ object ProjectCache {
         return null
     }
 
-    fun saveProject(project: LoginResponse.DataBean.ProjectListBean): Boolean {
+    fun saveProject(project: LoginResponse.Data.Project): Boolean {
         bean.projectStr = JsonHelper.toJson(project)
         return saveBean()
     }

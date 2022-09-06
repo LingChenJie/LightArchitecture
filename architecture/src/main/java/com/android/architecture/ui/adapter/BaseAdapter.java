@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 
 import com.android.architecture.extension.ResourcesKt;
-import com.android.architecture.utils.AppUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +22,8 @@ import java.util.List;
 public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView.Adapter<BaseAdapter.ViewHolder<V>> {
     protected RecyclerView recyclerView;
     private final List<T> data;
-    protected OnItemClickListener<T> listener;
-    protected OnItemLongClickListener<T> longListener;
+    protected OnItemClickListener<T> mOnItemClickListener;
+    protected OnItemLongClickListener<T> mOnItemLongClickListener;
 
     public BaseAdapter() {
         data = new ArrayList<>();
@@ -42,11 +41,11 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
     }
 
     public void setItemClickListener(OnItemClickListener<T> listener) {
-        this.listener = listener;
+        this.mOnItemClickListener = listener;
     }
 
     public void setItemLongClickListener(OnItemLongClickListener<T> listener) {
-        this.longListener = listener;
+        this.mOnItemLongClickListener = listener;
     }
 
     protected List<T> getData() {

@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'kotlin-kapt'
 }
+//apply plugin: 'android-aspectjx' 和gradle7.3.3不适配
 
 android {
     compileSdk 32
@@ -54,6 +55,9 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:4.1.0'
     implementation 'com.github.getActivity:ShapeView:8.3'
+
+    // AOP 插件库
+    implementation 'org.aspectj:aspectjrt:1.9.6'
 
 
     debugApi 'com.guolindev.glance:glance:1.1.0'

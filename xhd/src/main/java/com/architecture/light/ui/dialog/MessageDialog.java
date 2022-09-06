@@ -1,13 +1,10 @@
 package com.architecture.light.ui.dialog;
 
 import android.content.Context;
-import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-import com.android.architecture.aop.SingleClick;
 import com.android.architecture.ui.page.BaseDialog;
 import com.architecture.light.R;
 
@@ -24,10 +21,21 @@ public final class MessageDialog {
 
         private final TextView mMessageView;
 
+        private ClickConfirmListener mClickConfirmListener;
+        private ClickCancelListener mClickCancelListener;
+
         public Builder(Context context) {
             super(context);
             setCustomView(R.layout.dialog_message);
             mMessageView = findViewById(R.id.tv_message_message);
+            mCancelView.setOnClickListener(v -> {
+                autoDismiss();
+                if (mClickCancelListener != null) mClickCancelListener.onCancel(getDialog());
+            });
+            mConfirmView.setOnClickListener(v -> {
+                autoDismiss();
+                if (mClickConfirmListener != null) mClickConfirmListener.onConfirm(getDialog());
+            });
         }
 
         public Builder setMessage(@StringRes int id) {
@@ -48,6 +56,33 @@ public final class MessageDialog {
             return super.create();
         }
 
+        public Builder setConfirmListener(ClickConfirmListener clickConfirmListener) {
+            this.mClickConfirmListener = clickConfirmListener;
+            return this;
+        }
+
+        public Builder setCancelListener(ClickCancelListener clickCancelListener) {
+            this.mClickCancelListener = clickCancelListener;
+            return this;
+        }
+
+    }
+
+    public interface ClickConfirmListener {
+
+        /**
+         * 点击确定时回调
+         */
+        void onConfirm(BaseDialog dialog);
+
+    }
+
+    public interface ClickCancelListener {
+
+        /**
+         * 点击取消时回调
+         */
+        void onCancel(BaseDialog dialog);
     }
 
 }

@@ -12,21 +12,21 @@ public class LoginResponse extends ResponseBean {
 
     private String msg;
     private String code;
-    private DataBean data;
+    private Data data;
 
-    public static class DataBean {
+    public static class Data {
         private String UserName;
         private String UserGUID;
-        private List<ProjectListBean> ProjectList;
+        private List<Project> ProjectList;
 
-        public static class ProjectListBean {
+        public static class Project {
             private String ProjName;
             private String ProjGUID;
             private String BUGUID;
-            private List<BankListBean> BankList;
+            private List<Bank> BankList;
             private boolean isChecked = false;
 
-            public static class BankListBean {
+            public static class Bank {
                 private String BankName;
                 private Boolean IsMrBank;
                 private String BankAccount;
@@ -80,11 +80,11 @@ public class LoginResponse extends ResponseBean {
                 this.BUGUID = BUGUID;
             }
 
-            public List<BankListBean> getBankList() {
+            public List<Bank> getBankList() {
                 return BankList;
             }
 
-            public void setBankList(List<BankListBean> bankList) {
+            public void setBankList(List<Bank> bankList) {
                 BankList = bankList;
             }
 
@@ -113,11 +113,11 @@ public class LoginResponse extends ResponseBean {
             UserGUID = userGUID;
         }
 
-        public List<ProjectListBean> getProjectList() {
+        public List<Project> getProjectList() {
             return ProjectList;
         }
 
-        public void setProjectList(List<ProjectListBean> projectList) {
+        public void setProjectList(List<Project> projectList) {
             ProjectList = projectList;
         }
     }
@@ -138,11 +138,11 @@ public class LoginResponse extends ResponseBean {
         this.code = code;
     }
 
-    public DataBean getData() {
+    public Data getData() {
         return data;
     }
 
-    public void setData(DataBean data) {
+    public void setData(Data data) {
         this.data = data;
     }
 }

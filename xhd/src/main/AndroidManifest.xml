@@ -51,6 +51,13 @@
         <activity
             android:name=".domain.transaction.action.activity.InputRoomInfoActivity"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".domain.transaction.action.activity.ChooseRoomActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".domain.transaction.action.activity.ChoosePaymentActivity"
+            android:launchMode="singleTask" />
+
 
     </application>
 

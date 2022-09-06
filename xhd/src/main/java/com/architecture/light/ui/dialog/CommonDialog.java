@@ -31,17 +31,14 @@ public final class CommonDialog {
         private final ViewGroup mContainerLayout;
         private final TextView mTitleView;
 
-        private final TextView mCancelView;
+        protected final TextView mCancelView;
         private final View mLineView;
-        private final TextView mConfirmView;
-
-        private ClickConfirmListener mClickConfirmListener;
-        private ClickCancelListener mClickCancelListener;
+        protected final TextView mConfirmView;
 
         public Builder(Context context) {
             super(context);
 
-            setContentView(R.layout.activity_common);
+            setContentView(R.layout.dialog_common);
             setAnimStyle(BaseDialog.ANIM_IOS);
             setGravity(Gravity.CENTER);
 
@@ -50,12 +47,6 @@ public final class CommonDialog {
             mCancelView = findViewById(R.id.tv_ui_cancel);
             mLineView = findViewById(R.id.v_ui_line);
             mConfirmView = findViewById(R.id.tv_ui_confirm);
-            mCancelView.setOnClickListener(v -> {
-                if (mClickCancelListener != null) mClickCancelListener.onCancel(getDialog());
-            });
-            mConfirmView.setOnClickListener(v -> {
-                if (mClickConfirmListener != null) mClickConfirmListener.onConfirm(getDialog());
-            });
         }
 
         public B setCustomView(@LayoutRes int id) {
@@ -106,31 +97,6 @@ public final class CommonDialog {
             }
         }
 
-        public B setConfirmListener(ClickConfirmListener clickConfirmListener) {
-            this.mClickConfirmListener = clickConfirmListener;
-            return (B) this;
-        }
-
-        public B setCancelListener(ClickCancelListener clickCancelListener) {
-            this.mClickCancelListener = clickCancelListener;
-            return (B) this;
-        }
     }
 
-    public interface ClickConfirmListener {
-
-        /**
-         * 点击确定时回调
-         */
-        void onConfirm(BaseDialog dialog);
-
-    }
-
-    public interface ClickCancelListener {
-
-        /**
-         * 点击取消时回调
-         */
-        void onCancel(BaseDialog dialog);
-    }
 }

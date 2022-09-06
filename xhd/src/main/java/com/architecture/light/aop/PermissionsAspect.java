@@ -1,4 +1,4 @@
-package com.android.architecture.aop;
+package com.architecture.light.aop;
 
 import android.app.Activity;
 
@@ -7,7 +7,6 @@ import com.android.architecture.helper.Logger;
 import com.android.architecture.ui.page.ActivityStack;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.XXPermissions;
-import com.tencent.bugly.crashreport.CrashReport;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -29,7 +28,7 @@ public class PermissionsAspect {
     /**
      * 方法切入点
      */
-    @Pointcut("execution(@com.android.architecture.aop.Permissions * *(..))")
+    @Pointcut("execution(@com.architecture.light.aop.Permissions * *(..))")
     public void method() {
     }
 

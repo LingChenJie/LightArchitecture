@@ -2,12 +2,9 @@ package com.architecture.light.ui.page.activity
 
 import android.content.Intent
 import android.view.View
-import com.android.architecture.aop.Permissions
 import com.android.architecture.extension.click
-import com.android.architecture.helper.Logger
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityMainBinding
-import com.hjq.permissions.Permission
 
 /**
  * File describe:
