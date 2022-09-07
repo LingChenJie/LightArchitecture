@@ -3,7 +3,7 @@ package com.architecture.light.settings
 import com.android.architecture.extension.valid
 import com.android.architecture.helper.CacheHelper
 import com.android.architecture.helper.JsonHelper
-import com.architecture.light.settings.bean.LoginBean
+import com.architecture.light.settings.bean.AccountBean
 
 /**
  * File describe:
@@ -12,11 +12,11 @@ import com.architecture.light.settings.bean.LoginBean
  * Modify date: 2022/5/9
  * Version: 1
  */
-object LoginCache {
+object AccountCache {
     private const val KEY_LOGIN_BEAN = "key_login_bean_1"
     private var bean = initBean()
 
-    private fun initBean(): LoginBean {
+    private fun initBean(): AccountBean {
         try {
             val jsonString = CacheHelper.getString(KEY_LOGIN_BEAN)
             if (jsonString.valid) {
@@ -25,7 +25,7 @@ object LoginCache {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        return LoginBean()
+        return AccountBean()
     }
 
     private fun saveBean(): Boolean {
@@ -33,12 +33,12 @@ object LoginCache {
         return CacheHelper.saveString(KEY_LOGIN_BEAN, jsonString)
     }
 
-    fun saveLoginBean(bean: LoginBean): Boolean {
+    fun saveLoginBean(bean: AccountBean): Boolean {
         this.bean = bean
         return saveBean()
     }
 
-    fun getLoginBean(): LoginBean {
+    fun getLoginBean(): AccountBean {
         return bean
     }
 
@@ -69,6 +69,13 @@ object LoginCache {
     }
 
     fun getUserGUID() = bean.userGUID
+
+    fun getLoginStatus() = bean.loginStatus
+
+    fun saveLoginStatus(loginStatus: Boolean): Boolean {
+        bean.loginStatus = loginStatus
+        return saveBean()
+    }
 
     fun getLastLoginTime() = bean.lastLoginTime
 

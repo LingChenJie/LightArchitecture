@@ -18,6 +18,8 @@ object AppErrorCode {
     const val EXIT_LOGIN = "Exit Login"
     const val TASK_TIMEOUT = "Task Timeout"
 
+    const val PAY_DATA_ERROR = "Pay Data Error"
+
 
     val errorCodeMap = mapOf(
         BACK_TO_PREVIOUS_PAGE to getString(R.string.error_code_back_to_previous_page),
@@ -25,6 +27,8 @@ object AppErrorCode {
         EXIT_APP to getString(R.string.error_code_exit_app),
         EXIT_LOGIN to getString(R.string.error_code_exit_login),
         TASK_TIMEOUT to getString(R.string.error_code_task_timeout),
+
+        PAY_DATA_ERROR to getString(R.string.error_code_pay_data_error),
 
         )
 

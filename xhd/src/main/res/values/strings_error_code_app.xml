@@ -5,4 +5,5 @@
     <string name="error_code_exit_app">退出程序</string>
     <string name="error_code_exit_login">退出登录</string>
     <string name="error_code_task_timeout">任务超时</string>
+    <string name="error_code_pay_data_error">支付数据解析错误</string>
 </resources>

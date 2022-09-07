@@ -27,15 +27,12 @@ abstract class HttpTask : BaseTask<TransData, TransData>() {
         response = params
     }
 
-    open fun onAssembly(): RequestBean? {
-        return null
-    }
-
     override fun onPreExecute() {
     }
 
-    open fun onPostExecute(responseStr: String) {
-    }
+    abstract fun onAssembly(): RequestBean?
+
+    abstract fun onPostExecute(responseStr: String)
 
     override fun onExecute() {
         val requestBean = onAssembly()

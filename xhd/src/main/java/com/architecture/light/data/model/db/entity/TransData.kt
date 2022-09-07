@@ -19,11 +19,19 @@ data class TransData(
     var responseCode: String = "",
     var responseMessage: String = "",
 
+    var account: String = "",
     var zygwGUID: String = "",
     var projGUID: String = "",
     var cardID: String = "",
     var tel: String = "",
     var roomInfo: String = "",
+
+    var amount: Long = 0,
+    var orderNumber: String = "",
+    var bankAccount: String = "",
+
+    var originalVoucherNumber: String = "",
+    var originalOrderNumber: String = "",
 
     @Ignore
     var searchRoomResponse: SearchRoomResponse? = null,

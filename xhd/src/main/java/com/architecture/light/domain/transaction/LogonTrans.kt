@@ -8,7 +8,7 @@ import com.architecture.light.domain.task.LogonTask
 import com.architecture.light.domain.transaction.action.ActionInputLoginInfo
 import com.architecture.light.domain.transaction.action.ActionProjectChoose
 import com.architecture.light.domain.transaction.action.ActionTask
-import com.architecture.light.settings.LoginCache
+import com.architecture.light.settings.AccountCache
 
 
 class LogonTrans : BaseTransaction() {
@@ -67,9 +67,9 @@ class LogonTrans : BaseTransaction() {
             }
             State.PROJECT_CHOOSE -> {
                 if (code == ErrorCode.SUCCESS) {
+                    AccountCache.saveLoginStatus(true)
                     transEnd(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))
                 } else {
-                    LoginCache.saveUsername("")
                     gotoState(State.INPUT_LOGIN_INFO.name)
                 }
             }

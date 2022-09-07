@@ -17,6 +17,9 @@ class PaymentTrans : BaseTransaction() {
         SEARCH_ROOM_TASK,
         CHOOSE_ROOM,
         CHOOSE_PAYMENT,
+        BANK_PAY,
+        CODE_PAY,
+        SHOW_RESULT,
     }
 
     override fun bindStateOnAction() {
@@ -131,6 +134,27 @@ class PaymentTrans : BaseTransaction() {
 
                 } else {
                     gotoState(State.CHOOSE_ROOM.name)
+                }
+            }
+            State.BANK_PAY -> {
+                if (code == ErrorCode.SUCCESS) {
+
+                } else {
+
+                }
+            }
+            State.CODE_PAY -> {
+                if (code == ErrorCode.SUCCESS) {
+
+                } else {
+
+                }
+            }
+            State.SHOW_RESULT -> {
+                if (code == ErrorCode.SUCCESS) {
+
+                } else {
+
                 }
             }
         }

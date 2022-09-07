@@ -34,4 +34,6 @@ class ActionChoosePayment(listener: ActionStartListener) : AAction(listener) {
         activity = null
     }
 
+    data class Payment(val amount: Long)
+
 }
