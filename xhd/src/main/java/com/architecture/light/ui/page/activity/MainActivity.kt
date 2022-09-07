@@ -4,11 +4,11 @@ import android.content.Intent
 import android.view.View
 import com.android.architecture.domain.transaction.TransactionConstant
 import com.android.architecture.extension.click
-import com.android.architecture.helper.Logger
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityMainBinding
-import com.architecture.light.helper.PermissionsHelper
-import com.hjq.permissions.Permission
+import com.architecture.light.domain.transaction.LogonTrans
+import com.architecture.light.domain.transaction.PaymentTrans
+import com.architecture.light.settings.AccountCache
 
 /**
  * File describe:
@@ -24,9 +24,9 @@ class MainActivity : AppActivity() {
     override fun onResume() {
         super.onResume()
         TransactionConstant.getInstance().currentActivity = this
-//        if (LoginCache.getUsername().empty || ProjectCache.getProject() == null) {
-//            LogonTrans().execute()
-//        }
+        if (!AccountCache.getLoginStatus()) {
+            LogonTrans().execute()
+        }
     }
 
     override fun initView() {
@@ -35,21 +35,13 @@ class MainActivity : AppActivity() {
             backIcon.visibility = View.GONE
         }
         binding.layoutMvi.click {
-            //startActivity(Intent(this, MviActivity::class.java))
 //            thread {
 //                SearchRoomTask().execute(GlobalParams.newTransData())
 //            }
-            permissionCamera()
-            //PaymentTrans().execute()
+            PaymentTrans().execute()
         }
         binding.layoutCommon.click {
             startActivity(Intent(this, CommonActivity::class.java))
-        }
-    }
-
-    fun permissionCamera() {
-        PermissionsHelper.requirePermissions(Permission.CAMERA) {
-            Logger.e("tag", "获得了权限")
         }
     }
 

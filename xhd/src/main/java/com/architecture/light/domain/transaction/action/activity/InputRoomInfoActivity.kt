@@ -33,13 +33,4 @@ class InputRoomInfoActivity : AppActivityForAction() {
         }
     }
 
-    override fun finish(result: ActionResult?) {
-        super.finish(result)
-        DelayHelper.sendDelayTask(2000, object : DelayHelper.Task {
-            override fun execute() {
-                resetFinishedFlag()
-            }
-        })
-    }
-
 }

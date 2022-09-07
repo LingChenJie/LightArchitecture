@@ -7,6 +7,7 @@ import com.architecture.light.domain.event.Messages
 import com.architecture.light.domain.transaction.action.activity.InputLoginInfoActivity
 import com.architecture.light.domain.transaction.action.activity.ReadIdCardActivity
 import com.architecture.light.domain.transaction.action.activity.SelectQueryMethodActivity
+import java.io.Serializable
 
 /**
  * File describe:
@@ -32,6 +33,6 @@ class ActionReadIdCard(listener: ActionStartListener) : AAction(listener) {
         activity = null
     }
 
-    class IdCardInfo(val cardId: String)
+    class IdCardInfo(val cardId: String) : Serializable
 
 }

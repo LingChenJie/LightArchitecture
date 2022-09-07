@@ -115,11 +115,11 @@ class PaymentTrans : BaseTransaction() {
 
                     } else {
                         toastTransResult()
-                        setCurrentState(previousState)
+                        gotoState(previousState)
                     }
                 } else {
                     toastActionResult(result)
-                    setCurrentState(previousState)
+                    gotoState(previousState)
                 }
             }
             State.CHOOSE_ROOM -> {

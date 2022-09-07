@@ -3,19 +3,10 @@ package com.architecture.light.domain.transaction.action.activity
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
-import com.android.architecture.extension.toast
 import com.android.architecture.extension.valid
-import com.android.architecture.helper.DelayHelper
-import com.android.architecture.helper.Logger
 import com.architecture.light.app.AppActivityForAction
-import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.databinding.ActivityInputTelBinding
-import com.architecture.light.databinding.ActivityReadIdCardBinding
 import com.architecture.light.domain.transaction.action.ActionInputTel
-import com.architecture.light.domain.transaction.action.ActionReadIdCard
-import com.architecture.light.helper.AidlServiceFactory
-import com.sunmi.idcardservice.CardCallback
-import com.sunmi.idcardservice.IDCardInfo
 
 /**
  * File describe:
@@ -40,15 +31,6 @@ class InputTelActivity : AppActivityForAction() {
                 finish(ActionResult(ErrorCode.SUCCESS, telInfo))
             }
         }
-    }
-
-    override fun finish(result: ActionResult?) {
-        super.finish(result)
-        DelayHelper.sendDelayTask(2000, object : DelayHelper.Task {
-            override fun execute() {
-                resetFinishedFlag()
-            }
-        })
     }
 
 }

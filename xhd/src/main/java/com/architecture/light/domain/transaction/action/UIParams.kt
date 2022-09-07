@@ -9,4 +9,5 @@ package com.architecture.light.domain.transaction.action
  */
 object UIParams {
     const val TRANS_DATA = "TRANS_DATA"
+    const val ID_CARD_INFO = "ID_CARD_INFO"
 }
