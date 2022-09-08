@@ -29,7 +29,7 @@ class ChoosePaymentActivity : AppActivityForAction() {
 
     override fun initView() {
         setContentView(binding.root)
-        val transData = intent.getParcelableExtra<TransData>(UIParams.TRANS_DATA)!!
+        val transData = intent.getSerializableExtra(UIParams.TRANS_DATA) as TransData
         val data = transData.searchRoomResponse!!.data
         var selectRoom: SearchRoomResponse.Data? = null
         for (room in data) {
@@ -40,9 +40,6 @@ class ChoosePaymentActivity : AppActivityForAction() {
         }
         adapter.setData(selectRoom!!.feeList)
         binding.recyclerView.adapter = adapter
-        adapter.setItemClickListener { _, _, item ->
-            item.isChecked = !item.isChecked
-        }
         binding.btCancel.click {
             finish(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))
         }

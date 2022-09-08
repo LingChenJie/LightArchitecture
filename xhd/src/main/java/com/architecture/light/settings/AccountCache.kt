@@ -70,6 +70,13 @@ object AccountCache {
 
     fun getUserGUID() = bean.userGUID
 
+    fun saveBillRecipient(billRecipient: String): Boolean {
+        bean.billRecipient = billRecipient
+        return saveBean()
+    }
+
+    fun getBillRecipient() = bean.billRecipient
+
     fun getLoginStatus() = bean.loginStatus
 
     fun saveLoginStatus(loginStatus: Boolean): Boolean {

@@ -86,7 +86,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layout_roomnum_query"
+                android:id="@+id/layout_roominfo_query"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_100"
                 android:layout_weight="1"
@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_5"
-                    android:text="@string/payment_select_query_method_idcard" />
+                    android:text="@string/payment_select_query_method_roominfo" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

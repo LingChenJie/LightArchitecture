@@ -39,8 +39,7 @@ class ChoosePaymentAdapter :
                 getColor(com.android.architecture.R.color.transparent)
         )
         binding.root.click {
-            data.forEach { it.isChecked = false }
-            data[position].isChecked = true
+            data[position].isChecked = !data[position].isChecked
             notifyDataSetChanged()
             mOnItemClickListener?.onItemClick(it.id, position, item)
         }

@@ -24,7 +24,7 @@ class ChoosePaymentMethodActivity : AppActivityForAction() {
 
     override fun initView() {
         setContentView(binding.root)
-        val transData = intent.getParcelableExtra<TransData>(UIParams.TRANS_DATA)!!
+        val transData = intent.getSerializableExtra(UIParams.TRANS_DATA) as TransData
 
         binding.btCancel.click {
             finish(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))

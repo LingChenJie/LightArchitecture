@@ -36,7 +36,7 @@
                 android:src="@drawable/icon_username" />
 
             <EditText
-                android:id="@+id/et_account"
+                android:id="@+id/et_bill_recipient"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_60"
@@ -44,11 +44,10 @@
                 android:layout_marginBottom="@dimen/dp_12"
                 android:background="@null"
                 android:focusable="true"
-                android:hint="@string/login_hint_username"
+                android:hint="@string/login_hint_bill_recipient"
                 android:inputType="text"
                 android:singleLine="true"
                 android:textSize="@dimen/sp_18" />
-
         </RelativeLayout>
 
         <View
@@ -57,34 +56,6 @@
             android:layout_marginLeft="@dimen/dp_16"
             android:layout_marginRight="@dimen/dp_16"
             android:background="@color/black40" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_20"
-                android:layout_marginTop="@dimen/dp_13"
-                android:layout_marginBottom="@dimen/dp_12"
-                android:src="@drawable/icon_password" />
-
-            <EditText
-                android:id="@+id/et_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_60"
-                android:layout_marginTop="@dimen/dp_13"
-                android:layout_marginBottom="@dimen/dp_12"
-                android:background="@null"
-                android:focusable="true"
-                android:hint="@string/login_hint_password"
-                android:inputType="textPassword"
-                android:singleLine="true"
-                android:textSize="@dimen/sp_18" />
-        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -106,19 +77,19 @@
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/bt_login"
+            android:id="@+id/bt_confirm"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_45"
             android:layout_marginLeft="@dimen/dp_13"
             android:layout_marginTop="@dimen/dp_40"
-            android:layout_marginRight="@dimen/dp_13"
             android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_13"
             android:background="@drawable/selector_button_bg_round"
             android:gravity="center"
-            android:text="@string/login_ok"
+            android:text="@string/common_confirm"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_16" />
-
     </LinearLayout>
+
 
 </LinearLayout>

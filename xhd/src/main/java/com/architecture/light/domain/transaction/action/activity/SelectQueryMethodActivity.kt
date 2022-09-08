@@ -29,7 +29,7 @@ class SelectQueryMethodActivity : AppActivityForAction() {
         binding.layoutPhoneQuery.click {
             finish(ActionResult(ErrorCode.SUCCESS, ActionSelectQueryMethod.QueryMethod.Tel))
         }
-        binding.layoutRoomnumQuery.click {
+        binding.layoutRoominfoQuery.click {
             finish(ActionResult(ErrorCode.SUCCESS, ActionSelectQueryMethod.QueryMethod.RoomInfo))
         }
     }

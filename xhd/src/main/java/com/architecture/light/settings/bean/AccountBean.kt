@@ -12,6 +12,7 @@ data class AccountBean(
     var password: String = "",
     var username: String = "",
     var userGUID: String = "",
+    var billRecipient: String = "",
     var loginStatus: Boolean = false,
     var lastLoginTime: String = ""
 )

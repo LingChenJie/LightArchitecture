@@ -3,6 +3,7 @@ package com.architecture.light.domain.transaction
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.architecture.light.constant.AppErrorCode
+import com.architecture.light.constant.Constant
 import com.architecture.light.constant.TransactionPlatform
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.domain.task.SearchRoomTask
@@ -86,7 +87,11 @@ class PaymentTrans : BaseTransaction() {
             State.READ_ID_CARD -> {
                 if (code == ErrorCode.SUCCESS) {
                     val cardInfo = data as ActionReadIdCard.IdCardInfo
-                    transData.cardID = cardInfo.cardId
+                    if (Constant.IS_DEBUG) {
+                        transData.cardID = "34222419890827123X"
+                    } else {
+                        transData.cardID = cardInfo.cardId
+                    }
                     transData.tel = ""
                     transData.roomInfo = ""
                     gotoState(State.SEARCH_ROOM_TASK.name)
@@ -119,8 +124,6 @@ class PaymentTrans : BaseTransaction() {
             State.SEARCH_ROOM_TASK -> {
                 if (code == ErrorCode.SUCCESS) {
                     if (transData.responseCode == ErrorCode.SUCCESS) {
-                        val trans = data as TransData
-                        transData.searchRoomResponse = trans.searchRoomResponse
                         gotoState(State.CHOOSE_ROOM.name)
                     } else {
                         toastTransResult()

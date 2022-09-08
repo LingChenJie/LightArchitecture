@@ -7,13 +7,13 @@ import androidx.room.PrimaryKey
 import com.architecture.light.constant.TransactionPlatform
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
 /**
  * Created by SuQi on 2022/9/1.
  * Describe:
  */
 @Entity
-@Parcelize
 data class TransData(
     @PrimaryKey(autoGenerate = true)
     val tId: Long = 0,
@@ -28,9 +28,9 @@ data class TransData(
     var account: String = "",
     var zygwGUID: String = "",
     var projGUID: String = "",
-    var cardID: String = "",
-    var tel: String = "",
-    var roomInfo: String = "",
+    var cardID: String? = "",
+    var tel: String? = "",
+    var roomInfo: String? = "",
 
     var amount: Long = 0,
     var orderNumber: String = "",
@@ -44,4 +44,4 @@ data class TransData(
     var searchRoomResponse: SearchRoomResponse? = null,
     @Ignore
     var userInfo: UserInfo? = null,
-) : Parcelable
+) : Serializable

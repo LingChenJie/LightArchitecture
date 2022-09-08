@@ -8,6 +8,7 @@ import com.android.architecture.extension.toast
 import com.android.architecture.extension.valid
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode
+import com.architecture.light.constant.Constant
 import com.architecture.light.databinding.ActivityReadIdCardBinding
 import com.architecture.light.domain.transaction.action.ActionReadIdCard
 import com.architecture.light.helper.AidlServiceFactory

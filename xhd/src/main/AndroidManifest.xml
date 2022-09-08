@@ -35,6 +35,10 @@
         <activity android:name=".ui.page.activity.CommonActivity" />
         <activity
             android:name=".domain.transaction.action.activity.InputLoginInfoActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".domain.transaction.action.activity.InputBillRecipientActivity"
             android:launchMode="singleTask" />
         <activity
             android:name=".domain.transaction.action.activity.ProjectChooseActivity"

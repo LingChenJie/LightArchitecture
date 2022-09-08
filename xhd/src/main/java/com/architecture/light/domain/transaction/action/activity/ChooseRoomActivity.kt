@@ -28,13 +28,10 @@ class ChooseRoomActivity : AppActivityForAction() {
 
     override fun initView() {
         setContentView(binding.root)
-        val transData = intent.getParcelableExtra<TransData>(UIParams.TRANS_DATA)!!
+        val transData = intent.getSerializableExtra(UIParams.TRANS_DATA) as TransData
         val data = transData.searchRoomResponse!!.data
         adapter.setData(data)
         binding.recyclerView.adapter = adapter
-        adapter.setItemClickListener { _, _, item ->
-            item.isChecked = true
-        }
         binding.btCancel.click {
             finish(ActionResult(AppErrorCode.BACK_TO_PREVIOUS_PAGE))
         }

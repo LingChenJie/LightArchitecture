@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by SuQi on 2022/8/30.
  * Describe:
  */
-public class RequestBean implements Serializable {
+public class RequestBean extends BaseBean {
     private String ip;
     private String termSn;
     private String sysType;

@@ -1,5 +1,6 @@
 package com.architecture.light.data.remote.bean;
 
+import com.architecture.light.data.remote.bean.base.BaseBean;
 import com.architecture.light.data.remote.bean.base.ResponseBean;
 
 import java.io.Serializable;
@@ -15,7 +16,7 @@ public class SearchRoomResponse extends ResponseBean {
     private String code;
     private List<Data> data;
 
-    public static class Data {
+    public static class Data extends BaseBean {
         private String ProjGUID;
         private List<Fee> FeeList;
         private String CstName;
@@ -26,7 +27,7 @@ public class SearchRoomResponse extends ResponseBean {
         private String CstGUID;
         private boolean isChecked;
 
-        public static class Fee {
+        public static class Fee extends BaseBean {
             private String FeeGUID;
             private String ItemType;
             private Double Amount;

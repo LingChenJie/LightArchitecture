@@ -52,6 +52,8 @@
     <string name="login_hint_password">请输入密码</string>
     <string name="login_ok">登录</string>
     <string name="login_please_input_correct_username_password">请输入正确账号和密码</string>
+    <string name="login_hint_bill_recipient">请输入票据领用人</string>
+    <string name="login_hint_bill_recipient_empty">票据领用人不能为空</string>
     <string name="login_project_choose">项目选择</string>
 
     <!-- Payment相关 -->
@@ -59,12 +61,28 @@
     <string name="payment_select_query_method">请选择查询方式</string>
     <string name="payment_select_query_method_idcard">身份证号查询</string>
     <string name="payment_select_query_method_phone">电话号码查询</string>
-    <string name="payment_select_query_method_roomnum">房间号码查询</string>
+    <string name="payment_select_query_method_roominfo">房间名称查询</string>
     <string name="payment_payment_id_card_induction_area">请将二代身份证放置身份证感应区</string>
     <string name="payment_please_input_tel">请输入手机号码</string>
     <string name="payment_please_input_room_info">请输入房间信息</string>
     <string name="payment_bankcard">银行卡</string>
     <string name="payment_wechat">微信</string>
     <string name="payment_alipay">支付宝</string>
+
+    <!-- 数字键盘 -->
+    <string name="_0">0</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_6">6</string>
+    <string name="_7">7</string>
+    <string name="_8">8</string>
+    <string name="_9">9</string>
+    <string name="_point">.</string>
+    <string name="_back">退格</string>
+    <string name="_clear">清除</string>
+    <string name="_confirm">确认</string>
 
 </resources>

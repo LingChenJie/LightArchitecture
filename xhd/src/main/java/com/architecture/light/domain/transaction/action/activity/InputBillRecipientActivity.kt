@@ -10,7 +10,9 @@ import com.android.architecture.helper.DelayHelper
 import com.architecture.light.R
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode
+import com.architecture.light.databinding.ActivityInputBillRecipientBinding
 import com.architecture.light.databinding.ActivityInputLoginInfoBinding
+import com.architecture.light.domain.transaction.action.ActionInputBillRecipient
 import com.architecture.light.domain.transaction.action.ActionInputLoginInfo
 import com.architecture.light.utils.KeyBoardUtils
 
@@ -21,38 +23,27 @@ import com.architecture.light.utils.KeyBoardUtils
  * Modify date: 2022/9/1
  * Version: 1
  */
-class InputLoginInfoActivity : AppActivityForAction() {
+class InputBillRecipientActivity : AppActivityForAction() {
 
-    private val binding: ActivityInputLoginInfoBinding by lazy {
-        ActivityInputLoginInfoBinding.inflate(layoutInflater)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.etAccount.setText("")
-        binding.etPassword.setText("")
+    private val binding: ActivityInputBillRecipientBinding by lazy {
+        ActivityInputBillRecipientBinding.inflate(layoutInflater)
     }
 
     override fun initView() {
         setContentView(binding.root)
-        binding.btLogin.click {
+        binding.btConfirm.click {
             if (ClickHelper.isDoubleClick()) {
                 return@click
             }
-            val account = binding.etAccount.text.toString()// shengxy
-            val password = binding.etPassword.text.toString()// 2
-            if (account.empty || password.empty) {
-                toast(getString(R.string.login_please_input_correct_username_password))
+            val account = binding.etBillRecipient.text.toString()
+            if (account.empty) {
+                toast(getString(R.string.login_hint_bill_recipient_empty))
                 return@click
             }
-            val loginInfo = ActionInputLoginInfo.LoginInfo(account, password)
+            val loginInfo = ActionInputBillRecipient.BillRecipientInfo(account)
             finish(ActionResult(ErrorCode.SUCCESS, loginInfo))
         }
-        KeyBoardUtils.addLayoutListener(binding.layoutBottom, binding.btLogin)
-    }
-
-    override fun clickBack() {
-        finish(ActionResult(AppErrorCode.EXIT_APP))
+        KeyBoardUtils.addLayoutListener(binding.layoutBottom, binding.btConfirm)
     }
 
 }
