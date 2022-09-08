@@ -3,6 +3,8 @@ package com.architecture.light.domain.transaction
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.architecture.light.constant.AppErrorCode
+import com.architecture.light.constant.TransactionPlatform
+import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.domain.task.SearchRoomTask
 import com.architecture.light.domain.transaction.action.*
 
@@ -17,6 +19,7 @@ class PaymentTrans : BaseTransaction() {
         SEARCH_ROOM_TASK,
         CHOOSE_ROOM,
         CHOOSE_PAYMENT,
+        CHOOSE_PAYMENT_METHOD,
         BANK_PAY,
         CODE_PAY,
         SHOW_RESULT,
@@ -51,6 +54,10 @@ class PaymentTrans : BaseTransaction() {
             (it as ActionChoosePayment).setParam(currentActivity, transData)
         }
         bind(State.CHOOSE_PAYMENT.name, actionChoosePayment)
+        val actionChoosePaymentMethod = ActionChoosePaymentMethod {
+            (it as ActionChoosePaymentMethod).setParam(currentActivity, transData)
+        }
+        bind(State.CHOOSE_PAYMENT_METHOD.name, actionChoosePaymentMethod)
         gotoState(State.SELECT_QUERY_METHOD.name)
     }
 
@@ -112,7 +119,9 @@ class PaymentTrans : BaseTransaction() {
             State.SEARCH_ROOM_TASK -> {
                 if (code == ErrorCode.SUCCESS) {
                     if (transData.responseCode == ErrorCode.SUCCESS) {
-
+                        val trans = data as TransData
+                        transData.searchRoomResponse = trans.searchRoomResponse
+                        gotoState(State.CHOOSE_ROOM.name)
                     } else {
                         toastTransResult()
                         gotoState(previousState)
@@ -124,6 +133,8 @@ class PaymentTrans : BaseTransaction() {
             }
             State.CHOOSE_ROOM -> {
                 if (code == ErrorCode.SUCCESS) {
+                    val room = data as ActionChooseRoom.Room
+                    transData.searchRoomResponse = room.searchRoomResponse
                     gotoState(State.CHOOSE_PAYMENT.name)
                 } else {
                     gotoState(State.SELECT_QUERY_METHOD.name)
@@ -131,24 +142,34 @@ class PaymentTrans : BaseTransaction() {
             }
             State.CHOOSE_PAYMENT -> {
                 if (code == ErrorCode.SUCCESS) {
-
+                    val paymentInfo = data as ActionChoosePayment.PaymentInfo
+                    transData.amount = paymentInfo.amount
+                    transData.searchRoomResponse = paymentInfo.searchRoomResponse
+                    gotoState(State.CHOOSE_PAYMENT_METHOD.name)
                 } else {
                     gotoState(State.CHOOSE_ROOM.name)
                 }
             }
-            State.BANK_PAY -> {
+            State.CHOOSE_PAYMENT_METHOD -> {
                 if (code == ErrorCode.SUCCESS) {
-
+                    val paymentMethodInfo = data as ActionChoosePaymentMethod.PaymentMethodInfo
+                    transData.transactionPlatform = paymentMethodInfo.transactionPlatform
+                    transData.bankAccount = paymentMethodInfo.bankAccount
+                    transData.bankName = paymentMethodInfo.bankName
+                    if (transData.transactionPlatform == TransactionPlatform.Bank) {
+                        gotoState(State.BANK_PAY.name)
+                    } else {
+                        gotoState(State.CODE_PAY.name)
+                    }
                 } else {
-
+                    gotoState(State.CHOOSE_PAYMENT.name)
                 }
             }
+            State.BANK_PAY -> {
+                gotoState(State.SHOW_RESULT.name)
+            }
             State.CODE_PAY -> {
-                if (code == ErrorCode.SUCCESS) {
-
-                } else {
-
-                }
+                gotoState(State.SHOW_RESULT.name)
             }
             State.SHOW_RESULT -> {
                 if (code == ErrorCode.SUCCESS) {

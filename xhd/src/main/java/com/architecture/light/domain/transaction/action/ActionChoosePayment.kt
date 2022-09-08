@@ -4,6 +4,7 @@ import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.extension.openActivity
 import com.android.architecture.ui.page.BaseActivity
 import com.architecture.light.data.model.db.entity.TransData
+import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.domain.transaction.action.activity.ChoosePaymentActivity
 
 /**
@@ -34,6 +35,6 @@ class ActionChoosePayment(listener: ActionStartListener) : AAction(listener) {
         activity = null
     }
 
-    data class Payment(val amount: Long)
+    data class PaymentInfo(val amount: Long, val searchRoomResponse: SearchRoomResponse)
 
 }

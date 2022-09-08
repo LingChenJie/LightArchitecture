@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.architecture.light.constant.TransactionPlatform
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import kotlinx.parcelize.Parcelize
 
@@ -18,6 +19,11 @@ data class TransData(
     val tId: Long = 0,
     var responseCode: String = "",
     var responseMessage: String = "",
+    var transactionYear: String = "",
+    var transactionDate: String = "",
+    var transactionTime: String = "",
+    var transactionPlatform: Int = TransactionPlatform.Bank,
+
 
     var account: String = "",
     var zygwGUID: String = "",
@@ -29,6 +35,7 @@ data class TransData(
     var amount: Long = 0,
     var orderNumber: String = "",
     var bankAccount: String = "",
+    var bankName: String = "",
 
     var originalVoucherNumber: String = "",
     var originalOrderNumber: String = "",

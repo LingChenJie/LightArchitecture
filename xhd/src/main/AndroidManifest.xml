@@ -57,6 +57,12 @@
         <activity
             android:name=".domain.transaction.action.activity.ChoosePaymentActivity"
             android:launchMode="singleTask" />
+        <activity
+            android:name=".domain.transaction.action.activity.ChoosePaymentMethodActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".domain.transaction.action.activity.ShowResultActivity"
+            android:launchMode="singleTask" />
 
 
     </application>

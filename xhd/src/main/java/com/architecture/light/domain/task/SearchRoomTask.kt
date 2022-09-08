@@ -29,7 +29,7 @@ class SearchRoomTask : HttpTask() {
             if (response.data != null && response.data.size > 0) {
                 param.responseCode = ErrorCode.SUCCESS
                 param.responseMessage = response.msg
-                response.data
+                param.searchRoomResponse = response
             } else {
                 param.responseCode = ErrorCode.DATA_EMPTY
                 param.responseMessage = ErrorCode.getMessage(param.responseCode)

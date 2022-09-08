@@ -4,8 +4,7 @@ import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.extension.openActivity
 import com.android.architecture.ui.page.BaseActivity
 import com.architecture.light.data.model.db.entity.TransData
-import com.architecture.light.data.remote.bean.SearchRoomResponse
-import com.architecture.light.domain.transaction.action.activity.ChooseRoomActivity
+import com.architecture.light.domain.transaction.action.activity.ChoosePaymentMethodActivity
 
 /**
  * File describe:
@@ -14,7 +13,7 @@ import com.architecture.light.domain.transaction.action.activity.ChooseRoomActiv
  * Modify date: 2022/9/1
  * Version: 1
  */
-class ActionChooseRoom(listener: ActionStartListener) : AAction(listener) {
+class ActionChoosePaymentMethod(listener: ActionStartListener) : AAction(listener) {
 
     private var activity: BaseActivity? = null
     private lateinit var transData: TransData
@@ -25,7 +24,7 @@ class ActionChooseRoom(listener: ActionStartListener) : AAction(listener) {
     }
 
     override fun onExecute() {
-        activity!!.openActivity<ChooseRoomActivity> {
+        activity!!.openActivity<ChoosePaymentMethodActivity> {
             putExtra(UIParams.TRANS_DATA, transData)
         }
     }
@@ -35,6 +34,10 @@ class ActionChooseRoom(listener: ActionStartListener) : AAction(listener) {
         activity = null
     }
 
-    data class Room(val searchRoomResponse: SearchRoomResponse)
+    data class PaymentMethodInfo(
+        val transactionPlatform: Int,
+        val bankAccount: String,
+        val bankName: String
+    )
 
 }

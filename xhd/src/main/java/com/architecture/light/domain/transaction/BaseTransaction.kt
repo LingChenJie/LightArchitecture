@@ -13,7 +13,7 @@ import com.architecture.light.ui.page.activity.MainActivity
 
 abstract class BaseTransaction(listener: TransEndListener? = null) : ATransaction(listener) {
 
-    val transData = GlobalParams.getTransData()
+    val transData = GlobalParams.initTransData()
 
     override fun onPreExecute() {
         super.onPreExecute()

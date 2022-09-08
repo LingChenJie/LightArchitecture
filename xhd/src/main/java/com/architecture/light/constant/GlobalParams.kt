@@ -29,15 +29,20 @@ object GlobalParams {
         return userInfo!!
     }
 
-    fun getTransData(): TransData {
-        if (transData == null) {
-            transData = newTransData()
-        }
+    fun initTransData(): TransData {
+        transData = newTransData()
         return transData!!
     }
 
+    fun getTransData(): TransData {
+        return transData!!
+    }
 
-    fun newTransData(): TransData {
+    fun resetTransData() {
+        transData = null
+    }
+
+    private fun newTransData(): TransData {
         val transData = TransData()
         transData.account = AccountCache.getAccount()
         transData.zygwGUID = AccountCache.getUserGUID()
@@ -45,10 +50,6 @@ object GlobalParams {
             transData.projGUID = ProjectCache.getProject()!!.projGUID
         }
         return transData
-    }
-
-    fun resetTransData() {
-        transData = null
     }
 
 }
