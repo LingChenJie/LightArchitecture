@@ -14,7 +14,7 @@ object PermissionsHelper {
 
     fun requirePermissions(
         vararg permissions: String,
-        call: () -> Unit
+        call: (() -> Unit)? = null
     ) {
         val currentActivity = ActivityStack.getInstance().top
         XXPermissions.with(currentActivity)
@@ -22,7 +22,7 @@ object PermissionsHelper {
             .request(object : PermissionCallback() {
                 override fun onGranted(permissions: List<String>, all: Boolean) {
                     if (all) {
-                        call.invoke()
+                        call?.invoke()
                     }
                 }
             })

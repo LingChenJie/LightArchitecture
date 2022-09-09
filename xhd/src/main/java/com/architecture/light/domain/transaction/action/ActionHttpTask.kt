@@ -12,7 +12,7 @@ import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.model.db.entity.TransData
 import kotlinx.coroutines.*
 
-class ActionTask(listener: ActionStartListener) : AAction(listener) {
+class ActionHttpTask(listener: ActionStartListener) : AAction(listener) {
 
     private lateinit var job: Job
     private lateinit var task: ITask<TransData, TransData>

@@ -1,12 +1,10 @@
 package com.architecture.light.data.model.db.entity
 
-import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.architecture.light.constant.TransactionPlatform
 import com.architecture.light.data.remote.bean.SearchRoomResponse
-import kotlinx.parcelize.Parcelize
 import java.io.Serializable
 
 /**
@@ -33,9 +31,9 @@ data class TransData(
     var roomInfo: String? = "",
 
     var amount: Long = 0,
-    var orderNumber: String = "",
     var bankAccount: String = "",
     var bankName: String = "",
+    var orderNumber: String = "",
 
     var originalVoucherNumber: String = "",
     var originalOrderNumber: String = "",

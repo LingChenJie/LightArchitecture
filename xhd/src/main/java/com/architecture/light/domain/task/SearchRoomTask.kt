@@ -17,7 +17,7 @@ class SearchRoomTask : HttpTask() {
         val request = SearchRoomRequest()
         request.zygwGUID = param.zygwGUID
         request.projGUID = param.projGUID
-        request.cardID = param.cardID//"34222419890827123X"
+        request.cardID = param.cardID
         request.tel = param.tel
         request.roomInfo = param.roomInfo
         return request

@@ -8,7 +8,7 @@ import com.architecture.light.domain.task.LogonTask
 import com.architecture.light.domain.transaction.action.ActionInputBillRecipient
 import com.architecture.light.domain.transaction.action.ActionInputLoginInfo
 import com.architecture.light.domain.transaction.action.ActionProjectChoose
-import com.architecture.light.domain.transaction.action.ActionTask
+import com.architecture.light.domain.transaction.action.ActionHttpTask
 import com.architecture.light.settings.AccountCache
 
 
@@ -26,8 +26,8 @@ class LogonTrans : BaseTransaction() {
             (it as ActionInputLoginInfo).setParam(currentActivity)
         }
         bind(State.INPUT_LOGIN_INFO.name, actionInputLoginInfo)
-        val actionLogonTask = ActionTask {
-            (it as ActionTask).setParam(LogonTask(), transData, currentActivity)
+        val actionLogonTask = ActionHttpTask {
+            (it as ActionHttpTask).setParam(LogonTask(), transData, currentActivity)
         }
         bind(State.LOGON_TASK.name, actionLogonTask)
         val actionInputBillRecipient = ActionInputBillRecipient {

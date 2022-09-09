@@ -85,4 +85,26 @@
     <string name="_clear">清除</string>
     <string name="_confirm">确认</string>
 
+    <!-- 打印 -->
+    <string name="print_bill_title">地产房屋专用收据</string>
+    <string name="print_bill_project_name">项目名称：</string>
+    <string name="print_bill_room_num">房号：</string>
+    <string name="print_bill_date">收款日期：</string>
+    <string name="print_bill_paying_unit">缴款单位：</string>
+    <string name="print_bill_rmb_capital">人民币（大写）：</string>
+    <string name="print_bill_rmb_lower">金额小写：</string>
+    <string name="print_bill_paying_way">缴款方式：</string>
+    <string name="print_bill_collection_reason">收款事由：</string>
+    <string name="print_bill_summary_notes">摘要备注：</string>
+    <string name="print_bill_issuer">开票人：</string>
+    <string name="print_bill_first_union_content">第一联：存根联</string>
+    <string name="print_bill_second_union_content">第二联：客户联</string>
+    <string name="print_bill_third_union_content">第三联：记账联</string>
+    <string name="print_bill_remark">备注：</string>
+    <string name="print_bill_precautions">请妥善保管，结清款项时以此换取不动产专用发票</string>
+    <string name="print_bill_print_time">本次打印时间：</string>
+    <string name="print_bill_first_union">第一联</string>
+    <string name="print_bill_second_union">第二联</string>
+    <string name="print_bill_third_union">第三联</string>
+
 </resources>

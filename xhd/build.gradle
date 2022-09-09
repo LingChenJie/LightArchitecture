@@ -59,6 +59,7 @@ dependencies {
 
     implementation 'com.airbnb.android:lottie:4.1.0'
     implementation 'com.github.getActivity:ShapeView:8.3'
+    implementation 'com.itextpdf:itextg:5.5.10'
 
     // AOP 插件库
     implementation 'org.aspectj:aspectjrt:1.9.6'

@@ -27,6 +27,7 @@ object PrintHelper {
                 Logger.e(TAG, "onPrinters")
                 for (printer in printers) {
                     Logger.e(TAG, "printer:$printer")
+                    this@PrintHelper.printer = printer
                 }
             }
         })

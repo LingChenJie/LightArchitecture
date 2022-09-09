@@ -5,6 +5,7 @@ pluginManagement {
         mavenCentral()
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://jitpack.io' }
+        maven { url "https://mvnrepository.com/artifact/com.itextpdf/itext-asian"}
     }
 }
 dependencyResolutionManagement {
@@ -15,6 +16,7 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://jitpack.io' }
+        maven { url "https://mvnrepository.com/artifact/com.itextpdf/itext-asian"}
     }
 }
 rootProject.name = "LightArchitecture"

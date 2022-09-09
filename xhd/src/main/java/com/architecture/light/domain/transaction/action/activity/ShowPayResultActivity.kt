@@ -1,7 +1,7 @@
 package com.architecture.light.domain.transaction.action.activity
 
 import com.architecture.light.app.AppActivityForAction
-import com.architecture.light.databinding.ActivityShowResultBinding
+import com.architecture.light.databinding.ActivityShowPayResultBinding
 
 /**
  * File describe:
@@ -10,10 +10,10 @@ import com.architecture.light.databinding.ActivityShowResultBinding
  * Modify date: 2022/9/1
  * Version: 1
  */
-class ShowResultActivity : AppActivityForAction() {
+class ShowPayResultActivity : AppActivityForAction() {
 
-    private val binding: ActivityShowResultBinding by lazy {
-        ActivityShowResultBinding.inflate(layoutInflater)
+    private val binding: ActivityShowPayResultBinding by lazy {
+        ActivityShowPayResultBinding.inflate(layoutInflater)
     }
 
 

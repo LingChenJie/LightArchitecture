@@ -6,11 +6,11 @@ import com.architecture.light.data.remote.bean.base.RequestBean;
  * Created by SuQi on 2022/8/30.
  * Describe:
  */
-public class ChargePrintRequest extends RequestBean {
+public class SearchBillRequest extends RequestBean {
     private String CardID;
     private String Tel;
 
-    public ChargePrintRequest() {
+    public SearchBillRequest() {
         setInterfaceId("charge");
         setTradeType("3");
     }

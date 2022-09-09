@@ -19,6 +19,8 @@ object AppErrorCode {
     const val TASK_TIMEOUT = "Task Timeout"
 
     const val PAY_DATA_ERROR = "Pay Data Error"
+    const val PRINTER_NOT_FOUND = "Printer Not Found"
+    const val PRINT_EXCEPTION = "Print Exception"
 
 
     val errorCodeMap = mapOf(
@@ -29,6 +31,8 @@ object AppErrorCode {
         TASK_TIMEOUT to getString(R.string.error_code_task_timeout),
 
         PAY_DATA_ERROR to getString(R.string.error_code_pay_data_error),
+        PRINTER_NOT_FOUND to getString(R.string.error_code_printer_not_found),
+        PRINT_EXCEPTION to getString(R.string.error_code_print_exception),
 
         )
 

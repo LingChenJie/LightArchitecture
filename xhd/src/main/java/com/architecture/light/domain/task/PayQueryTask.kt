@@ -24,7 +24,7 @@ class PayQueryTask : PayTask() {
     private fun getTransMemo(): String {
         val json = JSONObject()
         json.put("orgTraceNo", param.originalVoucherNumber)
-        json.put("extOrderNo", param.orderNumber)
+        json.put("extOrderNo", param.originalOrderNumber)
         return json.toString()
     }
 

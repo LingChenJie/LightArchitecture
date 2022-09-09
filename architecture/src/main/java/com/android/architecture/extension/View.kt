@@ -3,8 +3,6 @@ package com.android.architecture.extension
 import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.annotation.NonNull
-import androidx.core.content.ContextCompat
 
 fun <T : View> T.click(block: (T) -> Unit) {
     setOnClickListener {
@@ -34,4 +32,12 @@ fun View.hideKeyboard() {
 fun View.toggleSoftInput() {
     val manager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
     manager?.toggleSoftInput(0, 0)
+}
+
+fun View.measuredView(width: Int, height: Int) {
+    layout(0, 0, width, height)
+    val measuredWidth = View.MeasureSpec.makeMeasureSpec(width, View.MeasureSpec.EXACTLY)
+    val measuredHeight = View.MeasureSpec.makeMeasureSpec(height, View.MeasureSpec.EXACTLY)
+    measure(measuredWidth, measuredHeight)
+    layout(0, 0, this.measuredWidth, this.measuredHeight)
 }

@@ -5,7 +5,6 @@ import com.android.architecture.domain.transaction.ActionResult
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.Constant
 import com.architecture.light.constant.TransactionPlatform
-import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.domain.task.SearchRoomTask
 import com.architecture.light.domain.transaction.action.*
 
@@ -21,9 +20,11 @@ class PaymentTrans : BaseTransaction() {
         CHOOSE_ROOM,
         CHOOSE_PAYMENT,
         CHOOSE_PAYMENT_METHOD,
-        BANK_PAY,
-        CODE_PAY,
-        SHOW_RESULT,
+        BANK_PAY_TASK,
+        CODE_PAY_TASK,
+        SHOW_PAY_RESULT,
+        SEARCH_BILL_TASK,
+        PRINT_BILL_TASK,
     }
 
     override fun bindStateOnAction() {
@@ -43,8 +44,8 @@ class PaymentTrans : BaseTransaction() {
             (it as ActionInputRoomInfo).setParam(currentActivity)
         }
         bind(State.INPUT_ROOM_INFO.name, actionInputRoomInfo)
-        val actionSearchRoomTask = ActionTask {
-            (it as ActionTask).setParam(SearchRoomTask(), transData, currentActivity)
+        val actionSearchRoomTask = ActionHttpTask {
+            (it as ActionHttpTask).setParam(SearchRoomTask(), transData, currentActivity)
         }
         bind(State.SEARCH_ROOM_TASK.name, actionSearchRoomTask)
         val actionChooseRoom = ActionChooseRoom {
@@ -59,6 +60,18 @@ class PaymentTrans : BaseTransaction() {
             (it as ActionChoosePaymentMethod).setParam(currentActivity, transData)
         }
         bind(State.CHOOSE_PAYMENT_METHOD.name, actionChoosePaymentMethod)
+        val actionShowPayResult = ActionShowPayResult {
+            (it as ActionShowPayResult).setParam(currentActivity)
+        }
+        bind(State.SHOW_PAY_RESULT.name, actionShowPayResult)
+        val actionSearchBillTask = ActionHttpTask {
+            (it as ActionHttpTask).setParam(SearchRoomTask(), transData, currentActivity)
+        }
+        bind(State.SEARCH_BILL_TASK.name, actionSearchBillTask)
+        val actionPrintBill = ActionPrintTask {
+//            (it as ActionPrintTask).setParam()
+        }
+        bind(State.PRINT_BILL_TASK.name, actionPrintBill)
         gotoState(State.SELECT_QUERY_METHOD.name)
     }
 
@@ -160,21 +173,35 @@ class PaymentTrans : BaseTransaction() {
                     transData.bankAccount = paymentMethodInfo.bankAccount
                     transData.bankName = paymentMethodInfo.bankName
                     if (transData.transactionPlatform == TransactionPlatform.Bank) {
-                        gotoState(State.BANK_PAY.name)
+                        gotoState(State.BANK_PAY_TASK.name)
                     } else {
-                        gotoState(State.CODE_PAY.name)
+                        gotoState(State.CODE_PAY_TASK.name)
                     }
                 } else {
                     gotoState(State.CHOOSE_PAYMENT.name)
                 }
             }
-            State.BANK_PAY -> {
-                gotoState(State.SHOW_RESULT.name)
+            State.BANK_PAY_TASK -> {
+                gotoState(State.SHOW_PAY_RESULT.name)
             }
-            State.CODE_PAY -> {
-                gotoState(State.SHOW_RESULT.name)
+            State.CODE_PAY_TASK -> {
+                gotoState(State.SHOW_PAY_RESULT.name)
             }
-            State.SHOW_RESULT -> {
+            State.SHOW_PAY_RESULT -> {
+                if (code == ErrorCode.SUCCESS) {
+
+                } else {
+
+                }
+            }
+            State.SEARCH_BILL_TASK -> {
+                if (code == ErrorCode.SUCCESS) {
+
+                } else {
+
+                }
+            }
+            State.PRINT_BILL_TASK -> {
                 if (code == ErrorCode.SUCCESS) {
 
                 } else {

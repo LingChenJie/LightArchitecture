@@ -3,7 +3,7 @@ package com.architecture.light.domain.transaction.action
 import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.extension.openActivity
 import com.android.architecture.ui.page.BaseActivity
-import com.architecture.light.domain.transaction.action.activity.InputTelActivity
+import com.architecture.light.domain.transaction.action.activity.ShowPayResultActivity
 
 /**
  * File describe:
@@ -12,7 +12,7 @@ import com.architecture.light.domain.transaction.action.activity.InputTelActivit
  * Modify date: 2022/9/1
  * Version: 1
  */
-class ActionShowResult(listener: ActionStartListener) : AAction(listener) {
+class ActionShowPayResult(listener: ActionStartListener) : AAction(listener) {
 
     private var activity: BaseActivity? = null
 
@@ -21,7 +21,7 @@ class ActionShowResult(listener: ActionStartListener) : AAction(listener) {
     }
 
     override fun onExecute() {
-        activity!!.openActivity<InputTelActivity>()
+        activity!!.openActivity<ShowPayResultActivity>()
     }
 
     override fun onClear() {

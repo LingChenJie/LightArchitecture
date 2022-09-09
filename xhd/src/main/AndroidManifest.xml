@@ -17,10 +17,15 @@
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppTheme"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="ScopedStorage"
+            android:value="true" />
 
         <activity
             android:name="com.architecture.light.ui.page.activity.MainActivity"
@@ -65,7 +70,7 @@
             android:name=".domain.transaction.action.activity.ChoosePaymentMethodActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".domain.transaction.action.activity.ShowResultActivity"
+            android:name=".domain.transaction.action.activity.ShowPayResultActivity"
             android:launchMode="singleTask" />
 
 
