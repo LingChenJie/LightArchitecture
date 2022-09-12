@@ -33,7 +33,7 @@ class ProjectChooseAdapter :
         position: Int
     ) {
         val binding = holder.binding
-        binding.tvTitle.text = item.projName
+        binding.tvProjectName.text = item.projName
         binding.root.setBackgroundColor(
             if (item.isChecked) getColor(R.color.theme_color) else
                 getColor(com.android.architecture.R.color.transparent)

@@ -50,12 +50,6 @@ dependencies {
     kapt "androidx.room:room-compiler:2.4.3"
 //    implementation 'com.github.LingChenJie:LightArchitecture:v0.0.2'
 
-    // 动画解析库：https://github.com/airbnb/lottie-android
-    // 动画资源：https://lottiefiles.com、https://icons8.com/animated-icons
-    implementation 'com.airbnb.android:lottie:4.1.0'
-    implementation 'com.github.getActivity:ShapeView:8.3'
-
-
     debugApi 'com.guolindev.glance:glance:1.1.0'
 
 

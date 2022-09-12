@@ -1,5 +1,6 @@
 package com.architecture.light.data.remote.bean;
 
+import com.architecture.light.data.remote.bean.base.BaseBean;
 import com.architecture.light.data.remote.bean.base.ResponseBean;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class SearchReserveResponse extends ResponseBean {
     private String code;
     private List<Data> data;
 
-    public static class Data {
+    public static class Data extends BaseBean {
         private String ProjNum;
         private String ProjGUID;
         private String CstName;

@@ -10,6 +10,7 @@ import com.android.architecture.ui.widget.layout.TitleView
 import com.architecture.light.R
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.ui.dialog.LoadingDialog
+import com.architecture.light.ui.view.AppTitleView
 import com.gyf.immersionbar.ImmersionBar
 
 /**
@@ -88,24 +89,24 @@ abstract class AppActivityForAction : BaseActivityForAction() {
     /**
      * 获取标题栏
      */
-    private fun getTitleView(): TitleView? {
+    private fun getTitleView(): AppTitleView? {
         return obtainTitleBar(contentView)
     }
 
     /**
      * 递归获取 ViewGroup 中的 TitleBar 对象
      */
-    private fun obtainTitleBar(group: ViewGroup?): TitleView? {
+    private fun obtainTitleBar(group: ViewGroup?): AppTitleView? {
         if (group == null) {
             return null
         }
         for (i in 0 until group.childCount) {
             val view = group.getChildAt(i)
-            if (view is TitleView) {
+            if (view is AppTitleView) {
                 return view
             }
             if (view is ViewGroup) {
-                val titleBar: TitleView? = obtainTitleBar(view)
+                val titleBar: AppTitleView? = obtainTitleBar(view)
                 if (titleBar != null) {
                     return titleBar
                 }

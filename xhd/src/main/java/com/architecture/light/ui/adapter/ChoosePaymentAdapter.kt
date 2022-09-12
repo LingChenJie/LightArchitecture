@@ -8,6 +8,7 @@ import com.android.architecture.ui.adapter.BaseAdapter
 import com.architecture.light.R
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.databinding.AdapterChoosePaymentListBinding
+import com.architecture.light.databinding.AdapterPaymentListBinding
 
 /**
  * File describe:
@@ -17,10 +18,10 @@ import com.architecture.light.databinding.AdapterChoosePaymentListBinding
  * Version: 1
  */
 class ChoosePaymentAdapter :
-    BaseAdapter<SearchRoomResponse.Data.Fee, AdapterChoosePaymentListBinding>() {
+    BaseAdapter<SearchRoomResponse.Data.Fee, AdapterPaymentListBinding>() {
 
-    override fun getViewBinding(viewGroup: ViewGroup): AdapterChoosePaymentListBinding {
-        return AdapterChoosePaymentListBinding.inflate(
+    override fun getViewBinding(viewGroup: ViewGroup): AdapterPaymentListBinding {
+        return AdapterPaymentListBinding.inflate(
             LayoutInflater.from(viewGroup.context),
             viewGroup,
             false
@@ -28,12 +29,16 @@ class ChoosePaymentAdapter :
     }
 
     override fun bindViewHolder(
-        holder: ViewHolder<AdapterChoosePaymentListBinding>,
+        holder: ViewHolder<AdapterPaymentListBinding>,
         item: SearchRoomResponse.Data.Fee,
         position: Int
     ) {
         val binding = holder.binding
-        binding.tvTitle.text = item.itemName
+        binding.tvNo.text = (position + 1).toString()
+        binding.tvPaymentType.text = item.itemType
+        binding.tvPaymentName.text = item.itemName
+        binding.tvPaymentTotalName.text = item.amount.toString()
+        binding.tvPaymentNotPaidAmount.text = item.yeAmount.toString()
         binding.root.setBackgroundColor(
             if (item.isChecked) getColor(R.color.theme_color) else
                 getColor(com.android.architecture.R.color.transparent)

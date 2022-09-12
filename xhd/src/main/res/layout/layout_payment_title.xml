@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/payment_title_bg"
+    android:padding="@dimen/dp_8">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:text="@string/payment_title_no"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_8" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:text="@string/payment_title_type"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_8" />
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:text="@string/payment_title_name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_8" />
+
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:text="@string/payment_title_total_amount"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_8" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center_horizontal"
+        android:text="@string/payment_title_not_paid_amount"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_8" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_8" />
+
+</LinearLayout>

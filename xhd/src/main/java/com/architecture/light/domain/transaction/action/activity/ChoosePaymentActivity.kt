@@ -38,10 +38,15 @@ class ChoosePaymentActivity : AppActivityForAction() {
                 break
             }
         }
-        adapter.setData(selectRoom!!.feeList)
+        val room = selectRoom!!
+        binding.tvCustomName.text = room.cstName
+        binding.tvCustomPhone.text = room.tel
+        binding.tvCustomCardId.text = room.cardID
+        binding.tvRoomName.text = room.roomInfo
+        adapter.setData(room.feeList)
         binding.recyclerView.adapter = adapter
         binding.btCancel.click {
-            finish(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))
+            finish(ActionResult(AppErrorCode.BACK_TO_PREVIOUS_PAGE))
         }
         binding.btConfirm.click {
             //TODO

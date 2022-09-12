@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
+import com.android.architecture.helper.DateHelper
+import com.architecture.light.data.remote.bean.SearchBillResponse
 import com.architecture.light.databinding.ViewPreviewBillBinding
 
 /**
@@ -24,8 +26,20 @@ class PreviewBillView(
         ViewPreviewBillBinding.inflate(layoutInflater, this, true)
     }
 
-    fun fullData() {
-        binding.root
+    fun fullData(bean: SearchBillResponse.DataBean) {
+        binding.tvNo.text = bean.payNo
+        binding.tvPrintUnion.text = bean.printNum
+        binding.tvProjectName.text = bean.projStagesName
+        binding.tvRoomNum.text = bean.roomName
+        binding.tvBillDate.text = bean.kpDate
+        binding.tvPayingUnit.text = bean.jkr
+        binding.tvRmbCapital.text = bean.amountString
+        binding.tvRmbLower.text = bean.amount
+        binding.tvPayingWay.text = bean.payMode
+        binding.tvPayingReason.text = bean.payRemark
+        //binding.tvSummaryNotes.text
+        binding.tvIssuer.text = bean.kpr
+        binding.tvPrintTime.text = DateHelper.getDateFormatString()
     }
 
 }

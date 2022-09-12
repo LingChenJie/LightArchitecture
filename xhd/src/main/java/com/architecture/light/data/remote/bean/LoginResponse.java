@@ -1,5 +1,6 @@
 package com.architecture.light.data.remote.bean;
 
+import com.architecture.light.data.remote.bean.base.BaseBean;
 import com.architecture.light.data.remote.bean.base.ResponseBean;
 
 import java.util.List;
@@ -14,19 +15,19 @@ public class LoginResponse extends ResponseBean {
     private String code;
     private Data data;
 
-    public static class Data {
+    public static class Data extends BaseBean {
         private String UserName;
         private String UserGUID;
         private List<Project> ProjectList;
 
-        public static class Project {
+        public static class Project extends BaseBean {
             private String ProjName;
             private String ProjGUID;
             private String BUGUID;
             private List<Bank> BankList;
             private boolean isChecked = false;
 
-            public static class Bank {
+            public static class Bank extends BaseBean {
                 private String BankName;
                 private Boolean IsMrBank;
                 private String BankAccount;

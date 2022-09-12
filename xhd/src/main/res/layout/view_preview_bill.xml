@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="1240px"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/dp_30"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="@dimen/dp_35">
 
         <TextView
             android:layout_width="wrap_content"
@@ -19,122 +18,151 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/print_bill_title"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_12"
+            android:textSize="@dimen/sp_14"
             android:textStyle="bold" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginEnd="@dimen/dp_50"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_8"
-                tools:text="NO: 124334t434" />
-
-        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_6"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/print_bill_project_name"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/print_bill_title_no"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_8" />
+                android:textSize="@dimen/sp_6" />
 
             <TextView
-                android:layout_width="@dimen/dp_120"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_8"
-                tools:text="我是内容我是内容" />
-
-            <TextView
+                android:id="@+id/tv_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/print_bill_room_num"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_8" />
-
-            <TextView
-                android:layout_width="@dimen/dp_100"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_8"
-                tools:text="我是内容我是内容" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/print_bill_date"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_8" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"
-                android:textSize="@dimen/sp_8"
-                tools:text="2022/09/18" />
+                android:textSize="@dimen/sp_6"
+                tools:text="124334t434" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginTop="@dimen/dp_4">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/print_bill_project_name"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_7" />
+
+            <TextView
+                android:id="@+id/tv_project_name"
+                android:layout_width="@dimen/dp_90"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_7"
+                tools:text="我是内容我是内容我是内容我是" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_6"
+                android:text="@string/print_bill_room_num"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_7" />
+
+            <TextView
+                android:id="@+id/tv_room_num"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_7"
+                tools:text="我是内容我是内容我是内容" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/print_bill_date"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_7" />
+
+            <TextView
+                android:id="@+id/tv_bill_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_7"
+                tools:text="2022/8/29 18:17:54" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_6"
             android:background="@drawable/bill_bg"
             android:orientation="vertical"
-            android:padding="@dimen/dp_5">
+            android:padding="@dimen/dp_8">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_2">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/print_bill_paying_unit"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_8" />
+                    android:textSize="@dimen/sp_7" />
 
                 <TextView
+                    android:id="@+id/tv_paying_unit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_8"
+                    android:textSize="@dimen/sp_7"
                     tools:text="XXXX" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10">
+                android:layout_marginTop="@dimen/dp_10"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:layout_weight="2">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/print_bill_rmb_capital"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_8" />
+                        android:textSize="@dimen/sp_7" />
 
                     <TextView
+                        android:id="@+id/tv_rmb_capital"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_8"
+                        android:textSize="@dimen/sp_7"
                         tools:text="XXXX" />
                 </LinearLayout>
 
@@ -148,13 +176,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/print_bill_rmb_lower"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_8" />
+                        android:textSize="@dimen/sp_7" />
 
                     <TextView
+                        android:id="@+id/tv_rmb_lower"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/sp_8"
+                        android:textSize="@dimen/sp_7"
                         tools:text="XXXX" />
 
                 </LinearLayout>
@@ -163,20 +192,21 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_10">
+                android:layout_marginTop="@dimen/dp_16">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/print_bill_paying_way"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_8" />
+                    android:textSize="@dimen/sp_7" />
 
                 <TextView
+                    android:id="@+id/tv_paying_way"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_8"
+                    android:textSize="@dimen/sp_7"
                     tools:text="XXXX" />
 
             </LinearLayout>
@@ -189,15 +219,16 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/print_bill_collection_reason"
+                    android:text="@string/print_bill_paying_reason"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_8" />
+                    android:textSize="@dimen/sp_7" />
 
                 <TextView
+                    android:id="@+id/tv_paying_reason"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_8"
+                    android:textSize="@dimen/sp_7"
                     tools:text="XXXX" />
 
             </LinearLayout>
@@ -212,13 +243,14 @@
                     android:layout_height="wrap_content"
                     android:text="@string/print_bill_summary_notes"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_8" />
+                    android:textSize="@dimen/sp_7" />
 
                 <TextView
+                    android:id="@+id/tv_summary_notes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/sp_8"
+                    android:textSize="@dimen/sp_7"
                     tools:text="XXXX" />
 
             </LinearLayout>
@@ -235,13 +267,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/print_bill_issuer"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_8" />
+                android:textSize="@dimen/sp_7" />
 
             <TextView
+                android:id="@+id/tv_issuer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_8"
+                android:textSize="@dimen/sp_7"
                 tools:text="XXXX" />
 
         </LinearLayout>
@@ -257,24 +290,23 @@
                 android:layout_height="wrap_content"
                 android:text="@string/print_bill_first_union_content"
                 android:textColor="@color/black"
-
-                android:textSize="@dimen/sp_8" />
+                android:textSize="@dimen/sp_7" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginStart="@dimen/dp_70"
                 android:text="@string/print_bill_second_union_content"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_8" />
+                android:textSize="@dimen/sp_7" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginStart="@dimen/dp_70"
                 android:text="@string/print_bill_third_union_content"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_8" />
+                android:textSize="@dimen/sp_7" />
 
 
         </LinearLayout>
@@ -289,14 +321,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/print_bill_remark"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_8" />
+                android:textSize="@dimen/sp_7" />
 
             <TextView
+                android:id="@+id/tv_remark"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_8"
-                tools:text="XXXX" />
+                android:textSize="@dimen/sp_7"
+                tools:text="收据盖章有效" />
 
         </LinearLayout>
 
@@ -306,7 +339,7 @@
             android:layout_marginTop="@dimen/dp_5"
             android:text="@string/print_bill_precautions"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_8" />
+            android:textSize="@dimen/sp_7" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -319,19 +352,30 @@
                 android:layout_marginTop="@dimen/dp_5"
                 android:text="@string/print_bill_print_time"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_8" />
+                android:textSize="@dimen/sp_7" />
 
             <TextView
+                android:id="@+id/tv_print_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:textColor="@color/black"
-                android:textSize="@dimen/sp_8"
+                android:textSize="@dimen/sp_7"
                 tools:text="2022-07-27 18:45:16" />
 
         </LinearLayout>
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_print_union"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/dp_130"
+        android:layout_marginEnd="@dimen/dp_10"
+        android:textColor="@color/black"
+        android:textSize="@dimen/sp_7"
+        tools:text="@string/print_bill_first_union" />
 
-</LinearLayout>
+</RelativeLayout>

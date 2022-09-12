@@ -26,7 +26,7 @@ public final class LoadingDialog {
             super(context);
             setContentView(R.layout.dialog_loading);
             setAnimStyle(BaseDialog.ANIM_TOAST);
-            setBackgroundDimEnabled(false);
+            setBackgroundDimEnabled(true);
             setCancelable(false);
 
             mMessageView = findViewById(R.id.tv_wait_message);

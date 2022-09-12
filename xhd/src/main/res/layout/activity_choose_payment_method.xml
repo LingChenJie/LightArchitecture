@@ -6,9 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.android.architecture.ui.widget.layout.TitleView
+    <com.architecture.light.ui.view.AppTitleView
+        android:id="@+id/title_view"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_56"
+        android:layout_height="@dimen/dp_40"
+        android:background="@drawable/title_view_bg"
         app:title_text="@string/login_project_choose" />
 
     <LinearLayout

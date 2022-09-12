@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.architecture.light.constant.TransactionPlatform
+import com.architecture.light.data.remote.bean.SearchBillResponse
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import java.io.Serializable
 
@@ -40,6 +41,8 @@ data class TransData(
 
     @Ignore
     var searchRoomResponse: SearchRoomResponse? = null,
+    @Ignore
+    var searchBillResponse: SearchBillResponse? = null,
     @Ignore
     var userInfo: UserInfo? = null,
 ) : Serializable

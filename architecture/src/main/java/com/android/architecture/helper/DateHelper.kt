@@ -41,7 +41,10 @@ object DateHelper {
     }
 
     @JvmStatic
-    fun getDateFormatString(millis: Long, pattern: String = "yyyy-MM-dd HH:mm:ss"): String {
+    fun getDateFormatString(
+        millis: Long = System.currentTimeMillis(),
+        pattern: String = "yyyy-MM-dd HH:mm:ss"
+    ): String {
         val date = Date(millis)
         val locale = Locale.getDefault()
         val dateFormat = SimpleDateFormat(pattern, locale)

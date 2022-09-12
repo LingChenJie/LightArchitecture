@@ -86,7 +86,8 @@
     <string name="_confirm">确认</string>
 
     <!-- 打印 -->
-    <string name="print_bill_title">地产房屋专用收据</string>
+    <string name="print_bill_title">新华地产房屋专用收据</string>
+    <string name="print_bill_title_no">NO：</string>
     <string name="print_bill_project_name">项目名称：</string>
     <string name="print_bill_room_num">房号：</string>
     <string name="print_bill_date">收款日期：</string>
@@ -94,7 +95,7 @@
     <string name="print_bill_rmb_capital">人民币（大写）：</string>
     <string name="print_bill_rmb_lower">金额小写：</string>
     <string name="print_bill_paying_way">缴款方式：</string>
-    <string name="print_bill_collection_reason">收款事由：</string>
+    <string name="print_bill_paying_reason">收款事由：</string>
     <string name="print_bill_summary_notes">摘要备注：</string>
     <string name="print_bill_issuer">开票人：</string>
     <string name="print_bill_first_union_content">第一联：存根联</string>
@@ -106,5 +107,16 @@
     <string name="print_bill_first_union">第一联</string>
     <string name="print_bill_second_union">第二联</string>
     <string name="print_bill_third_union">第三联</string>
+    <string name="room_custom_name">客户名称：</string>
+    <string name="room_custom_phone">客户电话：</string>
+    <string name="room_custom_card_id">客户身份证号：</string>
+    <string name="room_name">房间名称：</string>
+    <string name="payment_title_no">序号</string>
+    <string name="payment_title_type">款项类型</string>
+    <string name="payment_title_name">款项名称</string>
+    <string name="payment_title_total_amount">款项总额</string>
+    <string name="payment_title_not_paid_amount">未缴总额</string>
+    <string name="payment_title_modify">修改</string>
+
 
 </resources>

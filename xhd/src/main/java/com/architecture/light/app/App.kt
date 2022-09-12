@@ -4,6 +4,7 @@ import com.android.architecture.app.BaseApplication
 import com.android.architecture.constant.ErrorCode
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.helper.AidlServiceFactory
+import com.architecture.light.helper.PrintHelper
 
 /**
  * File describe:
@@ -22,6 +23,7 @@ class App : BaseApplication() {
     private fun init() {
         ErrorCode.add(AppErrorCode.errorCodeMap)
         AidlServiceFactory.instance.init()
+        PrintHelper.init()
     }
 
     override fun onTerminate() {
