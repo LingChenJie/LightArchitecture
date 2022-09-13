@@ -3,12 +3,14 @@ package com.architecture.light.domain.transaction
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ATransaction
 import com.android.architecture.domain.transaction.ActionResult
-import com.android.architecture.extension.toast
 import com.android.architecture.helper.JsonHelper
 import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.ActivityStack
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.GlobalParams
+import com.architecture.light.ext.toast
+import com.architecture.light.ext.toastSucc
+import com.architecture.light.ext.toastWarn
 import com.architecture.light.ui.page.activity.MainActivity
 
 abstract class BaseTransaction(listener: TransEndListener? = null) : ATransaction(listener) {
@@ -40,14 +42,19 @@ abstract class BaseTransaction(listener: TransEndListener? = null) : ATransactio
     fun toastActionResult(result: ActionResult) {
         val code = result.code
         val message = result.message ?: ErrorCode.getMessage(code)
-        toast("$message[$code]")
+        toastWarn("$message[$code]")
     }
 
     fun toastTransResult() {
         val code = transData.responseCode
         val message = transData.responseMessage
-        toast("$message[$code]")
+        toastWarn("$message[$code]")
     }
 
+    fun toastTransResultSucc() {
+        val code = transData.responseCode
+        val message = transData.responseMessage
+        toastSucc("$message[$code]")
+    }
 
 }

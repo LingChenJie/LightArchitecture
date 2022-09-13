@@ -3,6 +3,7 @@ package com.architecture.light.helper
 import android.os.ConditionVariable
 import com.android.architecture.extension.getContext
 import com.android.architecture.extension.measuredView
+import com.android.architecture.extension.toast
 import com.android.architecture.helper.AppExecutors
 import com.android.architecture.helper.Logger
 import com.android.architecture.utils.TupleUtil
@@ -76,24 +77,26 @@ object BillHelper {
         val thirdPath = path + File.separator + THREE
         AppExecutors.getInstance().single().execute {
             var result = printImage(firstPath)
-            if (result.a == 0) {
-                result = printImage(secondPath)
-            } else {
-                printResult.fail(result.a, result.b)
-                return@execute
-            }
-            if (result.a == 0) {
-                result = printImage(thirdPath)
-            } else {
-                printResult.fail(result.a, result.b)
-                return@execute
-            }
-            if (result.a == 0) {
-                printResult.success()
-            } else {
-                printResult.fail(result.a, result.b)
-                return@execute
-            }
+            toast("result:${result.b}")
+//            if (result.a == 0) {
+//                result = printImage(secondPath)
+//
+//            } else {
+//                printResult.fail(result.a, result.b)
+//                return@execute
+//            }
+//            if (result.a == 0) {
+//                result = printImage(thirdPath)
+//            } else {
+//                printResult.fail(result.a, result.b)
+//                return@execute
+//            }
+//            if (result.a == 0) {
+//                printResult.success()
+//            } else {
+//                printResult.fail(result.a, result.b)
+//                return@execute
+//            }
         }
     }
 

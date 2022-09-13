@@ -18,7 +18,7 @@
             android:layout_gravity="center_horizontal"
             android:text="@string/print_bill_title"
             android:textColor="@color/black"
-            android:textSize="@dimen/sp_14"
+            android:textSize="14px"
             android:textStyle="bold" />
 
         <LinearLayout

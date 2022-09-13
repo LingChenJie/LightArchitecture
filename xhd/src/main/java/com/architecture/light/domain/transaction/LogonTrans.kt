@@ -9,6 +9,7 @@ import com.architecture.light.domain.transaction.action.ActionInputBillRecipient
 import com.architecture.light.domain.transaction.action.ActionInputLoginInfo
 import com.architecture.light.domain.transaction.action.ActionProjectChoose
 import com.architecture.light.domain.transaction.action.ActionHttpTask
+import com.architecture.light.ext.toastSucc
 import com.architecture.light.settings.AccountCache
 
 
@@ -60,10 +61,11 @@ class LogonTrans : BaseTransaction() {
             }
             State.LOGON_TASK -> {
                 if (code == ErrorCode.SUCCESS) {
-                    toastTransResult()
                     if (transData.responseCode == ErrorCode.SUCCESS) {
+                        toastTransResultSucc()
                         gotoState(State.INPUT_BILL_RECIPIENT.name)
                     } else {
+                        toastTransResult()
                         gotoState(State.INPUT_LOGIN_INFO.name)
                     }
                 } else {

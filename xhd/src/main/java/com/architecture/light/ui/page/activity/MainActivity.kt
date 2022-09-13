@@ -48,21 +48,31 @@ class MainActivity : AppActivity() {
         binding.layoutCommon.click {
             //startActivity(Intent(this, CommonActivity::class.java))
             thread {
-                val transData = SearchBillTask().execute(GlobalParams.initTransData())
-                if (transData.responseCode == ErrorCode.SUCCESS) {
-                    val bill = transData.searchBillResponse!!.data
-                    BillHelper.saveBill(bill[0])
-                    BillHelper.printBill(object : BillHelper.PrintResult {
-                        override fun success() {
-                            Logger.e("suqi", "success")
-                        }
+//                val transData = SearchBillTask().execute(GlobalParams.initTransData())
+//                if (transData.responseCode == ErrorCode.SUCCESS) {
+//                    val bill = transData.searchBillResponse!!.data
+//                    BillHelper.saveBill(bill[0], false)
+//                    BillHelper.printBill(object : BillHelper.PrintResult {
+//                        override fun success() {
+//                            Logger.e("suqi", "success")
+//                        }
+//
+//                        override fun fail(code: Int, msg: String) {
+//                            Logger.e("suqi", "fail code:$code;msg:$msg")
+//                        }
+//
+//                    })
+//                }
+                BillHelper.printBill(object : BillHelper.PrintResult {
+                    override fun success() {
+                        Logger.e("suqi", "success")
+                    }
 
-                        override fun fail(code: Int, msg: String) {
-                            Logger.e("suqi", "fail code:$code;msg:$msg")
-                        }
+                    override fun fail(code: Int, msg: String) {
+                        Logger.e("suqi", "fail code:$code;msg:$msg")
+                    }
 
-                    })
-                }
+                })
             }
         }
         PermissionsHelper.requirePermissions(Permission.WRITE_EXTERNAL_STORAGE)
