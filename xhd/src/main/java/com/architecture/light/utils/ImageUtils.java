@@ -19,22 +19,18 @@ import java.io.FileOutputStream;
  */
 public class ImageUtils {
 
-    public static void viewSaveImage(View view, String filePath) {
-        view.setDrawingCacheEnabled(true);
-        view.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
-        view.setDrawingCacheBackgroundColor(Color.WHITE);
+    public static void saveImage(View view, String filePath) {
         Bitmap bitmap = loadBitmapFromView(view);
         FileOutputStream fos;
         try {
             File file = new File(filePath);
             fos = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
             fos.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        view.destroyDrawingCache();
     }
 
     private static Bitmap loadBitmapFromView(View v) {

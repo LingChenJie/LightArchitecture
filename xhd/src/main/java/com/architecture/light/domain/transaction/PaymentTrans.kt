@@ -5,7 +5,7 @@ import com.android.architecture.domain.transaction.ActionResult
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.Constant
 import com.architecture.light.constant.TransactionPlatform
-import com.architecture.light.domain.task.SearchRoomTask
+import com.architecture.light.domain.task.*
 import com.architecture.light.domain.transaction.action.*
 
 
@@ -22,6 +22,7 @@ class PaymentTrans : BaseTransaction() {
         CHOOSE_PAYMENT_METHOD,
         BANK_PAY_TASK,
         CODE_PAY_TASK,
+        PAY_QUERY_TASK,
         SHOW_PAY_RESULT,
         SEARCH_BILL_TASK,
         PRINT_BILL_TASK,
@@ -60,6 +61,18 @@ class PaymentTrans : BaseTransaction() {
             (it as ActionChoosePaymentMethod).setParam(currentActivity, transData)
         }
         bind(State.CHOOSE_PAYMENT_METHOD.name, actionChoosePaymentMethod)
+        val actionBankPayTask = ActionPayTask {
+            (it as ActionPayTask).setParam(BankPayTask(), transData, currentActivity)
+        }
+        bind(State.BANK_PAY_TASK.name, actionBankPayTask)
+        val actionCodePayTask = ActionPayTask {
+            (it as ActionPayTask).setParam(CodePayTask(), transData, currentActivity)
+        }
+        bind(State.CODE_PAY_TASK.name, actionCodePayTask)
+        val actionQueryPayTask = ActionPayTask {
+            (it as ActionPayTask).setParam(PayQueryTask(), transData, currentActivity)
+        }
+        bind(State.PAY_QUERY_TASK.name, actionQueryPayTask)
         val actionShowPayResult = ActionShowPayResult {
             (it as ActionShowPayResult).setParam(currentActivity)
         }
@@ -69,7 +82,7 @@ class PaymentTrans : BaseTransaction() {
         }
         bind(State.SEARCH_BILL_TASK.name, actionSearchBillTask)
         val actionPrintBill = ActionPrintTask {
-//            (it as ActionPrintTask).setParam()
+            (it as ActionPrintTask).setParam(PrintTask(), transData, currentActivity)
         }
         bind(State.PRINT_BILL_TASK.name, actionPrintBill)
         gotoState(State.SELECT_QUERY_METHOD.name)
@@ -185,6 +198,9 @@ class PaymentTrans : BaseTransaction() {
                 gotoState(State.SHOW_PAY_RESULT.name)
             }
             State.CODE_PAY_TASK -> {
+                gotoState(State.SHOW_PAY_RESULT.name)
+            }
+            State.PAY_QUERY_TASK -> {
                 gotoState(State.SHOW_PAY_RESULT.name)
             }
             State.SHOW_PAY_RESULT -> {

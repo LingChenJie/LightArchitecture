@@ -31,6 +31,8 @@ public class SearchBillResponse extends ResponseBean {
         private String PayRemark = "";
         private String PayNo = "";
         private String printNum = "";
+        private String customRemark = "";
+        private boolean isChecked;
 
         public String getProjName() {
             return ProjName;
@@ -150,6 +152,22 @@ public class SearchBillResponse extends ResponseBean {
 
         public void setPrintNum(String printNum) {
             this.printNum = printNum;
+        }
+
+        public String getCustomRemark() {
+            return customRemark;
+        }
+
+        public void setCustomRemark(String customRemark) {
+            this.customRemark = customRemark;
+        }
+
+        public boolean isChecked() {
+            return isChecked;
+        }
+
+        public void setChecked(boolean checked) {
+            isChecked = checked;
         }
     }
 

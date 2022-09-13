@@ -1,19 +1,16 @@
 package com.architecture.light.domain.task
 
-import android.os.ConditionVariable
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.task.BaseTask
-import com.android.architecture.helper.Logger
-import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.model.db.entity.TransData
-import com.architecture.light.helper.PrintHelper
-import com.sunmi.printerx.api.PrintResult
+import com.architecture.light.data.remote.bean.SearchBillResponse
+import com.architecture.light.helper.BillHelper
 
 /**
  * Created by SuQi on 2022/8/30.
  * Describe:
  */
-abstract class PrintTask : BaseTask<TransData, TransData>() {
+class PrintTask : BaseTask<TransData, TransData>() {
 
     override fun initParams(params: TransData) {
         response = params
@@ -23,34 +20,26 @@ abstract class PrintTask : BaseTask<TransData, TransData>() {
     }
 
     override fun onExecute() {
-        if (PrintHelper.printer == null) {
-            PrintHelper.init()
-            setErrorCode(AppErrorCode.PRINTER_NOT_FOUND)
-            return
-        } else {
-            try {
-                val printer = PrintHelper.printer!!
-                val fileApi = printer.fileApi()
-                val cv = ConditionVariable()
-                fileApi.printFile("", object : PrintResult() {
-                    override fun onResult(resultCode: Int, message: String) {
-                        Logger.d("PrintTask", "resultCode:$resultCode; message:$message")
-                        param.responseCode = ErrorCode.SUCCESS
-                        param.responseMessage = message
-                        cv.open()
-                    }
-                })
-                cv.block()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                setErrorCode(AppErrorCode.PRINT_EXCEPTION)
+        val list = param.searchBillResponse!!.data
+        var data: SearchBillResponse.DataBean? = null
+        for (item in list) {
+            if (item.isChecked) {
+                data = item
+                break
             }
         }
-    }
+        BillHelper.saveBill(data!!, param.isRePrint)
+        BillHelper.printBill(object : BillHelper.PrintResult {
+            override fun success() {
+                param.responseCode = ErrorCode.SUCCESS
+                param.responseMessage = ErrorCode.getMessage(param.responseCode)
+            }
 
-    private fun setErrorCode(code: String) {
-        param.responseCode = code
-        param.responseMessage = ErrorCode.getMessage(code)
+            override fun fail(code: Int, msg: String) {
+                param.responseCode = code.toString()
+                param.responseMessage = msg
+            }
+        })
     }
 
 }

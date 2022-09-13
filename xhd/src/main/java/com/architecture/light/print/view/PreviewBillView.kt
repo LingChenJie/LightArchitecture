@@ -39,6 +39,7 @@ class PreviewBillView(
         binding.tvPayingReason.text = bean.payRemark
         //binding.tvSummaryNotes.text
         binding.tvIssuer.text = bean.kpr
+        binding.tvRemark.text = bean.customRemark
         binding.tvPrintTime.text = DateHelper.getDateFormatString()
     }
 

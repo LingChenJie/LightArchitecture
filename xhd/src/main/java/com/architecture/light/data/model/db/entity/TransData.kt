@@ -36,6 +36,8 @@ data class TransData(
     var bankName: String = "",
     var orderNumber: String = "",
 
+    var isRePrint: Boolean = false,
+
     var originalVoucherNumber: String = "",
     var originalOrderNumber: String = "",
 
