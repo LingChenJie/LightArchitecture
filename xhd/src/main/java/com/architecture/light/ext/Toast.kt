@@ -2,6 +2,7 @@ package com.architecture.light.ext
 
 import android.view.Gravity
 import android.widget.Toast
+import com.android.architecture.extension.getResources
 import com.android.architecture.helper.MainThreadHelper
 import com.architecture.light.R
 import com.hjq.toast.ToastUtils
@@ -17,7 +18,11 @@ import com.hjq.toast.ToastUtils
 fun toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
     MainThreadHelper.run {
         ToastUtils.setView(R.layout.toast_warn_view)
-        ToastUtils.setGravity(Gravity.BOTTOM, 0, 260)
+        ToastUtils.setGravity(
+            Gravity.BOTTOM,
+            0,
+            getResources().getDimensionPixelOffset(com.android.architecture.R.dimen.dp_100)
+        )
         ToastUtils.show(text)
     }
 }
@@ -26,7 +31,11 @@ fun toast(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
 fun toastSucc(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
     MainThreadHelper.run {
         ToastUtils.setView(R.layout.toast_info_view)
-        ToastUtils.setGravity(Gravity.BOTTOM, 0, 260)
+        ToastUtils.setGravity(
+            Gravity.BOTTOM,
+            0,
+            getResources().getDimensionPixelOffset(com.android.architecture.R.dimen.dp_100)
+        )
         ToastUtils.show(text)
     }
 }
@@ -35,7 +44,11 @@ fun toastSucc(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
 fun toastWarn(text: CharSequence, duration: Int = Toast.LENGTH_SHORT) {
     MainThreadHelper.run {
         ToastUtils.setView(R.layout.toast_warn_view)
-        ToastUtils.setGravity(Gravity.BOTTOM, 0, 260)
+        ToastUtils.setGravity(
+            Gravity.BOTTOM,
+            0,
+            getResources().getDimensionPixelOffset(com.android.architecture.R.dimen.dp_100)
+        )
         ToastUtils.show(text)
     }
 }

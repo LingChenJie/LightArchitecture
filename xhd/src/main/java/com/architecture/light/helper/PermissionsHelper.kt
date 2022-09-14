@@ -16,7 +16,7 @@ object PermissionsHelper {
         vararg permissions: String,
         call: (() -> Unit)? = null
     ) {
-        val currentActivity = ActivityStack.getInstance().top
+        val currentActivity = ActivityStack.getInstance().topActivity
         XXPermissions.with(currentActivity)
             .permission(permissions)
             .request(object : PermissionCallback() {

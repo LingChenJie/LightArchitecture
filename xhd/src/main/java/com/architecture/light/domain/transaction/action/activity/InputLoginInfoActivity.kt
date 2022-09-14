@@ -4,14 +4,13 @@ import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
 import com.android.architecture.extension.empty
-import com.android.architecture.extension.toast
 import com.android.architecture.helper.ClickHelper
-import com.android.architecture.helper.DelayHelper
 import com.architecture.light.R
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.databinding.ActivityInputLoginInfoBinding
 import com.architecture.light.domain.transaction.action.ActionInputLoginInfo
+import com.architecture.light.ext.toast
 import com.architecture.light.utils.KeyBoardUtils
 
 /**

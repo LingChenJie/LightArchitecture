@@ -8,7 +8,6 @@ import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.ActivityStack
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.GlobalParams
-import com.architecture.light.ext.toast
 import com.architecture.light.ext.toastSucc
 import com.architecture.light.ext.toastWarn
 import com.architecture.light.ui.page.activity.MainActivity
@@ -48,13 +47,11 @@ abstract class BaseTransaction(listener: TransEndListener? = null) : ATransactio
     fun toastTransResult() {
         val code = transData.responseCode
         val message = transData.responseMessage
-        toastWarn("$message[$code]")
-    }
-
-    fun toastTransResultSucc() {
-        val code = transData.responseCode
-        val message = transData.responseMessage
-        toastSucc("$message[$code]")
+        if (code == ErrorCode.SUCCESS) {
+            toastSucc("$message[$code]")
+        } else {
+            toastWarn("$message[$code]")
+        }
     }
 
 }

@@ -50,7 +50,7 @@ public class PermissionsAspect {
         }
 
         if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
-            activity = ActivityStack.getInstance().getTop();
+            activity = ActivityStack.getInstance().getTopActivity();
         }
 
         if (activity == null || activity.isFinishing() || activity.isDestroyed()) {

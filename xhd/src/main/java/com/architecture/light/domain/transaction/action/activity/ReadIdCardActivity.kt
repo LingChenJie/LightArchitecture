@@ -4,13 +4,12 @@ import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
-import com.android.architecture.extension.toast
 import com.android.architecture.extension.valid
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode
-import com.architecture.light.constant.Constant
 import com.architecture.light.databinding.ActivityReadIdCardBinding
 import com.architecture.light.domain.transaction.action.ActionReadIdCard
+import com.architecture.light.ext.toast
 import com.architecture.light.helper.AidlServiceFactory
 import com.sunmi.idcardservice.IDCardInfo
 import kotlinx.coroutines.Dispatchers
@@ -42,7 +41,7 @@ class ReadIdCardActivity : AppActivityForAction() {
             readIdCard()
         } else {
             toast("身份证服务打开失败，请重试")
-            finish(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))
+            finish(ActionResult(AppErrorCode.BACK_TO_PREVIOUS_PAGE))
         }
     }
 

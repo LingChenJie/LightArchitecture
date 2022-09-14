@@ -12,14 +12,14 @@ import android.os.Looper
 object MainThreadHelper {
 
     fun run(call: () -> Unit) {
-        if (Looper.myLooper() == Looper.getMainLooper()) {
+        if (isMainThread()) {
             call.invoke()
         } else {
             AppExecutors.getInstance().main().execute(call)
         }
     }
 
-    fun judgeMainThread(): Boolean {
+    fun isMainThread(): Boolean {
         if (Looper.myLooper() == Looper.getMainLooper()) {
             return true
         }

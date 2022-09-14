@@ -16,7 +16,7 @@ public abstract class BaseTask<P, R> implements ITask<P, R> {
 
     @Override
     public R execute(P param) {
-        if (MainThreadHelper.INSTANCE.judgeMainThread()) {
+        if (MainThreadHelper.INSTANCE.isMainThread()) {
             throw new RuntimeException("The task cannot be executed in the main thread.");
         }
         doExecute(param);

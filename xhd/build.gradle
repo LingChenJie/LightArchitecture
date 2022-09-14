@@ -39,6 +39,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def app = "XHD"
+            def build_name = "${buildType.name}"
+            def formattedDate = new Date().format('yyyy_MM_dd')
+            def ver = "${defaultConfig.versionName}"
+            outputFileName = app + "-" + build_name + "-" + formattedDate + "-v" + ver + ".apk"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

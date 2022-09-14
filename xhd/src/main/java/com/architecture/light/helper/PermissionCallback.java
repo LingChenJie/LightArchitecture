@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 
-import com.android.architecture.extension.ToastKt;
+import com.android.architecture.extension.ResourcesKt;
 import com.android.architecture.ui.page.ActivityStack;
 import com.architecture.light.R;
+import com.architecture.light.ext.ToastKt;
 import com.architecture.light.ui.dialog.MessageDialog;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
@@ -31,18 +32,18 @@ public abstract class PermissionCallback implements OnPermissionCallback {
         }
 
         if (permissions.size() == 1 && Permission.ACCESS_BACKGROUND_LOCATION.equals(permissions.get(0))) {
-            ToastKt.toast(R.string.common_permission_fail_4);
+            ToastKt.toast(ResourcesKt.getString(R.string.common_permission_fail_4));
             return;
         }
 
-        ToastKt.toast(R.string.common_permission_fail_1);
+        ToastKt.toast(ResourcesKt.getString(R.string.common_permission_fail_1));
     }
 
     /**
      * 显示授权对话框
      */
     protected void showPermissionDialog(List<String> permissions) {
-        Activity activity = ActivityStack.getInstance().getTop();
+        Activity activity = ActivityStack.getInstance().getTopActivity();
         if (activity == null || activity.isFinishing() || activity.isDestroyed()) {
             return;
         }

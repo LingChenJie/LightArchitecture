@@ -1,5 +1,6 @@
 package com.android.architecture.ui.page;
 
+import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
@@ -38,6 +39,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
         super.onCreate(savedInstanceState);
         Logger.e(TAG, "--onCreate");
         ActivityStack.getInstance().add(this);
+        ActivityStack.getInstance().setTopActivity(this);
 
         getLifecycle().addObserver(NetworkStateManager.getInstance());
 
@@ -73,6 +75,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
     protected void onResume() {
         super.onResume();
         Logger.e(TAG, "--onResume");
+        ActivityStack.getInstance().setTopActivity(this);
+        ActivityStack.getInstance().setResumedActivity(this);
     }
 
     @Override
@@ -85,12 +89,20 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
     protected void onStop() {
         super.onStop();
         Logger.e(TAG, "--onStop");
+        Activity resumedActivity = ActivityStack.getInstance().getResumedActivity();
+        if (resumedActivity == this) {
+            ActivityStack.getInstance().setResumedActivity(null);
+        }
     }
 
     @Override
     protected void onDestroy() {
         Logger.e(TAG, "--onDestroy");
         ActivityStack.getInstance().remove(this);
+        Activity topActivity = ActivityStack.getInstance().getTopActivity();
+        if (topActivity == this) {
+            ActivityStack.getInstance().setTopActivity(null);
+        }
         super.onDestroy();
     }
 

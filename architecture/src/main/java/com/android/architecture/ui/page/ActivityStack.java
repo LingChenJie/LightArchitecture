@@ -1,5 +1,6 @@
 package com.android.architecture.ui.page;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
 import com.android.architecture.helper.Logger;
@@ -12,8 +13,11 @@ import java.util.Stack;
 public class ActivityStack {
     private static final String TAG = ActivityStack.class.getSimpleName();
 
+    @SuppressLint("StaticFieldLeak")
     private static final ActivityStack INSTANCE = new ActivityStack();
     private static Stack<Activity> activityStack;
+    private Activity topActivity;
+    private Activity resumedActivity;
 
     private ActivityStack() {
     }
@@ -74,18 +78,20 @@ public class ActivityStack {
                 if (activity == top) {
                     break;
                 }
-                activityStack.remove(top);
-                top.finish();
+                if (top != null) {
+                    activityStack.remove(top);
+                    top.finish();
+                }
             }
         }
     }
 
     /**
-     * 获取顶层Activity
+     * 获取栈顶Activity
      *
      * @return
      */
-    public Activity getTop() {
+    private Activity getTop() {
         if (activityStack.empty()) {
             return null;
         }
@@ -158,6 +164,22 @@ public class ActivityStack {
             activityStack.remove(top);
             top.finish();
         }
+    }
+
+    public Activity getTopActivity() {
+        return topActivity;
+    }
+
+    void setTopActivity(Activity topActivity) {
+        this.topActivity = topActivity;
+    }
+
+    public Activity getResumedActivity() {
+        return resumedActivity;
+    }
+
+    void setResumedActivity(Activity resumedActivity) {
+        this.resumedActivity = resumedActivity;
     }
 
 }
