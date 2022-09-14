@@ -1,6 +1,7 @@
 package com.architecture.light.domain.transaction.action.activity
 
 import com.android.architecture.constant.ErrorCode
+import com.android.architecture.data.manage.InputTextManager
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
 import com.android.architecture.extension.empty
@@ -47,6 +48,12 @@ class InputLoginInfoActivity : AppActivityForAction() {
             val loginInfo = ActionInputLoginInfo.LoginInfo(account, password)
             finish(ActionResult(ErrorCode.SUCCESS, loginInfo))
         }
+        InputTextManager.with(this)
+            .addView(binding.etAccount)
+            .addView(binding.etPassword)
+            .setMain(binding.btLogin)
+            .setAlpha(true)
+            .build()
         KeyBoardUtils.addLayoutListener(binding.layoutBottom, binding.btLogin)
     }
 

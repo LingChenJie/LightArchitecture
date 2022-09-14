@@ -13,5 +13,6 @@ object Constant {
 
     val ROOT_PATH = LightConstant.SDCARD_PATH + File.separator + "XHD"
     val BILL_PATH = ROOT_PATH + File.separator + "Bill"
+    val LOG_PATH = ROOT_PATH + File.separator + "Log"
 
 }

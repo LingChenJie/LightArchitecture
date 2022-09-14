@@ -4,6 +4,7 @@ import com.android.architecture.app.BaseApplication
 import com.android.architecture.constant.ErrorCode
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.helper.AidlServiceFactory
+import com.tencent.bugly.crashreport.CrashReport
 
 /**
  * File describe:
@@ -22,6 +23,9 @@ class App : BaseApplication() {
     private fun init() {
         ErrorCode.add(AppErrorCode.errorCodeMap)
         AidlServiceFactory.instance.init()
+
+        CrashHandler.getInstance().init(this)
+        CrashReport.initCrashReport(this, "0b4c7db09d", true)
     }
 
     override fun onTerminate() {

@@ -9,11 +9,9 @@ import com.architecture.light.app.AppActivity
 import com.architecture.light.constant.GlobalParams
 import com.architecture.light.databinding.ActivityMainBinding
 import com.architecture.light.domain.task.SearchBillTask
-import com.architecture.light.domain.transaction.LogonTrans
 import com.architecture.light.domain.transaction.PaymentTrans
 import com.architecture.light.helper.BillHelper
 import com.architecture.light.helper.PermissionsHelper
-import com.architecture.light.settings.AccountCache
 import com.hjq.permissions.Permission
 import kotlin.concurrent.thread
 
@@ -31,9 +29,9 @@ class MainActivity : AppActivity() {
     override fun onResume() {
         super.onResume()
         TransactionConstant.getInstance().currentActivity = this
-        if (!AccountCache.getLoginStatus()) {
-            LogonTrans().execute()
-        }
+//        if (!AccountCache.getLoginStatus()) {
+//            LogonTrans().execute()
+//        }
     }
 
     override fun initView() {
@@ -48,31 +46,31 @@ class MainActivity : AppActivity() {
         binding.layoutCommon.click {
             //startActivity(Intent(this, CommonActivity::class.java))
             thread {
-//                val transData = SearchBillTask().execute(GlobalParams.initTransData())
-//                if (transData.responseCode == ErrorCode.SUCCESS) {
-//                    val bill = transData.searchBillResponse!!.data
-//                    BillHelper.saveBill(bill[0], false)
-//                    BillHelper.printBill(object : BillHelper.PrintResult {
-//                        override fun success() {
-//                            Logger.e("suqi", "success")
-//                        }
-//
-//                        override fun fail(code: Int, msg: String) {
-//                            Logger.e("suqi", "fail code:$code;msg:$msg")
-//                        }
-//
-//                    })
-//                }
-                BillHelper.printBill(object : BillHelper.PrintResult {
-                    override fun success() {
-                        Logger.e("suqi", "success")
-                    }
+                val transData = SearchBillTask().execute(GlobalParams.initTransData())
+                if (transData.responseCode == ErrorCode.SUCCESS) {
+                    val bill = transData.searchBillResponse!!.data
+                    BillHelper.saveBill(bill[0], false)
+                    BillHelper.printBill(object : BillHelper.PrintResult {
+                        override fun success() {
+                            Logger.e("suqi", "success")
+                        }
 
-                    override fun fail(code: Int, msg: String) {
-                        Logger.e("suqi", "fail code:$code;msg:$msg")
-                    }
+                        override fun fail(code: Int, msg: String) {
+                            Logger.e("suqi", "fail code:$code;msg:$msg")
+                        }
 
-                })
+                    })
+                }
+//                BillHelper.printBill(object : BillHelper.PrintResult {
+//                    override fun success() {
+//                        Logger.e("suqi", "success")
+//                    }
+//
+//                    override fun fail(code: Int, msg: String) {
+//                        Logger.e("suqi", "fail code:$code;msg:$msg")
+//                    }
+//
+//                })
             }
         }
         PermissionsHelper.requirePermissions(Permission.WRITE_EXTERNAL_STORAGE)

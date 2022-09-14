@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId "com.architecture.light.xhd"
         minSdk 21
-        targetSdk 32
+        targetSdk 30
         versionCode 1
         versionName "1.0"
 
@@ -46,7 +46,21 @@ android {
             def build_name = "${buildType.name}"
             def formattedDate = new Date().format('yyyy_MM_dd')
             def ver = "${defaultConfig.versionName}"
-            outputFileName = app + "-" + build_name + "-" + formattedDate + "-v" + ver + ".apk"
+            outputFileName = app + "_" + build_name + "_" + formattedDate + "_V" + ver + ".apk"
+        }
+    }
+
+    tasks.whenTaskAdded { task ->
+        if (task.name.startsWith("assemble")) {
+            task.doLast {
+                android.applicationVariants.all { variant ->
+                    File outputPath = new File("../build/outputs/apk/" + variant.versionName + "/" + System.getenv("BUILD_NUMBER"))
+                    copy {
+                        from variant.outputs[0].outputFile
+                        into outputPath
+                    }
+                }
+            }
         }
     }
 
@@ -69,6 +83,7 @@ dependencies {
     kapt "androidx.room:room-compiler:2.4.3"
 
     implementation 'com.itextpdf:itextg:5.5.10'
+    implementation 'com.tencent.bugly:crashreport:4.0.4'
 
     // AOP 插件库
     implementation 'org.aspectj:aspectjrt:1.9.6'
