@@ -1,10 +1,12 @@
 package com.architecture.light.ui.page.activity
 
 import android.view.View
+import android.widget.ImageView
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.TransactionConstant
 import com.android.architecture.extension.click
 import com.android.architecture.helper.Logger
+import com.architecture.light.R
 import com.architecture.light.app.AppActivity
 import com.architecture.light.constant.GlobalParams
 import com.architecture.light.databinding.ActivityMainBinding
@@ -14,6 +16,7 @@ import com.architecture.light.helper.BillHelper
 import com.architecture.light.helper.PermissionsHelper
 import com.hjq.permissions.Permission
 import kotlin.concurrent.thread
+
 
 /**
  * File describe:
@@ -74,6 +77,12 @@ class MainActivity : AppActivity() {
             }
         }
         PermissionsHelper.requirePermissions(Permission.WRITE_EXTERNAL_STORAGE)
+        binding.banner.setData(
+            null, ImageView.ScaleType.CENTER_CROP,
+            R.drawable.icon_banner_1,
+            R.drawable.icon_banner_2,
+            R.drawable.icon_banner_3
+        )
     }
 
 }

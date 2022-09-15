@@ -4,12 +4,14 @@ import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.model.db.entity.UserInfo
+import com.architecture.light.data.remote.bean.LoginResponse
 import com.architecture.light.domain.task.LogonTask
 import com.architecture.light.domain.transaction.action.ActionHttpTask
 import com.architecture.light.domain.transaction.action.ActionInputBillRecipient
 import com.architecture.light.domain.transaction.action.ActionInputLoginInfo
 import com.architecture.light.domain.transaction.action.ActionProjectChoose
 import com.architecture.light.settings.AccountCache
+import com.architecture.light.settings.ProjectCache
 
 
 class LogonTrans : BaseTransaction() {
@@ -17,8 +19,8 @@ class LogonTrans : BaseTransaction() {
     enum class State {
         INPUT_LOGIN_INFO,
         LOGON_TASK,
-        INPUT_BILL_RECIPIENT,
         PROJECT_CHOOSE,
+        INPUT_BILL_RECIPIENT,
     }
 
     override fun bindStateOnAction() {
@@ -30,14 +32,14 @@ class LogonTrans : BaseTransaction() {
             (it as ActionHttpTask).setParam(LogonTask(), transData, currentActivity)
         }
         bind(State.LOGON_TASK.name, actionLogonTask)
-        val actionInputBillRecipient = ActionInputBillRecipient {
-            (it as ActionInputBillRecipient).setParam(currentActivity)
-        }
-        bind(State.INPUT_BILL_RECIPIENT.name, actionInputBillRecipient)
         val actionProjectChoose = ActionProjectChoose {
             (it as ActionProjectChoose).setParam(currentActivity)
         }
         bind(State.PROJECT_CHOOSE.name, actionProjectChoose)
+        val actionInputBillRecipient = ActionInputBillRecipient {
+            (it as ActionInputBillRecipient).setParam(currentActivity)
+        }
+        bind(State.INPUT_BILL_RECIPIENT.name, actionInputBillRecipient)
         gotoState(State.INPUT_LOGIN_INFO.name)
     }
 
@@ -61,7 +63,7 @@ class LogonTrans : BaseTransaction() {
             State.LOGON_TASK -> {
                 if (code == ErrorCode.SUCCESS) {
                     if (transData.responseCode == ErrorCode.SUCCESS) {
-                        gotoState(State.INPUT_BILL_RECIPIENT.name)
+                        gotoState(State.PROJECT_CHOOSE.name)
                     } else {
                         toastTransResult()
                         gotoState(State.INPUT_LOGIN_INFO.name)
@@ -71,21 +73,23 @@ class LogonTrans : BaseTransaction() {
                     gotoState(State.INPUT_LOGIN_INFO.name)
                 }
             }
-            State.INPUT_BILL_RECIPIENT -> {
+            State.PROJECT_CHOOSE -> {
                 if (code == ErrorCode.SUCCESS) {
-                    val billRecipientInfo = data as ActionInputBillRecipient.BillRecipientInfo
-                    AccountCache.saveBillRecipient(billRecipientInfo.account)
-                    gotoState(State.PROJECT_CHOOSE.name)
+                    val project = data as LoginResponse.Data.Project
+                    ProjectCache.saveProject(project)
+                    gotoState(State.INPUT_BILL_RECIPIENT.name)
                 } else {
                     gotoState(State.INPUT_LOGIN_INFO.name)
                 }
             }
-            State.PROJECT_CHOOSE -> {
+            State.INPUT_BILL_RECIPIENT -> {
                 if (code == ErrorCode.SUCCESS) {
+                    val billRecipientInfo = data as ActionInputBillRecipient.BillRecipientInfo
+                    AccountCache.saveBillRecipient(billRecipientInfo.account)
                     AccountCache.saveLoginStatus(true)
                     transEnd(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))
                 } else {
-                    gotoState(State.INPUT_BILL_RECIPIENT.name)
+                    gotoState(State.PROJECT_CHOOSE.name)
                 }
             }
         }

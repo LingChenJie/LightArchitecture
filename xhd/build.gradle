@@ -82,14 +82,18 @@ dependencies {
     implementation project(":architecture")
     kapt "androidx.room:room-compiler:2.4.3"
 
-    implementation 'com.itextpdf:itextg:5.5.10'
     implementation 'com.tencent.bugly:crashreport:4.0.4'
+    implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
+
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
 
     // AOP 插件库
     implementation 'org.aspectj:aspectjrt:1.9.6'
 
 
-    debugApi 'com.guolindev.glance:glance:1.1.0'
+    debugImplementation 'com.guolindev.glance:glance:1.1.0'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.8.1'
 
 
     testImplementation 'junit:junit:4.13.2'

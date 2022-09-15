@@ -38,6 +38,6 @@
 
     <include
         android:id="@+id/keyboard"
-        layout="@layout/layout_number_keyboard" />
+        layout="@layout/keyboard_number_view" />
 
 </LinearLayout>
