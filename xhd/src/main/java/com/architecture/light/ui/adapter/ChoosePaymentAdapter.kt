@@ -7,7 +7,6 @@ import com.android.architecture.extension.getColor
 import com.android.architecture.ui.adapter.BaseAdapter
 import com.architecture.light.R
 import com.architecture.light.data.remote.bean.SearchRoomResponse
-import com.architecture.light.databinding.AdapterChoosePaymentListBinding
 import com.architecture.light.databinding.AdapterPaymentListBinding
 
 /**
@@ -43,6 +42,9 @@ class ChoosePaymentAdapter :
             if (item.isChecked) getColor(R.color.theme_color) else
                 getColor(com.android.architecture.R.color.transparent)
         )
+        binding.tvPaymentModify.click {
+
+        }
         binding.root.click {
             data[position].isChecked = !data[position].isChecked
             notifyDataSetChanged()

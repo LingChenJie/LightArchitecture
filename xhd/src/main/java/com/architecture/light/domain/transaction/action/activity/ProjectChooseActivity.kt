@@ -39,8 +39,7 @@ class ProjectChooseActivity : AppActivityForAction() {
         }
         binding.btConfirm.click {
             if (project != null) {
-                ProjectCache.saveProject(project!!)
-                finish(ActionResult(ErrorCode.SUCCESS))
+                finish(ActionResult(ErrorCode.SUCCESS, project!!))
             }
         }
         binding.btConfirm.isEnabled = false

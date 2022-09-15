@@ -13,6 +13,17 @@
         android:background="@drawable/title_view_bg"
         app:title_text="@string/login_project_choose" />
 
+    <cn.bingoogolapple.bgabanner.BGABanner
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_200"
+        app:banner_pageChangeDuration="1000"
+        app:banner_pointAutoPlayAble="true"
+        app:banner_pointContainerBackground="@android:color/transparent"
+        app:banner_pointDrawable="@drawable/bga_banner_selector_point_hollow"
+        app:banner_pointTopBottomMargin="15dp"
+        app:banner_transitionEffect="flip" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

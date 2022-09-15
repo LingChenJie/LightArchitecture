@@ -3,7 +3,6 @@ package com.architecture.light.domain.transaction.action
 import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.extension.openActivity
 import com.android.architecture.ui.page.BaseActivity
-import com.architecture.light.domain.transaction.action.activity.InputLoginInfoActivity
 import com.architecture.light.domain.transaction.action.activity.ProjectChooseActivity
 
 /**
@@ -29,7 +28,5 @@ class ActionProjectChoose(listener: ActionStartListener) : AAction(listener) {
         super.onClear()
         activity = null
     }
-
-    class LoginInfo(val account: String, val password: String)
 
 }

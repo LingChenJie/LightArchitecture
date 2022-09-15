@@ -4,12 +4,16 @@ import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.task.ITask
 import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.domain.transaction.ActionResult
+import com.android.architecture.extension.getString
 import com.android.architecture.helper.TaskTimer
 import com.android.architecture.ui.page.BaseActivity
 import com.android.architecture.utils.NetworkUtils
+import com.architecture.light.R
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.model.db.entity.TransData
+import com.architecture.light.domain.task.SearchBillTask
+import com.architecture.light.domain.task.SearchRoomTask
 import kotlinx.coroutines.*
 
 class ActionHttpTask(listener: ActionStartListener) : AAction(listener) {
@@ -61,7 +65,12 @@ class ActionHttpTask(listener: ActionStartListener) : AAction(listener) {
 
     private fun showLoading() {
         activity?.let {
-            if (it is AppActivityForAction) it.showLoading()
+            val message = when (task) {
+                is SearchRoomTask -> getString(R.string.loading_room)
+                is SearchBillTask -> getString(R.string.loading_bill)
+                else -> getString(R.string.common_loading)
+            }
+            if (it is AppActivityForAction) it.showLoading(message)
         }
     }
 

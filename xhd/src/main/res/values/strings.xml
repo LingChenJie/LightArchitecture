@@ -47,6 +47,11 @@
     <string name="common_nav_message">消息</string>
     <string name="common_nav_me">我的</string>
 
+    <!-- 加载相关 -->
+    <string name="loading_room">查询房间&#8230;</string>
+    <string name="loading_bill">账单数据拉取中&#8230;</string>
+    <string name="loading_print">打印数据生成中&#8230;</string>
+
     <!-- Login相关 -->
     <string name="login_username">用户名</string>
     <string name="login_password">密码</string>

@@ -4,7 +4,9 @@ import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.task.ITask
 import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.domain.transaction.ActionResult
+import com.android.architecture.extension.getString
 import com.android.architecture.ui.page.BaseActivity
+import com.architecture.light.R
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.data.model.db.entity.TransData
 import kotlinx.coroutines.*
@@ -47,7 +49,7 @@ class ActionPrintTask(listener: ActionStartListener) : AAction(listener) {
 
     private fun showLoading() {
         activity?.let {
-            if (it is AppActivityForAction) it.showLoading()
+            if (it is AppActivityForAction) it.showLoading(getString(R.string.loading_print))
         }
     }
 
