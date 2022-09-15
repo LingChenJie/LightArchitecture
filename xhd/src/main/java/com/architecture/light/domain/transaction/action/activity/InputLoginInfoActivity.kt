@@ -12,7 +12,9 @@ import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.databinding.ActivityInputLoginInfoBinding
 import com.architecture.light.domain.transaction.action.ActionInputLoginInfo
 import com.architecture.light.ext.toast
+import com.architecture.light.helper.PermissionsHelper
 import com.architecture.light.utils.KeyBoardUtils
+import com.hjq.permissions.Permission
 
 /**
  * File describe:
@@ -45,8 +47,10 @@ class InputLoginInfoActivity : AppActivityForAction() {
                 toast(getString(R.string.login_please_input_correct_username_password))
                 return@click
             }
-            val loginInfo = ActionInputLoginInfo.LoginInfo(username, password)
-            finish(ActionResult(ErrorCode.SUCCESS, loginInfo))
+            PermissionsHelper.requirePermissions(Permission.WRITE_EXTERNAL_STORAGE) {
+                val loginInfo = ActionInputLoginInfo.LoginInfo(username, password)
+                finish(ActionResult(ErrorCode.SUCCESS, loginInfo))
+            }
         }
         binding.etUsername.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) checkUsername()
@@ -60,6 +64,7 @@ class InputLoginInfoActivity : AppActivityForAction() {
             .setMain(binding.btLogin)
             .build()
         KeyBoardUtils.addLayoutListener(binding.layoutBottom, binding.btLogin)
+        PermissionsHelper.requirePermissions(Permission.WRITE_EXTERNAL_STORAGE)
     }
 
     private fun checkUsername() {

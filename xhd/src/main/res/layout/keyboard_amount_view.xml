@@ -2,9 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp_240"
-    android:background="#CCCCCC"
-    android:padding="@dimen/dp_10">
+    android:layout_height="@dimen/dp_225"
+    android:background="#F0F0F0"
+    android:paddingStart="@dimen/dp_6"
+    android:paddingTop="@dimen/dp_8"
+    android:paddingEnd="@dimen/dp_6"
+    android:paddingBottom="@dimen/dp_5">
 
     <TextView
         android:id="@+id/n1"
@@ -13,71 +16,87 @@
         android:background="@drawable/keyboard_item_bg"
         android:gravity="center"
         android:text="@string/_1"
-        android:textColor="@color/keyboard_textcolor"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintHeight_percent="0.25"
+        android:textColor="@color/keyboard_text_color"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/n4"
+        app:layout_constraintEnd_toStartOf="@+id/n2"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.25" />
+        app:layout_constraintVertical_weight="1" />
 
     <TextView
         android:id="@+id/n2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_7"
         android:background="@drawable/keyboard_item_bg"
         android:gravity="center"
         android:text="@string/_2"
-        android:textColor="@color/keyboard_textcolor"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintHeight_percent="0.25"
+        android:textColor="@color/keyboard_text_color"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/n1"
+        app:layout_constraintEnd_toStartOf="@+id/n3"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/n1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.25" />
+        app:layout_constraintTop_toTopOf="@+id/n1" />
 
     <TextView
         android:id="@+id/n3"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginStart="@dimen/dp_7"
         android:background="@drawable/keyboard_item_bg"
         android:gravity="center"
         android:text="@string/_3"
-        android:textColor="@color/keyboard_textcolor"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintHeight_percent="0.25"
+        android:textColor="@color/keyboard_text_color"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/n1"
+        app:layout_constraintEnd_toStartOf="@+id/back"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/n2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.25" />
+        app:layout_constraintTop_toTopOf="@+id/n1" />
 
-    <TextView
+    <ImageView
         android:id="@+id/back"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/dp_10"
         android:background="@drawable/keyboard_item_bg"
+        android:contentDescription="@string/app_name"
         android:gravity="center"
+        android:paddingTop="@dimen/dp_12"
+        android:paddingBottom="@dimen/dp_12"
+        android:src="@drawable/icon_keyboard_clear"
         android:text="@string/_back"
-        android:textColor="@color/keyboard_textcolor"
+        android:textColor="@color/keyboard_text_color"
         android:textSize="@dimen/sp_14"
-        app:layout_constraintHeight_percent="0.25"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/n1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/n3"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.25" />
+        app:layout_constraintTop_toTopOf="@+id/n1" />
 
     <TextView
         android:id="@+id/n4"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_8"
         android:background="@drawable/keyboard_item_bg"
         android:gravity="center"
         android:text="@string/_4"
-        android:textColor="@color/keyboard_textcolor"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/n1"
-        app:layout_constraintWidth_percent="0.25" />
+        android:textColor="@color/keyboard_text_color"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/n7"
+        app:layout_constraintEnd_toEndOf="@+id/n1"
+        app:layout_constraintStart_toStartOf="@+id/n1"
+        app:layout_constraintTop_toBottomOf="@+id/n1"
+        app:layout_constraintVertical_weight="1" />
 
     <TextView
         android:id="@+id/n5"
@@ -86,12 +105,13 @@
         android:background="@drawable/keyboard_item_bg"
         android:gravity="center"
         android:text="@string/_5"
-        android:textColor="@color/keyboard_textcolor"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintStart_toEndOf="@+id/n1"
-        app:layout_constraintTop_toBottomOf="@id/n1"
-        app:layout_constraintWidth_percent="0.25" />
+        android:textColor="@color/keyboard_text_color"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/n4"
+        app:layout_constraintEnd_toEndOf="@+id/n2"
+        app:layout_constraintStart_toStartOf="@+id/n2"
+        app:layout_constraintTop_toTopOf="@+id/n4" />
 
     <TextView
         android:id="@+id/n6"
@@ -100,40 +120,30 @@
         android:background="@drawable/keyboard_item_bg"
         android:gravity="center"
         android:text="@string/_6"
-        android:textColor="@color/keyboard_textcolor"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintStart_toEndOf="@+id/n2"
-        app:layout_constraintTop_toBottomOf="@id/n1"
-        app:layout_constraintWidth_percent="0.25" />
-
-    <TextView
-        android:id="@+id/clear"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/keyboard_item_bg"
-        android:gravity="center"
-        android:text="@string/_clear"
-        android:textColor="@color/keyboard_textcolor"
-        android:textSize="@dimen/sp_14"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintStart_toEndOf="@+id/n3"
-        app:layout_constraintTop_toBottomOf="@id/n1"
-        app:layout_constraintWidth_percent="0.25" />
+        android:textColor="@color/keyboard_text_color"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/n4"
+        app:layout_constraintEnd_toEndOf="@+id/n3"
+        app:layout_constraintStart_toStartOf="@+id/n3"
+        app:layout_constraintTop_toTopOf="@+id/n4" />
 
     <TextView
         android:id="@+id/n7"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_8"
         android:background="@drawable/keyboard_item_bg"
         android:gravity="center"
         android:text="@string/_7"
-        android:textColor="@color/keyboard_textcolor"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/keyboard_text_color"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/n0"
+        app:layout_constraintEnd_toEndOf="@+id/n1"
+        app:layout_constraintStart_toStartOf="@+id/n1"
         app:layout_constraintTop_toBottomOf="@id/n4"
-        app:layout_constraintWidth_percent="0.25" />
+        app:layout_constraintVertical_weight="1" />
 
     <TextView
         android:id="@+id/n8"
@@ -142,12 +152,13 @@
         android:background="@drawable/keyboard_item_bg"
         android:gravity="center"
         android:text="@string/_8"
-        android:textColor="@color/keyboard_textcolor"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintStart_toEndOf="@id/n1"
-        app:layout_constraintTop_toBottomOf="@id/n4"
-        app:layout_constraintWidth_percent="0.25" />
+        android:textColor="@color/keyboard_text_color"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/n7"
+        app:layout_constraintEnd_toEndOf="@+id/n2"
+        app:layout_constraintStart_toStartOf="@+id/n2"
+        app:layout_constraintTop_toTopOf="@+id/n7" />
 
     <TextView
         android:id="@+id/n9"
@@ -156,12 +167,45 @@
         android:background="@drawable/keyboard_item_bg"
         android:gravity="center"
         android:text="@string/_9"
-        android:textColor="@color/keyboard_textcolor"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintStart_toEndOf="@id/n2"
-        app:layout_constraintTop_toBottomOf="@id/n4"
-        app:layout_constraintWidth_percent="0.25" />
+        android:textColor="@color/keyboard_text_color"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/n7"
+        app:layout_constraintEnd_toEndOf="@+id/n3"
+        app:layout_constraintStart_toStartOf="@+id/n3"
+        app:layout_constraintTop_toTopOf="@+id/n7" />
+
+    <TextView
+        android:id="@+id/n0"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_8"
+        android:background="@drawable/keyboard_item_bg"
+        android:gravity="center"
+        android:text="@string/_0"
+        android:textColor="@color/keyboard_text_color"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/n2"
+        app:layout_constraintStart_toStartOf="@+id/n1"
+        app:layout_constraintTop_toBottomOf="@id/n7"
+        app:layout_constraintVertical_weight="1" />
+
+    <TextView
+        android:id="@+id/npoint"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/keyboard_item_bg"
+        android:gravity="center"
+        android:text="@string/_point"
+        android:textColor="@color/keyboard_text_color"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/n0"
+        app:layout_constraintEnd_toEndOf="@+id/n3"
+        app:layout_constraintStart_toStartOf="@+id/n3"
+        app:layout_constraintTop_toTopOf="@+id/n0" />
 
     <TextView
         android:id="@+id/confirm"
@@ -171,39 +215,11 @@
         android:gravity="center"
         android:text="@string/_confirm"
         android:textColor="@color/white"
-        android:textSize="@dimen/sp_14"
+        android:textSize="@dimen/sp_16"
         android:textStyle="bold"
-        app:layout_constraintHeight_percent="0.5"
-        app:layout_constraintStart_toEndOf="@id/n3"
-        app:layout_constraintTop_toBottomOf="@id/n4"
-        app:layout_constraintWidth_percent="0.25" />
-
-    <TextView
-        android:id="@+id/n0"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/keyboard_item_bg"
-        android:gravity="center"
-        android:text="@string/_0"
-        android:textColor="@color/keyboard_textcolor"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/n7"
-        app:layout_constraintWidth_percent="0.50" />
-
-    <TextView
-        android:id="@+id/npoint"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/keyboard_item_bg"
-        android:gravity="center"
-        android:text="@string/_point"
-        android:textColor="@color/keyboard_textcolor"
-        android:textSize="@dimen/sp_20"
-        app:layout_constraintHeight_percent="0.25"
-        app:layout_constraintStart_toEndOf="@id/n0"
-        app:layout_constraintTop_toBottomOf="@id/n7"
-        app:layout_constraintWidth_percent="0.25" />
+        app:layout_constraintBottom_toBottomOf="@+id/n0"
+        app:layout_constraintEnd_toEndOf="@+id/back"
+        app:layout_constraintStart_toStartOf="@+id/back"
+        app:layout_constraintTop_toTopOf="@+id/n4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

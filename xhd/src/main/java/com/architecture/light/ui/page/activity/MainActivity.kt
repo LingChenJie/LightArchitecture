@@ -41,14 +41,11 @@ class MainActivity : AppActivity() {
 
     override fun initView() {
         setContentView(binding.root)
-        binding.titleView.apply {
-            backIcon.visibility = View.GONE
-        }
-        binding.layoutMvi.click {
+        binding.cvPayment.click {
             PaymentTrans().execute()
         }
 
-        binding.layoutCommon.click {
+        binding.cvPledgeMoney.click {
             //startActivity(Intent(this, CommonActivity::class.java))
             thread {
                 val transData = SearchBillTask().execute(GlobalParams.initTransData())
@@ -78,13 +75,20 @@ class MainActivity : AppActivity() {
 //                })
             }
         }
-        PermissionsHelper.requirePermissions(Permission.WRITE_EXTERNAL_STORAGE)
-        binding.banner.setData(
-            null, ImageView.ScaleType.CENTER_CROP,
-            R.drawable.icon_banner_1,
-            R.drawable.icon_banner_2,
-            R.drawable.icon_banner_3
-        )
+
+        val bannerImages =
+            arrayOf(
+                R.drawable.icon_banner_1,
+                R.drawable.icon_banner_2,
+                R.drawable.icon_banner_3
+            )
+        val bannerViews = mutableListOf<View>()
+        for (bannerImage in bannerImages) {
+            val bannerView = View.inflate(this, R.layout.main_banner_view, null)
+            bannerView.findViewById<ImageView>(R.id.iv_image).setImageResource(bannerImage)
+            bannerViews.add(bannerView)
+        }
+        binding.banner.setData(bannerViews)
     }
 
 }

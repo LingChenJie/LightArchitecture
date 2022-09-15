@@ -37,7 +37,6 @@ public abstract class PermissionCallback implements OnPermissionCallback {
         }
 
         ToastKt.toast(ResourcesKt.getString(R.string.common_permission_fail_1));
-        ActivityStack.getInstance().removeAll();
     }
 
     /**

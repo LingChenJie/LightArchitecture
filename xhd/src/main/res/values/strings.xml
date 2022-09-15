@@ -65,6 +65,14 @@
     <string name="login_project_choose">项目选择</string>
     <string name="logon_project_list">项目列表</string>
 
+    <!-- Main相关 -->
+    <string name="main_payment">查询缴款</string>
+    <string name="main_pledge_money">认筹金</string>
+    <string name="main_void">撤销</string>
+    <string name="main_payment_synchronize">缴款信息同步</string>
+    <string name="main_void_synchronize">撤销信息同步</string>
+    <string name="main_print">打印交易信息</string>
+
     <!-- Payment相关 -->
     <string name="payment_select_query_method_title">查询缴款</string>
     <string name="payment_select_query_method">请选择查询方式</string>
@@ -126,7 +134,6 @@
     <string name="payment_title_total_amount">款项总额</string>
     <string name="payment_title_not_paid_amount">未缴总额</string>
     <string name="payment_title_modify">修改</string>
-
 
 
 </resources>

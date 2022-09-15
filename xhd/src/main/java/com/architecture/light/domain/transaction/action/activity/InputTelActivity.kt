@@ -34,7 +34,6 @@ class InputTelActivity : AppActivityForAction() {
         binding.keyboard.n8.click { inputText("8") }
         binding.keyboard.n9.click { inputText("9") }
         binding.keyboard.back.click { back() }
-        binding.keyboard.clear.click { clear() }
         binding.keyboard.confirm.click { confirm() }
     }
 
