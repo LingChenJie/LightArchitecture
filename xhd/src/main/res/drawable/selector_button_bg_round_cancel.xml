@@ -13,7 +13,7 @@
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/dp_20" />
-            <solid android:color="@color/common_button_pressed_color" />
+            <solid android:color="#80EF7029" />
         </shape>
     </item>
 
@@ -21,7 +21,7 @@
     <item android:state_focused="true">
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/dp_20" />
-            <solid android:color="@color/common_button_pressed_color" />
+            <solid android:color="#80EF7029" />
         </shape>
     </item>
 
@@ -29,7 +29,7 @@
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/dp_20" />
-            <solid android:color="@color/common_button_default_color" />
+            <solid android:color="#EF7029" />
         </shape>
     </item>
 

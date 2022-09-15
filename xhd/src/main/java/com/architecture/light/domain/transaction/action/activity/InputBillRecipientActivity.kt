@@ -1,12 +1,14 @@
 package com.architecture.light.domain.transaction.action.activity
 
 import com.android.architecture.constant.ErrorCode
+import com.android.architecture.data.manage.InputTextManager
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
 import com.android.architecture.extension.empty
 import com.android.architecture.helper.ClickHelper
 import com.architecture.light.R
 import com.architecture.light.app.AppActivityForAction
+import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.databinding.ActivityInputBillRecipientBinding
 import com.architecture.light.domain.transaction.action.ActionInputBillRecipient
 import com.architecture.light.ext.toast
@@ -39,6 +41,13 @@ class InputBillRecipientActivity : AppActivityForAction() {
             val loginInfo = ActionInputBillRecipient.BillRecipientInfo(account)
             finish(ActionResult(ErrorCode.SUCCESS, loginInfo))
         }
+        binding.btCancel.click {
+            finish(ActionResult(AppErrorCode.BACK_TO_PREVIOUS_PAGE))
+        }
+        InputTextManager.with(this)
+            .addView(binding.etBillRecipient)
+            .setMain(binding.btConfirm)
+            .build()
         KeyBoardUtils.addLayoutListener(binding.layoutBottom, binding.btConfirm)
     }
 

@@ -41,37 +41,47 @@
         <activity
             android:name=".domain.transaction.action.activity.InputLoginInfoActivity"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="adjustResize" />
+            android:theme="@style/Anim_fade" />
         <activity
             android:name=".domain.transaction.action.activity.InputBillRecipientActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
         <activity
             android:name=".domain.transaction.action.activity.ProjectChooseActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
         <activity
             android:name=".domain.transaction.action.activity.SelectQueryMethodActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
         <activity
             android:name=".domain.transaction.action.activity.ReadIdCardActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
         <activity
             android:name=".domain.transaction.action.activity.InputTelActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
         <activity
             android:name=".domain.transaction.action.activity.InputRoomInfoActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
         <activity
             android:name=".domain.transaction.action.activity.ChooseRoomActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
         <activity
             android:name=".domain.transaction.action.activity.ChoosePaymentActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
         <activity
             android:name=".domain.transaction.action.activity.ChoosePaymentMethodActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
         <activity
             android:name=".domain.transaction.action.activity.ShowPayResultActivity"
-            android:launchMode="singleTask" />
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
 
 
     </application>

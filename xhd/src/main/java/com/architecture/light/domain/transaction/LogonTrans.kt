@@ -50,7 +50,7 @@ class LogonTrans : BaseTransaction() {
                 if (code == ErrorCode.SUCCESS) {
                     val loginInfo = data as ActionInputLoginInfo.LoginInfo
                     val userInfo = UserInfo()
-                    userInfo.account = loginInfo.account
+                    userInfo.account = loginInfo.username
                     userInfo.password = loginInfo.password
                     transData.userInfo = userInfo
                     gotoState(State.LOGON_TASK.name)

@@ -29,7 +29,7 @@ class InputLoginInfoActivity : AppActivityForAction() {
 
     override fun onResume() {
         super.onResume()
-        binding.etAccount.setText("")
+        //binding.etUsername.setText("")
         binding.etPassword.setText("")
     }
 
@@ -39,22 +39,41 @@ class InputLoginInfoActivity : AppActivityForAction() {
             if (ClickHelper.isDoubleClick()) {
                 return@click
             }
-            val account = binding.etAccount.text.toString()// shengxy
-            val password = binding.etPassword.text.toString()// 2
-            if (account.empty || password.empty) {
+            val username = binding.etUsername.text.toString()
+            val password = binding.etPassword.text.toString()
+            if (username.empty || password.empty) {
                 toast(getString(R.string.login_please_input_correct_username_password))
                 return@click
             }
-            val loginInfo = ActionInputLoginInfo.LoginInfo(account, password)
+            val loginInfo = ActionInputLoginInfo.LoginInfo(username, password)
             finish(ActionResult(ErrorCode.SUCCESS, loginInfo))
         }
+        binding.etUsername.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) checkUsername()
+        }
+        binding.etPassword.setOnFocusChangeListener { _, hasFocus ->
+            if (hasFocus) checkPassword()
+        }
         InputTextManager.with(this)
-            .addView(binding.etAccount)
+            .addView(binding.etUsername)
             .addView(binding.etPassword)
             .setMain(binding.btLogin)
-            .setAlpha(true)
             .build()
         KeyBoardUtils.addLayoutListener(binding.layoutBottom, binding.btLogin)
+    }
+
+    private fun checkUsername() {
+        binding.ivUsername.setImageResource(R.drawable.icon_login_username)
+        binding.vUsername.setBackgroundColor(getColor(R.color.common_accent_color))
+        binding.ivPassword.setImageResource(R.drawable.icon_login_password_un)
+        binding.vPassword.setBackgroundColor(getColor(R.color.common_uncheck_color))
+    }
+
+    private fun checkPassword() {
+        binding.ivUsername.setImageResource(R.drawable.icon_login_username_un)
+        binding.vUsername.setBackgroundColor(getColor(R.color.common_uncheck_color))
+        binding.ivPassword.setImageResource(R.drawable.icon_login_password)
+        binding.vPassword.setBackgroundColor(getColor(R.color.common_accent_color))
     }
 
     override fun clickBack() {

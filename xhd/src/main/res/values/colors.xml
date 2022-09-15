@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="theme_color">#FF6347</color>
-    <color name="theme_color_90">#E6EC652C</color>
-    <color name="theme_color_50">#80EC652C</color>
+    <color name="theme_color">#0061A7</color>
+    <color name="theme_color_80">#CD0061A7</color>
+    <color name="theme_color_50">#800061A7</color>
 
     <!-- App 样式中引用的颜色 -->
     <color name="common_primary_color">@color/theme_color</color>
     <color name="common_primary_dark_color">@color/black</color>
-    <color name="common_accent_color">@color/theme_color_90</color>
+    <color name="common_accent_color">#0063F8</color>
     <color name="common_window_background_color">#F4F4F4</color>
     <color name="common_text_color">#333333</color>
     <color name="common_text_hint_color">@color/panda</color>
+    <color name="common_uncheck_color">#CCCCCC</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
@@ -21,8 +22,9 @@
     <color name="common_line_color">#ECECEC</color>
     <color name="common_confirm_text_color">#1B1A1A</color>
     <color name="common_cancel_text_color">#4B4746</color>
+    <color name="common_button_default_color">@color/theme_color</color>
     <color name="common_button_pressed_color">@color/theme_color_50</color>
-    <color name="common_button_disable_color">#BBBBBB</color>
+    <color name="common_button_disable_color">@color/common_uncheck_color</color>
     <color name="common_icon_color">#7C7C7C</color>
     <color name="keyboard_textcolor">#253B56</color>
 

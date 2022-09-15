@@ -32,6 +32,7 @@ class ProjectChooseActivity : AppActivityForAction() {
         binding.recyclerView.adapter = adapter
         adapter.setItemClickListener { _, _, item ->
             project = item
+            binding.btConfirm.isEnabled = true
         }
         binding.btCancel.click {
             finish(ActionResult(AppErrorCode.EXIT_LOGIN))
@@ -42,6 +43,7 @@ class ProjectChooseActivity : AppActivityForAction() {
                 finish(ActionResult(ErrorCode.SUCCESS))
             }
         }
+        binding.btConfirm.isEnabled = false
     }
 
     override fun clickBack() {

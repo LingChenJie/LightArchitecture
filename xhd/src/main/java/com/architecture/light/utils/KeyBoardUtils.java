@@ -29,7 +29,7 @@ public class KeyBoardUtils {
                     scroll.getLocationInWindow(location);
                     int scrollHeight = (location[1] + scroll.getHeight()) - rect.bottom;
                     if (isKeyboardShown(main)) {
-                        main.scrollTo(0, scrollHeight + 50);
+                        main.scrollTo(0, scrollHeight + 100);
                     } else {
                         main.scrollTo(0, 0);
                     }

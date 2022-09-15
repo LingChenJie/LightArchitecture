@@ -9,9 +9,11 @@ import com.architecture.light.app.AppActivity
 import com.architecture.light.constant.GlobalParams
 import com.architecture.light.databinding.ActivityMainBinding
 import com.architecture.light.domain.task.SearchBillTask
+import com.architecture.light.domain.transaction.LogonTrans
 import com.architecture.light.domain.transaction.PaymentTrans
 import com.architecture.light.helper.BillHelper
 import com.architecture.light.helper.PermissionsHelper
+import com.architecture.light.settings.AccountCache
 import com.hjq.permissions.Permission
 import kotlin.concurrent.thread
 
@@ -29,9 +31,9 @@ class MainActivity : AppActivity() {
     override fun onResume() {
         super.onResume()
         TransactionConstant.getInstance().currentActivity = this
-//        if (!AccountCache.getLoginStatus()) {
-//            LogonTrans().execute()
-//        }
+        if (!AccountCache.getLoginStatus()) {
+            LogonTrans().execute()
+        }
     }
 
     override fun initView() {

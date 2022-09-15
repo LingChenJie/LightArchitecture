@@ -34,10 +34,7 @@ class ProjectChooseAdapter :
     ) {
         val binding = holder.binding
         binding.tvProjectName.text = item.projName
-        binding.root.setBackgroundColor(
-            if (item.isChecked) getColor(R.color.theme_color) else
-                getColor(com.android.architecture.R.color.transparent)
-        )
+        binding.ivChecked.isChecked = item.isChecked
         binding.root.click {
             data.forEach { it.isChecked = false }
             data[position].isChecked = true

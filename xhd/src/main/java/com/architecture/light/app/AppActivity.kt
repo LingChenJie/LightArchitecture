@@ -1,6 +1,5 @@
 package com.architecture.light.app
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.ViewGroup
 import com.android.architecture.ui.page.BaseActivity
@@ -106,16 +105,6 @@ abstract class AppActivity : BaseActivity() {
             }
         }
         return null
-    }
-
-    override fun startActivityForResult(intent: Intent?, requestCode: Int, options: Bundle?) {
-        super.startActivityForResult(intent, requestCode, options)
-        overridePendingTransition(R.anim.right_in_activity, R.anim.right_out_activity)
-    }
-
-    override fun finish() {
-        super.finish()
-        overridePendingTransition(R.anim.left_in_activity, R.anim.left_out_activity)
     }
 
 }

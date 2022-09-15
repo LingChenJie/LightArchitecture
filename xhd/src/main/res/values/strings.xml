@@ -48,6 +48,9 @@
     <string name="common_nav_me">我的</string>
 
     <!-- Login相关 -->
+    <string name="login_username">用户名</string>
+    <string name="login_password">密码</string>
+    <string name="login_bill_recipient">票据领用人</string>
     <string name="login_hint_username">请输入操作员号</string>
     <string name="login_hint_password">请输入密码</string>
     <string name="login_ok">登录</string>
@@ -55,6 +58,7 @@
     <string name="login_hint_bill_recipient">请输入票据领用人</string>
     <string name="login_hint_bill_recipient_empty">票据领用人不能为空</string>
     <string name="login_project_choose">项目选择</string>
+    <string name="logon_project_list">项目列表</string>
 
     <!-- Payment相关 -->
     <string name="payment_select_query_method_title">查询缴款</string>
@@ -117,6 +121,7 @@
     <string name="payment_title_total_amount">款项总额</string>
     <string name="payment_title_not_paid_amount">未缴总额</string>
     <string name="payment_title_modify">修改</string>
+
 
 
 </resources>

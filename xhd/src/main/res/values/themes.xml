@@ -32,4 +32,15 @@
         <item name="android:windowDisablePreview">true</item>
     </style>
 
+    <style name="Anim_fade" parent="Theme.AppTheme">
+        <item name="android:windowAnimationStyle">@style/fade</item>
+    </style>
+
+    <style name="fade" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/right_in_activity</item>
+        <item name="android:activityOpenExitAnimation">@anim/left_out_activity</item>
+        <item name="android:activityCloseEnterAnimation">@anim/left_in_activity</item>
+        <item name="android:activityCloseExitAnimation">@anim/right_out_activity</item>
+    </style>
+
 </resources>
