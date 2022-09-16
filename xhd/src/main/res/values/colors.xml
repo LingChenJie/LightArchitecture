@@ -3,6 +3,7 @@
     <color name="theme_color">#0061A7</color>
     <color name="theme_color_80">#CD0061A7</color>
     <color name="theme_color_50">#800061A7</color>
+    <color name="theme_color_10">#1A0061A7</color>
 
     <!-- App 样式中引用的颜色 -->
     <color name="common_primary_color">@color/theme_color</color>

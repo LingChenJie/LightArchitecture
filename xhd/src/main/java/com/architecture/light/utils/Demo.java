@@ -10,7 +10,8 @@ package com.architecture.light.utils;
 public class Demo {
 
     public static void main(String[] args) {
-
+        String amount = "";
+        amount.replaceAll(",", ".");
     }
 
 }

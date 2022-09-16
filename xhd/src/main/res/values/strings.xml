@@ -134,6 +134,7 @@
     <string name="payment_title_total_amount">款项总额</string>
     <string name="payment_title_not_paid_amount">未缴总额</string>
     <string name="payment_title_modify">修改</string>
+    <string name="modify_amount">修改金额</string>
 
 
 </resources>

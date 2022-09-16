@@ -1,12 +1,59 @@
 package com.android.architecture.extension
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.android.architecture.helper.DelayHelper
 
 fun <T : View> T.click(block: (T) -> Unit) {
     setOnClickListener {
         block(this)
+    }
+}
+
+@SuppressLint("ClickableViewAccessibility")
+fun <T : View> T.touch(repeatTrigger: Boolean = false, block: (T) -> Unit) {
+    var touchUp = false
+    var downTime = 0L
+    val delay = 100L
+    val what = -999
+    setOnTouchListener { _, event ->
+        when (event.action) {
+            MotionEvent.ACTION_DOWN -> {
+                touchUp = false
+                isPressed = true
+                downTime = System.currentTimeMillis()
+                if (repeatTrigger) {
+                    DelayHelper.sendDelayTask(what, delay, object : DelayHelper.Task {
+                        override fun execute() {
+                            if (!touchUp) {
+                                block(this@touch)
+                                DelayHelper.sendDelayTask(what, delay)
+                            } else {
+                                DelayHelper.removeTask(what)
+                            }
+                        }
+                    })
+                }
+            }
+            MotionEvent.ACTION_UP -> {
+                touchUp = true
+                isPressed = false
+                if (repeatTrigger) {
+                    if (System.currentTimeMillis() - downTime < delay) {
+                        block(this@touch)
+                    }
+                } else {
+                    block(this@touch)
+                }
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                isPressed = false
+            }
+        }
+        true
     }
 }
 

@@ -30,12 +30,14 @@ public class SearchRoomResponse extends ResponseBean {
         public static class Fee extends BaseBean {
             private String FeeGUID;
             private String ItemType;
-            private Double Amount;
+            private double Amount;
             private String ItemNameGUID;
             private String ItemName;
-            private Double YeAmount;
+            private double YeAmount;
             private String ItemTypeGUID;
             private boolean isChecked;
+            private double paymentAmount;
+
 
             public String getFeeGUID() {
                 return FeeGUID;
@@ -53,11 +55,12 @@ public class SearchRoomResponse extends ResponseBean {
                 ItemType = itemType;
             }
 
-            public Double getAmount() {
+            public double getAmount() {
                 return Amount;
             }
 
-            public void setAmount(Double amount) {
+            public void setAmount(double amount) {
+
                 Amount = amount;
             }
 
@@ -77,12 +80,13 @@ public class SearchRoomResponse extends ResponseBean {
                 ItemName = itemName;
             }
 
-            public Double getYeAmount() {
+            public double getYeAmount() {
                 return YeAmount;
             }
 
-            public void setYeAmount(Double yeAmount) {
+            public void setYeAmount(double yeAmount) {
                 YeAmount = yeAmount;
+                paymentAmount = yeAmount;
             }
 
             public String getItemTypeGUID() {
@@ -99,6 +103,14 @@ public class SearchRoomResponse extends ResponseBean {
 
             public void setChecked(boolean checked) {
                 isChecked = checked;
+            }
+
+            public double getPaymentAmount() {
+                return paymentAmount;
+            }
+
+            public void setPaymentAmount(double paymentAmount) {
+                this.paymentAmount = paymentAmount;
             }
         }
 

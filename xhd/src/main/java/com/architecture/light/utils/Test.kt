@@ -1,12 +1,12 @@
 package com.architecture.light.utils
 
-import com.android.architecture.helper.JsonHelper
+import com.architecture.light.helper.AmountHelper
 
 /**
  * Created by SuQi on 2022/8/3.
  * Describe:
  */
 fun main(args: Array<String>) {
-    val json = JsonHelper.toJson("su")
-    println(json)
+    val stringCent2Long = AmountHelper.convertAmount("10,001")
+    println(stringCent2Long)
 }

@@ -5,4 +5,7 @@
         <attr name="ios" format="boolean" />
         <attr name="leftSwipe" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="CustomKeyboardView">
+        <attr name="show_point" format="boolean" />
+    </declare-styleable>
 </resources>

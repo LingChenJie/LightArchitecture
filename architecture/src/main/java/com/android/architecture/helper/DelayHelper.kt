@@ -3,7 +3,6 @@ package com.android.architecture.helper
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
-import android.util.Log
 import android.util.SparseArray
 
 object DelayHelper {
@@ -29,6 +28,10 @@ object DelayHelper {
         delayTaskList.remove(what)
         // 添加任务
         delayTaskList.put(what, task)
+        handler.sendEmptyMessageDelayed(what, delay)
+    }
+
+    fun sendDelayTask(what: Int, delay: Long) {
         handler.sendEmptyMessageDelayed(what, delay)
     }
 

@@ -18,16 +18,19 @@
         android:orientation="vertical"
         android:padding="@dimen/dp_10">
 
-        <TextView
-            android:id="@+id/tv_tel"
+        <com.android.architecture.ui.widget.view.ClearEditText
+            android:id="@+id/et_tel"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
+            android:background="@null"
             android:gravity="center_vertical"
-            android:hint="@string/payment_please_input_tel" />
+            android:hint="@string/payment_please_input_tel"
+            app:regexType="mobile" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_1"
-            android:background="@color/theme_color"/>
+            android:background="@color/theme_color" />
 
     </LinearLayout>
 
@@ -36,8 +39,10 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <include
+    <com.architecture.light.ui.view.NumberKeyboardView
         android:id="@+id/keyboard"
-        layout="@layout/keyboard_number_view" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:show_point="false" />
 
 </LinearLayout>
