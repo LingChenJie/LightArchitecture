@@ -2,6 +2,7 @@ package com.architecture.light.ui.view
 
 import android.content.Context
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -81,6 +82,7 @@ class NumberKeyboardView @JvmOverloads constructor(
 
     fun bindEditText(editText: EditText) {
         this.editText = editText
+        editText.inputType = InputType.TYPE_NULL
         disableShowInput(editText)
         editText.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

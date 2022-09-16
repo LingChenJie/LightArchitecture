@@ -9,12 +9,12 @@ import com.android.architecture.helper.Logger
 import com.architecture.light.R
 import com.architecture.light.app.AppActivity
 import com.architecture.light.constant.GlobalParams
-import com.architecture.light.databinding.ActivityMain2Binding
+import com.architecture.light.databinding.ActivityMainBinding
 import com.architecture.light.domain.task.SearchBillTask
 import com.architecture.light.domain.transaction.LogonTrans
+import com.architecture.light.domain.transaction.PaymentTrans
 import com.architecture.light.helper.BillHelper
 import com.architecture.light.settings.AccountCache
-import com.architecture.light.ui.dialog.AmountModifyDialog
 import kotlin.concurrent.thread
 
 
@@ -27,7 +27,7 @@ import kotlin.concurrent.thread
  */
 class MainActivity : AppActivity() {
 
-    private val binding: ActivityMain2Binding by lazy { ActivityMain2Binding.inflate(layoutInflater) }
+    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onResume() {
         super.onResume()
@@ -39,16 +39,11 @@ class MainActivity : AppActivity() {
 
     override fun initView() {
         setContentView(binding.root)
-        binding.layoutMvi.click {
-//            PaymentTrans().execute()
-            AmountModifyDialog.Builder(this)
-                .setAmount(-8888.88, -9.9)
-                .setCancelable(false)
-                .create()
-                .show()
+        binding.cvPayment.click {
+            PaymentTrans().execute()
         }
 
-        binding.layoutCommon.click {
+        binding.cvPledgeMoney.click {
             //startActivity(Intent(this, CommonActivity::class.java))
             thread {
                 val transData = SearchBillTask().execute(GlobalParams.initTransData())
@@ -81,9 +76,9 @@ class MainActivity : AppActivity() {
 
         val bannerImages =
             arrayOf(
-                R.drawable.icon_banner_1,
-                R.drawable.icon_banner_2,
-                R.drawable.icon_banner_3
+                R.drawable.icon_main_banner_1,
+                R.drawable.icon_main_banner_2,
+                R.drawable.icon_main_banner_3,
             )
         val bannerViews = mutableListOf<View>()
         for (bannerImage in bannerImages) {
@@ -91,7 +86,7 @@ class MainActivity : AppActivity() {
             bannerView.findViewById<ImageView>(R.id.iv_image).setImageResource(bannerImage)
             bannerViews.add(bannerView)
         }
-//        binding.banner.setData(bannerViews)
+        binding.banner.setData(bannerViews)
     }
 
 }

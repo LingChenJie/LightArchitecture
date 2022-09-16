@@ -3,24 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/icon_login_bg"
     android:orientation="vertical">
 
-    <cn.bingoogolapple.bgabanner.BGABanner
-        android:id="@+id/banner"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_143"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="@dimen/dp_17"
-        android:layout_marginTop="@dimen/dp_62"
-        android:layout_marginEnd="@dimen/dp_17"
-        app:banner_pageChangeDuration="2000"
-        app:banner_pointAutoPlayAble="true"
-        app:banner_pointAutoPlayInterval="2000"
-        app:banner_pointContainerBackground="@android:color/transparent"
-        app:banner_pointDrawable="@drawable/main_banner_point_selector"
-        app:banner_pointTopBottomMargin="@dimen/dp_3"
-        app:banner_transitionEffect="alpha" />
+        android:layout_height="@dimen/dp_196">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_145"
+            android:background="@drawable/title_view_bg"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_103"
+            android:layout_height="@dimen/dp_29"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_8"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_main_logo" />
+
+        <cn.bingoogolapple.bgabanner.BGABanner
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_143"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/dp_17"
+            android:layout_marginTop="@dimen/dp_62"
+            android:layout_marginEnd="@dimen/dp_17"
+            app:banner_pageChangeDuration="2000"
+            app:banner_pointAutoPlayAble="true"
+            app:banner_pointAutoPlayInterval="2000"
+            app:banner_pointContainerBackground="@android:color/transparent"
+            app:banner_pointDrawable="@drawable/main_banner_point_selector"
+            app:banner_pointTopBottomMargin="@dimen/dp_3"
+            app:banner_transitionEffect="stack" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

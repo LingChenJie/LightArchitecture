@@ -11,7 +11,7 @@
         android:layout_height="@dimen/dp_123"
         android:contentDescription="@string/app_name"
         android:scaleType="centerCrop"
-        android:src="@drawable/icon_banner_1"
+        android:src="@drawable/icon_main_banner_2"
         app:riv_corner_radius="@dimen/dp_5" />
 
     <View
