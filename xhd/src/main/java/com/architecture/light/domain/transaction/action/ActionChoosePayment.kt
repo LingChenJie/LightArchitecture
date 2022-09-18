@@ -35,6 +35,11 @@ class ActionChoosePayment(listener: ActionStartListener) : AAction(listener) {
         activity = null
     }
 
-    data class PaymentInfo(val amount: Long, val searchRoomResponse: SearchRoomResponse)
+    data class PaymentInfo(
+        val totalAmount: Double,
+        val unpaidAmount: Double,
+        val amount: Double,
+        val searchRoomResponse: SearchRoomResponse
+    )
 
 }

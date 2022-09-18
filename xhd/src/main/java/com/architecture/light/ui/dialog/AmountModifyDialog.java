@@ -14,6 +14,7 @@ import com.android.architecture.helper.Logger;
 import com.android.architecture.ui.page.BaseDialog;
 import com.android.architecture.ui.page.action.AnimAction;
 import com.architecture.light.R;
+import com.architecture.light.helper.AmountHelper;
 import com.architecture.light.ui.view.NumberKeyboardView;
 
 /**
@@ -26,6 +27,7 @@ import com.architecture.light.ui.view.NumberKeyboardView;
 public class AmountModifyDialog {
 
     public static final class Builder extends BaseDialog.Builder<Builder> {
+        private static final double MAX_AMOUNT = 9999999.99;
         private final ImageView ivMinus;
         private final EditText etAmount;
         private final ImageView ivClose;
@@ -75,12 +77,12 @@ public class AmountModifyDialog {
 
         public Builder setAmount(double amount, double originAmount) {
             this.originAmount = originAmount;
-            if (originAmount > 0) {
+            if (originAmount >= 0) {
                 ivMinus.setVisibility(View.GONE);
             } else {
                 ivMinus.setVisibility(View.VISIBLE);
             }
-            etAmount.setText(String.valueOf(Math.abs(amount)));
+            etAmount.setText(AmountHelper.INSTANCE.formatAmountNoSymbols(Math.abs(amount)));
             return this;
         }
 
@@ -89,11 +91,8 @@ public class AmountModifyDialog {
             if (!TextUtils.isEmpty(amount)) {
                 double amt = Double.parseDouble(amount);
                 if (originAmount >= 0) {
-                    if (amt > originAmount) {
-                        tvTip.setText("不能大于原金额");
-                        keyboard.setConfirmEnabled(false);
-                    } else if (amt == 0) {
-                        tvTip.setText("金额不能为0");
+                    if (amt > MAX_AMOUNT) {
+                        tvTip.setText("金额输入超过最大金额");
                         keyboard.setConfirmEnabled(false);
                     } else {
                         tvTip.setText("");
@@ -102,10 +101,7 @@ public class AmountModifyDialog {
                 } else {
                     double origin = Math.abs(originAmount);
                     if (amt > origin) {
-                        tvTip.setText("不能小于原金额");
-                        keyboard.setConfirmEnabled(false);
-                    } else if (amt == 0) {
-                        tvTip.setText("金额不能为0");
+                        tvTip.setText("不能小于余额");
                         keyboard.setConfirmEnabled(false);
                     } else {
                         tvTip.setText("");

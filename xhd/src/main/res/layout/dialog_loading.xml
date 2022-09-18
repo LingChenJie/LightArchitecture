@@ -25,7 +25,7 @@
             android:layout_marginTop="@dimen/dp_43"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            app:lottie_rawRes="@raw/loading" />
+            app:lottie_rawRes="@raw/loading_app" />
 
         <com.android.architecture.ui.widget.view.SmartTextView
             android:id="@+id/tv_wait_message"

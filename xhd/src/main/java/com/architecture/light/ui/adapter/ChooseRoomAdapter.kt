@@ -37,10 +37,17 @@ class ChooseRoomAdapter :
         binding.tvCustomPhone.text = item.tel
         binding.tvCustomCardId.text = item.cardID
         binding.tvRoomName.text = item.roomInfo
-        binding.root.setBackgroundColor(
-            if (item.isChecked) getColor(R.color.theme_color) else
-                getColor(com.android.architecture.R.color.transparent)
-        )
+
+        binding.layoutItem.isSelected = item.isChecked
+        binding.labelCustomName.isSelected = item.isChecked
+        binding.tvCustomName.isSelected = item.isChecked
+        binding.labelCustomPhone.isSelected = item.isChecked
+        binding.tvCustomPhone.isSelected = item.isChecked
+        binding.labelCustomCardId.isSelected = item.isChecked
+        binding.tvCustomCardId.isSelected = item.isChecked
+        binding.labelRoomName.isSelected = item.isChecked
+        binding.tvRoomName.isSelected = item.isChecked
+
         binding.root.click {
             data.forEach { it.isChecked = false }
             data[position].isChecked = true

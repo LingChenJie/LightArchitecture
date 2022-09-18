@@ -3,13 +3,14 @@ package com.architecture.light.domain.transaction.action.activity
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
+import com.android.architecture.utils.DoubleUtils
 import com.architecture.light.app.AppActivityForAction
-import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.databinding.ActivityChoosePaymentBinding
 import com.architecture.light.domain.transaction.action.ActionChoosePayment
 import com.architecture.light.domain.transaction.action.UIParams
+import com.architecture.light.helper.AmountHelper
 import com.architecture.light.ui.adapter.ChoosePaymentAdapter
 
 /**
@@ -25,7 +26,7 @@ class ChoosePaymentActivity : AppActivityForAction() {
         ActivityChoosePaymentBinding.inflate(layoutInflater)
     }
 
-    private val adapter by lazy { ChoosePaymentAdapter() }
+    private val adapter by lazy { ChoosePaymentAdapter(this) }
 
     override fun initView() {
         setContentView(binding.root)
@@ -45,16 +46,41 @@ class ChoosePaymentActivity : AppActivityForAction() {
         binding.tvRoomName.text = room.roomInfo
         adapter.setData(room.feeList)
         binding.recyclerView.adapter = adapter
-        binding.btCancel.click {
-            finish(ActionResult(AppErrorCode.BACK_TO_PREVIOUS_PAGE))
-        }
+        adapter.setItemChangeListener(object : ChoosePaymentAdapter.ItemChangeListener {
+            override fun change() {
+                refreshUI(room)
+            }
+        })
         binding.btConfirm.click {
-            //TODO
-            val amount = 1L
             val paymentInfo =
-                ActionChoosePayment.PaymentInfo(amount, transData.searchRoomResponse!!)
+                ActionChoosePayment.PaymentInfo(
+                    totalAmount,
+                    unPaidAmount,
+                    thisPaidAmount,
+                    transData.searchRoomResponse!!
+                )
             finish(ActionResult(ErrorCode.SUCCESS, paymentInfo))
         }
+        binding.btConfirm.isEnabled = false
+    }
+
+    var totalAmount = 0.0
+    var unPaidAmount = 0.0
+    var thisPaidAmount = 0.0
+
+    private fun refreshUI(selectRoom: SearchRoomResponse.Data) {
+        val feeList = selectRoom.feeList
+        for (fee in feeList) {
+            if (fee.isChecked) {
+                totalAmount = DoubleUtils.add(totalAmount, fee.amount)
+                unPaidAmount = DoubleUtils.add(unPaidAmount, fee.yeAmount)
+                thisPaidAmount = DoubleUtils.add(thisPaidAmount, fee.paymentAmount)
+            }
+        }
+        binding.tvTotalAmountPayment.text = AmountHelper.formatAmount(totalAmount)
+        binding.tvTotalAmountUnpaid.text = AmountHelper.formatAmount(unPaidAmount)
+        binding.tvTotalAmountThisPaid.text = AmountHelper.formatAmount(thisPaidAmount)
+        binding.btConfirm.isEnabled = thisPaidAmount > 0
     }
 
 }

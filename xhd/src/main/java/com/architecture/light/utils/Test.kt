@@ -7,6 +7,6 @@ import com.architecture.light.helper.AmountHelper
  * Describe:
  */
 fun main(args: Array<String>) {
-    val stringCent2Long = AmountHelper.convertAmount("10,001")
+    val stringCent2Long = AmountHelper.formatAmount(0.0)
     println(stringCent2Long)
 }

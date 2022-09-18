@@ -24,22 +24,41 @@ object AmountHelper {
     }
 
     /**
-     * 100 -> 1.00
+     * 100000 -> 1,000.00
      */
     fun formatAmount(amount: Long): String {
         val amountString = amount.toString()
         val bigDecimal = BigDecimal(amountString)
         val decimalHelper = BigDecimal("100")
         val doubleValue = bigDecimal.divide(decimalHelper).toDouble()
-        val decimalFormat = DecimalFormat("#0.00")
+        val decimalFormat = DecimalFormat("###,##0.00")
         return decimalFormat.format(doubleValue)
     }
 
     /**
-     * 1.0 -> 1.00
+     * 100000 -> 1000.00
+     */
+    fun formatAmountNoSymbols(amount: Long): String {
+        val amountString = amount.toString()
+        val bigDecimal = BigDecimal(amountString)
+        val decimalHelper = BigDecimal("100")
+        val doubleValue = bigDecimal.divide(decimalHelper).toDouble()
+        val decimalFormat = DecimalFormat("0.00")
+        return decimalFormat.format(doubleValue)
+    }
+
+    /**
+     * 1000.0 -> 1,000.00
      */
     fun formatAmount(amount: Double): String {
         return formatAmount(yuan2Fen(amount))
+    }
+
+    /**
+     * 1000.0 -> 1000.00
+     */
+    fun formatAmountNoSymbols(amount: Double): String {
+        return formatAmountNoSymbols(yuan2Fen(amount))
     }
 
     /**

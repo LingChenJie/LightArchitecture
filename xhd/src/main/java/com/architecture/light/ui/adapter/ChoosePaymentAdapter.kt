@@ -1,13 +1,14 @@
 package com.architecture.light.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.android.architecture.extension.click
-import com.android.architecture.extension.getColor
 import com.android.architecture.ui.adapter.BaseAdapter
-import com.architecture.light.R
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.databinding.AdapterPaymentListBinding
+import com.architecture.light.helper.AmountHelper
+import com.architecture.light.ui.dialog.AmountModifyDialog
 
 /**
  * File describe:
@@ -16,7 +17,7 @@ import com.architecture.light.databinding.AdapterPaymentListBinding
  * Modify date: 2022/7/31
  * Version: 1
  */
-class ChoosePaymentAdapter :
+class ChoosePaymentAdapter(val context: Context) :
     BaseAdapter<SearchRoomResponse.Data.Fee, AdapterPaymentListBinding>() {
 
     override fun getViewBinding(viewGroup: ViewGroup): AdapterPaymentListBinding {
@@ -36,19 +37,37 @@ class ChoosePaymentAdapter :
         binding.tvNo.text = (position + 1).toString()
         binding.tvPaymentType.text = item.itemType
         binding.tvPaymentName.text = item.itemName
-        binding.tvPaymentTotalName.text = item.amount.toString()
-        binding.tvPaymentNotPaidAmount.text = item.yeAmount.toString()
-        binding.root.setBackgroundColor(
-            if (item.isChecked) getColor(R.color.theme_color) else
-                getColor(com.android.architecture.R.color.transparent)
-        )
-        binding.tvPaymentModify.click {
-
+        binding.tvPaymentTotalName.text = AmountHelper.formatAmount(item.amount)
+        binding.tvPaymentNotPaidAmount.text = AmountHelper.formatAmount(item.paymentAmount)
+        binding.layoutItem.isSelected = item.isChecked
+        binding.layoutPaymentNotPaidAmount.click {
+            showModifyAmountDialog(item)
         }
-        binding.root.click {
+        binding.layoutItem.click {
             data[position].isChecked = !data[position].isChecked
             notifyDataSetChanged()
-            mOnItemClickListener?.onItemClick(it.id, position, item)
+            itemChangeListener?.change()
         }
+    }
+
+    private fun showModifyAmountDialog(item: SearchRoomResponse.Data.Fee) {
+        AmountModifyDialog.Builder(context)
+            .setAmount(item.paymentAmount, item.yeAmount)
+            .setClickConfirmListener { _, amount ->
+                item.paymentAmount = amount
+                notifyDataSetChanged()
+                itemChangeListener?.change()
+            }
+            .show()
+    }
+
+    private var itemChangeListener: ItemChangeListener? = null
+
+    fun setItemChangeListener(listener: ItemChangeListener) {
+        itemChangeListener = listener
+    }
+
+    interface ItemChangeListener {
+        fun change()
     }
 }

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <com.architecture.light.ui.view.AppTitleView
@@ -10,108 +11,97 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
         android:background="@drawable/title_view_bg"
-        app:title_text="@string/login_project_choose" />
+        app:title_text="@string/payment_select_query_method_title" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_27"
         android:orientation="vertical"
-        android:padding="@dimen/dp_10">
-
+        android:paddingStart="@dimen/dp_25"
+        android:paddingEnd="@dimen/dp_27">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_25"
-            android:text="@string/payment_select_query_method" />
+            android:text="@string/payment_select_query_method"
+            android:textColor="#162234"
+            android:textSize="@dimen/sp_13"
+            android:textStyle="bold" />
 
-        <LinearLayout
+        <com.hjq.shape.layout.ShapeLinearLayout
+            android:id="@+id/layout_idcard_query"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_25"
-            android:orientation="horizontal">
+            android:layout_height="@dimen/dp_87"
+            android:layout_marginTop="@dimen/dp_17"
+            android:gravity="center"
+            app:shape_radius="@dimen/dp_5"
+            app:shape_solidColor="#DFF6FF">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layout_idcard_query"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp_100"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+            <com.android.architecture.ui.widget.view.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/icon_payment_idcard"
+                android:drawablePadding="@dimen/dp_122"
+                android:gravity="center"
+                android:text="@string/payment_select_query_method_idcard"
+                android:textColor="#162234"
+                android:textSize="@dimen/sp_13"
+                android:textStyle="bold"
+                app:drawableHeight="@dimen/dp_38"
+                app:drawableWidth="@dimen/dp_38" />
 
-                <ImageView
-                    android:layout_width="@dimen/dp_50"
-                    android:layout_height="@dimen/dp_50"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/icon_avatar" />
+        </com.hjq.shape.layout.ShapeLinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_5"
-                    android:text="@string/payment_select_query_method_idcard" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layout_phone_query"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp_100"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/dp_50"
-                    android:layout_height="@dimen/dp_50"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/icon_avatar" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_5"
-                    android:text="@string/payment_select_query_method_phone" />
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-        </LinearLayout>
-
-        <LinearLayout
+        <com.hjq.shape.layout.ShapeLinearLayout
+            android:id="@+id/layout_phone_query"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_5"
-            android:orientation="horizontal">
+            android:layout_height="@dimen/dp_87"
+            android:layout_marginTop="@dimen/dp_17"
+            android:gravity="center"
+            app:shape_radius="@dimen/dp_5"
+            app:shape_solidColor="#DFF6FF">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:id="@+id/layout_roominfo_query"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp_100"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+            <com.android.architecture.ui.widget.view.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/icon_payment_phone"
+                android:drawablePadding="@dimen/dp_122"
+                android:gravity="center"
+                android:text="@string/payment_select_query_method_phone"
+                android:textColor="#162234"
+                android:textSize="@dimen/sp_13"
+                android:textStyle="bold"
+                app:drawableHeight="@dimen/dp_38"
+                app:drawableWidth="@dimen/dp_38" />
 
-                <ImageView
-                    android:layout_width="@dimen/dp_50"
-                    android:layout_height="@dimen/dp_50"
-                    android:contentDescription="@string/app_name"
-                    android:src="@drawable/icon_avatar" />
+        </com.hjq.shape.layout.ShapeLinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp_5"
-                    android:text="@string/payment_select_query_method_roominfo" />
+        <com.hjq.shape.layout.ShapeLinearLayout
+            android:id="@+id/layout_roomnum_query"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_87"
+            android:layout_marginTop="@dimen/dp_17"
+            android:gravity="center"
+            app:shape_radius="@dimen/dp_5"
+            app:shape_solidColor="#DFF6FF">
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
+            <com.android.architecture.ui.widget.view.DrawableTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/icon_payment_roomnum"
+                android:drawablePadding="@dimen/dp_122"
+                android:gravity="center"
+                android:text="@string/payment_select_query_method_roomnum"
+                android:textColor="#162234"
+                android:textSize="@dimen/sp_13"
+                android:textStyle="bold"
+                app:drawableHeight="@dimen/dp_38"
+                app:drawableWidth="@dimen/dp_38" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-        </LinearLayout>
+        </com.hjq.shape.layout.ShapeLinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

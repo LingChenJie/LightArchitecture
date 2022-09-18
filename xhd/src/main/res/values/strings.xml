@@ -48,7 +48,7 @@
     <string name="common_nav_me">我的</string>
 
     <!-- 加载相关 -->
-    <string name="loading_room">查询房间&#8230;</string>
+    <string name="loading_room">房间交易信息查询中&#8230;</string>
     <string name="loading_bill">账单数据拉取中&#8230;</string>
     <string name="loading_print">打印数据生成中&#8230;</string>
 
@@ -78,13 +78,55 @@
     <string name="payment_select_query_method">请选择查询方式</string>
     <string name="payment_select_query_method_idcard">身份证号查询</string>
     <string name="payment_select_query_method_phone">电话号码查询</string>
-    <string name="payment_select_query_method_roominfo">房间名称查询</string>
+    <string name="payment_select_query_method_roomnum">房间号码查询</string>
     <string name="payment_payment_id_card_induction_area">请将二代身份证放置身份证感应区</string>
     <string name="payment_please_input_tel">请输入手机号码</string>
     <string name="payment_please_input_room_info">请输入房间信息</string>
     <string name="payment_bankcard">银行卡</string>
     <string name="payment_wechat">微信</string>
     <string name="payment_alipay">支付宝</string>
+    <string name="payment_phone_num">电话号码：</string>
+    <string name="payment_room_num">房间号码：</string>
+    <string name="payment_select_room">选择缴费房间</string>
+    <string name="payment_select_room_please">请选择缴费房间：</string>
+    <string name="payment_select_payment">选择缴费款项</string>
+    <string name="payment_select_payment_please">请选择缴费款项：</string>
+    <string name="room_custom_name">客户名称：</string>
+    <string name="room_custom_phone">客户电话：</string>
+    <string name="room_custom_card_id">客户身份证号：</string>
+    <string name="room_name">房间名称：</string>
+    <string name="payment_title_no">序号</string>
+    <string name="payment_title_type">款项类型</string>
+    <string name="payment_title_name">款项名称</string>
+    <string name="payment_title_total_amount">款项总额</string>
+    <string name="payment_title_not_paid_amount">未缴总额</string>
+    <string name="payment_title_modify">修改</string>
+    <string name="modify_amount">修改金额</string>
+    <string name="room_total_amount_payment">房间款项总额：</string>
+    <string name="room_total_amount_paid">已缴总额：</string>
+    <string name="room_total_amount_unpaid">应缴总额：</string>
+    <string name="room_total_amount_payable_this_time">本次应缴：</string>
+    <string name="payment_method_choice">缴款</string>
+    <string name="payment_amount">缴款金额</string>
+    <string name="room_total_amount_this_time">本次缴纳金额：</string>
+    <string name="payment_choose_payment_method_please">请选择支付方式</string>
+    <string name="payment_choose_payment_select_bank_account_please">请选择入账账号</string>
+    <string name="payment_choose_select">请选择</string>
+    <string name="payment_account_name">名称：</string>
+    <string name="payment_account_value">账户：</string>
+    <string name="payment_confirm">确认缴款</string>
+    <string name="payment_result">支付结果</string>
+    <string name="payment_result_success">缴费成功</string>
+    <string name="payment_result_fail">缴费失败</string>
+    <string name="payment_result_this_payment_amount">本次缴纳金额：</string>
+    <string name="payment_result_payment_method">支付方式：</string>
+    <string name="payment_result_bank_name">入账名称：</string>
+    <string name="payment_result_bank_account">入账账户：</string>
+    <string name="payment_result_exit">退出</string>
+    <string name="payment_result_repay">重新收款</string>
+    <string name="payment_result_synch">重新同步</string>
+    <string name="payment_result_query">重新查询</string>
+
 
     <!-- 数字键盘 -->
     <string name="_0">0</string>
@@ -124,17 +166,8 @@
     <string name="print_bill_first_union">第一联</string>
     <string name="print_bill_second_union">第二联</string>
     <string name="print_bill_third_union">第三联</string>
-    <string name="room_custom_name">客户名称：</string>
-    <string name="room_custom_phone">客户电话：</string>
-    <string name="room_custom_card_id">客户身份证号：</string>
-    <string name="room_name">房间名称：</string>
-    <string name="payment_title_no">序号</string>
-    <string name="payment_title_type">款项类型</string>
-    <string name="payment_title_name">款项名称</string>
-    <string name="payment_title_total_amount">款项总额</string>
-    <string name="payment_title_not_paid_amount">未缴总额</string>
-    <string name="payment_title_modify">修改</string>
-    <string name="modify_amount">修改金额</string>
+    <string name="amount_symbol">￥</string>
+    <string name="_0_00">0.00</string>
 
 
 </resources>

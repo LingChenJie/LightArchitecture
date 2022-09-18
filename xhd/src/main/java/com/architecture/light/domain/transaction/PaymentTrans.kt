@@ -172,6 +172,8 @@ class PaymentTrans : BaseTransaction() {
             State.CHOOSE_PAYMENT -> {
                 if (code == ErrorCode.SUCCESS) {
                     val paymentInfo = data as ActionChoosePayment.PaymentInfo
+                    transData.totalAmount = paymentInfo.totalAmount
+                    transData.unpaidAmount = paymentInfo.unpaidAmount
                     transData.amount = paymentInfo.amount
                     transData.searchRoomResponse = paymentInfo.searchRoomResponse
                     gotoState(State.CHOOSE_PAYMENT_METHOD.name)

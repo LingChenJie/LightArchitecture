@@ -31,7 +31,9 @@ data class TransData(
     var tel: String? = "",
     var roomInfo: String? = "",
 
-    var amount: Long = 0,
+    var totalAmount: Double = 0.0,
+    var unpaidAmount: Double = 0.0,
+    var amount: Double = 0.0,
     var bankAccount: String = "",
     var bankName: String = "",
     var orderNumber: String = "",
