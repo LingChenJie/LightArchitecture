@@ -28,7 +28,7 @@
             android:value="true" />
 
         <activity
-            android:name="com.architecture.light.ui.page.activity.MainActivity"
+            android:name=".ui.page.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,6 +38,19 @@
         </activity>
         <activity android:name=".ui.page.activity.MviActivity" />
         <activity android:name=".ui.page.activity.CommonActivity" />
+        <activity
+            android:name=".ui.page.activity.AccountManageActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
+        <activity
+            android:name=".ui.page.activity.ChooseProjectActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
+        <activity
+            android:name=".ui.page.activity.ConnectSetActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade"
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".domain.transaction.action.activity.InputLoginInfoActivity"
             android:launchMode="singleTask"

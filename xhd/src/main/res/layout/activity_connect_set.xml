@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <com.architecture.light.ui.view.AppTitleView
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_40"
+        android:background="@drawable/title_view_bg"
+        app:title_text="@string/account_manage_connect_set" />
+
+
+    <com.hjq.shape.layout.ShapeLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_25"
+        android:layout_marginTop="@dimen/dp_30"
+        android:layout_marginEnd="@dimen/dp_25"
+        android:orientation="vertical"
+        app:shape_radius="@dimen/dp_5"
+        app:shape_strokeColor="@color/theme_color"
+        app:shape_strokeWidth="@dimen/dp_1">
+
+        <LinearLayout
+            android:id="@+id/layout_wifi_set"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="@dimen/dp_33"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dp_7"
+                android:text="@string/account_manage_connect_wifi"
+                android:textColor="#414B5A"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_9"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/dp_7"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/icon_select_down" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_bill_recipient_modify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginBottom="@dimen/dp_14">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dp_15"
+                android:text="@string/account_manage_connect_wifi_ip"
+                android:textColor="#414B5A"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_17"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_ip"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:textSize="@dimen/sp_11"
+                    tools:text="192.168.1.199" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_0_5"
+                    android:background="#0061A7" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/dp_15"
+                android:text="@string/account_manage_connect_wifi_port"
+                android:textColor="#414B5A"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_17"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/et_port"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:textSize="@dimen/sp_11"
+                    tools:text="8080" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_0_5"
+                    android:background="#0061A7" />
+
+            </LinearLayout>
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/bt_confirm_wifi"
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_20"
+                android:layout_marginStart="@dimen/dp_20"
+                android:layout_marginEnd="@dimen/dp_20"
+                android:gravity="center"
+                android:text="@string/common_confirm"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_11"
+                app:shape_radius="@dimen/dp_3"
+                app:shape_solidColor="@color/theme_color"
+                app:shape_solidDisabledColor="@color/theme_color_50"
+                app:shape_textPressedColor="@color/theme_color_50" />
+
+        </LinearLayout>
+
+    </com.hjq.shape.layout.ShapeLinearLayout>
+
+</LinearLayout>

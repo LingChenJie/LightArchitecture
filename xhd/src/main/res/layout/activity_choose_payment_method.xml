@@ -332,7 +332,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/dp_13"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/icon_select_tri" />
+                android:src="@drawable/icon_select_down" />
 
         </com.hjq.shape.layout.ShapeRelativeLayout>
 

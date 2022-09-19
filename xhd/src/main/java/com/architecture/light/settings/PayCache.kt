@@ -56,6 +56,13 @@ object PayCache {
         return saveBean()
     }
 
+    fun getPort() = bean.port
+
+    fun savePort(port: String): Boolean {
+        bean.port = port
+        return saveBean()
+    }
+
     fun getComNo() = bean.comNo
 
     fun saveComNo(comNo: String): Boolean {

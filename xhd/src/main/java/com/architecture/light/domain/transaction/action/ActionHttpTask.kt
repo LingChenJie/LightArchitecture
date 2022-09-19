@@ -12,6 +12,7 @@ import com.architecture.light.R
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.model.db.entity.TransData
+import com.architecture.light.domain.task.LogonTask
 import com.architecture.light.domain.task.SearchBillTask
 import com.architecture.light.domain.task.SearchRoomTask
 import kotlinx.coroutines.*
@@ -66,6 +67,7 @@ class ActionHttpTask(listener: ActionStartListener) : AAction(listener) {
     private fun showLoading() {
         activity?.let {
             val message = when (task) {
+                is LogonTask -> getString(R.string.loading_login)
                 is SearchRoomTask -> getString(R.string.loading_room_query)
                 is SearchBillTask -> getString(R.string.loading_bill_query)
                 else -> getString(R.string.common_loading)

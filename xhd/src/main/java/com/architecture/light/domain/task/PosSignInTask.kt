@@ -7,7 +7,7 @@ import com.chinaums.mis.bean.RequestPojo
  * Created by SuQi on 2022/9/1.
  * Describe:
  */
-class BankSignInTask : PayTask() {
+class PosSignInTask : PayTask() {
 
     override fun onAssembly(): RequestPojo {
         val request = RequestPojo()

@@ -10,6 +10,7 @@ package com.architecture.light.settings.bean
 data class PayBean(
     var posConnMode: Int = 1,
     var ip: String = "",
+    var port: String = "",
     var comNo: String = "",
     var boundNo: Int = 9600,
 )

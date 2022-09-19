@@ -21,7 +21,7 @@
     <color name="teal_700">#FF018786</color>
 
     <color name="common_line_color">#ECECEC</color>
-    <color name="common_confirm_text_color">#1B1A1A</color>
+    <color name="common_confirm_text_color">#4B4746</color>
     <color name="common_cancel_text_color">#4B4746</color>
     <color name="common_button_default_color">@color/theme_color</color>
     <color name="common_button_pressed_color">@color/theme_color_50</color>

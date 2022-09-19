@@ -8,11 +8,11 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_196">
+        android:layout_height="@dimen/dp_209">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_145"
+            android:layout_height="@dimen/dp_158"
             android:background="@drawable/title_view_bg"
             android:contentDescription="@string/app_name" />
 
@@ -20,9 +20,19 @@
             android:layout_width="@dimen/dp_103"
             android:layout_height="@dimen/dp_29"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_21"
             android:contentDescription="@string/app_name"
             android:src="@drawable/icon_main_logo" />
+
+        <ImageView
+            android:id="@+id/iv_user_avatar"
+            android:layout_width="@dimen/dp_20"
+            android:layout_height="@dimen/dp_20"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/dp_25"
+            android:layout_marginEnd="@dimen/dp_17"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icon_main_user_avatar" />
 
         <cn.bingoogolapple.bgabanner.BGABanner
             android:id="@+id/banner"
@@ -30,7 +40,7 @@
             android:layout_height="@dimen/dp_143"
             android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/dp_17"
-            android:layout_marginTop="@dimen/dp_62"
+            android:layout_marginTop="@dimen/dp_75"
             android:layout_marginEnd="@dimen/dp_17"
             app:banner_pageChangeDuration="2000"
             app:banner_pointAutoPlayAble="true"

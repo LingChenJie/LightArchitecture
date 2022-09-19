@@ -48,6 +48,7 @@
     <string name="common_nav_me">我的</string>
 
     <!-- 加载相关 -->
+    <string name="loading_login">登录中&#8230;</string>
     <string name="loading_room_query">房间交易信息查询中&#8230;</string>
     <string name="loading_bill_query">账单数据拉取中&#8230;</string>
     <string name="loading_pay_request">支付请求中&#8230;</string>
@@ -75,6 +76,20 @@
     <string name="main_payment_synchronize">缴款信息同步</string>
     <string name="main_void_synchronize">撤销信息同步</string>
     <string name="main_print">打印交易信息</string>
+
+    <!-- 账户管理 -->
+    <string name="account_manage">账户管理</string>
+    <string name="account_manage_username">用户名：</string>
+    <string name="account_manage_userguid">用户GUID：</string>
+    <string name="account_manage_project">项目</string>
+    <string name="account_manage_bill_recipient">票据领用人</string>
+    <string name="account_manage_bill_recipient_modify">修改票据领用人：</string>
+    <string name="account_manage_connect_set">连接设置</string>
+    <string name="account_manage_connect_modify_manage_pwd">修改主管密码</string>
+    <string name="account_manage_logout_current_account">退出当前账户</string>
+    <string name="account_manage_connect_wifi">WIFI通讯</string>
+    <string name="account_manage_connect_wifi_ip">IP：</string>
+    <string name="account_manage_connect_wifi_port">端口：</string>
 
     <!-- Payment相关 -->
     <string name="payment_select_query_method_title">查询缴款</string>

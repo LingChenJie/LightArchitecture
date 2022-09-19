@@ -5,6 +5,7 @@ import android.widget.ImageView
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.TransactionConstant
 import com.android.architecture.extension.click
+import com.android.architecture.extension.openActivity
 import com.android.architecture.helper.Logger
 import com.architecture.light.R
 import com.architecture.light.app.AppActivity
@@ -39,6 +40,9 @@ class MainActivity : AppActivity() {
 
     override fun initView() {
         setContentView(binding.root)
+        binding.ivUserAvatar.click {
+            openActivity<AccountManageActivity>()
+        }
         binding.cvPayment.click {
             PaymentTrans().execute()
         }
