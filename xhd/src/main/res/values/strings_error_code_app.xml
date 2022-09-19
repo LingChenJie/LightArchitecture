@@ -2,9 +2,12 @@
 <resources>
     <string name="error_code_back_to_previous_page">返回上一个页面</string>
     <string name="error_code_back_to_main_page">回到主页</string>
+    <string name="error_code_back_to_choose_room_page">回到选择房间页面</string>
     <string name="error_code_exit_app">退出程序</string>
     <string name="error_code_exit_login">退出登录</string>
     <string name="error_code_task_timeout">任务超时</string>
+    <string name="error_code_pay_result_query">支付结果查询</string>
+    <string name="error_code_pay_result_notify">支付结果同步</string>
     <string name="error_code_pay_data_error">支付数据解析错误</string>
     <string name="error_code_printer_not_found">打印机未找到，请检查后重试</string>
     <string name="error_code_print_exception">打印异常，请重试</string>

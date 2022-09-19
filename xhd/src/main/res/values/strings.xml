@@ -48,9 +48,12 @@
     <string name="common_nav_me">我的</string>
 
     <!-- 加载相关 -->
-    <string name="loading_room">房间交易信息查询中&#8230;</string>
-    <string name="loading_bill">账单数据拉取中&#8230;</string>
-    <string name="loading_print">打印数据生成中&#8230;</string>
+    <string name="loading_room_query">房间交易信息查询中&#8230;</string>
+    <string name="loading_bill_query">账单数据拉取中&#8230;</string>
+    <string name="loading_pay_request">支付请求中&#8230;</string>
+    <string name="loading_void_request">撤销请求中&#8230;</string>
+    <string name="loading_pay_query">交易查询中&#8230;</string>
+    <string name="loading_print_bill">打印数据生成中&#8230;</string>
 
     <!-- Login相关 -->
     <string name="login_username">用户名</string>

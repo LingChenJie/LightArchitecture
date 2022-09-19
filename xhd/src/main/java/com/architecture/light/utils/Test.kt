@@ -7,6 +7,8 @@ import com.architecture.light.helper.AmountHelper
  * Describe:
  */
 fun main(args: Array<String>) {
-    val stringCent2Long = AmountHelper.formatAmount(0.0)
-    println(stringCent2Long)
+//    val stringCent2Long = AmountHelper.formatAmount(AmountHelper.convertAmount("1,010,000.0"))
+//    println(stringCent2Long)
+    val yuan2Fen12 = AmountHelper.yuan2Fen12(1.100001)
+    println(yuan2Fen12)
 }

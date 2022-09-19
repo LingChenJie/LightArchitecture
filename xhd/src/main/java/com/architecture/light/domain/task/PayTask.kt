@@ -2,10 +2,12 @@ package com.architecture.light.domain.task
 
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.task.BaseTask
+import com.android.architecture.helper.JsonHelper
 import com.android.architecture.helper.Logger
 import com.android.architecture.utils.NetworkUtils
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.model.db.entity.TransData
+import com.architecture.light.data.pay.bean.TransMemo
 import com.architecture.light.settings.PayCache
 import com.chinaums.mis.bank.BankDAO
 import com.chinaums.mis.bean.RequestPojo
@@ -34,7 +36,7 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
 
     abstract fun onAssembly(): RequestPojo?
 
-    abstract fun onPostExecute(response: ResponsePojo)
+    abstract fun onPostExecute(payData: TransMemo.PayData)
 
     override fun onExecute() {
         val requestBean = onAssembly()
@@ -52,7 +54,7 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
                 }
                 val response = bankDAO.bankall(transCfx, requestBean)
                 Logger.d("PayTask", response.toString())
-                onPostExecute(response)
+                analysisResponse(response)
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -60,6 +62,27 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
                 return
 
             }
+        }
+    }
+
+    private fun analysisResponse(response: ResponsePojo) {
+        if (response.rspCode == "00") {
+            val transMemo = JsonHelper.toBean<TransMemo>(response.transMemo)
+            if (transMemo.resultCode == "0") {
+                val payData = transMemo.transData
+                if (payData.resCode == "00") {
+                    onPostExecute(payData)
+                } else {
+                    param.responseCode = payData.resCode
+                    param.responseMessage = payData.resDesc
+                }
+            } else {
+                param.responseCode = transMemo.resultCode
+                param.responseMessage = transMemo.resultMsg
+            }
+        } else {
+            param.responseCode = response.rspCode
+            param.responseMessage = response.rspChin
         }
     }
 

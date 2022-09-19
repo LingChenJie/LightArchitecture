@@ -1,7 +1,7 @@
 package com.architecture.light.domain.task
 
+import com.architecture.light.data.pay.bean.TransMemo
 import com.chinaums.mis.bean.RequestPojo
-import com.chinaums.mis.bean.ResponsePojo
 
 /**
  * Created by SuQi on 2022/9/1.
@@ -16,7 +16,7 @@ class BankSignInTask : PayTask() {
         return request
     }
 
-    override fun onPostExecute(response: ResponsePojo) {
+    override fun onPostExecute(payData: TransMemo.PayData) {
 
     }
 

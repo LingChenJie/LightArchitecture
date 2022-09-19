@@ -32,7 +32,7 @@ class ActionHttpTask(listener: ActionStartListener) : AAction(listener) {
         task: ITask<TransData, TransData>,
         transData: TransData,
         activity: BaseActivity?,
-        delayRequestTime: Long = 0
+        delayRequestTime: Long = 500
     ) {
         this.task = task
         this.transData = transData
@@ -66,8 +66,8 @@ class ActionHttpTask(listener: ActionStartListener) : AAction(listener) {
     private fun showLoading() {
         activity?.let {
             val message = when (task) {
-                is SearchRoomTask -> getString(R.string.loading_room)
-                is SearchBillTask -> getString(R.string.loading_bill)
+                is SearchRoomTask -> getString(R.string.loading_room_query)
+                is SearchBillTask -> getString(R.string.loading_bill_query)
                 else -> getString(R.string.common_loading)
             }
             if (it is AppActivityForAction) it.showLoading(message)

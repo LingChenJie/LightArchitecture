@@ -4,6 +4,7 @@ import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.valid
 import com.architecture.light.app.AppActivityForAction
+import com.architecture.light.constant.Constant
 import com.architecture.light.databinding.ActivityInputTelBinding
 import com.architecture.light.domain.transaction.action.ActionInputTel
 import com.architecture.light.ui.view.NumberKeyboardView
@@ -33,6 +34,9 @@ class InputTelActivity : AppActivityForAction() {
                 clickConfirm()
             }
         })
+        if (Constant.IS_DEBUG) {
+            binding.etTel.setText("15212568170")
+        }
         notifyConfirmEnabled()
     }
 

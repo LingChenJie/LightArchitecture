@@ -1,7 +1,7 @@
 package com.architecture.light.domain.task
 
+import com.architecture.light.data.pay.bean.TransMemo
 import com.chinaums.mis.bean.RequestPojo
-import com.chinaums.mis.bean.ResponsePojo
 import org.json.JSONObject
 
 /**
@@ -17,8 +17,9 @@ class PayQueryTask : PayTask() {
         return request
     }
 
-    override fun onPostExecute(response: ResponsePojo) {
-
+    override fun onPostExecute(payData: TransMemo.PayData) {
+        response.payData = payData
+        response.voucherNumber = payData.traceNo
     }
 
     private fun getTransMemo(): String {

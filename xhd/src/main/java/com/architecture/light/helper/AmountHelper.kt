@@ -24,6 +24,13 @@ object AmountHelper {
     }
 
     /**
+     * 1.1 -> 000000000110
+     */
+    fun yuan2Fen12(yuan: Double): String {
+        return String.format("%012d", yuan2Fen(yuan))
+    }
+
+    /**
      * 100000 -> 1,000.00
      */
     fun formatAmount(amount: Long): String {

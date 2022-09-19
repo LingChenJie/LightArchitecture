@@ -4,9 +4,12 @@ import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.task.ITask
 import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.domain.transaction.ActionResult
+import com.android.architecture.extension.getString
 import com.android.architecture.ui.page.BaseActivity
+import com.architecture.light.R
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.data.model.db.entity.TransData
+import com.architecture.light.domain.task.*
 import kotlinx.coroutines.*
 
 class ActionPayTask(listener: ActionStartListener) : AAction(listener) {
@@ -47,7 +50,15 @@ class ActionPayTask(listener: ActionStartListener) : AAction(listener) {
 
     private fun showLoading() {
         activity?.let {
-            if (it is AppActivityForAction) it.showLoading()
+            val message = when (task) {
+                is BankPayTask -> getString(R.string.loading_pay_request)
+                is CodePayTask -> getString(R.string.loading_pay_request)
+                is BankVoidTask -> getString(R.string.loading_void_request)
+                is CodeVoidTask -> getString(R.string.loading_void_request)
+                is PayQueryTask -> getString(R.string.loading_pay_query)
+                else -> getString(R.string.common_loading)
+            }
+            if (it is AppActivityForAction) it.showLoading(message)
         }
     }
 

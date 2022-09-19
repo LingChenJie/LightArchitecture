@@ -49,7 +49,7 @@ class ActionPrintTask(listener: ActionStartListener) : AAction(listener) {
 
     private fun showLoading() {
         activity?.let {
-            if (it is AppActivityForAction) it.showLoading(getString(R.string.loading_print))
+            if (it is AppActivityForAction) it.showLoading(getString(R.string.loading_print_bill))
         }
     }
 

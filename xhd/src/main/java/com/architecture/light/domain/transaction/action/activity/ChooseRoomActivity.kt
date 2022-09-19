@@ -29,8 +29,9 @@ class ChooseRoomActivity : AppActivityForAction() {
         val transData = intent.getSerializableExtra(UIParams.TRANS_DATA) as TransData
         val data = transData.searchRoomResponse!!.data
         adapter.setData(data)
-        adapter.setItemClickListener { viewId, position, item ->
-            val room = ActionChooseRoom.Room(transData.searchRoomResponse!!)
+        adapter.setItemClickListener { _, _, item ->
+            val room =
+                ActionChooseRoom.Room(item.roomGUID, item.cstName, transData.searchRoomResponse!!)
             finish(ActionResult(ErrorCode.SUCCESS, room))
         }
         binding.recyclerView.adapter = adapter

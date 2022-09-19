@@ -2,6 +2,7 @@ package com.architecture.light.domain.transaction
 
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
+import com.android.architecture.helper.DateHelper
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.Constant
 import com.architecture.light.constant.TransactionPlatform
@@ -74,7 +75,7 @@ class PaymentTrans : BaseTransaction() {
         }
         bind(State.PAY_QUERY_TASK.name, actionQueryPayTask)
         val actionShowPayResult = ActionShowPayResult {
-            (it as ActionShowPayResult).setParam(currentActivity)
+            (it as ActionShowPayResult).setParam(actionResult!!, transData, currentActivity)
         }
         bind(State.SHOW_PAY_RESULT.name, actionShowPayResult)
         val actionSearchBillTask = ActionHttpTask {
@@ -88,7 +89,10 @@ class PaymentTrans : BaseTransaction() {
         gotoState(State.SELECT_QUERY_METHOD.name)
     }
 
+    private var actionResult: ActionResult? = null
+
     override fun onActionResult(state: String, result: ActionResult) {
+        this.actionResult = result
         val currentState = State.valueOf(state)
         val code = result.code
         val data = result.data
@@ -163,6 +167,8 @@ class PaymentTrans : BaseTransaction() {
             State.CHOOSE_ROOM -> {
                 if (code == ErrorCode.SUCCESS) {
                     val room = data as ActionChooseRoom.Room
+                    transData.roomGUID = room.roomGUID
+                    transData.cstName = room.cstName
                     transData.searchRoomResponse = room.searchRoomResponse
                     gotoState(State.CHOOSE_PAYMENT.name)
                 } else {
@@ -187,6 +193,8 @@ class PaymentTrans : BaseTransaction() {
                     transData.transactionPlatform = paymentMethodInfo.transactionPlatform
                     transData.bankAccount = paymentMethodInfo.bankAccount
                     transData.bankName = paymentMethodInfo.bankName
+                    transData.transactionDate =
+                        DateHelper.getCurrentDateFormatString("yyyyMMddHHmmss")
                     if (transData.transactionPlatform == TransactionPlatform.Bank) {
                         gotoState(State.BANK_PAY_TASK.name)
                     } else {
@@ -206,10 +214,22 @@ class PaymentTrans : BaseTransaction() {
                 gotoState(State.SHOW_PAY_RESULT.name)
             }
             State.SHOW_PAY_RESULT -> {
-                if (code == ErrorCode.SUCCESS) {
+                when (code) {
+                    ErrorCode.SUCCESS -> {
 
-                } else {
+                    }
+                    AppErrorCode.PAY_RESULT_QUERY -> {
 
+                    }
+                    AppErrorCode.PAY_RESULT_NOTIFY -> {
+
+                    }
+                    AppErrorCode.BACK_TO_CHOOSE_ROOM_PAGE -> {
+
+                    }
+                    else -> {
+
+                    }
                 }
             }
             State.SEARCH_BILL_TASK -> {

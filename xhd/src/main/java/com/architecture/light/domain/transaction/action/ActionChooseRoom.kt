@@ -35,6 +35,10 @@ class ActionChooseRoom(listener: ActionStartListener) : AAction(listener) {
         activity = null
     }
 
-    data class Room(val searchRoomResponse: SearchRoomResponse)
+    data class Room(
+        val roomGUID: String,
+        val cstName: String,
+        val searchRoomResponse: SearchRoomResponse
+    )
 
 }

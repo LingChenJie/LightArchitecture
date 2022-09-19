@@ -28,7 +28,7 @@ public class NotifyCollectionRequest extends RequestBean {
     public static class Getin {
         private String ItemNameGUID;
         private String ItemName;
-        private String Amount;
+        private double Amount;
         private String FeeGUID;
         private String PosCode;
         private String PosAmount;
@@ -50,11 +50,11 @@ public class NotifyCollectionRequest extends RequestBean {
             ItemName = itemName;
         }
 
-        public String getAmount() {
+        public double getAmount() {
             return Amount;
         }
 
-        public void setAmount(String amount) {
+        public void setAmount(double amount) {
             Amount = amount;
         }
 

@@ -69,6 +69,9 @@ class ChoosePaymentActivity : AppActivityForAction() {
     var thisPaidAmount = 0.0
 
     private fun refreshUI(selectRoom: SearchRoomResponse.Data) {
+        totalAmount = 0.0
+        unPaidAmount = 0.0
+        thisPaidAmount = 0.0
         val feeList = selectRoom.feeList
         for (fee in feeList) {
             if (fee.isChecked) {
