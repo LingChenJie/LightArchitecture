@@ -3,6 +3,7 @@ package com.architecture.light.domain.transaction
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.helper.DateHelper
+import com.android.architecture.helper.RandomHelper
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.Constant
 import com.architecture.light.constant.TransactionPlatform
@@ -193,8 +194,9 @@ class PaymentTrans : BaseTransaction() {
                     transData.transactionPlatform = paymentMethodInfo.transactionPlatform
                     transData.bankAccount = paymentMethodInfo.bankAccount
                     transData.bankName = paymentMethodInfo.bankName
-                    transData.transactionDate =
-                        DateHelper.getCurrentDateFormatString("yyyyMMddHHmmss")
+                    val currentTime = DateHelper.getCurrentDateFormatString("yyyyMMddHHmmss")
+                    transData.orderNumber = currentTime + RandomHelper.getRandomHexString(3)
+                    transData.transactionDate = currentTime
                     if (transData.transactionPlatform == TransactionPlatform.Bank) {
                         gotoState(State.BANK_PAY_TASK.name)
                     } else {

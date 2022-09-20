@@ -85,6 +85,7 @@
     <string name="account_manage_bill_recipient">票据领用人</string>
     <string name="account_manage_bill_recipient_modify">修改票据领用人：</string>
     <string name="account_manage_connect_set">连接设置</string>
+    <string name="account_manage_connect_test">连接测试</string>
     <string name="account_manage_connect_modify_manage_pwd">修改主管密码</string>
     <string name="account_manage_logout_current_account">退出当前账户</string>
     <string name="account_manage_connect_wifi">WIFI通讯</string>

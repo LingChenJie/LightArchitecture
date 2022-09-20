@@ -11,7 +11,7 @@ import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.databinding.ActivityShowPayResultBinding
 import com.architecture.light.domain.transaction.action.UIParams
 import com.architecture.light.helper.AmountHelper
-import com.architecture.light.helper.PayHelper
+import com.architecture.light.helper.TransHelper
 
 /**
  * File describe:
@@ -56,7 +56,7 @@ class ShowPayResultActivity : AppActivityForAction() {
                 binding.tvFailMessage.text = ""
                 binding.tvThisPaymentAmount.text = AmountHelper.formatAmount(payData.amt.toLong())
                 binding.tvPaymentMethod.text =
-                    PayHelper.getTransactionPlatform(transData.transactionPlatform)
+                    TransHelper.getTransactionPlatform(transData.transactionPlatform)
                 binding.tvPaymentBankName.text = transData.bankName
                 binding.tvPaymentBankAccount.text = transData.bankAccount
                 binding.layoutBottomSuccess.visibility = View.VISIBLE

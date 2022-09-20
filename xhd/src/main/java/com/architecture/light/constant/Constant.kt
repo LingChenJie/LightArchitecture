@@ -1,6 +1,7 @@
 package com.architecture.light.constant
 
 import com.android.architecture.constant.LightConstant
+import com.architecture.light.BuildConfig
 import java.io.File
 
 /**
@@ -9,7 +10,7 @@ import java.io.File
  */
 object Constant {
 
-    const val IS_DEBUG = true
+    const val IS_DEBUG = BuildConfig.IS_DEBUG
 
     val ROOT_PATH = LightConstant.SDCARD_PATH + File.separator + "XHD"
     val BILL_PATH = ROOT_PATH + File.separator + "Bill"

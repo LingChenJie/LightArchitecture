@@ -1,5 +1,6 @@
 package com.architecture.light.domain.task
 
+import com.android.architecture.constant.ErrorCode
 import com.architecture.light.data.pay.bean.TransMemo
 import com.chinaums.mis.bean.RequestPojo
 
@@ -17,7 +18,13 @@ class PosSignInTask : PayTask() {
     }
 
     override fun onPostExecute(payData: TransMemo.PayData) {
-
+        if (payData.resCode == "00") {
+            response.responseCode = ErrorCode.SUCCESS
+            response.responseMessage = ErrorCode.getMessage(ErrorCode.SUCCESS)
+        } else {
+            response.responseCode = payData.resCode
+            response.responseMessage = payData.resDesc
+        }
     }
 
     private fun getTransMemo(): String {

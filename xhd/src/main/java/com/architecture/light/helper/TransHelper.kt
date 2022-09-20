@@ -11,7 +11,7 @@ import com.architecture.light.constant.TransactionPlatform
  * Modify date: 9/19/22
  * Version: 1
  */
-object PayHelper {
+object TransHelper {
 
     fun getTransactionPlatform(transactionPlatform: Int): String {
         return when (transactionPlatform) {

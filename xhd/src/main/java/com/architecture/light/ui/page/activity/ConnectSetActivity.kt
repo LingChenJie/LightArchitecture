@@ -1,6 +1,9 @@
 package com.architecture.light.ui.page.activity
 
+import android.view.View
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
+import com.android.architecture.constant.ErrorCode
 import com.android.architecture.data.manage.InputTextManager
 import com.android.architecture.extension.click
 import com.android.architecture.extension.hideKeyboard
@@ -9,8 +12,11 @@ import com.architecture.light.app.AppActivity
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.databinding.ActivityConnectSetBinding
 import com.architecture.light.domain.task.PosSignInTask
+import com.architecture.light.ext.toastSucc
+import com.architecture.light.ext.toastWarn
 import com.architecture.light.settings.PayCache
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 
 /**
@@ -33,13 +39,28 @@ class ConnectSetActivity : AppActivity() {
         binding.titleView.backView.click { finish() }
         binding.etIp.setText(PayCache.getIp())
         binding.etPort.setText(PayCache.getPort())
+        binding.layoutWifiSet.click {
+            if (binding.layoutBillRecipientModify.isVisible) {
+                binding.layoutBillRecipientModify.visibility = View.GONE
+            } else {
+                binding.layoutBillRecipientModify.visibility = View.VISIBLE
+            }
+        }
         binding.btConfirmWifi.click {
             val ip = binding.etIp.text.toString()
             val port = binding.etPort.text.toString()
             if (ip.valid && port.valid) {
                 PayCache.saveIp(ip)
                 PayCache.savePort(port)
+            }
+        }
+        binding.layoutConnectTest.click {
+            val ip = PayCache.getIp()
+            val port = PayCache.getPort()
+            if (ip.valid && port.valid) {
                 signIn()
+            } else {
+                toastWarn("无效的IP和端口")
             }
         }
         InputTextManager.with(this)
@@ -52,8 +73,18 @@ class ConnectSetActivity : AppActivity() {
 
     private fun signIn() {
         lifecycleScope.launchWhenResumed {
-            withContext(Dispatchers.IO) {
+            showLoading("POS签到中...")
+            delay(500)
+            val response = withContext(Dispatchers.IO) {
                 PosSignInTask().execute(TransData())
+            }
+            hideLoading()
+            val code = response.responseCode
+            val message = response.responseMessage
+            if (code == ErrorCode.SUCCESS) {
+                toastSucc("签到成功[$code]")
+            } else {
+                toastWarn("$message[$code]")
             }
         }
     }

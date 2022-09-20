@@ -16,10 +16,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_25"
         android:layout_marginTop="@dimen/dp_30"
-        android:layout_marginEnd="@dimen/dp_10">
+        android:layout_marginEnd="@dimen/dp_10"
+        android:minHeight="@dimen/dp_40">
 
         <ImageView
             android:id="@+id/iv_user_avatar"
@@ -30,7 +31,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_7"
             android:layout_marginTop="@dimen/dp_2"
             android:orientation="vertical">
@@ -80,7 +81,7 @@
                     android:layout_weight="4"
                     android:textColor="#162234"
                     android:textSize="@dimen/sp_11"
-                    tools:text="fjsldafjlsad4358435" />
+                    tools:text="fjsldafjlsad4358fjsld5" />
 
             </LinearLayout>
 

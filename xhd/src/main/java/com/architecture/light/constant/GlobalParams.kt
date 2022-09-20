@@ -1,7 +1,5 @@
 package com.architecture.light.constant
 
-import com.android.architecture.helper.DateHelper
-import com.android.architecture.helper.RandomHelper
 import com.architecture.light.data.model.UserInfoModel
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.data.model.db.entity.UserInfo
@@ -51,8 +49,6 @@ object GlobalParams {
         if (ProjectCache.getProject() != null) {
             transData.projGUID = ProjectCache.getProject()!!.projGUID
         }
-        transData.orderNumber =
-            DateHelper.MMDDYYYY + DateHelper.timeString + RandomHelper.getRandomHexString(3)
         return transData
     }
 

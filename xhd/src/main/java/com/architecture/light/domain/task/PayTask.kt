@@ -8,11 +8,10 @@ import com.android.architecture.utils.NetworkUtils
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.data.pay.bean.TransMemo
+import com.architecture.light.helper.PayRequest
 import com.architecture.light.settings.PayCache
-import com.chinaums.mis.bank.BankDAO
 import com.chinaums.mis.bean.RequestPojo
 import com.chinaums.mis.bean.ResponsePojo
-import com.chinaums.mis.bean.TransCfx
 
 /**
  * Created by SuQi on 2022/8/30.
@@ -20,14 +19,7 @@ import com.chinaums.mis.bean.TransCfx
  */
 abstract class PayTask : BaseTask<TransData, TransData>() {
 
-    private val transCfx = TransCfx()
-    private val bankDAO = BankDAO()
-
     override fun initParams(params: TransData) {
-        transCfx.posConnMode = PayCache.getPosConnMode()
-        transCfx.ip = PayCache.getIp()
-        transCfx.devPath = PayCache.getComNo()
-        transCfx.baudRate = PayCache.getBoundNo()
         response = params
     }
 
@@ -49,10 +41,8 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
             }
 
             try {
-                bankDAO.getCallBack { stateCode, stateTips ->
-                    Logger.d("PayTask", "stateCode:$stateCode; stateTips:$stateTips")
-                }
-                val response = bankDAO.bankall(transCfx, requestBean)
+                requestBean.erpId = param.orderNumber
+                val response = PayRequest().execute(requestBean)
                 Logger.d("PayTask", response.toString())
                 analysisResponse(response)
 
@@ -82,7 +72,7 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
             }
         } else {
             param.responseCode = response.rspCode
-            param.responseMessage = response.rspChin
+            param.responseMessage = response.rspChin.trim()
         }
     }
 
