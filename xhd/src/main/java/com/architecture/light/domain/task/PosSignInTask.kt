@@ -1,5 +1,6 @@
 package com.architecture.light.domain.task
 
+import com.android.architecture.helper.Logger
 import com.architecture.light.data.pay.bean.TransMemo
 import com.chinaums.mis.bean.RequestPojo
 
@@ -17,7 +18,10 @@ class PosSignInTask : PayTask() {
     }
 
     override fun onPostExecute(payData: TransMemo.PayData) {
-
+        Logger.d(
+            "PosSignInTask",
+            "merchantNo:${payData.merchantNo}; terminalNo:${payData.terminalNo}"
+        )
     }
 
     private fun getTransMemo(): String {

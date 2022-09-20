@@ -95,6 +95,14 @@
             android:name=".domain.transaction.action.activity.ShowPayResultActivity"
             android:launchMode="singleTask"
             android:theme="@style/Anim_fade" />
+        <activity
+            android:name=".domain.transaction.action.activity.InputManagePwdActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
+        <activity
+            android:name=".domain.transaction.action.activity.InputVoucherNumberActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
 
 
     </application>
