@@ -23,6 +23,7 @@ public class SearchReserveResponse extends ResponseBean {
         private String BookingGUID;
         private String CardID;
         private String CstGUID;
+        private boolean isChecked;
 
         public String getProjNum() {
             return ProjNum;
@@ -78,6 +79,14 @@ public class SearchReserveResponse extends ResponseBean {
 
         public void setCstGUID(String cstGUID) {
             CstGUID = cstGUID;
+        }
+
+        public boolean isChecked() {
+            return isChecked;
+        }
+
+        public void setChecked(boolean checked) {
+            isChecked = checked;
         }
     }
 

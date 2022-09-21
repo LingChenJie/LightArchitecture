@@ -91,5 +91,84 @@ public class NotifyPrepaidRequest extends RequestBean {
         }
     }
 
+    public String getPosNO() {
+        return PosNO;
+    }
+
+    public void setPosNO(String posNO) {
+        PosNO = posNO;
+    }
+
+    public String getSerialNumber() {
+        return SerialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        SerialNumber = serialNumber;
+    }
+
+    public String getProjGUID() {
+        return ProjGUID;
+    }
+
+    public void setProjGUID(String projGUID) {
+        ProjGUID = projGUID;
+    }
+
+    public String getBookingGUID() {
+        return BookingGUID;
+    }
+
+    public void setBookingGUID(String bookingGUID) {
+        BookingGUID = bookingGUID;
+    }
+
+    public String getLyrCode() {
+        return LyrCode;
+    }
+
+    public void setLyrCode(String lyrCode) {
+        LyrCode = lyrCode;
+    }
+
+    public String getSkDate() {
+        return SkDate;
+    }
+
+    public void setSkDate(String skDate) {
+        SkDate = skDate;
+    }
+
+    public String getKpr() {
+        return kpr;
+    }
+
+    public void setKpr(String kpr) {
+        this.kpr = kpr;
+    }
+
+    public String getJkr() {
+        return Jkr;
+    }
+
+    public void setJkr(String jkr) {
+        Jkr = jkr;
+    }
+
+    public List<Getin> getGetinList() {
+        return GetinList;
+    }
+
+    public void setGetinList(List<Getin> getinList) {
+        GetinList = getinList;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 }
 

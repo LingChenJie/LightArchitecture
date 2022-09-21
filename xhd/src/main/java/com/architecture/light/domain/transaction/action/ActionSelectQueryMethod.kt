@@ -17,13 +17,24 @@ import com.architecture.light.domain.transaction.action.activity.SelectQueryMeth
 class ActionSelectQueryMethod(listener: ActionStartListener) : AAction(listener) {
 
     private var activity: BaseActivity? = null
+    private var queryMethodArray: Array<String>? = null
 
-    fun setParam(activity: BaseActivity?) {
+    fun setParam(
+        activity: BaseActivity?,
+        queryMethodArray: Array<String> = arrayOf(
+            QueryMethod.IdCard.toString(),
+            QueryMethod.Tel.toString(),
+            QueryMethod.RoomInfo.toString()
+        )
+    ) {
         this.activity = activity
+        this.queryMethodArray = queryMethodArray
     }
 
     override fun onExecute() {
-        activity!!.openActivity<SelectQueryMethodActivity>()
+        activity!!.openActivity<SelectQueryMethodActivity> {
+            putExtra(UIParams.QUERY_METHOD_ARRAY, queryMethodArray)
+        }
     }
 
     override fun onClear() {

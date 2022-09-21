@@ -4,6 +4,8 @@ import com.android.architecture.helper.JsonHelper
 import com.architecture.light.data.remote.bean.NotifyCollectionResponse
 import com.architecture.light.data.remote.bean.NotifyPrepaidRequest
 import com.architecture.light.data.remote.bean.base.RequestBean
+import com.architecture.light.settings.AccountCache
+import com.architecture.light.utils.DeviceUtils
 
 /**
  * Created by SuQi on 2022/9/1.
@@ -13,7 +15,13 @@ class NotifyPrepaidTask : HttpTask() {
 
     override fun onAssembly(): RequestBean {
         val request = NotifyPrepaidRequest()
-
+        request.posNO = DeviceUtils.getDeviceSN()
+        request.serialNumber = param.voucherNumber
+        request.projGUID = param.projGUID
+        request.lyrCode = AccountCache.getBillRecipient()
+        request.skDate = param.transactionDate
+        request.kpr = AccountCache.getAccount()
+        request.jkr = param.cstName
         return request
     }
 

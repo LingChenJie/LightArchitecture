@@ -11,4 +11,6 @@ object UIParams {
     const val TRANS_DATA = "TRANS_DATA"
     const val ACTION_RESULT = "ACTION_RESULT"
     const val ID_CARD_INFO = "ID_CARD_INFO"
+    const val QUERY_METHOD_ARRAY = "QUERY_METHOD_ARRAY"
+    const val SHOW_UNPAID_AMOUNT = "SHOW_UNPAID_AMOUNT"
 }

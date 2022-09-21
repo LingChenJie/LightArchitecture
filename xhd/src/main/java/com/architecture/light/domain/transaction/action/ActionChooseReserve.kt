@@ -4,7 +4,10 @@ import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.extension.openActivity
 import com.android.architecture.ui.page.BaseActivity
 import com.architecture.light.data.model.db.entity.TransData
-import com.architecture.light.domain.transaction.action.activity.ChoosePaymentMethodActivity
+import com.architecture.light.data.remote.bean.SearchReserveResponse
+import com.architecture.light.data.remote.bean.SearchRoomResponse
+import com.architecture.light.domain.transaction.action.activity.ChooseReserveActivity
+import com.architecture.light.domain.transaction.action.activity.ChooseRoomActivity
 
 /**
  * File describe:
@@ -13,22 +16,19 @@ import com.architecture.light.domain.transaction.action.activity.ChoosePaymentMe
  * Modify date: 2022/9/1
  * Version: 1
  */
-class ActionChoosePaymentMethod(listener: ActionStartListener) : AAction(listener) {
+class ActionChooseReserve(listener: ActionStartListener) : AAction(listener) {
 
     private var activity: BaseActivity? = null
     private lateinit var transData: TransData
-    private var showUnpaidAmount = true
 
-    fun setParam(activity: BaseActivity, transData: TransData, showUnpaidAmount: Boolean = true) {
+    fun setParam(activity: BaseActivity, transData: TransData) {
         this.activity = activity
         this.transData = transData
-        this.showUnpaidAmount = showUnpaidAmount
     }
 
     override fun onExecute() {
-        activity!!.openActivity<ChoosePaymentMethodActivity> {
+        activity!!.openActivity<ChooseReserveActivity> {
             putExtra(UIParams.TRANS_DATA, transData)
-            putExtra(UIParams.SHOW_UNPAID_AMOUNT, showUnpaidAmount)
         }
     }
 
@@ -37,10 +37,8 @@ class ActionChoosePaymentMethod(listener: ActionStartListener) : AAction(listene
         activity = null
     }
 
-    data class PaymentMethodInfo(
-        val transactionPlatform: Int,
-        val bankAccount: String,
-        val bankName: String
+    data class Info(
+        val searchReserveResponse: SearchReserveResponse
     )
 
 }

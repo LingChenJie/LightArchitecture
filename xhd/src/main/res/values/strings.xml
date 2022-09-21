@@ -146,6 +146,13 @@
     <string name="payment_result_synch">重新同步</string>
     <string name="payment_result_query">重新查询</string>
 
+    <!-- Reserve相关 -->
+    <string name="reserve_project_num">项目排号</string>
+    <string name="reserve_payment_name">缴款名称</string>
+    <string name="reserve_order_number">预约单号</string>
+    <string name="reserve_input_amount">输入金额</string>
+    <string name="reserve_this_payment_amount">本次缴纳金额：</string>
+
     <!-- Void相关 -->
     <string name="void_title">撤销</string>
     <string name="void_manage_pwd">主管密码</string>
@@ -200,7 +207,6 @@
     <string name="print_bill_third_union">第三联</string>
     <string name="amount_symbol">￥</string>
     <string name="_0_00">0.00</string>
-
 
 
 </resources>

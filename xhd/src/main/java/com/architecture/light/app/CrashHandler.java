@@ -1,6 +1,8 @@
 package com.architecture.light.app;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -8,7 +10,10 @@ import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
 
+import com.android.architecture.ui.page.ActivityStack;
 import com.architecture.light.constant.Constant;
+import com.architecture.light.ext.ToastKt;
+import com.architecture.light.ui.page.activity.MainActivity;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -76,7 +81,9 @@ public class CrashHandler implements UncaughtExceptionHandler {
             } catch (InterruptedException e) {
                 Log.e(TAG, "error : ", e);
             }
+            restartApp();
             // 退出程序
+            ActivityStack.getInstance().removeAll();
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);
         } else {
@@ -85,10 +92,18 @@ public class CrashHandler implements UncaughtExceptionHandler {
             } catch (InterruptedException e) {
                 Log.e(TAG, "error : ", e);
             }
+            restartApp();
             // 退出程序
+            ActivityStack.getInstance().removeAll();
             android.os.Process.killProcess(android.os.Process.myPid());
             System.exit(1);
         }
+    }
+
+    private void restartApp() {
+        Intent intent = new Intent(mContext, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(intent);
     }
 
     /**

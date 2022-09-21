@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 import com.architecture.light.constant.TransactionPlatform
 import com.architecture.light.data.pay.bean.TransMemo
 import com.architecture.light.data.remote.bean.SearchBillResponse
+import com.architecture.light.data.remote.bean.SearchReserveResponse
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import java.io.Serializable
 
@@ -55,6 +56,8 @@ data class TransData(
     var payData: TransMemo.PayData? = null,
     @Ignore
     var searchRoomResponse: SearchRoomResponse? = null,
+    @Ignore
+    var searchReserveResponse: SearchReserveResponse? = null,
     @Ignore
     var searchBillResponse: SearchBillResponse? = null,
     @Ignore
