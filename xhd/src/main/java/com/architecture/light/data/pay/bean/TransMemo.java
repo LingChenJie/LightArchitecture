@@ -41,6 +41,7 @@ public class TransMemo extends BaseBean {
     public static class PayData extends BaseBean {
         private String resCode;
         private String resDesc;
+        private String uniCode;
         private String exOrderNo;
         private String cardType;
 
@@ -99,6 +100,14 @@ public class TransMemo extends BaseBean {
 
         public void setResDesc(String resDesc) {
             this.resDesc = resDesc;
+        }
+
+        public String getUniCode() {
+            return uniCode;
+        }
+
+        public void setUniCode(String uniCode) {
+            this.uniCode = uniCode;
         }
 
         public String getExOrderNo() {

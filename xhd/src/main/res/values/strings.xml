@@ -146,6 +146,12 @@
     <string name="payment_result_synch">重新同步</string>
     <string name="payment_result_query">重新查询</string>
 
+    <!-- Void相关 -->
+    <string name="void_title">撤销</string>
+    <string name="void_manage_pwd">主管密码</string>
+    <string name="void_manage_pwd_error">主管密码错误</string>
+    <string name="void_manage_voucher_number">流水号：</string>
+
 
     <!-- 数字键盘 -->
     <string name="_0">0</string>
@@ -187,6 +193,7 @@
     <string name="print_bill_third_union">第三联</string>
     <string name="amount_symbol">￥</string>
     <string name="_0_00">0.00</string>
+
 
 
 </resources>

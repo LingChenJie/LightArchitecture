@@ -14,6 +14,7 @@ import com.architecture.light.databinding.ActivityMainBinding
 import com.architecture.light.domain.task.SearchBillTask
 import com.architecture.light.domain.transaction.LogonTrans
 import com.architecture.light.domain.transaction.PaymentTrans
+import com.architecture.light.domain.transaction.VoidTrans
 import com.architecture.light.helper.BillHelper
 import com.architecture.light.settings.AccountCache
 import kotlin.concurrent.thread
@@ -76,6 +77,9 @@ class MainActivity : AppActivity() {
 //
 //                })
             }
+        }
+        binding.cvVoid.click {
+            VoidTrans().execute()
         }
 
         val bannerImages =
