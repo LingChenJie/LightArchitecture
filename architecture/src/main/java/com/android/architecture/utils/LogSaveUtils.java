@@ -5,6 +5,8 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.android.architecture.constant.LightConstant;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class LogSaveUtils {
     private static final int WARING_LEVER = 2;
     private static final int ERROR_LEVER = 3;
 
-    private static final String LOG_DIR_NAME = "LightArchitectureAppLog";
+    private static final String LOG_DIR_NAME = "LightArchitectureApp";
     private static final int SAVE_LOG_DAY = 7;
     private static final String LOG_PREFIX = "app_";
     private static final String LOG_SUFFIX = ".log";
@@ -112,7 +114,7 @@ public class LogSaveUtils {
         try {
             if (Environment.MEDIA_MOUNTED.equals(Environment
                     .getExternalStorageState())) {
-                String sdPath = Environment.getExternalStorageDirectory().getAbsolutePath();
+                String sdPath = LightConstant.INSTANCE.getSDCARD_PATH();
                 String logPath = sdPath + "/" + LOG_DIR_NAME + "/" + AppUtils.getApp().getPackageName() + "/";
                 File file = new File(logPath);
                 boolean mkdirs = false;

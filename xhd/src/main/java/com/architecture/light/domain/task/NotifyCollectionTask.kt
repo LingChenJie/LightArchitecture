@@ -18,6 +18,7 @@ class NotifyCollectionTask : HttpTask() {
         val request = NotifyCollectionRequest()
         request.posNO = DeviceUtils.getDeviceSN()
         request.serialNumber = param.voucherNumber
+        request.zygwGUID = param.zygwGUID
         request.projGUID = param.projGUID
         request.roomGUID = param.roomGUID
         request.lyrCode = AccountCache.getBillRecipient()
@@ -38,7 +39,7 @@ class NotifyCollectionTask : HttpTask() {
         for (fee in feeList) {
             if (fee.isChecked) {
                 getin = NotifyCollectionRequest.Getin()
-                getin.itemNameGUID = fee.itemName
+                getin.itemNameGUID = fee.itemNameGUID
                 getin.itemName = fee.itemName
                 getin.amount = fee.paymentAmount
                 getin.feeGUID = fee.feeGUID

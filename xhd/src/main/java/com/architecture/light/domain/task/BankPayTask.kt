@@ -1,8 +1,11 @@
 package com.architecture.light.domain.task
 
+import com.android.architecture.constant.ErrorCode
+import com.architecture.light.constant.Constant
 import com.architecture.light.data.pay.bean.TransMemo
 import com.architecture.light.helper.AmountHelper
 import com.chinaums.mis.bean.RequestPojo
+import com.chinaums.mis.bean.ResponsePojo
 import org.json.JSONObject
 
 /**
@@ -19,8 +22,29 @@ class BankPayTask : PayTask() {
     }
 
     override fun onPostExecute(payData: TransMemo.PayData) {
-        response.payData = payData
-        response.voucherNumber = payData.traceNo
+        if (payData.resCode == "00") {
+            response.responseCode = ErrorCode.SUCCESS
+            response.responseMessage = payData.resDesc
+            response.payData = payData
+            response.voucherNumber = payData.traceNo
+            response.refNo = payData.refNo
+        } else {
+            response.responseCode = payData.resCode
+            response.responseMessage = payData.resDesc
+        }
+    }
+
+    override fun analysisResponse(response: ResponsePojo) {
+        if (Constant.IS_DEBUG) {
+            val payData = TransMemo.PayData()
+            payData.resCode = "00"
+            payData.resDesc = "交易成功"
+            payData.traceNo = "000012"
+            payData.refNo = "123456789012"
+            onPostExecute(payData)
+        } else {
+            super.analysisResponse(response)
+        }
     }
 
     private fun getTransMemo(): String {

@@ -29,6 +29,15 @@ class SearchRoomTask : HttpTask() {
             if (response.data != null && response.data.size > 0) {
                 param.responseCode = ErrorCode.SUCCESS
                 param.responseMessage = response.msg
+                val data = response.data
+                for (project in data) {
+                    val feeList = project.feeList
+                    if (feeList != null && feeList.size > 0) {
+                        for (fee in feeList) {
+                            fee.paymentAmount = fee.yeAmount
+                        }
+                    }
+                }
                 param.searchRoomResponse = response
             } else {
                 param.responseCode = ErrorCode.DATA_EMPTY

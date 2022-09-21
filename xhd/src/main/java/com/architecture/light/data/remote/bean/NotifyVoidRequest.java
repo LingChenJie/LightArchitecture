@@ -6,10 +6,10 @@ import com.architecture.light.data.remote.bean.base.RequestBean;
  * Created by SuQi on 2022/8/30.
  * Describe:
  */
-public class ChargeVoidRequest extends RequestBean {
+public class NotifyVoidRequest extends RequestBean {
     private String SerialNumber;
 
-    public ChargeVoidRequest() {
+    public NotifyVoidRequest() {
         setInterfaceId("charge");
         setTradeType("4");
     }

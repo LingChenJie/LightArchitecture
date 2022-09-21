@@ -2,6 +2,7 @@ package com.android.architecture.domain.transaction;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.SparseArray;
 
 import com.android.architecture.helper.Logger;
 import com.android.architecture.ui.page.BaseActivity;

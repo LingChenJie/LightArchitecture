@@ -2,6 +2,7 @@ package com.architecture.light.data.remote.bean;
 
 import com.architecture.light.data.remote.bean.base.BaseBean;
 import com.architecture.light.data.remote.bean.base.ResponseBean;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
@@ -86,7 +87,6 @@ public class SearchRoomResponse extends ResponseBean {
 
             public void setYeAmount(double yeAmount) {
                 YeAmount = yeAmount;
-                paymentAmount = yeAmount;
             }
 
             public String getItemTypeGUID() {

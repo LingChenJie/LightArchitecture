@@ -52,7 +52,7 @@
                 android:singleLine="true"
                 android:textColor="#0C192C"
                 android:textSize="@dimen/sp_12"
-                app:regexType="name"
+                app:regexType="nonnull"
                 tools:text="201室" />
 
         </LinearLayout>

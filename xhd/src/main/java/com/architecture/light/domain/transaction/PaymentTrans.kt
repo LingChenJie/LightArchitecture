@@ -26,6 +26,7 @@ class PaymentTrans : BaseTransaction() {
         CODE_PAY_TASK,
         PAY_QUERY_TASK,
         SHOW_PAY_RESULT,
+        NOTIFY_COLLECTION,
         SEARCH_BILL_TASK,
         PRINT_BILL_TASK,
     }
@@ -71,16 +72,20 @@ class PaymentTrans : BaseTransaction() {
             (it as ActionPayTask).setParam(CodePayTask(), transData, currentActivity)
         }
         bind(State.CODE_PAY_TASK.name, actionCodePayTask)
-        val actionQueryPayTask = ActionPayTask {
+        val actionPayQueryTask = ActionPayTask {
             (it as ActionPayTask).setParam(PayQueryTask(), transData, currentActivity)
         }
-        bind(State.PAY_QUERY_TASK.name, actionQueryPayTask)
+        bind(State.PAY_QUERY_TASK.name, actionPayQueryTask)
         val actionShowPayResult = ActionShowPayResult {
             (it as ActionShowPayResult).setParam(actionResult!!, transData, currentActivity)
         }
         bind(State.SHOW_PAY_RESULT.name, actionShowPayResult)
+        val actionNotifyCollectionTask = ActionHttpTask {
+            (it as ActionHttpTask).setParam(NotifyCollectionTask(), transData, currentActivity)
+        }
+        bind(State.NOTIFY_COLLECTION.name, actionNotifyCollectionTask)
         val actionSearchBillTask = ActionHttpTask {
-            (it as ActionHttpTask).setParam(SearchRoomTask(), transData, currentActivity)
+            (it as ActionHttpTask).setParam(SearchBillTask(), transData, currentActivity)
         }
         bind(State.SEARCH_BILL_TASK.name, actionSearchBillTask)
         val actionPrintBill = ActionPrintTask {
@@ -218,35 +223,34 @@ class PaymentTrans : BaseTransaction() {
             State.SHOW_PAY_RESULT -> {
                 when (code) {
                     ErrorCode.SUCCESS -> {
-
+                        transEnd(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))
                     }
                     AppErrorCode.PAY_RESULT_QUERY -> {
-
+                        gotoState(State.PAY_QUERY_TASK.name)
                     }
                     AppErrorCode.PAY_RESULT_NOTIFY -> {
-
+                        gotoState(State.NOTIFY_COLLECTION.name)
                     }
-                    AppErrorCode.BACK_TO_CHOOSE_ROOM_PAGE -> {
-
+                    AppErrorCode.PAY_AGAIN -> {
+                        gotoState(State.CHOOSE_ROOM.name)
                     }
                     else -> {
-
+                        transEnd(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))
                     }
                 }
+            }
+            State.NOTIFY_COLLECTION -> {
+                gotoState(State.SHOW_PAY_RESULT.name)
             }
             State.SEARCH_BILL_TASK -> {
                 if (code == ErrorCode.SUCCESS) {
-
+                    gotoState(State.PRINT_BILL_TASK.name)
                 } else {
-
+                    gotoState(State.SHOW_PAY_RESULT.name)
                 }
             }
             State.PRINT_BILL_TASK -> {
-                if (code == ErrorCode.SUCCESS) {
-
-                } else {
-
-                }
+                gotoState(State.SHOW_PAY_RESULT.name)
             }
         }
     }

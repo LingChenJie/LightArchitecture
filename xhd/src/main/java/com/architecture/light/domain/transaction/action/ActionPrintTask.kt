@@ -6,9 +6,10 @@ import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.getString
 import com.android.architecture.ui.page.BaseActivity
+import com.android.architecture.ui.page.BaseDialog
 import com.architecture.light.R
-import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.data.model.db.entity.TransData
+import com.architecture.light.ui.dialog.PrintingDialog
 import kotlinx.coroutines.*
 
 class ActionPrintTask(listener: ActionStartListener) : AAction(listener) {
@@ -18,6 +19,7 @@ class ActionPrintTask(listener: ActionStartListener) : AAction(listener) {
     private lateinit var transData: TransData
     private var activity: BaseActivity? = null
     private var delayRequestTime: Long = 0
+    private var printingDialog: BaseDialog? = null
 
     fun setParam(
         task: ITask<TransData, TransData>,
@@ -48,15 +50,14 @@ class ActionPrintTask(listener: ActionStartListener) : AAction(listener) {
     }
 
     private fun showLoading() {
-        activity?.let {
-            if (it is AppActivityForAction) it.showLoading(getString(R.string.loading_print_bill))
-        }
+        printingDialog = PrintingDialog.Builder(activity)
+            .setMessage(getString(R.string.loading_print_bill))
+            .create()
+        printingDialog?.show()
     }
 
     private fun hideLoading() {
-        activity?.let {
-            if (it is AppActivityForAction) it.hideLoading()
-        }
+        printingDialog?.dismiss()
     }
 
     override fun onClear() {

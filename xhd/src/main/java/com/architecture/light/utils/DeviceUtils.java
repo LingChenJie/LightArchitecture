@@ -1,6 +1,9 @@
 package com.architecture.light.utils;
 
 import android.annotation.SuppressLint;
+import android.text.TextUtils;
+
+import com.architecture.light.constant.Constant;
 
 import java.lang.reflect.Method;
 
@@ -24,6 +27,9 @@ public class DeviceUtils {
         } catch (Exception e) {
             e.printStackTrace();
             serial = android.os.Build.SERIAL;
+        }
+        if (TextUtils.isEmpty(serial) && Constant.IS_DEBUG) {
+            serial = "1234567890";
         }
         return serial;
     }

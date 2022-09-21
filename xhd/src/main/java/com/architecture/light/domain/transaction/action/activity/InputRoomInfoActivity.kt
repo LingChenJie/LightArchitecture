@@ -1,11 +1,11 @@
 package com.architecture.light.domain.transaction.action.activity
 
+import android.text.Editable
 import com.android.architecture.constant.ErrorCode
-import com.android.architecture.data.manage.InputTextManager
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
 import com.android.architecture.extension.valid
-import com.android.architecture.helper.DelayHelper
+import com.android.architecture.other.DefaultTextWatcher
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.databinding.ActivityInputRoomInfoBinding
 import com.architecture.light.domain.transaction.action.ActionInputRoomInfo
@@ -33,11 +33,28 @@ class InputRoomInfoActivity : AppActivityForAction() {
                 finish(ActionResult(ErrorCode.SUCCESS, room))
             }
         }
-        InputTextManager.with(this)
-            .addView(binding.etRoomInfo)
-            .setMain(binding.btConfirm)
-            .build()
+        binding.etRoomInfo.addTextChangedListener(object : DefaultTextWatcher() {
+            override fun afterTextChanged(s: Editable) {
+                notifyUI()
+            }
+        })
         KeyBoardUtils.addLayoutListener(binding.layoutBottom, binding.btConfirm)
+        notifyUI()
+    }
+
+    private fun notifyUI() {
+        val roomInfo = binding.etRoomInfo.text.toString()
+        binding.btConfirm.isEnabled = includedNumbers(roomInfo) >= 3
+    }
+
+    private fun includedNumbers(string: String): Int {
+        var number = 0
+        for (char in string) {
+            if (char.isDigit()) {
+                number++
+            }
+        }
+        return number
     }
 
 }

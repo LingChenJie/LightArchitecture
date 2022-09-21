@@ -55,7 +55,7 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
         }
     }
 
-    private fun analysisResponse(response: ResponsePojo) {
+    open fun analysisResponse(response: ResponsePojo) {
         if (response.rspCode == "00") {
             val transMemo = JsonHelper.toBean<TransMemo>(response.transMemo)
             if (transMemo.resultCode == "0") {
@@ -70,6 +70,9 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
                 param.responseCode = transMemo.resultCode
                 param.responseMessage = transMemo.resultMsg
             }
+        } else if (response.rspCode == "E4") {
+            param.responseCode = AppErrorCode.PAY_TIMEOUT
+            param.responseMessage = response.rspChin.trim()
         } else {
             param.responseCode = response.rspCode
             param.responseMessage = response.rspChin.trim()

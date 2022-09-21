@@ -7,6 +7,7 @@ import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.valid
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode
+import com.architecture.light.constant.Constant
 import com.architecture.light.databinding.ActivityReadIdCardBinding
 import com.architecture.light.domain.transaction.action.ActionReadIdCard
 import com.architecture.light.ext.toast
@@ -40,8 +41,13 @@ class ReadIdCardActivity : AppActivityForAction() {
         if (idCardService != null) {
             readIdCard()
         } else {
-            toast("身份证服务打开失败，请重试")
-            finish(ActionResult(AppErrorCode.BACK_TO_PREVIOUS_PAGE))
+            if (Constant.IS_DEBUG) {
+                val idCardInfo = ActionReadIdCard.IdCardInfo("")
+                finish(ActionResult(ErrorCode.SUCCESS, idCardInfo))
+            } else {
+                toast("身份证服务打开失败，请重试")
+                finish(ActionResult(AppErrorCode.BACK_TO_PREVIOUS_PAGE))
+            }
         }
     }
 
