@@ -7,6 +7,7 @@ import com.android.architecture.helper.RandomHelper
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.Constant
 import com.architecture.light.constant.TransactionPlatform
+import com.architecture.light.constant.TransactionStatus
 import com.architecture.light.domain.task.*
 import com.architecture.light.domain.transaction.action.*
 
@@ -128,7 +129,7 @@ class ReserveTrans : BaseTransaction() {
                 if (code == ErrorCode.SUCCESS) {
                     val cardInfo = data as ActionReadIdCard.IdCardInfo
                     if (Constant.IS_DEBUG) {
-                        transData.cardID = "34222419890827123X"
+                        transData.cardID = "999888777666"
                     } else {
                         transData.cardID = cardInfo.cardId
                     }
@@ -142,7 +143,11 @@ class ReserveTrans : BaseTransaction() {
             State.INPUT_TEL -> {
                 if (code == ErrorCode.SUCCESS) {
                     val telInfo = data as ActionInputTel.TelInfo
-                    transData.tel = telInfo.tel
+                    if (Constant.IS_DEBUG) {
+                        transData.tel = "18155723385"
+                    } else {
+                        transData.tel = telInfo.tel
+                    }
                     transData.cardID = ""
                     transData.roomInfo = ""
                     gotoState(State.SEARCH_RESERVE_TASK.name)
@@ -198,9 +203,7 @@ class ReserveTrans : BaseTransaction() {
                     transData.transactionPlatform = paymentMethodInfo.transactionPlatform
                     transData.bankAccount = paymentMethodInfo.bankAccount
                     transData.bankName = paymentMethodInfo.bankName
-                    val currentTime = DateHelper.getCurrentDateFormatString("yyyyMMddHHmmss")
-                    transData.orderNumber = currentTime + RandomHelper.getRandomHexString(3)
-                    transData.transactionDate = currentTime
+                    initPay()
                     if (transData.transactionPlatform == TransactionPlatform.Bank) {
                         gotoState(State.BANK_PAY_TASK.name)
                     } else {
@@ -210,14 +213,30 @@ class ReserveTrans : BaseTransaction() {
                     gotoState(State.INPUT_AMOUNT.name)
                 }
             }
-            State.BANK_PAY_TASK -> {
-                gotoState(State.SHOW_PAY_RESULT.name)
-            }
-            State.CODE_PAY_TASK -> {
-                gotoState(State.SHOW_PAY_RESULT.name)
-            }
+            State.BANK_PAY_TASK,
+            State.CODE_PAY_TASK,
             State.PAY_QUERY_TASK -> {
-                gotoState(State.SHOW_PAY_RESULT.name)
+                setTransactionStatusMessage()
+                if (code == ErrorCode.SUCCESS) {
+                    when (transData.responseCode) {
+                        ErrorCode.SUCCESS -> {
+                            transData.transactionStatus = TransactionStatus.PaySucceed.name
+                            gotoState(State.SHOW_PAY_RESULT.name)
+                        }
+                        AppErrorCode.PAY_TIMEOUT -> {
+                            transData.transactionStatus = TransactionStatus.PayTimeout.name
+                            gotoState(State.SHOW_PAY_RESULT.name)
+                        }
+                        else -> {
+                            transData.transactionStatus = TransactionStatus.PayFailed.name
+                            gotoState(State.SHOW_PAY_RESULT.name)
+                        }
+                    }
+
+                } else {
+                    transData.transactionStatus = TransactionStatus.PayFailed.name
+                    gotoState(State.SHOW_PAY_RESULT.name)
+                }
             }
             State.SHOW_PAY_RESULT -> {
                 when (code) {
@@ -227,11 +246,17 @@ class ReserveTrans : BaseTransaction() {
                     AppErrorCode.PAY_RESULT_QUERY -> {
                         gotoState(State.PAY_QUERY_TASK.name)
                     }
+                    AppErrorCode.PAY_AGAIN -> {
+                        gotoState(State.SEARCH_RESERVE_TASK.name)
+                    }
                     AppErrorCode.PAY_RESULT_NOTIFY -> {
                         gotoState(State.NOTIFY_COLLECTION.name)
                     }
-                    AppErrorCode.PAY_AGAIN -> {
-                        gotoState(State.CHOOSE_RESERVE.name)
+                    AppErrorCode.BILL_GET -> {
+                        gotoState(State.SEARCH_BILL_TASK.name)
+                    }
+                    AppErrorCode.BILL_PRINT -> {
+                        gotoState(State.PRINT_BILL_TASK.name)
                     }
                     else -> {
                         transEnd(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))
@@ -239,19 +264,80 @@ class ReserveTrans : BaseTransaction() {
                 }
             }
             State.NOTIFY_COLLECTION -> {
-                gotoState(State.SHOW_PAY_RESULT.name)
+                setTransactionStatusMessage()
+                if (code == ErrorCode.SUCCESS) {
+                    when (transData.responseCode) {
+                        ErrorCode.SUCCESS -> {
+                            transData.transactionStatus = TransactionStatus.ResultNotifySucceed.name
+                            gotoState(State.SHOW_PAY_RESULT.name)
+                        }
+                        else -> {
+                            transData.transactionStatus = TransactionStatus.ResultNotifyFailed.name
+                            gotoState(State.SHOW_PAY_RESULT.name)
+                        }
+                    }
+                } else {
+                    transData.transactionStatus = TransactionStatus.ResultNotifyFailed.name
+                    gotoState(State.SHOW_PAY_RESULT.name)
+                }
             }
             State.SEARCH_BILL_TASK -> {
+                setTransactionStatusMessage()
                 if (code == ErrorCode.SUCCESS) {
-                    gotoState(State.PRINT_BILL_TASK.name)
+                    when (transData.responseCode) {
+                        ErrorCode.SUCCESS -> {
+                            transData.transactionStatus = TransactionStatus.GetPrintDataSucceed.name
+                            gotoState(State.SHOW_PAY_RESULT.name)
+                        }
+                        else -> {
+                            transData.transactionStatus = TransactionStatus.GetPrintDataFailed.name
+                            gotoState(State.SHOW_PAY_RESULT.name)
+                        }
+                    }
                 } else {
+                    transData.transactionStatus = TransactionStatus.GetPrintDataFailed.name
                     gotoState(State.SHOW_PAY_RESULT.name)
                 }
             }
             State.PRINT_BILL_TASK -> {
-                gotoState(State.SHOW_PAY_RESULT.name)
+                setTransactionStatusMessage()
+                if (code == ErrorCode.SUCCESS) {
+                    when (transData.responseCode) {
+                        ErrorCode.SUCCESS -> {
+                            transData.transactionStatus = TransactionStatus.PrintSucceed.name
+                            gotoState(State.SHOW_PAY_RESULT.name)
+                        }
+                        else -> {
+                            transData.transactionStatus = TransactionStatus.PrintFailed.name
+                            gotoState(State.SHOW_PAY_RESULT.name)
+                        }
+                    }
+                } else {
+                    transData.transactionStatus = TransactionStatus.PrintFailed.name
+                    gotoState(State.SHOW_PAY_RESULT.name)
+                }
             }
         }
     }
+
+    private fun initPay() {
+        val timeMillis = System.currentTimeMillis()
+        val currentTime = DateHelper.getDateFormatString("yyyyMMddHHmm" + "ss", timeMillis)
+        transData.transactionTimeMillis = timeMillis
+        transData.orderNumber = currentTime + RandomHelper.getRandomHexString(3)
+    }
+
+    private fun setTransactionStatusMessage() {
+        val code = actionResult!!.code
+        if (code == ErrorCode.SUCCESS) {
+            val responseCode = transData.responseCode
+            val responseMessage = transData.responseMessage
+            transData.transactionStatusMessage = "$responseMessage[$responseCode]"
+        } else {
+            val message = actionResult!!.message ?: ErrorCode.getMessage(code)
+            transData.transactionStatusMessage = "$message[$code]"
+        }
+    }
+
 
 }

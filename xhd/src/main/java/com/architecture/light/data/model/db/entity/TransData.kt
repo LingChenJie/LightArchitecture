@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import com.architecture.light.constant.TransactionPlatform
+import com.architecture.light.constant.TransactionStatus
 import com.architecture.light.data.pay.bean.TransMemo
 import com.architecture.light.data.remote.bean.SearchBillResponse
 import com.architecture.light.data.remote.bean.SearchReserveResponse
@@ -21,9 +22,12 @@ data class TransData(
     var responseCode: String = "",
     var responseMessage: String = "",
     var transactionYear: String = "",
+    var transactionTimeMillis: Long = 0,
     var transactionDate: String = "",
     var transactionTime: String = "",
     var transactionPlatform: Int = TransactionPlatform.Bank,
+    var transactionStatus: String = TransactionStatus.PayTimeout.name,
+    var transactionStatusMessage: String = "",
 
 
     var account: String = "",
@@ -46,6 +50,7 @@ data class TransData(
 
     var voucherNumber: String = "",
     var refNo: String = "",
+    var vouchGUID: String = "",
 
     var originalVoucherNumber: String = "",
     var originalOrderNumber: String = "",

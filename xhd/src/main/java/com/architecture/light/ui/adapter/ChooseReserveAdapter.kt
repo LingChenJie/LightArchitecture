@@ -6,11 +6,7 @@ import android.view.ViewGroup
 import com.android.architecture.extension.click
 import com.android.architecture.ui.adapter.BaseAdapter
 import com.architecture.light.data.remote.bean.SearchReserveResponse
-import com.architecture.light.data.remote.bean.SearchRoomResponse
-import com.architecture.light.databinding.AdapterPaymentListBinding
 import com.architecture.light.databinding.AdapterReserveListBinding
-import com.architecture.light.helper.AmountHelper
-import com.architecture.light.ui.dialog.AmountModifyDialog
 
 /**
  * File describe:
@@ -43,6 +39,7 @@ class ChooseReserveAdapter(val context: Context) :
         binding.layoutItem.click {
             data[position].isChecked = !data[position].isChecked
             notifyDataSetChanged()
+            mOnItemClickListener?.onItemClick(it.id, position, item)
         }
     }
 

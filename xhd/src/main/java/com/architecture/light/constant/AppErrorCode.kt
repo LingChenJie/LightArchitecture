@@ -22,6 +22,8 @@ object AppErrorCode {
     const val PAY_RESULT_QUERY = "Pay Query"
     const val PAY_RESULT_NOTIFY = "Pay Result Sync"
     const val PAY_AGAIN = "Pay Again"
+    const val BILL_GET = "Bill Get"
+    const val BILL_PRINT = "Bill PRINT"
 
     const val VOID_RESULT_QUERY = "Void Query"
     const val VOID_RESULT_NOTIFY = "Void Result Sync"
@@ -29,6 +31,7 @@ object AppErrorCode {
 
 
     const val PAY_DATA_ERROR = "Pay Data Error"
+    const val PRINT_DATA_NOT_FOUND = "Print Data Not Found"
     const val PRINTER_NOT_FOUND = "Printer Not Found"
     const val PRINT_EXCEPTION = "Print Exception"
 
@@ -49,6 +52,7 @@ object AppErrorCode {
         VOID_AGAIN to getString(R.string.error_code_void_again),
 
         PAY_DATA_ERROR to getString(R.string.error_code_pay_data_error),
+        PRINT_DATA_NOT_FOUND to getString(R.string.error_code_print_data_not_found),
         PRINTER_NOT_FOUND to getString(R.string.error_code_printer_not_found),
         PRINT_EXCEPTION to getString(R.string.error_code_print_exception),
 

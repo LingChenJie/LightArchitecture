@@ -24,7 +24,6 @@ class ChooseOriginalPaymentMethodActivity : AppActivityForAction() {
     override fun initView() {
         setContentView(binding.root)
         binding.layoutBankcard.isSelected = true
-        binding.btConfirm.isEnabled = false
         binding.layoutBankcard.click {
             selectBankCard()
         }

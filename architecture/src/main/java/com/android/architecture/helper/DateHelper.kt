@@ -7,20 +7,20 @@ import java.util.*
 object DateHelper {
 
     @JvmStatic
-    val MMDDYYYY: String
-        get() = getCurrentDateFormatString("MMddyyyy")
+    val dateString: String
+        get() = getDateFormatString("yyyy" + "MMdd")
 
     @JvmStatic
     val yearString: String
-        get() = getCurrentDateFormatString("yyyy")
+        get() = getDateFormatString("yyyy")
 
     @JvmStatic
     val monthDateString: String
-        get() = getCurrentDateFormatString("MMdd")
+        get() = getDateFormatString("MMdd")
 
     @JvmStatic
     val timeString: String
-        get() = getCurrentDateFormatString("HHmm" + "ss")
+        get() = getDateFormatString("HHmm" + "ss")
 
     val currentUnixTimeMillisString: String
         get() {
@@ -32,22 +32,13 @@ object DateHelper {
         get() = System.currentTimeMillis() * 1000 + SystemClock.elapsedRealtimeNanos() / 1000 % 1000
 
     @JvmStatic
-    fun getCurrentDateFormatString(pattern: String): String {
-        val locale = Locale.getDefault()
-        val millis = System.currentTimeMillis()
-        val dateFormat = SimpleDateFormat(pattern, locale)
-        val date = Date(millis)
-        return dateFormat.format(date)
-    }
-
-    @JvmStatic
     fun getDateFormatString(
+        pattern: String = "yyyy-MM-dd HH:mm:ss",
         millis: Long = System.currentTimeMillis(),
-        pattern: String = "yyyy-MM-dd HH:mm:ss"
     ): String {
-        val date = Date(millis)
         val locale = Locale.getDefault()
         val dateFormat = SimpleDateFormat(pattern, locale)
+        val date = Date(millis)
         return dateFormat.format(date)
     }
 

@@ -44,6 +44,7 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
                 requestBean.erpId = param.orderNumber
                 val response = PayRequest().execute(requestBean)
                 Logger.d("PayTask", response.toString())
+                setErrorCode(ErrorCode.SUCCESS)
                 analysisResponse(response)
 
             } catch (e: Exception) {

@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp_17"
-            android:text="@string/payment_result_success"
+            android:text="@string/payment_result_pay_success"
             android:textSize="@dimen/sp_15"
             android:textStyle="bold"
             app:shape_textColor="#6BCC03"
@@ -239,7 +239,7 @@
             android:text="@string/payment_result_repay"
             android:textColor="@android:color/white"
             android:textSize="@dimen/sp_15"
-            android:visibility="visible" />
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/bt_resynch"

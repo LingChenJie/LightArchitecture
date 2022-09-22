@@ -1,15 +1,18 @@
 package com.architecture.light.domain.transaction.action.activity
 
+import android.content.Intent
 import android.view.View
-import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
+import com.android.architecture.helper.Logger.e
 import com.architecture.light.R
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode
+import com.architecture.light.constant.TransactionStatus
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.databinding.ActivityShowPayResultBinding
 import com.architecture.light.domain.transaction.action.UIParams
+import com.architecture.light.ext.toastSucc
 import com.architecture.light.helper.AmountHelper
 import com.architecture.light.helper.TransHelper
 
@@ -44,45 +47,119 @@ class ShowPayResultActivity : AppActivityForAction() {
         binding.btResynch.click {
             finish(ActionResult(AppErrorCode.PAY_RESULT_NOTIFY))
         }
-        val result = intent.getSerializableExtra(UIParams.ACTION_RESULT) as ActionResult
+        refreshUI(intent)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        e(TAG, "--onNewIntent")
+        refreshUI(intent)
+    }
+
+    private fun refreshUI(intent: Intent) {
         val transData = intent.getSerializableExtra(UIParams.TRANS_DATA) as TransData
         binding.tvThisPaymentAmount.text = AmountHelper.formatAmount(transData.amount)
         binding.tvPaymentMethod.text =
             TransHelper.getTransactionPlatform(transData.transactionPlatform)
         binding.tvPaymentBankName.text = transData.bankName
         binding.tvPaymentBankAccount.text = transData.bankAccount
-        if (result.code == ErrorCode.SUCCESS) {
-            val code = transData.responseCode
-            val message = transData.responseMessage
-            if (code == ErrorCode.SUCCESS) {
+
+        when (transData.transactionStatus) {
+            TransactionStatus.PaySucceed.name -> {
                 binding.ivResult.setImageResource(R.drawable.icon_result_success)
                 binding.tvResultTip.isSelected = false
-                binding.tvResultTip.text = getString(R.string.payment_result_success)
+                binding.tvResultTip.text = getString(R.string.payment_result_pay_success)
                 binding.tvFailMessage.visibility = View.GONE
                 binding.tvFailMessage.text = ""
                 binding.layoutBottomSuccess.visibility = View.VISIBLE
                 binding.layoutBottomFail.visibility = View.GONE
                 finish(ActionResult(AppErrorCode.PAY_RESULT_NOTIFY))
-            } else {
+            }
+            TransactionStatus.PayFailed.name -> {
                 binding.ivResult.setImageResource(R.drawable.icon_result_fail)
                 binding.tvResultTip.isSelected = true
-                binding.tvResultTip.text = getString(R.string.payment_result_fail)
+                binding.tvResultTip.text = getString(R.string.payment_result_pay_fail)
                 binding.tvFailMessage.visibility = View.VISIBLE
-                binding.tvFailMessage.text = "$message[$code]"
+                binding.tvFailMessage.text = transData.transactionStatusMessage
                 binding.layoutBottomSuccess.visibility = View.GONE
                 binding.layoutBottomFail.visibility = View.VISIBLE
+                binding.btRepay.visibility = View.VISIBLE
+                binding.btRequery.visibility = View.GONE
+                binding.btResynch.visibility = View.GONE
             }
-        } else {
-            val code = result.code
-            val message = result.message ?: ErrorCode.getMessage(code)
-            binding.ivResult.setImageResource(R.drawable.icon_result_fail)
-            binding.tvResultTip.isSelected = true
-            binding.tvFailMessage.visibility = View.VISIBLE
-            binding.tvFailMessage.text = "$message[$code]"
-            binding.layoutBottomSuccess.visibility = View.GONE
-            binding.layoutBottomFail.visibility = View.VISIBLE
+            TransactionStatus.PayTimeout.name -> {
+                binding.ivResult.setImageResource(R.drawable.icon_result_fail)
+                binding.tvResultTip.isSelected = true
+                binding.tvResultTip.text = getString(R.string.payment_result_pay_fail)
+                binding.tvFailMessage.visibility = View.VISIBLE
+                binding.tvFailMessage.text = transData.transactionStatusMessage
+                binding.layoutBottomSuccess.visibility = View.GONE
+                binding.layoutBottomFail.visibility = View.VISIBLE
+                binding.btRepay.visibility = View.GONE
+                binding.btRequery.visibility = View.VISIBLE
+                binding.btResynch.visibility = View.GONE
+            }
+            TransactionStatus.ResultNotifySucceed.name -> {
+                binding.ivResult.setImageResource(R.drawable.icon_result_success)
+                binding.tvResultTip.isSelected = false
+                binding.tvResultTip.text = getString(R.string.payment_result_result_sync_success)
+                binding.tvFailMessage.visibility = View.GONE
+                binding.tvFailMessage.text = ""
+                binding.layoutBottomSuccess.visibility = View.VISIBLE
+                binding.layoutBottomFail.visibility = View.GONE
+                finish(ActionResult(AppErrorCode.BILL_GET))
+            }
+            TransactionStatus.ResultNotifyFailed.name -> {
+                binding.ivResult.setImageResource(R.drawable.icon_result_fail)
+                binding.tvResultTip.isSelected = true
+                binding.tvResultTip.text = getString(R.string.payment_result_result_sync_fail)
+                binding.tvFailMessage.visibility = View.VISIBLE
+                binding.tvFailMessage.text = transData.transactionStatusMessage
+                binding.layoutBottomSuccess.visibility = View.GONE
+                binding.layoutBottomFail.visibility = View.VISIBLE
+                binding.btRepay.visibility = View.GONE
+                binding.btRequery.visibility = View.GONE
+                binding.btResynch.visibility = View.VISIBLE
+            }
+            TransactionStatus.GetPrintDataSucceed.name -> {
+                binding.ivResult.setImageResource(R.drawable.icon_result_success)
+                binding.tvResultTip.isSelected = false
+                binding.tvResultTip.text = getString(R.string.payment_result_result_sync_success)
+                binding.tvFailMessage.visibility = View.GONE
+                binding.tvFailMessage.text = ""
+                binding.layoutBottomSuccess.visibility = View.VISIBLE
+                binding.layoutBottomFail.visibility = View.GONE
+                finish(ActionResult(AppErrorCode.BILL_PRINT))
+            }
+            TransactionStatus.GetPrintDataFailed.name -> {
+                binding.ivResult.setImageResource(R.drawable.icon_result_success)
+                binding.tvResultTip.isSelected = false
+                binding.tvResultTip.text = getString(R.string.payment_result_result_sync_success)
+                binding.tvFailMessage.visibility = View.VISIBLE
+                binding.tvFailMessage.text = transData.transactionStatusMessage
+                binding.layoutBottomSuccess.visibility = View.VISIBLE
+                binding.layoutBottomFail.visibility = View.GONE
+            }
+            TransactionStatus.PrintSucceed.name -> {
+                binding.ivResult.setImageResource(R.drawable.icon_result_success)
+                binding.tvResultTip.isSelected = false
+                binding.tvResultTip.text = getString(R.string.payment_result_result_sync_success)
+                binding.tvFailMessage.visibility = View.GONE
+                binding.tvFailMessage.text = ""
+                binding.layoutBottomSuccess.visibility = View.VISIBLE
+                binding.layoutBottomFail.visibility = View.GONE
+                toastSucc("打印内容发送成功")
+            }
+            TransactionStatus.PrintFailed.name -> {
+                binding.ivResult.setImageResource(R.drawable.icon_result_success)
+                binding.tvResultTip.isSelected = false
+                binding.tvResultTip.text = getString(R.string.payment_result_result_sync_success)
+                binding.tvFailMessage.visibility = View.VISIBLE
+                binding.tvFailMessage.text = transData.transactionStatusMessage
+                binding.layoutBottomSuccess.visibility = View.VISIBLE
+                binding.layoutBottomFail.visibility = View.GONE
+            }
         }
-
     }
 
 }

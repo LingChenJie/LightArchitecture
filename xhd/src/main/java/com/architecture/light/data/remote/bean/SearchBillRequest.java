@@ -9,6 +9,7 @@ import com.architecture.light.data.remote.bean.base.RequestBean;
 public class SearchBillRequest extends RequestBean {
     private String CardID;
     private String Tel;
+    private String SerialNumber;
 
     public SearchBillRequest() {
         setInterfaceId("charge");
@@ -29,6 +30,14 @@ public class SearchBillRequest extends RequestBean {
 
     public void setTel(String tel) {
         Tel = tel;
+    }
+
+    public String getSerialNumber() {
+        return SerialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        SerialNumber = serialNumber;
     }
 }
 

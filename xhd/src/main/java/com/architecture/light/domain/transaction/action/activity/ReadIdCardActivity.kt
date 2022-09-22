@@ -5,6 +5,7 @@ import androidx.lifecycle.lifecycleScope
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.valid
+import com.android.architecture.helper.DelayHelper
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.Constant
@@ -42,8 +43,12 @@ class ReadIdCardActivity : AppActivityForAction() {
             readIdCard()
         } else {
             if (Constant.IS_DEBUG) {
-                val idCardInfo = ActionReadIdCard.IdCardInfo("")
-                finish(ActionResult(ErrorCode.SUCCESS, idCardInfo))
+                DelayHelper.sendDelayTask(3000, object : DelayHelper.Task {
+                    override fun execute() {
+                        val idCardInfo = ActionReadIdCard.IdCardInfo("")
+                        finish(ActionResult(ErrorCode.SUCCESS, idCardInfo))
+                    }
+                })
             } else {
                 toast("身份证服务打开失败，请重试")
                 finish(ActionResult(AppErrorCode.BACK_TO_PREVIOUS_PAGE))

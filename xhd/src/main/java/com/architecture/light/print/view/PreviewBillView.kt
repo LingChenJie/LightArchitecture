@@ -7,6 +7,7 @@ import android.widget.RelativeLayout
 import com.android.architecture.helper.DateHelper
 import com.architecture.light.data.remote.bean.SearchBillResponse
 import com.architecture.light.databinding.ViewPreviewBillBinding
+import com.architecture.light.helper.AmountHelper
 
 /**
  * File describe:
@@ -34,7 +35,7 @@ class PreviewBillView(
         binding.tvBillDate.text = bean.kpDate
         binding.tvPayingUnit.text = bean.jkr
         binding.tvRmbCapital.text = bean.amountString
-        binding.tvRmbLower.text = bean.amount
+        binding.tvRmbLower.text = AmountHelper.formatAmount(AmountHelper.convertAmount(bean.amount))
         binding.tvPayingWay.text = bean.payMode
         binding.tvPayingReason.text = bean.payRemark
         //binding.tvSummaryNotes.text

@@ -6,9 +6,9 @@ import com.architecture.light.data.remote.bean.base.RequestBean;
  * Created by SuQi on 2022/8/30.
  * Describe:
  */
-public class ChargeListRequest extends RequestBean {
+public class SearchPaymentListRequest extends RequestBean {
 
-    public ChargeListRequest() {
+    public SearchPaymentListRequest() {
         setInterfaceId("charge");
         setTradeType("2");
     }

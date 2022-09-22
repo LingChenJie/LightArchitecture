@@ -7,12 +7,16 @@ import com.android.architecture.extension.click
 import com.android.architecture.extension.openActivity
 import com.architecture.light.R
 import com.architecture.light.app.AppActivity
+import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.databinding.ActivityMainBinding
-import com.architecture.light.domain.transaction.ReserveTrans
+import com.architecture.light.domain.task.SearchPaymentListTask
 import com.architecture.light.domain.transaction.LogonTrans
 import com.architecture.light.domain.transaction.PaymentTrans
+import com.architecture.light.domain.transaction.ReserveTrans
 import com.architecture.light.domain.transaction.VoidTrans
 import com.architecture.light.settings.AccountCache
+import com.gyf.immersionbar.ImmersionBar
+import kotlin.concurrent.thread
 
 
 /**
@@ -36,10 +40,16 @@ class MainActivity : AppActivity() {
 
     override fun initView() {
         setContentView(binding.root)
+        ImmersionBar.setTitleBar(this, binding.titleView)
         binding.ivUserAvatar.click { openActivity<AccountManageActivity>() }
         binding.cvPayment.click { PaymentTrans().execute() }
         binding.cvPledgeMoney.click { ReserveTrans().execute() }
         binding.cvVoid.click { VoidTrans().execute() }
+        binding.cvPrint.click {
+            thread {
+                SearchPaymentListTask().execute(TransData())
+            }
+        }
 
         val bannerImages =
             arrayOf(

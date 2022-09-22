@@ -49,6 +49,7 @@ abstract class HttpTask : BaseTask<TransData, TransData>() {
                 val body = JsonHelper.toJson(requestData)
                 val headers = getHeaders(body)
                 val response = httpRequest.postJson(headers, body)
+                setErrorCode(ErrorCode.SUCCESS)
                 onPostExecute(response)
 
             } catch (e: SocketTimeoutException) {

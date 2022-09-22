@@ -135,8 +135,10 @@
     <string name="payment_account_value">账户：</string>
     <string name="payment_confirm">确认缴款</string>
     <string name="payment_result">支付结果</string>
-    <string name="payment_result_success">缴费成功</string>
-    <string name="payment_result_fail">缴费失败</string>
+    <string name="payment_result_pay_success">缴费成功</string>
+    <string name="payment_result_pay_fail">缴费失败</string>
+    <string name="payment_result_result_sync_success">缴费成功，同步成功</string>
+    <string name="payment_result_result_sync_fail">缴费成功，同步失败</string>
     <string name="payment_result_this_payment_amount">本次缴纳金额：</string>
     <string name="payment_result_payment_method">支付方式：</string>
     <string name="payment_result_bank_name">入账名称：</string>

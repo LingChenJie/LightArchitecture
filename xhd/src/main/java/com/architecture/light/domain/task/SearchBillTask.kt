@@ -2,10 +2,12 @@ package com.architecture.light.domain.task
 
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.helper.JsonHelper
+import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.remote.ResponseCode
 import com.architecture.light.data.remote.bean.SearchBillRequest
 import com.architecture.light.data.remote.bean.SearchBillResponse
 import com.architecture.light.data.remote.bean.base.RequestBean
+import com.architecture.light.helper.TransHelper
 
 /**
  * Created by SuQi on 2022/9/1.
@@ -15,8 +17,9 @@ class SearchBillTask : HttpTask() {
 
     override fun onAssembly(): RequestBean {
         val request = SearchBillRequest()
-        request.cardID = "34222419890827123X"//param.cardID
+        request.cardID = param.cardID
         request.tel = param.tel
+        request.serialNumber = TransHelper.getTransactionSerialNumber(param)
         return request
     }
 
@@ -26,9 +29,12 @@ class SearchBillTask : HttpTask() {
             if (response.data != null && response.data.size > 0) {
                 param.responseCode = ErrorCode.SUCCESS
                 param.responseMessage = response.msg
+                if (response.data.size == 1) {
+                    response.data[0].isChecked = true
+                }
                 param.searchBillResponse = response
             } else {
-                param.responseCode = ErrorCode.DATA_EMPTY
+                param.responseCode = AppErrorCode.PRINT_DATA_NOT_FOUND
                 param.responseMessage = ErrorCode.getMessage(param.responseCode)
             }
         } else {

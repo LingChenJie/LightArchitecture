@@ -11,7 +11,6 @@ import java.util.List;
 public class NotifyCollectionRequest extends RequestBean {
     private String PosNO;
     private String SerialNumber;
-    private String ZygwGUID;
     private String ProjGUID;
     private String RoomGUID;
     private String LyrCode;
@@ -29,7 +28,7 @@ public class NotifyCollectionRequest extends RequestBean {
     public static class Getin {
         private String ItemNameGUID;
         private String ItemName;
-        private double Amount;
+        private String Amount;
         private String FeeGUID;
         private String PosCode;
         private String PosAmount;
@@ -51,11 +50,11 @@ public class NotifyCollectionRequest extends RequestBean {
             ItemName = itemName;
         }
 
-        public double getAmount() {
+        public String getAmount() {
             return Amount;
         }
 
-        public void setAmount(double amount) {
+        public void setAmount(String amount) {
             Amount = amount;
         }
 
@@ -106,14 +105,6 @@ public class NotifyCollectionRequest extends RequestBean {
 
     public void setSerialNumber(String serialNumber) {
         SerialNumber = serialNumber;
-    }
-
-    public String getZygwGUID() {
-        return ZygwGUID;
-    }
-
-    public void setZygwGUID(String zygwGUID) {
-        ZygwGUID = zygwGUID;
     }
 
     public String getProjGUID() {

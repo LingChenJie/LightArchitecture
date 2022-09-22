@@ -5,6 +5,7 @@ import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.data.model.db.entity.TransData
+import com.architecture.light.data.remote.bean.SearchReserveResponse
 import com.architecture.light.databinding.ActivityChooseReserveBinding
 import com.architecture.light.domain.transaction.action.ActionChooseReserve
 import com.architecture.light.domain.transaction.action.UIParams
@@ -42,6 +43,7 @@ class ChooseReserveActivity : AppActivityForAction() {
                     break
                 }
             }
+            refreshUI(data)
         }
         binding.recyclerView.adapter = adapter
         binding.btConfirm.click {
@@ -49,6 +51,15 @@ class ChooseReserveActivity : AppActivityForAction() {
             finish(ActionResult(ErrorCode.SUCCESS, info))
         }
         binding.btConfirm.isEnabled = false
+    }
+
+    private fun refreshUI(data: MutableList<SearchReserveResponse.Data>) {
+        for (bean in data) {
+            if (bean.isChecked) {
+                binding.btConfirm.isEnabled = true
+                break
+            }
+        }
     }
 
 }

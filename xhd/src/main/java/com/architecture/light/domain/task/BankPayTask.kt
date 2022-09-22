@@ -1,6 +1,7 @@
 package com.architecture.light.domain.task
 
 import com.android.architecture.constant.ErrorCode
+import com.android.architecture.helper.DateHelper
 import com.architecture.light.constant.Constant
 import com.architecture.light.data.pay.bean.TransMemo
 import com.architecture.light.helper.AmountHelper
@@ -28,6 +29,8 @@ class BankPayTask : PayTask() {
             response.payData = payData
             response.voucherNumber = payData.traceNo
             response.refNo = payData.refNo
+            response.transactionDate = payData.date
+            response.transactionTime = payData.time
         } else {
             response.responseCode = payData.resCode
             response.responseMessage = payData.resDesc
@@ -41,6 +44,8 @@ class BankPayTask : PayTask() {
             payData.resDesc = "交易成功"
             payData.traceNo = "000012"
             payData.refNo = "123456789012"
+            payData.date = DateHelper.dateString
+            payData.time = DateHelper.timeString
             onPostExecute(payData)
         } else {
             super.analysisResponse(response)

@@ -1,10 +1,13 @@
 package com.architecture.light.domain.task
 
+import com.android.architecture.helper.DateHelper
 import com.android.architecture.helper.JsonHelper
+import com.architecture.light.data.remote.ResponseCode
 import com.architecture.light.data.remote.bean.NotifyCollectionRequest
 import com.architecture.light.data.remote.bean.NotifyCollectionResponse
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.data.remote.bean.base.RequestBean
+import com.architecture.light.helper.TransHelper
 import com.architecture.light.settings.AccountCache
 import com.architecture.light.utils.DeviceUtils
 
@@ -17,12 +20,11 @@ class NotifyCollectionTask : HttpTask() {
     override fun onAssembly(): RequestBean {
         val request = NotifyCollectionRequest()
         request.posNO = DeviceUtils.getDeviceSN()
-        request.serialNumber = param.voucherNumber
-        request.zygwGUID = param.zygwGUID
+        request.serialNumber = TransHelper.getTransactionSerialNumber(param)
         request.projGUID = param.projGUID
         request.roomGUID = param.roomGUID
         request.lyrCode = AccountCache.getBillRecipient()
-        request.skDate = param.transactionDate
+        request.skDate = DateHelper.getDateFormatString(millis = param.transactionTimeMillis)
         request.kpr = AccountCache.getAccount()
         request.jkr = param.cstName
         val roomResponse = param.searchRoomResponse!!
@@ -41,7 +43,7 @@ class NotifyCollectionTask : HttpTask() {
                 getin = NotifyCollectionRequest.Getin()
                 getin.itemNameGUID = fee.itemNameGUID
                 getin.itemName = fee.itemName
-                getin.amount = fee.paymentAmount
+                getin.amount = fee.paymentAmount.toString()
                 getin.feeGUID = fee.feeGUID
                 getin.posCode = param.refNo
                 getin.rzBank = param.bankName
@@ -54,19 +56,13 @@ class NotifyCollectionTask : HttpTask() {
 
     override fun onPostExecute(responseStr: String) {
         val response = JsonHelper.toBean<NotifyCollectionResponse>(responseStr)
-//        if (response.code == ResponseCode.SUCCESS) {
-//            if (response.data != null && response.data.size > 0) {
-//                param.responseCode = ErrorCode.SUCCESS
-//                param.responseMessage = response.msg
-//                param.searchRoomResponse = response
-//            } else {
-//                param.responseCode = ErrorCode.DATA_EMPTY
-//                param.responseMessage = ErrorCode.getMessage(param.responseCode)
-//            }
-//        } else {
-//            param.responseCode = response.code
-//            param.responseMessage = response.msg
-//        }
+        if (response.code == ResponseCode.SUCCESS) {
+            param.responseMessage = response.msg
+            param.vouchGUID = response.data.vouchGUID
+        } else {
+            param.responseCode = response.code
+            param.responseMessage = response.msg
+        }
     }
 
 }

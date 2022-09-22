@@ -3,6 +3,8 @@ package com.architecture.light.helper
 import com.android.architecture.extension.getString
 import com.architecture.light.R
 import com.architecture.light.constant.TransactionPlatform
+import com.architecture.light.data.model.db.entity.TransData
+import com.architecture.light.utils.DeviceUtils
 
 /**
  * File describe:
@@ -20,6 +22,13 @@ object TransHelper {
             TransactionPlatform.WechatPay -> getString(R.string.payment_wechat)
             else -> ""
         }
+    }
+
+    fun getTransactionSerialNumber(transData: TransData): String {
+        val sn = DeviceUtils.getDeviceSN()
+        val date = transData.transactionDate
+        val time = transData.transactionTime
+        return sn + date + time + transData.voucherNumber
     }
 
 }

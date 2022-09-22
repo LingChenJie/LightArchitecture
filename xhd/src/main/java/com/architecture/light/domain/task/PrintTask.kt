@@ -2,9 +2,9 @@ package com.architecture.light.domain.task
 
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.task.BaseTask
+import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.data.remote.bean.SearchBillResponse
-import com.architecture.light.ext.toastWarn
 import com.architecture.light.helper.BillHelper
 
 /**
@@ -39,11 +39,12 @@ class PrintTask : BaseTask<TransData, TransData>() {
 
                 override fun fail(code: Int, msg: String) {
                     param.responseCode = code.toString()
-                    param.responseMessage = msg
+                    param.responseMessage = "打印失败，$msg"
                 }
             })
         } else {
-            toastWarn("未找到要打印的数据")
+            param.responseCode = AppErrorCode.PRINT_DATA_NOT_FOUND
+            param.responseMessage = ErrorCode.getMessage(param.responseCode)
         }
     }
 

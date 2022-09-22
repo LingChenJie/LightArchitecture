@@ -71,7 +71,7 @@ class EditorFragment : AppFragment<MviActivity>() {
                     binding.etTitle.setText(this.title)
                     binding.etContent.setText(this.content)
                     binding.tvTitle.text = getString(R.string.last_time_modify)
-                    binding.tvTime.text = DateHelper.getDateFormatString(this.modifyTime)
+                    binding.tvTime.text = DateHelper.getDateFormatString(millis = this.modifyTime)
                 }
             }
         }
