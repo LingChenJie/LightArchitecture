@@ -7,6 +7,7 @@ import com.architecture.light.constant.TransactionPlatform
 import com.architecture.light.constant.TransactionStatus
 import com.architecture.light.data.pay.bean.TransMemo
 import com.architecture.light.data.remote.bean.SearchBillResponse
+import com.architecture.light.data.remote.bean.SearchPaymentResponse
 import com.architecture.light.data.remote.bean.SearchReserveResponse
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import java.io.Serializable
@@ -34,6 +35,7 @@ data class TransData(
     var zygwGUID: String = "",
     var projGUID: String = "",
     var roomGUID: String = "",
+    var bookingGUID: String = "",
     var cardID: String? = "",
     var tel: String? = "",
     var roomInfo: String? = "",
@@ -63,6 +65,8 @@ data class TransData(
     var searchRoomResponse: SearchRoomResponse? = null,
     @Ignore
     var searchReserveResponse: SearchReserveResponse? = null,
+    @Ignore
+    var searchPaymentResponse: SearchPaymentResponse? = null,
     @Ignore
     var searchBillResponse: SearchBillResponse? = null,
     @Ignore

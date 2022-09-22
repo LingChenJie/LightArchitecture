@@ -12,144 +12,33 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
         android:background="@drawable/title_view_bg"
-        app:title_text="@string/payment_select_payment" />
-
-    <com.hjq.shape.layout.ShapeLinearLayout
-        android:id="@+id/layout_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_15"
-        android:layout_marginTop="@dimen/dp_27"
-        android:layout_marginEnd="@dimen/dp_15"
-        android:orientation="vertical"
-        android:paddingStart="@dimen/dp_9"
-        android:paddingTop="@dimen/dp_13"
-        android:paddingEnd="@dimen/dp_9"
-        android:paddingBottom="@dimen/dp_13"
-        app:shape_radius="@dimen/dp_5"
-        app:shape_solidColor="@color/white"
-        app:shape_solidSelectedColor="#0061A7">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.hjq.shape.view.ShapeTextView
-                android:id="@+id/label_custom_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/room_custom_name"
-                android:textSize="@dimen/sp_11"
-                android:textStyle="bold"
-                app:shape_textColor="#999999"
-                app:shape_textSelectedColor="@color/white" />
-
-            <com.hjq.shape.view.ShapeTextView
-                android:id="@+id/tv_custom_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:textSize="@dimen/sp_11"
-                app:shape_textColor="#162234"
-                app:shape_textSelectedColor="@color/white"
-                tools:text="XXXX" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10">
-
-            <com.hjq.shape.view.ShapeTextView
-                android:id="@+id/label_custom_phone"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/room_custom_phone"
-                android:textSize="@dimen/sp_11"
-                android:textStyle="bold"
-                app:shape_textColor="#999999"
-                app:shape_textSelectedColor="@color/white" />
-
-            <com.hjq.shape.view.ShapeTextView
-                android:id="@+id/tv_custom_phone"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:textSize="@dimen/sp_11"
-                app:shape_textColor="#162234"
-                app:shape_textSelectedColor="@color/white"
-                tools:text="XXXX" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_10">
-
-            <com.hjq.shape.view.ShapeTextView
-                android:id="@+id/label_custom_card_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/room_custom_card_id"
-                android:textSize="@dimen/sp_11"
-                android:textStyle="bold"
-                app:shape_textColor="#999999"
-                app:shape_textSelectedColor="@color/white" />
-
-            <com.hjq.shape.view.ShapeTextView
-                android:id="@+id/tv_custom_card_id"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:textSize="@dimen/sp_11"
-                app:shape_textColor="#162234"
-                app:shape_textSelectedColor="@color/white"
-                tools:text="XXXX" />
-
-        </LinearLayout>
-
-    </com.hjq.shape.layout.ShapeLinearLayout>
-
+        app:title_text="@string/reserve_select" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dp_17"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/dp_15"
+        android:layout_marginEnd="@dimen/dp_15"
         android:orientation="vertical"
-        android:paddingStart="@dimen/dp_15"
-        android:paddingEnd="@dimen/dp_15">
+        android:paddingTop="@dimen/dp_27">
 
-        <include layout="@layout/layout_reserve_title" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reserve_select_please"
+            android:textColor="#162234"
+            android:textSize="@dimen/sp_13"
+            android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/dp_5"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp_17"
+            android:layout_weight="1"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/adapter_reserve_list" />
+            tools:listitem="@layout/adapter_reserve_list"/>
 
     </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/bt_confirm"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_40"
-        android:layout_marginStart="@dimen/dp_17"
-        android:layout_marginTop="@dimen/dp_20"
-        android:layout_marginEnd="@dimen/dp_17"
-        android:layout_marginBottom="@dimen/dp_20"
-        android:background="@drawable/selector_button_bg_round"
-        android:gravity="center"
-        android:text="@string/payment_confirm"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/sp_15" />
 
 </LinearLayout>

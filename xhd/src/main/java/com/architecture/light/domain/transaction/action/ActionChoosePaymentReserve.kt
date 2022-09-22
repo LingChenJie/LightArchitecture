@@ -4,10 +4,9 @@ import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.extension.openActivity
 import com.android.architecture.ui.page.BaseActivity
 import com.architecture.light.data.model.db.entity.TransData
-import com.architecture.light.data.remote.bean.SearchReserveResponse
 import com.architecture.light.data.remote.bean.SearchRoomResponse
-import com.architecture.light.domain.transaction.action.activity.ChooseReserveActivity
-import com.architecture.light.domain.transaction.action.activity.ChooseRoomActivity
+import com.architecture.light.domain.transaction.action.activity.ChoosePaymentActivity
+import com.architecture.light.domain.transaction.action.activity.ChoosePaymentReserveActivity
 
 /**
  * File describe:
@@ -16,7 +15,7 @@ import com.architecture.light.domain.transaction.action.activity.ChooseRoomActiv
  * Modify date: 2022/9/1
  * Version: 1
  */
-class ActionChooseReserve(listener: ActionStartListener) : AAction(listener) {
+class ActionChoosePaymentReserve(listener: ActionStartListener) : AAction(listener) {
 
     private var activity: BaseActivity? = null
     private lateinit var transData: TransData
@@ -27,7 +26,7 @@ class ActionChooseReserve(listener: ActionStartListener) : AAction(listener) {
     }
 
     override fun onExecute() {
-        activity!!.openActivity<ChooseReserveActivity> {
+        activity!!.openActivity<ChoosePaymentReserveActivity> {
             putExtra(UIParams.TRANS_DATA, transData)
         }
     }
@@ -38,9 +37,10 @@ class ActionChooseReserve(listener: ActionStartListener) : AAction(listener) {
     }
 
     data class Info(
-        val bookingGUID: String,
-        val cstName: String,
-        val searchReserveResponse: SearchReserveResponse
+        val totalAmount: Double,
+        val unpaidAmount: Double,
+        val amount: Double,
+        val searchRoomResponse: SearchRoomResponse
     )
 
 }

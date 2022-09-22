@@ -6,7 +6,9 @@ import android.view.ViewGroup
 import com.android.architecture.extension.click
 import com.android.architecture.ui.adapter.BaseAdapter
 import com.architecture.light.data.remote.bean.SearchReserveResponse
+import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.databinding.AdapterReserveListBinding
+import com.architecture.light.databinding.AdapterRoomListBinding
 
 /**
  * File describe:
@@ -32,12 +34,24 @@ class ChooseReserveAdapter(val context: Context) :
         position: Int
     ) {
         val binding = holder.binding
-        binding.tvNo.text = item.projNum
-        binding.tvPaymentName.text = item.projGUID
-        binding.tvReserveNumber.text = item.bookingGUID
+        binding.tvCustomName.text = item.cstName
+        binding.tvCustomPhone.text = item.tel
+        binding.tvCustomCardId.text = item.cardID
+        binding.tvProjectNum.text = item.projNum
+
         binding.layoutItem.isSelected = item.isChecked
-        binding.layoutItem.click {
-            data[position].isChecked = !data[position].isChecked
+        binding.labelCustomName.isSelected = item.isChecked
+        binding.tvCustomName.isSelected = item.isChecked
+        binding.labelCustomPhone.isSelected = item.isChecked
+        binding.tvCustomPhone.isSelected = item.isChecked
+        binding.labelCustomCardId.isSelected = item.isChecked
+        binding.tvCustomCardId.isSelected = item.isChecked
+        binding.labelProjectNum.isSelected = item.isChecked
+        binding.tvProjectNum.isSelected = item.isChecked
+
+        binding.root.click {
+            data.forEach { it.isChecked = false }
+            data[position].isChecked = true
             notifyDataSetChanged()
             mOnItemClickListener?.onItemClick(it.id, position, item)
         }

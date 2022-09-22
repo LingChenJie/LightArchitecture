@@ -52,6 +52,7 @@ class ConnectSetActivity : AppActivity() {
             if (ip.valid && port.valid) {
                 PayCache.saveIp(ip)
                 PayCache.savePort(port)
+                toastSucc("保存成功")
             }
         }
         binding.layoutConnectTest.click {

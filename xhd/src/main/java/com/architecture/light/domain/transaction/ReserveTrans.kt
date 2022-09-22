@@ -21,7 +21,8 @@ class ReserveTrans : BaseTransaction() {
         INPUT_ROOM_INFO,
         SEARCH_RESERVE_TASK,
         CHOOSE_RESERVE,
-        INPUT_AMOUNT,
+        SEARCH_PAYMENT_TASK,
+        CHOOSE_PAYMENT,
         CHOOSE_PAYMENT_METHOD,
         BANK_PAY_TASK,
         CODE_PAY_TASK,
@@ -61,10 +62,14 @@ class ReserveTrans : BaseTransaction() {
             (it as ActionChooseReserve).setParam(currentActivity, transData)
         }
         bind(State.CHOOSE_RESERVE.name, actionChooseReserve)
-        val actionInputAmount = ActionInputAmount {
-            (it as ActionInputAmount).setParam(currentActivity)
+        val actionSearchPaymentTask = ActionHttpTask {
+            (it as ActionHttpTask).setParam(SearchPaymentTask(), transData, currentActivity)
         }
-        bind(State.INPUT_AMOUNT.name, actionInputAmount)
+        bind(State.SEARCH_PAYMENT_TASK.name, actionSearchPaymentTask)
+        val actionChoosePayment = ActionChoosePaymentReserve {
+            (it as ActionChoosePaymentReserve).setParam(currentActivity, transData)
+        }
+        bind(State.CHOOSE_PAYMENT.name, actionChoosePayment)
         val actionChoosePaymentMethod = ActionChoosePaymentMethod {
             (it as ActionChoosePaymentMethod).setParam(currentActivity, transData, false)
         }
@@ -182,16 +187,31 @@ class ReserveTrans : BaseTransaction() {
             State.CHOOSE_RESERVE -> {
                 if (code == ErrorCode.SUCCESS) {
                     val info = data as ActionChooseReserve.Info
+                    transData.bookingGUID = info.bookingGUID
+                    transData.cstName = info.cstName
                     transData.searchReserveResponse = info.searchReserveResponse
-                    gotoState(State.INPUT_AMOUNT.name)
+                    gotoState(State.SEARCH_PAYMENT_TASK.name)
                 } else {
                     gotoState(State.SELECT_QUERY_METHOD.name)
                 }
             }
-            State.INPUT_AMOUNT -> {
+            State.SEARCH_PAYMENT_TASK -> {
                 if (code == ErrorCode.SUCCESS) {
-                    val info = data as ActionInputAmount.Info
-                    transData.amount = info.amount
+                    if (transData.responseCode == ErrorCode.SUCCESS) {
+                        gotoState(State.CHOOSE_PAYMENT.name)
+                    } else {
+                        toastTransResult()
+                        gotoState(State.CHOOSE_RESERVE.name)
+                    }
+                } else {
+                    toastActionResult(result)
+                    gotoState(State.CHOOSE_RESERVE.name)
+                }
+            }
+            State.CHOOSE_PAYMENT -> {
+                if (code == ErrorCode.SUCCESS) {
+                    val info = data as ActionChoosePaymentReserve.Info
+                    //transData.searchReserveResponse = info.searchReserveResponse
                     gotoState(State.CHOOSE_PAYMENT_METHOD.name)
                 } else {
                     gotoState(State.CHOOSE_RESERVE.name)
@@ -210,7 +230,7 @@ class ReserveTrans : BaseTransaction() {
                         gotoState(State.CODE_PAY_TASK.name)
                     }
                 } else {
-                    gotoState(State.INPUT_AMOUNT.name)
+                    gotoState(State.CHOOSE_PAYMENT.name)
                 }
             }
             State.BANK_PAY_TASK,

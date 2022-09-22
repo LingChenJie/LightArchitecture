@@ -52,6 +52,14 @@
             android:theme="@style/Anim_fade"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
+            android:name=".ui.page.activity.PaymentSyncActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
+        <activity
+            android:name=".ui.page.activity.VoidSyncActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
+        <activity
             android:name=".domain.transaction.action.activity.InputLoginInfoActivity"
             android:launchMode="singleTask"
             android:theme="@style/Anim_fade" />
@@ -113,6 +121,10 @@
             android:theme="@style/Anim_fade" />
         <activity
             android:name=".domain.transaction.action.activity.InputVoucherNumberActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
+        <activity
+            android:name=".domain.transaction.action.activity.ChoosePaymentReserveActivity"
             android:launchMode="singleTask"
             android:theme="@style/Anim_fade" />
         <activity
