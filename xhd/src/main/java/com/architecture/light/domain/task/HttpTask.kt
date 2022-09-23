@@ -83,4 +83,8 @@ abstract class HttpTask : BaseTask<TransData, TransData>() {
         param.responseMessage = ErrorCode.getMessage(code)
     }
 
+    fun getHttpRequest(): HttpRequest {
+        return httpRequest
+    }
+
 }

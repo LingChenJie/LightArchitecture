@@ -1,11 +1,11 @@
 package com.architecture.light.domain.transaction.action
 
 import com.android.architecture.domain.transaction.AAction
+import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.openActivity
 import com.android.architecture.ui.page.BaseActivity
 import com.architecture.light.data.model.db.entity.TransData
-import com.architecture.light.data.remote.bean.SearchPaymentResponse
-import com.architecture.light.domain.transaction.action.activity.ChoosePaymentReserveActivity
+import com.architecture.light.domain.transaction.action.activity.ShowPayResultReserveActivity
 
 /**
  * File describe:
@@ -14,18 +14,21 @@ import com.architecture.light.domain.transaction.action.activity.ChoosePaymentRe
  * Modify date: 2022/9/1
  * Version: 1
  */
-class ActionChoosePaymentReserve(listener: ActionStartListener) : AAction(listener) {
+class ActionShowPayResultReserve(listener: ActionStartListener) : AAction(listener) {
 
     private var activity: BaseActivity? = null
-    private lateinit var transData: TransData
+    private var actionResult: ActionResult? = null
+    private var transData: TransData? = null
 
-    fun setParam(activity: BaseActivity, transData: TransData) {
-        this.activity = activity
+    fun setParam(actionResult: ActionResult, transData: TransData, activity: BaseActivity) {
+        this.actionResult = actionResult
         this.transData = transData
+        this.activity = activity
     }
 
     override fun onExecute() {
-        activity!!.openActivity<ChoosePaymentReserveActivity> {
+        activity!!.openActivity<ShowPayResultReserveActivity> {
+            putExtra(UIParams.ACTION_RESULT, actionResult)
             putExtra(UIParams.TRANS_DATA, transData)
         }
     }
@@ -35,8 +38,6 @@ class ActionChoosePaymentReserve(listener: ActionStartListener) : AAction(listen
         activity = null
     }
 
-    data class Info(
-        val searchPaymentResponse: SearchPaymentResponse
-    )
+    class TelInfo(val tel: String)
 
 }

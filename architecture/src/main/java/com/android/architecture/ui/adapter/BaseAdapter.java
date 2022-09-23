@@ -48,7 +48,7 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
         this.mOnItemLongClickListener = listener;
     }
 
-    protected List<T> getData() {
+    public List<T> getData() {
         return data;
     }
 

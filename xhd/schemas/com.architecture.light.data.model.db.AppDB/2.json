@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 1,
-    "identityHash": "3966284b1cfba514a71bbdae8d3a476b",
+    "version": 2,
+    "identityHash": "57cf81f167d7de3e74e440ccff5a3d12",
     "entities": [
       {
         "tableName": "Note",
@@ -94,7 +94,7 @@
       },
       {
         "tableName": "TransData",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `responseCode` TEXT NOT NULL, `responseMessage` TEXT NOT NULL, `transactionYear` TEXT NOT NULL, `transactionTimeMillis` INTEGER NOT NULL, `transactionDate` TEXT NOT NULL, `transactionTime` TEXT NOT NULL, `transactionPlatform` INTEGER NOT NULL, `transactionStatus` TEXT NOT NULL, `transactionStatusMessage` TEXT NOT NULL, `account` TEXT NOT NULL, `zygwGUID` TEXT NOT NULL, `projGUID` TEXT NOT NULL, `roomGUID` TEXT NOT NULL, `bookingGUID` TEXT NOT NULL, `cardID` TEXT, `tel` TEXT, `roomInfo` TEXT, `totalAmount` REAL NOT NULL, `unpaidAmount` REAL NOT NULL, `amount` REAL NOT NULL, `bankAccount` TEXT NOT NULL, `bankName` TEXT NOT NULL, `cstName` TEXT NOT NULL, `orderNumber` TEXT NOT NULL, `isRePrint` INTEGER NOT NULL, `voucherNumber` TEXT NOT NULL, `refNo` TEXT NOT NULL, `vouchGUID` TEXT NOT NULL, `originalVoucherNumber` TEXT NOT NULL, `originalOrderNumber` TEXT NOT NULL, `payData` TEXT, `searchRoomResponse` TEXT, `searchReserveResponse` TEXT, `searchPaymentResponse` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `responseCode` TEXT NOT NULL, `responseMessage` TEXT NOT NULL, `transactionYear` TEXT NOT NULL, `transactionTimeMillis` INTEGER NOT NULL, `transactionDate` TEXT NOT NULL, `transactionTime` TEXT NOT NULL, `transactionPlatform` INTEGER NOT NULL, `transactionStatus` TEXT NOT NULL, `transactionStatusMessage` TEXT NOT NULL, `account` TEXT NOT NULL, `zygwGUID` TEXT NOT NULL, `projGUID` TEXT NOT NULL, `roomGUID` TEXT NOT NULL, `bookingGUID` TEXT NOT NULL, `cardID` TEXT, `tel` TEXT, `roomInfo` TEXT, `totalAmount` REAL NOT NULL, `unpaidAmount` REAL NOT NULL, `amount` REAL NOT NULL, `bankAccount` TEXT NOT NULL, `bankName` TEXT NOT NULL, `cstName` TEXT NOT NULL, `orderNumber` TEXT NOT NULL, `isRePrint` INTEGER NOT NULL, `voucherNumber` TEXT NOT NULL, `refNo` TEXT NOT NULL, `vouchGUID` TEXT NOT NULL, `originalVoucherNumber` TEXT NOT NULL, `originalOrderNumber` TEXT NOT NULL, `payDataStr` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "tId",
@@ -283,28 +283,10 @@
             "notNull": true
           },
           {
-            "fieldPath": "payData",
-            "columnName": "payData",
+            "fieldPath": "payDataStr",
+            "columnName": "payDataStr",
             "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "searchRoomResponse",
-            "columnName": "searchRoomResponse",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "searchReserveResponse",
-            "columnName": "searchReserveResponse",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "searchPaymentResponse",
-            "columnName": "searchPaymentResponse",
-            "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -320,7 +302,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3966284b1cfba514a71bbdae8d3a476b')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '57cf81f167d7de3e74e440ccff5a3d12')"
     ]
   }
 }

@@ -2,13 +2,10 @@ package com.architecture.light.domain.transaction.action.activity
 
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
-import com.android.architecture.extension.click
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.data.model.db.entity.TransData
-import com.architecture.light.data.remote.bean.SearchReserveResponse
 import com.architecture.light.databinding.ActivityChooseReserveBinding
 import com.architecture.light.domain.transaction.action.ActionChooseReserve
-import com.architecture.light.domain.transaction.action.ActionChooseRoom
 import com.architecture.light.domain.transaction.action.UIParams
 import com.architecture.light.ui.adapter.ChooseReserveAdapter
 
@@ -31,7 +28,7 @@ class ChooseReserveActivity : AppActivityForAction() {
         setContentView(binding.root)
         val transData = intent.getSerializableExtra(UIParams.TRANS_DATA) as TransData
         val data = transData.searchReserveResponse!!.data
-        adapter.setData(data)
+        adapter.data = data
         adapter.setItemClickListener { _, _, item ->
             val room =
                 ActionChooseReserve.Info(

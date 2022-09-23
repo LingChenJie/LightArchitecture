@@ -21,8 +21,8 @@ public class NotifyPrepaidRequest extends RequestBean {
     private String Remark;
 
     public NotifyPrepaidRequest() {
-        setInterfaceId("search");
-        setTradeType("4");
+        setInterfaceId("charge");
+        setTradeType("1");
     }
 
     public static class Getin {

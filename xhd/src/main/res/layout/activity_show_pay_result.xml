@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp_3"
-            android:textColor="#666666"
+            android:textColor="#EF7029"
             android:textSize="@dimen/sp_11"
             android:visibility="gone"
             tools:text="密码错误（55）" />
@@ -113,7 +113,7 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
@@ -122,24 +122,27 @@
             android:paddingEnd="@dimen/dp_67">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/payment_result_bank_name"
                 android:textColor="#666666"
                 android:textSize="@dimen/sp_11" />
 
             <TextView
                 android:id="@+id/tv_payment_bank_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_weight="2"
+                android:gravity="end"
                 android:textColor="#162234"
                 android:textSize="@dimen/sp_11"
                 tools:text="20,000.00" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
@@ -148,22 +151,24 @@
             android:paddingEnd="@dimen/dp_67">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/payment_result_bank_account"
                 android:textColor="#666666"
                 android:textSize="@dimen/sp_11" />
 
             <TextView
                 android:id="@+id/tv_payment_bank_account"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                android:layout_weight="2"
+                android:gravity="end"
                 android:textColor="#162234"
                 android:textSize="@dimen/sp_11"
                 tools:text="20,000.00" />
 
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

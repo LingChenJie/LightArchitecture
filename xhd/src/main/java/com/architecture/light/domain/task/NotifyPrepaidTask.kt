@@ -1,9 +1,12 @@
 package com.architecture.light.domain.task
 
+import com.android.architecture.helper.DateHelper
 import com.android.architecture.helper.JsonHelper
-import com.architecture.light.data.remote.bean.NotifyCollectionResponse
+import com.architecture.light.data.remote.ResponseCode
 import com.architecture.light.data.remote.bean.NotifyPrepaidRequest
+import com.architecture.light.data.remote.bean.NotifyPrepaidResponse
 import com.architecture.light.data.remote.bean.base.RequestBean
+import com.architecture.light.helper.TransHelper
 import com.architecture.light.settings.AccountCache
 import com.architecture.light.utils.DeviceUtils
 
@@ -16,30 +19,41 @@ class NotifyPrepaidTask : HttpTask() {
     override fun onAssembly(): RequestBean {
         val request = NotifyPrepaidRequest()
         request.posNO = DeviceUtils.getDeviceSN()
-        request.serialNumber = param.voucherNumber
+        request.serialNumber = TransHelper.getTransactionSerialNumber(param)
         request.projGUID = param.projGUID
+        request.bookingGUID = param.bookingGUID
         request.lyrCode = AccountCache.getBillRecipient()
-        request.skDate = param.transactionDate
+        request.skDate = DateHelper.getDateFormatString(millis = param.transactionTimeMillis)
         request.kpr = AccountCache.getAccount()
         request.jkr = param.cstName
+        val searchPaymentResponse = param.searchPaymentResponse!!
+        val getinList = mutableListOf<NotifyPrepaidRequest.Getin>()
+        val getin: NotifyPrepaidRequest.Getin
+        for (payment in searchPaymentResponse.data!!) {
+            if (payment.isSubLevel && payment.isChecked) {
+                getin = NotifyPrepaidRequest.Getin()
+                getin.itemNameGUID = payment.feeItemGUID
+                getin.itemName = payment.feeItemName
+                getin.amount = param.amount.toString()
+                getin.posCode = param.refNo
+                getin.rzBank = param.bankName
+                getinList.add(getin)
+                break
+            }
+        }
+        request.getinList = getinList
         return request
     }
 
     override fun onPostExecute(responseStr: String) {
-        val response = JsonHelper.toBean<NotifyCollectionResponse>(responseStr)
-//        if (response.code == ResponseCode.SUCCESS) {
-//            if (response.data != null && response.data.size > 0) {
-//                param.responseCode = ErrorCode.SUCCESS
-//                param.responseMessage = response.msg
-//                param.searchRoomResponse = response
-//            } else {
-//                param.responseCode = ErrorCode.DATA_EMPTY
-//                param.responseMessage = ErrorCode.getMessage(param.responseCode)
-//            }
-//        } else {
-//            param.responseCode = response.code
-//            param.responseMessage = response.msg
-//        }
+        val response = JsonHelper.toBean<NotifyPrepaidResponse>(responseStr)
+        if (response.code == ResponseCode.SUCCESS) {
+            param.responseMessage = response.msg
+            param.vouchGUID = response.data.vouchGUID
+        } else {
+            param.responseCode = response.code
+            param.responseMessage = response.msg
+        }
     }
 
 }

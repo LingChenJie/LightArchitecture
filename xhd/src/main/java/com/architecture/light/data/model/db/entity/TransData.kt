@@ -3,8 +3,13 @@ package com.architecture.light.data.model.db.entity
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
 import com.architecture.light.constant.TransactionPlatform
 import com.architecture.light.constant.TransactionStatus
+import com.architecture.light.data.model.db.entity.convert.PayDataConvert
+import com.architecture.light.data.model.db.entity.convert.SearchPaymentResponseConvert
+import com.architecture.light.data.model.db.entity.convert.SearchReserveResponseConvert
+import com.architecture.light.data.model.db.entity.convert.SearchRoomResponseConvert
 import com.architecture.light.data.pay.bean.TransMemo
 import com.architecture.light.data.remote.bean.SearchBillResponse
 import com.architecture.light.data.remote.bean.SearchPaymentResponse
@@ -16,10 +21,16 @@ import java.io.Serializable
  * Created by SuQi on 2022/9/1.
  * Describe:
  */
+@TypeConverters(
+    PayDataConvert::class,
+    SearchRoomResponseConvert::class,
+    SearchReserveResponseConvert::class,
+    SearchPaymentResponseConvert::class
+)
 @Entity
 data class TransData(
     @PrimaryKey(autoGenerate = true)
-    val tId: Long = 0,
+    var tId: Long = 0,
     var responseCode: String = "",
     var responseMessage: String = "",
     var transactionYear: String = "",
@@ -57,15 +68,10 @@ data class TransData(
     var originalVoucherNumber: String = "",
     var originalOrderNumber: String = "",
 
-    var payDataStr: String = "",
 
-    @Ignore
     var payData: TransMemo.PayData? = null,
-    @Ignore
     var searchRoomResponse: SearchRoomResponse? = null,
-    @Ignore
     var searchReserveResponse: SearchReserveResponse? = null,
-    @Ignore
     var searchPaymentResponse: SearchPaymentResponse? = null,
     @Ignore
     var searchBillResponse: SearchBillResponse? = null,

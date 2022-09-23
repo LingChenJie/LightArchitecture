@@ -14,10 +14,12 @@ public class SearchPaymentResponse extends ResponseBean {
     private String code;
     private List<Data> data;
 
-    public static class Data {
+    public static class Data extends ResponseBean {
         private String ParentGUID;
         private String FeeItemGUID;
         private String FeeItemName;
+        private boolean isParentLevel;
+        private boolean isSubLevel;
         private boolean isChecked;
 
         public String getParentGUID() {
@@ -42,6 +44,22 @@ public class SearchPaymentResponse extends ResponseBean {
 
         public void setFeeItemName(String feeItemName) {
             FeeItemName = feeItemName;
+        }
+
+        public boolean isParentLevel() {
+            return isParentLevel;
+        }
+
+        public void setParentLevel(boolean parentLevel) {
+            isParentLevel = parentLevel;
+        }
+
+        public boolean isSubLevel() {
+            return isSubLevel;
+        }
+
+        public void setSubLevel(boolean subLevel) {
+            isSubLevel = subLevel;
         }
 
         public boolean isChecked() {

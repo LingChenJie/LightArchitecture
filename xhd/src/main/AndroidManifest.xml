@@ -120,6 +120,10 @@
             android:launchMode="singleTask"
             android:theme="@style/Anim_fade" />
         <activity
+            android:name=".domain.transaction.action.activity.ShowPayResultReserveActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
+        <activity
             android:name=".domain.transaction.action.activity.InputVoucherNumberActivity"
             android:launchMode="singleTask"
             android:theme="@style/Anim_fade" />

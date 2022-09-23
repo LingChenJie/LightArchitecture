@@ -6,11 +6,7 @@ import android.view.ViewGroup
 import com.android.architecture.extension.click
 import com.android.architecture.ui.adapter.BaseAdapter
 import com.architecture.light.data.remote.bean.SearchPaymentResponse
-import com.architecture.light.data.remote.bean.SearchRoomResponse
-import com.architecture.light.databinding.AdapterPaymentListBinding
 import com.architecture.light.databinding.AdapterPaymentReserveListBinding
-import com.architecture.light.helper.AmountHelper
-import com.architecture.light.ui.dialog.AmountModifyDialog
 
 /**
  * File describe:
@@ -36,40 +32,14 @@ class ChoosePaymentReserveAdapter(val context: Context) :
         position: Int
     ) {
         val binding = holder.binding
-        binding.tvNo.text = (position + 1).toString()
-//        binding.tvPaymentType.text = item.itemType
-//        binding.tvPaymentName.text = item.itemName
-//        binding.tvPaymentTotalName.text = AmountHelper.formatAmount(item.amount)
-//        binding.tvPaymentNotPaidAmount.text = AmountHelper.formatAmount(item.paymentAmount)
-//        binding.layoutItem.isSelected = item.isChecked
-//        binding.layoutPaymentNotPaidAmount.click {
-//            showModifyAmountDialog(item)
-//        }
+        binding.layoutItem.isSelected = item.isChecked
+        binding.tvPaymentName.text = item.feeItemName
         binding.layoutItem.click {
-            data[position].isChecked = !data[position].isChecked
+            data.forEach { it.isChecked = false }
+            data[position].isChecked = true
             notifyDataSetChanged()
-            itemChangeListener?.change()
+            mOnItemClickListener?.onItemClick(it.id, position, item)
         }
     }
 
-    private fun showModifyAmountDialog(item: SearchRoomResponse.Data.Fee) {
-        AmountModifyDialog.Builder(context)
-            .setAmount(item.paymentAmount, item.yeAmount)
-            .setClickConfirmListener { _, amount ->
-                item.paymentAmount = amount
-                notifyDataSetChanged()
-                itemChangeListener?.change()
-            }
-            .show()
-    }
-
-    private var itemChangeListener: ItemChangeListener? = null
-
-    fun setItemChangeListener(listener: ItemChangeListener) {
-        itemChangeListener = listener
-    }
-
-    interface ItemChangeListener {
-        fun change()
-    }
 }

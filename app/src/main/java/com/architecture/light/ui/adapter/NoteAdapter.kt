@@ -35,7 +35,7 @@ class NoteAdapter : BaseAdapter<Note, AdapterNoteListBinding>() {
         val binding = holder.binding
         binding.tvTitle.text = item.title
         binding.layoutItem.clipToOutline = true
-        binding.tvTime.text = DateHelper.getDateFormatString(item.modifyTime)
+        binding.tvTime.text = DateHelper.getDateFormatString(millis = item.modifyTime)
         binding.btnMark.setImageResource(if (item.isMarked) R.drawable.icon_star else R.drawable.icon_star_board)
         binding.tvTopped.visibility = if (item.isTopping) View.VISIBLE else View.GONE
         binding.layoutItem.click { mOnItemClickListener?.onItemClick(it.id, position, item) }

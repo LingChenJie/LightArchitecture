@@ -14,6 +14,10 @@ import com.architecture.light.helper.AidlServiceFactory
  */
 class App : BaseApplication() {
 
+    companion object {
+        const val TAG = "XHD"
+    }
+
     override fun onCreate() {
         super.onCreate()
         init()
