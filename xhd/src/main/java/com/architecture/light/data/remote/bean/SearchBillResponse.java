@@ -13,9 +13,9 @@ public class SearchBillResponse extends ResponseBean {
 
     private String msg;
     private String code;
-    private List<DataBean> data;
+    private List<Data> data;
 
-    public static class DataBean extends BaseBean {
+    public static class Data extends BaseBean {
         private String ProjName = "";
         private String AmountString = "";
         private String ProjStagesName = "";
@@ -187,11 +187,11 @@ public class SearchBillResponse extends ResponseBean {
         this.code = code;
     }
 
-    public List<DataBean> getData() {
+    public List<Data> getData() {
         return data;
     }
 
-    public void setData(List<DataBean> data) {
+    public void setData(List<Data> data) {
         this.data = data;
     }
 }

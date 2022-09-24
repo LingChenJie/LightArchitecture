@@ -15,9 +15,9 @@ import com.architecture.light.data.remote.bean.SearchPaymentResponse
 class SearchPaymentResponseConvert {
 
     @TypeConverter
-    fun objectToString(payData: SearchPaymentResponse?): String {
-        if (payData != null) {
-            return JsonHelper.toJson(payData)
+    fun objectToString(response: SearchPaymentResponse?): String {
+        if (response != null) {
+            return JsonHelper.toJson(response)
         }
         return ""
     }

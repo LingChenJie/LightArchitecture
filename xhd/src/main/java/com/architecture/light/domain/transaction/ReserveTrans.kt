@@ -2,10 +2,12 @@ package com.architecture.light.domain.transaction
 
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
+import com.android.architecture.extension.getString
 import com.android.architecture.helper.AppExecutors
 import com.android.architecture.helper.DateHelper
 import com.android.architecture.helper.Logger
 import com.android.architecture.helper.RandomHelper
+import com.architecture.light.R
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.Constant
 import com.architecture.light.constant.TransactionPlatform
@@ -39,11 +41,14 @@ class ReserveTrans : BaseTransaction() {
 
     override fun bindStateOnAction() {
         val actionSelectQueryMethod = ActionSelectQueryMethod {
-            val queryMethodArray: Array<String> = arrayOf(
-                ActionSelectQueryMethod.QueryMethod.IdCard.toString(),
-                ActionSelectQueryMethod.QueryMethod.Tel.toString(),
+            (it as ActionSelectQueryMethod).setParam(
+                currentActivity,
+                getString(R.string.main_pledge_money),
+                arrayOf(
+                    ActionSelectQueryMethod.QueryMethod.IdCard.toString(),
+                    ActionSelectQueryMethod.QueryMethod.Tel.toString(),
+                )
             )
-            (it as ActionSelectQueryMethod).setParam(currentActivity, queryMethodArray)
         }
         bind(State.SELECT_QUERY_METHOD.name, actionSelectQueryMethod)
         val actionReadIdCard = ActionReadIdCard {
@@ -79,7 +84,12 @@ class ReserveTrans : BaseTransaction() {
         }
         bind(State.INPUT_AMOUNT.name, actionInputAmount)
         val actionChoosePaymentMethod = ActionChoosePaymentMethod {
-            (it as ActionChoosePaymentMethod).setParam(currentActivity, transData, false)
+            (it as ActionChoosePaymentMethod).setParam(
+                currentActivity,
+                getString(R.string.main_pledge_money),
+                transData,
+                false
+            )
         }
         bind(State.CHOOSE_PAYMENT_METHOD.name, actionChoosePaymentMethod)
         val actionBankPayTask = ActionPayTask {
@@ -94,8 +104,13 @@ class ReserveTrans : BaseTransaction() {
             (it as ActionPayTask).setParam(PayQueryTask(), transData, currentActivity)
         }
         bind(State.PAY_QUERY_TASK.name, actionPayQueryTask)
-        val actionShowPayResult = ActionShowPayResultReserve {
-            (it as ActionShowPayResultReserve).setParam(actionResult!!, transData, currentActivity)
+        val actionShowPayResult = ActionShowPayResult {
+            (it as ActionShowPayResult).setParam(
+                getString(R.string.main_pledge_money),
+                actionResult!!,
+                transData,
+                currentActivity
+            )
         }
         bind(State.SHOW_PAY_RESULT.name, actionShowPayResult)
         val actionNotifyCollectionTask = ActionHttpTask {

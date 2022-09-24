@@ -1,6 +1,7 @@
 package com.architecture.light.domain.task
 
 import com.android.architecture.constant.ErrorCode
+import com.android.architecture.extension.valid
 import com.android.architecture.helper.JsonHelper
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.remote.ResponseCode
@@ -19,7 +20,9 @@ class SearchBillTask : HttpTask() {
         val request = SearchBillRequest()
         request.cardID = param.cardID
         request.tel = param.tel
-        request.serialNumber = TransHelper.getTransactionSerialNumber(param)
+        if (param.voucherNumber.valid) {
+            request.serialNumber = TransHelper.getTransactionSerialNumber(param)
+        }
         return request
     }
 

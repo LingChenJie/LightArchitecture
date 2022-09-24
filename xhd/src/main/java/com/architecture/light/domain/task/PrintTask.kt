@@ -22,7 +22,7 @@ class PrintTask : BaseTask<TransData, TransData>() {
 
     override fun onExecute() {
         val list = param.searchBillResponse!!.data
-        var data: SearchBillResponse.DataBean? = null
+        var data: SearchBillResponse.Data? = null
         for (item in list) {
             if (item.isChecked) {
                 data = item
@@ -32,14 +32,14 @@ class PrintTask : BaseTask<TransData, TransData>() {
         if (data != null) {
             BillHelper.saveBill(data, param.isRePrint)
             BillHelper.printBill(object : BillHelper.PrintResult {
-                override fun success() {
+                override fun success(msg: String) {
                     param.responseCode = ErrorCode.SUCCESS
-                    param.responseMessage = ErrorCode.getMessage(param.responseCode)
+                    param.responseMessage = msg
                 }
 
                 override fun fail(code: Int, msg: String) {
                     param.responseCode = code.toString()
-                    param.responseMessage = "打印失败，$msg"
+                    param.responseMessage = msg
                 }
             })
         } else {

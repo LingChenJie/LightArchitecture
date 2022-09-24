@@ -17,10 +17,12 @@ import com.architecture.light.domain.transaction.action.activity.SelectQueryMeth
 class ActionSelectQueryMethod(listener: ActionStartListener) : AAction(listener) {
 
     private var activity: BaseActivity? = null
-    private var queryMethodArray: Array<String>? = null
+    private lateinit var titleName: String
+    private lateinit var queryMethodArray: Array<String>
 
     fun setParam(
         activity: BaseActivity?,
+        titleName: String,
         queryMethodArray: Array<String> = arrayOf(
             QueryMethod.IdCard.toString(),
             QueryMethod.Tel.toString(),
@@ -28,11 +30,13 @@ class ActionSelectQueryMethod(listener: ActionStartListener) : AAction(listener)
         )
     ) {
         this.activity = activity
+        this.titleName = titleName
         this.queryMethodArray = queryMethodArray
     }
 
     override fun onExecute() {
         activity!!.openActivity<SelectQueryMethodActivity> {
+            putExtra(UIParams.TITLE_NAME, titleName)
             putExtra(UIParams.QUERY_METHOD_ARRAY, queryMethodArray)
         }
     }

@@ -10,7 +10,7 @@
     <string name="last_time_modify">最后编辑于</string>
     <string name="copyright">Product by LingChenJie with love</string>
 
-    <string name="common_loading">加载中&#8230;</string>
+    <string name="common_loading">数据加载中&#8230;</string>
     <string name="common_confirm">确定</string>
     <string name="common_cancel">取消</string>
     <string name="mvi">MVI</string>
@@ -49,12 +49,15 @@
 
     <!-- 加载相关 -->
     <string name="loading_login">登录中&#8230;</string>
-    <string name="loading_room_query">房间交易信息查询中&#8230;</string>
-    <string name="loading_bill_query">账单数据拉取中&#8230;</string>
+    <string name="loading_room_query">房间信息查询中&#8230;</string>
+    <string name="loading_reserve_query">认筹金信息查询中&#8230;</string>
+    <string name="loading_payment_query">款项信息查询中&#8230;</string>
+    <string name="loading_payment_notify">缴款数据同步中&#8230;</string>
+    <string name="loading_bill_query">票据数据查询中&#8230;</string>
     <string name="loading_pay_request">支付请求中&#8230;</string>
     <string name="loading_void_request">撤销请求中&#8230;</string>
     <string name="loading_pay_query">交易查询中&#8230;</string>
-    <string name="loading_print_bill">打印数据生成中&#8230;</string>
+    <string name="loading_print_bill">票据打印中&#8230;</string>
 
     <!-- Login相关 -->
     <string name="login_username">用户名</string>
@@ -193,11 +196,13 @@
     <string name="_confirm">确认</string>
 
     <!-- 打印 -->
+    <string name="print_bill">打印</string>
     <string name="print_bill_title">新华地产房屋专用收据</string>
     <string name="print_bill_title_no">NO：</string>
     <string name="print_bill_project_name">项目名称：</string>
     <string name="print_bill_room_num">房号：</string>
     <string name="print_bill_date">收款日期：</string>
+    <string name="print_bill_amount">收款金额：</string>
     <string name="print_bill_paying_unit">缴款单位：</string>
     <string name="print_bill_rmb_capital">人民币（大写）：</string>
     <string name="print_bill_rmb_lower">金额小写：</string>
@@ -214,6 +219,11 @@
     <string name="print_bill_first_union">第一联</string>
     <string name="print_bill_second_union">第二联</string>
     <string name="print_bill_third_union">第三联</string>
+    <string name="print_bill_first_union_reprint">存根联-重打印</string>
+    <string name="print_bill_second_union_reprint">客户联-重打印</string>
+    <string name="print_bill_third_union_reprint">记账联-重打印</string>
+    <string name="print_bill_service_connect_fail">打印服务连接失败，请重试</string>
+    <string name="print_bill_data_not_found">打印数据不存在</string>
     <string name="amount_symbol">￥</string>
     <string name="_0_00">0.00</string>
 

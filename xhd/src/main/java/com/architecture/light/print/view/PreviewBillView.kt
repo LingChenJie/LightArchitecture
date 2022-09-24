@@ -27,7 +27,7 @@ class PreviewBillView(
         ViewPreviewBillBinding.inflate(layoutInflater, this, true)
     }
 
-    fun fullData(bean: SearchBillResponse.DataBean) {
+    fun fullData(bean: SearchBillResponse.Data) {
         binding.tvNo.text = bean.payNo
         binding.tvPrintUnion.text = bean.printNum
         binding.tvProjectName.text = bean.projStagesName

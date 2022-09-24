@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_code_print_0">打印数据发送成功，打印机将执行</string>
+    <string name="error_code_print_1">打印机离线或打印机未准备好</string>
+    <string name="error_code_print_2">缓存已满，不接收打印数据</string>
+    <string name="error_code_print_3">发送打印数据异常</string>
+    <string name="error_code_print_4">发送打印命令或参数错误</string>
+    <string name="error_code_print_101">打印机状态不可用</string>
+    <string name="error_code_print_102">打印失败，授权文件错误，初始化失败</string>
+    <string name="error_code_print_103">当前状态不支持打印</string>
+    <string name="error_code_print_unknown">打印机未知异常</string>
+</resources>

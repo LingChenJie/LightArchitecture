@@ -32,8 +32,10 @@ class ChoosePaymentMethodActivity : AppActivityForAction() {
 
     override fun initView() {
         setContentView(binding.root)
+        val titleName = intent.getStringExtra(UIParams.TITLE_NAME)
         val transData = intent.getSerializableExtra(UIParams.TRANS_DATA) as TransData
         val showUnpaidAmount = intent.getBooleanExtra(UIParams.SHOW_UNPAID_AMOUNT, true)
+        binding.titleView.titleText.text = titleName
         if (showUnpaidAmount) {
             binding.layoutUnpaidAmount.visibility = View.VISIBLE
         } else {

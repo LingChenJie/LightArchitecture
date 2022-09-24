@@ -25,7 +25,9 @@ class SelectQueryMethodActivity : AppActivityForAction() {
 
     override fun initView() {
         setContentView(binding.root)
+        val titleName = intent.getStringExtra(UIParams.TITLE_NAME)
         val queryMethodArray = intent.getStringArrayExtra(UIParams.QUERY_METHOD_ARRAY)!!
+        binding.titleView.titleText.text = titleName
         if (!queryMethodArray.contains(ActionSelectQueryMethod.QueryMethod.IdCard.toString())) {
             binding.layoutIdcardQuery.visibility = View.GONE
         }

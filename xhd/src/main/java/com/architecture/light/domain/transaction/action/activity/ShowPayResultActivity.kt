@@ -31,6 +31,8 @@ class ShowPayResultActivity : AppActivityForAction() {
 
     override fun initView() {
         setContentView(binding.root)
+        val titleName = intent.getStringExtra(UIParams.TITLE_NAME)
+        binding.titleView.titleText.text = titleName
         binding.titleView.backView.visibility = View.GONE
         binding.btConfirm.click {
             finish(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))

@@ -39,7 +39,7 @@ public final class CommonDialog {
             super(context);
 
             setContentView(R.layout.dialog_common);
-            setAnimStyle(BaseDialog.ANIM_IOS);
+            setAnimStyle(BaseDialog.ANIM_DEFAULT);
             setGravity(Gravity.CENTER);
 
             mContainerLayout = findViewById(R.id.ll_ui_container);

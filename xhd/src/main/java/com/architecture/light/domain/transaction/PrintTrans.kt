@@ -2,9 +2,10 @@ package com.architecture.light.domain.transaction
 
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
+import com.android.architecture.extension.getString
+import com.architecture.light.R
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.Constant
-import com.architecture.light.constant.TransactionPlatform
 import com.architecture.light.constant.TransactionStatus
 import com.architecture.light.domain.task.*
 import com.architecture.light.domain.transaction.action.*
@@ -16,17 +17,20 @@ class PrintTrans : BaseTransaction() {
         READ_ID_CARD,
         INPUT_TEL,
         SEARCH_BILL_TASK,
-        SHOW_BILL,
+        CHOOSE_BILL,
         PRINT_BILL_TASK,
     }
 
     override fun bindStateOnAction() {
         val actionSelectQueryMethod = ActionSelectQueryMethod {
-            val queryMethodArray = arrayOf(
-                ActionSelectQueryMethod.QueryMethod.IdCard.toString(),
-                ActionSelectQueryMethod.QueryMethod.Tel.toString(),
+            (it as ActionSelectQueryMethod).setParam(
+                currentActivity,
+                getString(R.string.main_print),
+                arrayOf(
+                    ActionSelectQueryMethod.QueryMethod.IdCard.toString(),
+                    ActionSelectQueryMethod.QueryMethod.Tel.toString(),
+                )
             )
-            (it as ActionSelectQueryMethod).setParam(currentActivity, queryMethodArray)
         }
         bind(State.SELECT_QUERY_METHOD.name, actionSelectQueryMethod)
         val actionReadIdCard = ActionReadIdCard {
@@ -41,6 +45,18 @@ class PrintTrans : BaseTransaction() {
             (it as ActionHttpTask).setParam(SearchBillTask(), transData, currentActivity)
         }
         bind(State.SEARCH_BILL_TASK.name, actionSearchBillTask)
+        val actionChooseBill = ActionChooseBill {
+            (it as ActionChooseBill).setParam(
+                currentActivity,
+                transData,
+                getString(R.string.main_print)
+            )
+        }
+        bind(State.CHOOSE_BILL.name, actionChooseBill)
+        val actionPrintBill = ActionPrintTask {
+            (it as ActionPrintTask).setParam(PrintTask(), transData, currentActivity)
+        }
+        bind(State.PRINT_BILL_TASK.name, actionPrintBill)
         gotoState(State.SELECT_QUERY_METHOD.name)
     }
 
@@ -98,7 +114,7 @@ class PrintTrans : BaseTransaction() {
                 if (code == ErrorCode.SUCCESS) {
                     when (transData.responseCode) {
                         ErrorCode.SUCCESS -> {
-                            gotoState(State.SHOW_BILL.name)
+                            gotoState(State.CHOOSE_BILL.name)
                         }
                         else -> {
                             toastTransResult()
@@ -110,11 +126,31 @@ class PrintTrans : BaseTransaction() {
                     gotoState(previousState)
                 }
             }
-            State.SHOW_BILL -> {
-
+            State.CHOOSE_BILL -> {
+                if (code == ErrorCode.SUCCESS) {
+                    val info = data as ActionChooseBill.Info
+                    transData.searchBillResponse = info.searchBillResponse
+                    gotoState(State.PRINT_BILL_TASK.name)
+                } else {
+                    transEnd(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))
+                }
             }
             State.PRINT_BILL_TASK -> {
-
+                if (code == ErrorCode.SUCCESS) {
+                    when (transData.responseCode) {
+                        ErrorCode.SUCCESS -> {
+                            toastTransResult()
+                            gotoState(State.CHOOSE_BILL.name)
+                        }
+                        else -> {
+                            toastTransResult()
+                            gotoState(State.CHOOSE_BILL.name)
+                        }
+                    }
+                } else {
+                    toastActionResult(result)
+                    gotoState(State.CHOOSE_BILL.name)
+                }
             }
         }
     }

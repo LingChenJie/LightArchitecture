@@ -1,12 +1,16 @@
 package com.architecture.light.helper
 
 import android.os.ConditionVariable
+import android.os.SystemClock
 import com.android.architecture.extension.getContext
+import com.android.architecture.extension.getString
 import com.android.architecture.extension.measuredView
 import com.android.architecture.helper.AppExecutors
 import com.android.architecture.helper.Logger
 import com.android.architecture.utils.TupleUtil
+import com.architecture.light.R
 import com.architecture.light.constant.Constant
+import com.architecture.light.constant.PrintErrorCode
 import com.architecture.light.data.remote.bean.SearchBillResponse
 import com.architecture.light.print.view.PreviewBillView
 import com.architecture.light.utils.ImageUtils
@@ -29,7 +33,7 @@ object BillHelper {
     private const val WIDTH = 4736 / 4
     private const val HEIGHT = 6784 / 4
 
-    fun saveBill(data: SearchBillResponse.DataBean, isRePrint: Boolean) {
+    fun saveBill(data: SearchBillResponse.Data, isRePrint: Boolean) {
         Logger.d(TAG, "saveBill start")
         val path = Constant.BILL_PATH
         val parentFile = File(path)
@@ -41,18 +45,21 @@ object BillHelper {
         val secondPath = path + File.separator + TWO
         val thirdPath = path + File.separator + THREE
         val billView = PreviewBillView(getContext())
-        data.printNum = "第一联"
-        data.customRemark = if (isRePrint) "存根联-重打印" else ""
+        data.printNum = getString(R.string.print_bill_first_union)
+        data.customRemark =
+            if (isRePrint) getString(R.string.print_bill_first_union_reprint) else ""
         billView.fullData(data)
         billView.measuredView(WIDTH, HEIGHT)
         ImageUtils.saveImage(billView, firstPath)
-        data.printNum = "第二联"
-        data.customRemark = if (isRePrint) "客户联-重打印" else ""
+        data.printNum = getString(R.string.print_bill_second_union)
+        data.customRemark =
+            if (isRePrint) getString(R.string.print_bill_second_union_reprint) else ""
         billView.fullData(data)
         billView.measuredView(WIDTH, HEIGHT)
         ImageUtils.saveImage(billView, secondPath)
-        data.printNum = "第三联"
-        data.customRemark = if (isRePrint) "记账联-重打印" else ""
+        data.printNum = getString(R.string.print_bill_third_union)
+        data.customRemark =
+            if (isRePrint) getString(R.string.print_bill_third_union_reprint) else ""
         billView.fullData(data)
         billView.measuredView(WIDTH, HEIGHT)
         ImageUtils.saveImage(billView, thirdPath)
@@ -63,12 +70,12 @@ object BillHelper {
         val path = Constant.BILL_PATH
         val parentFile = File(path)
         if (!parentFile.exists()) {
-            printResult.fail(-1, "打印数据不存在")
+            printResult.fail(-1, getString(R.string.print_bill_data_not_found))
             return
         }
         val printerService = AidlServiceFactory.instance.getA4PrinterService()
         if (printerService == null) {
-            printResult.fail(-1, "打印服务连接失败")
+            printResult.fail(-1, getString(R.string.print_bill_service_connect_fail))
             return
         }
         val firstPath = path + File.separator + ONE
@@ -90,7 +97,8 @@ object BillHelper {
                 return@execute
             }
             if (result.a == 0) {
-                printResult.success()
+                SystemClock.sleep(10 * 1000)
+                printResult.success(result.b)
             } else {
                 printResult.fail(result.a, result.b)
                 return@execute
@@ -105,8 +113,9 @@ object BillHelper {
         val printerService = AidlServiceFactory.instance.getA4PrinterService()
         printerService?.printImage(path, 0, object : ICallback.Stub() {
             override fun onPrintResult(code: Int, msg: String) {
+                Logger.d(TAG, "onPrintResult code:$code; msg:$msg")
                 retCode = code
-                retMsg = msg
+                retMsg = PrintErrorCode.getMessage(code.toString())
                 cv.open()
             }
         })
@@ -115,7 +124,7 @@ object BillHelper {
     }
 
     interface PrintResult {
-        fun success()
+        fun success(msg: String)
         fun fail(code: Int, msg: String)
     }
 

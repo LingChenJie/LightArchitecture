@@ -15,9 +15,16 @@ import com.architecture.light.data.remote.bean.SearchRoomResponse
 class SearchRoomResponseConvert {
 
     @TypeConverter
-    fun objectToString(payData: SearchRoomResponse?): String {
-        if (payData != null) {
-            return JsonHelper.toJson(payData)
+    fun objectToString(response: SearchRoomResponse?): String {
+        if (response != null) {
+            val res = SearchRoomResponse()
+            for (bean in response.data) {
+                if (bean.isChecked) {
+                    res.data.add(bean)
+                    break
+                }
+            }
+            return JsonHelper.toJson(res)
         }
         return ""
     }
