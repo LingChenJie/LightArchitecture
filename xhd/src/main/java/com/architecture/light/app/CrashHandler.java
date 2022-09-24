@@ -1,6 +1,5 @@
 package com.architecture.light.app;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -8,11 +7,12 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Looper;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.architecture.ui.page.ActivityStack;
 import com.architecture.light.constant.Constant;
-import com.architecture.light.ext.ToastKt;
 import com.architecture.light.ui.page.activity.MainActivity;
 
 import java.io.File;
@@ -116,6 +116,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         if (ex == null) {
             return false;
         }
+        errorTip(ex.getMessage());
         // 收集设备参数信息
         collectDeviceInfo(mContext);
         // 保存日志文件
@@ -218,5 +219,16 @@ public class CrashHandler implements UncaughtExceptionHandler {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    private void errorTip(String msg) {
+        new Thread() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                Toast.makeText(mContext, "很抱歉，程序出现异常，即将重启。\n异常原因：" + msg, Toast.LENGTH_LONG).show();
+                Looper.loop();
+            }
+        }.start();
     }
 }

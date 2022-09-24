@@ -140,8 +140,9 @@
     <string name="payment_result">支付结果</string>
     <string name="payment_result_pay_success">缴费成功</string>
     <string name="payment_result_pay_fail">缴费失败</string>
-    <string name="payment_result_result_sync_success">缴费成功，同步成功</string>
-    <string name="payment_result_result_sync_fail">缴费成功，同步失败</string>
+    <string name="payment_result_pay_timeout">缴费结果未知</string>
+    <string name="payment_result_sync_success">缴费成功，同步成功</string>
+    <string name="payment_result_sync_fail">缴费成功，同步失败</string>
     <string name="payment_result_this_payment_amount">本次缴纳金额：</string>
     <string name="payment_result_payment_method">支付方式：</string>
     <string name="payment_result_bank_name">入账名称：</string>
@@ -169,7 +170,7 @@
     <string name="void_title">撤销</string>
     <string name="void_manage_pwd">主管密码</string>
     <string name="void_manage_pwd_error">主管密码错误</string>
-    <string name="void_manage_voucher_number">流水号：</string>
+    <string name="void_manage_voucher_number">原交易凭证号：</string>
     <string name="void_choose_payment_method_please">请选择原支付方式</string>
     <string name="void_result_revoid">重新撤销</string>
     <string name="void_result_payment_method">原支付方式：</string>
@@ -177,6 +178,9 @@
     <string name="void_result">撤销结果</string>
     <string name="void_result_success">撤销成功</string>
     <string name="void_result_fail">撤销失败</string>
+    <string name="void_result_timeout">撤销结果未知</string>
+    <string name="void_result_sync_success">撤销成功，同步成功</string>
+    <string name="void_result_sync_fail">撤销成功，同步失败</string>
 
 
     <!-- 数字键盘 -->

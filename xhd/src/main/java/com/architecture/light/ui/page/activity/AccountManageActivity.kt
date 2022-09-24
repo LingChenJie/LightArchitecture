@@ -33,7 +33,9 @@ class AccountManageActivity : AppActivity() {
 
     override fun onResume() {
         super.onResume()
-        binding.tvProjectName.text = ProjectCache.getProject()!!.projName
+        if (ProjectCache.getProject() != null) {
+            binding.tvProjectName.text = ProjectCache.getProject()!!.projName
+        }
     }
 
     override fun initView() {

@@ -10,8 +10,9 @@ package com.architecture.light.utils;
 public class Demo {
 
     public static void main(String[] args) {
-        String amount = "";
-        amount.replaceAll(",", ".");
+        String amount = "2022\\/09\\/24";
+        amount = amount.replaceAll("/", "");
+        System.out.println(amount);
     }
 
 }

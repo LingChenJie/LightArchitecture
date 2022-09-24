@@ -2,15 +2,24 @@ package com.architecture.light.domain.transaction
 
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
+import com.android.architecture.helper.AppExecutors
+import com.android.architecture.helper.DateHelper
+import com.android.architecture.helper.Logger
+import com.android.architecture.helper.RandomHelper
 import com.architecture.light.constant.AppErrorCode
+import com.architecture.light.constant.TransactionName
 import com.architecture.light.constant.TransactionPlatform
-import com.architecture.light.domain.task.BankVoidTask
-import com.architecture.light.domain.task.CodeVoidTask
-import com.architecture.light.domain.task.NotifyVoidTask
-import com.architecture.light.domain.task.PayQueryTask
+import com.architecture.light.constant.TransactionStatus
+import com.architecture.light.data.model.TransDataModel
+import com.architecture.light.domain.task.*
 import com.architecture.light.domain.transaction.action.*
 
 class VoidTrans : BaseTransaction() {
+
+    override fun onPreExecute() {
+        super.onPreExecute()
+        transData.transactionName = TransactionName.Void.name
+    }
 
     enum class State {
         INPUT_MANAGE_PWD,
@@ -45,7 +54,7 @@ class VoidTrans : BaseTransaction() {
         }
         bind(State.CODE_VOID_TASK.name, actionCodeVoidTask)
         val actionVoidQueryTask = ActionPayTask {
-            (it as ActionPayTask).setParam(PayQueryTask(), transData, currentActivity)
+            (it as ActionPayTask).setParam(VoidQueryTask(), transData, currentActivity)
         }
         bind(State.VOID_QUERY_TASK.name, actionVoidQueryTask)
         val actionShowVoidResult = ActionShowVoidResult {
@@ -85,6 +94,14 @@ class VoidTrans : BaseTransaction() {
             }
             State.INPUT_VOUCHER_NUMBER -> {
                 if (code == ErrorCode.SUCCESS) {
+                    val info = data as ActionInputVoucherNumber.Info
+                    transData.originalVoucherNumber = info.voucherNumber
+                    val originTrans = TransDataModel.queryByVoucher(transData.originalOrderNumber)
+                    if (originTrans != null) {
+                        transData.originalOrderNumber = originTrans.orderNumber
+                        transData.originalSerialNumber = originTrans.serialNumber
+                    }
+                    initPay()
                     if (transData.transactionPlatform == TransactionPlatform.Bank) {
                         gotoState(State.BANK_VOID_TASK.name)
                     } else {
@@ -94,14 +111,34 @@ class VoidTrans : BaseTransaction() {
                     gotoState(State.CHOOSE_ORIGIN_PAYMENT_METHOD.name)
                 }
             }
-            State.BANK_VOID_TASK -> {
-                gotoState(State.SHOW_VOID_RESULT.name)
-            }
-            State.CODE_VOID_TASK -> {
-                gotoState(State.SHOW_VOID_RESULT.name)
-            }
+            State.BANK_VOID_TASK,
+            State.CODE_VOID_TASK,
             State.VOID_QUERY_TASK -> {
-                gotoState(State.SHOW_VOID_RESULT.name)
+                setTransactionStatusMessage()
+                if (code == ErrorCode.SUCCESS) {
+                    when (transData.responseCode) {
+                        ErrorCode.SUCCESS -> {
+                            transData.transactionStatus = TransactionStatus.TransSucceed.name
+                            updateTransData()
+                            gotoState(State.SHOW_VOID_RESULT.name)
+                        }
+                        AppErrorCode.PAY_TIMEOUT -> {
+                            transData.transactionStatus = TransactionStatus.TransTimeout.name
+                            updateTransData()
+                            gotoState(State.SHOW_VOID_RESULT.name)
+                        }
+                        else -> {
+                            transData.transactionStatus = TransactionStatus.TransFailed.name
+                            updateTransData()
+                            gotoState(State.SHOW_VOID_RESULT.name)
+                        }
+                    }
+
+                } else {
+                    transData.transactionStatus = TransactionStatus.TransFailed.name
+                    updateTransData()
+                    gotoState(State.SHOW_VOID_RESULT.name)
+                }
             }
             State.SHOW_VOID_RESULT -> {
                 when (code) {
@@ -111,11 +148,11 @@ class VoidTrans : BaseTransaction() {
                     AppErrorCode.VOID_RESULT_QUERY -> {
                         gotoState(State.VOID_QUERY_TASK.name)
                     }
-                    AppErrorCode.VOID_RESULT_NOTIFY -> {
-                        gotoState(State.NOTIFY_VOID_TASK.name)
-                    }
                     AppErrorCode.VOID_AGAIN -> {
                         gotoState(State.CHOOSE_ORIGIN_PAYMENT_METHOD.name)
+                    }
+                    AppErrorCode.VOID_RESULT_NOTIFY -> {
+                        gotoState(State.NOTIFY_VOID_TASK.name)
                     }
                     else -> {
                         transEnd(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))
@@ -123,8 +160,60 @@ class VoidTrans : BaseTransaction() {
                 }
             }
             State.NOTIFY_VOID_TASK -> {
-                gotoState(State.SHOW_VOID_RESULT.name)
+                setTransactionStatusMessage()
+                if (code == ErrorCode.SUCCESS) {
+                    when (transData.responseCode) {
+                        ErrorCode.SUCCESS -> {
+                            transData.transactionStatus = TransactionStatus.ResultNotifySucceed.name
+                            updateTransData()
+                            gotoState(State.SHOW_VOID_RESULT.name)
+                        }
+                        else -> {
+                            transData.transactionStatus = TransactionStatus.ResultNotifyFailed.name
+                            updateTransData()
+                            gotoState(State.SHOW_VOID_RESULT.name)
+                        }
+                    }
+                } else {
+                    transData.transactionStatus = TransactionStatus.ResultNotifyFailed.name
+                    updateTransData()
+                    gotoState(State.SHOW_VOID_RESULT.name)
+                }
             }
+        }
+    }
+
+    private fun initPay() {
+        val timeMillis = System.currentTimeMillis()
+        val currentTime = DateHelper.getDateFormatString("yyyyMMddHHmm" + "ss", timeMillis)
+        transData.transactionTimeMillis = timeMillis
+        transData.orderNumber = currentTime + RandomHelper.getRandomHexString(3)
+        insertTransData()
+    }
+
+    private fun setTransactionStatusMessage() {
+        val code = actionResult!!.code
+        if (code == ErrorCode.SUCCESS) {
+            val responseCode = transData.responseCode
+            val responseMessage = transData.responseMessage
+            transData.transactionStatusMessage = "$responseMessage[$responseCode]"
+        } else {
+            val message = actionResult!!.message ?: ErrorCode.getMessage(code)
+            transData.transactionStatusMessage = "$message[$code]"
+        }
+    }
+
+    private fun insertTransData() {
+        AppExecutors.getInstance().single().execute {
+            val result = TransDataModel.insert(transData)
+            Logger.e(TAG, "insertTransData result:$result")
+        }
+    }
+
+    private fun updateTransData() {
+        AppExecutors.getInstance().single().execute {
+            val result = TransDataModel.update(transData)
+            Logger.e(TAG, "updateTransData result:$result")
         }
     }
 

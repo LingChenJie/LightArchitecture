@@ -1,10 +1,8 @@
 package com.architecture.light.data.remote.bean;
 
-import com.architecture.light.data.remote.bean.base.BaseBean;
+import com.architecture.light.data.bean.BaseBean;
 import com.architecture.light.data.remote.bean.base.ResponseBean;
-import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**

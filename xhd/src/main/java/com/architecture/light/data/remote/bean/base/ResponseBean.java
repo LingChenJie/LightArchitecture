@@ -1,6 +1,6 @@
 package com.architecture.light.data.remote.bean.base;
 
-import java.io.Serializable;
+import com.architecture.light.data.bean.BaseBean;
 
 /**
  * Created by SuQi on 2022/8/30.

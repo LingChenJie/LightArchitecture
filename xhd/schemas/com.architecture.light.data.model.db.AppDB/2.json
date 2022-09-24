@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "57cf81f167d7de3e74e440ccff5a3d12",
+    "identityHash": "75b8f74ecb987437dfc09e78aac53b1b",
     "entities": [
       {
         "tableName": "Note",
@@ -94,7 +94,7 @@
       },
       {
         "tableName": "TransData",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `responseCode` TEXT NOT NULL, `responseMessage` TEXT NOT NULL, `transactionYear` TEXT NOT NULL, `transactionTimeMillis` INTEGER NOT NULL, `transactionDate` TEXT NOT NULL, `transactionTime` TEXT NOT NULL, `transactionPlatform` INTEGER NOT NULL, `transactionStatus` TEXT NOT NULL, `transactionStatusMessage` TEXT NOT NULL, `account` TEXT NOT NULL, `zygwGUID` TEXT NOT NULL, `projGUID` TEXT NOT NULL, `roomGUID` TEXT NOT NULL, `bookingGUID` TEXT NOT NULL, `cardID` TEXT, `tel` TEXT, `roomInfo` TEXT, `totalAmount` REAL NOT NULL, `unpaidAmount` REAL NOT NULL, `amount` REAL NOT NULL, `bankAccount` TEXT NOT NULL, `bankName` TEXT NOT NULL, `cstName` TEXT NOT NULL, `orderNumber` TEXT NOT NULL, `isRePrint` INTEGER NOT NULL, `voucherNumber` TEXT NOT NULL, `refNo` TEXT NOT NULL, `vouchGUID` TEXT NOT NULL, `originalVoucherNumber` TEXT NOT NULL, `originalOrderNumber` TEXT NOT NULL, `payDataStr` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`tId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `responseCode` TEXT NOT NULL, `responseMessage` TEXT NOT NULL, `transactionYear` TEXT NOT NULL, `transactionTimeMillis` INTEGER NOT NULL, `transactionDate` TEXT NOT NULL, `transactionTime` TEXT NOT NULL, `transactionPlatform` INTEGER NOT NULL, `transactionName` TEXT NOT NULL, `transactionStatus` TEXT NOT NULL, `transactionStatusMessage` TEXT NOT NULL, `account` TEXT NOT NULL, `zygwGUID` TEXT NOT NULL, `projGUID` TEXT NOT NULL, `roomGUID` TEXT NOT NULL, `bookingGUID` TEXT NOT NULL, `cardID` TEXT, `tel` TEXT, `roomInfo` TEXT, `totalAmount` REAL NOT NULL, `unpaidAmount` REAL NOT NULL, `amount` REAL NOT NULL, `bankAccount` TEXT NOT NULL, `bankName` TEXT NOT NULL, `cstName` TEXT NOT NULL, `orderNumber` TEXT NOT NULL, `isRePrint` INTEGER NOT NULL, `voucherNumber` TEXT NOT NULL, `serialNumber` TEXT NOT NULL, `refNo` TEXT NOT NULL, `vouchGUID` TEXT NOT NULL, `originalVoucherNumber` TEXT NOT NULL, `originalSerialNumber` TEXT NOT NULL, `originalOrderNumber` TEXT NOT NULL, `payData` TEXT, `searchRoomResponse` TEXT, `searchReserveResponse` TEXT, `searchPaymentResponse` TEXT)",
         "fields": [
           {
             "fieldPath": "tId",
@@ -142,6 +142,12 @@
             "fieldPath": "transactionPlatform",
             "columnName": "transactionPlatform",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "transactionName",
+            "columnName": "transactionName",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -259,6 +265,12 @@
             "notNull": true
           },
           {
+            "fieldPath": "serialNumber",
+            "columnName": "serialNumber",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
             "fieldPath": "refNo",
             "columnName": "refNo",
             "affinity": "TEXT",
@@ -277,16 +289,40 @@
             "notNull": true
           },
           {
+            "fieldPath": "originalSerialNumber",
+            "columnName": "originalSerialNumber",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
             "fieldPath": "originalOrderNumber",
             "columnName": "originalOrderNumber",
             "affinity": "TEXT",
             "notNull": true
           },
           {
-            "fieldPath": "payDataStr",
-            "columnName": "payDataStr",
+            "fieldPath": "payData",
+            "columnName": "payData",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
+          },
+          {
+            "fieldPath": "searchRoomResponse",
+            "columnName": "searchRoomResponse",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "searchReserveResponse",
+            "columnName": "searchReserveResponse",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "searchPaymentResponse",
+            "columnName": "searchPaymentResponse",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -302,7 +338,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '57cf81f167d7de3e74e440ccff5a3d12')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '75b8f74ecb987437dfc09e78aac53b1b')"
     ]
   }
 }

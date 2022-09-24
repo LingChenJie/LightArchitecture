@@ -1,8 +1,7 @@
 package com.architecture.light.data.remote.bean.base;
 
+import com.architecture.light.data.bean.BaseBean;
 import com.architecture.light.utils.DeviceUtils;
-
-import java.io.Serializable;
 
 /**
  * Created by SuQi on 2022/8/30.

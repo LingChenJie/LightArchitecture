@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
+import com.architecture.light.constant.TransactionName
 import com.architecture.light.constant.TransactionPlatform
 import com.architecture.light.constant.TransactionStatus
 import com.architecture.light.data.model.db.entity.convert.PayDataConvert
@@ -38,7 +39,8 @@ data class TransData(
     var transactionDate: String = "",
     var transactionTime: String = "",
     var transactionPlatform: Int = TransactionPlatform.Bank,
-    var transactionStatus: String = TransactionStatus.PayTimeout.name,
+    var transactionName: String = TransactionName.Payment.name,
+    var transactionStatus: String = TransactionStatus.TransTimeout.name,
     var transactionStatusMessage: String = "",
 
 
@@ -62,10 +64,12 @@ data class TransData(
     var isRePrint: Boolean = false,
 
     var voucherNumber: String = "",
+    var serialNumber: String = "",
     var refNo: String = "",
     var vouchGUID: String = "",
 
     var originalVoucherNumber: String = "",
+    var originalSerialNumber: String = "",
     var originalOrderNumber: String = "",
 
 

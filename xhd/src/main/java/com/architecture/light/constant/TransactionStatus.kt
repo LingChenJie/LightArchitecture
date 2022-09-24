@@ -8,9 +8,9 @@ package com.architecture.light.constant
  * Version: 1
  */
 enum class TransactionStatus {
-    PaySucceed,
-    PayFailed,
-    PayTimeout,
+    TransSucceed,
+    TransFailed,
+    TransTimeout,
     ResultNotifySucceed,
     ResultNotifyFailed,
     GetPrintDataSucceed,

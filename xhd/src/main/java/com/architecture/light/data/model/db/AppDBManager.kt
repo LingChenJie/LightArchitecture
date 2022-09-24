@@ -27,6 +27,7 @@ class AppDBManager private constructor() {
         DATABASE_NAME
     )
         .allowMainThreadQueries()
+        .fallbackToDestructiveMigration()
         .build()
 
     fun getDataBase(): AppDB {

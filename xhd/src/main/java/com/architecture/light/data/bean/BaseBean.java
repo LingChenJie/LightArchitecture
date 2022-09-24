@@ -1,4 +1,4 @@
-package com.architecture.light.data.remote.bean.base;
+package com.architecture.light.data.bean;
 
 import java.io.Serializable;
 

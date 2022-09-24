@@ -7,16 +7,17 @@ import com.architecture.light.helper.AmountHelper
 import com.architecture.light.helper.TransHelper
 import com.chinaums.mis.bean.RequestPojo
 import org.json.JSONObject
+import kotlin.math.abs
 
 /**
  * Created by SuQi on 2022/9/1.
  * Describe:
  */
-class BankPayTask : PayTask() {
+class VoidQueryTask : PayTask() {
 
     override fun onAssembly(): RequestPojo {
         val request = RequestPojo()
-        request.transType = "0402"
+        request.transType = "0401"
         request.transMemo = getTransMemo()
         return request
     }
@@ -28,10 +29,11 @@ class BankPayTask : PayTask() {
             response.payData = payData
             response.voucherNumber = payData.traceNo
             response.refNo = payData.refNo
+            response.amount = abs(AmountHelper.convertAmount(payData.amt))
             response.transactionDate = payData.date.replace("/".toRegex(), "")
             response.transactionTime = payData.time.replace(":".toRegex(), "")
             Logger.e(
-                "BankPayTask",
+                "BankVoidTask",
                 "date:${response.transactionDate}; time:${response.transactionTime}"
             )
             response.serialNumber = TransHelper.getTransactionSerialNumber(response)
@@ -41,30 +43,10 @@ class BankPayTask : PayTask() {
         }
     }
 
-//    override fun analysisResponse(response: ResponsePojo) {
-//        if (Constant.IS_DEBUG) {
-//            val payData = TransMemo.PayData()
-//            payData.resCode = "00"
-//            payData.resDesc = "交易成功"
-//            payData.traceNo = "000012"
-//            payData.refNo = "123456789012"
-//            payData.date = DateHelper.dateString
-//            payData.time = DateHelper.timeString
-//            onPostExecute(payData)
-//        } else {
-//            super.analysisResponse(response)
-//        }
-//    }
-
     private fun getTransMemo(): String {
         val json = JSONObject()
-        json.put("amt", AmountHelper.yuan2Fen12(param.amount))
-        json.put("extOrderNo", param.orderNumber)
-        json.put("settleAccount", param.bankAccount)
-        json.put("bCardType", "0")
-        json.put("isRealAuth", "2")
-        json.put("propertyTag", "CMDC")
-        json.put("appId", "c0c83bd5025141e6a84e17174c4d5465")
+        json.put("orgTraceNo", param.originalVoucherNumber)
+        json.put("extOrderNo", param.originalOrderNumber)
         return json.toString()
     }
 

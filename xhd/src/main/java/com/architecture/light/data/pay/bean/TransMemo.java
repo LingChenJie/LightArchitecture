@@ -1,6 +1,6 @@
 package com.architecture.light.data.pay.bean;
 
-import com.architecture.light.data.remote.bean.base.BaseBean;
+import com.architecture.light.data.bean.BaseBean;
 
 /**
  * File describe:
@@ -10,54 +10,20 @@ import com.architecture.light.data.remote.bean.base.BaseBean;
  * Version: 1
  */
 public class TransMemo extends BaseBean {
+
+    private String appName;
+    private String transId;
     private String resultCode;
     private String resultMsg;
     private PayData transData;
 
-    public String getResultCode() {
-        return resultCode;
-    }
-
-    public void setResultCode(String resultCode) {
-        this.resultCode = resultCode;
-    }
-
-    public String getResultMsg() {
-        return resultMsg;
-    }
-
-    public void setResultMsg(String resultMsg) {
-        this.resultMsg = resultMsg;
-    }
-
-    public PayData getTransData() {
-        return transData;
-    }
-
-    public void setTransData(PayData transData) {
-        this.transData = transData;
-    }
-
     public static class PayData extends BaseBean {
         private String resCode;
         private String resDesc;
-        private String uniCode;
-        private String exOrderNo;
+        private String orderStatus;
+        private String extBillNo;
+        private String extOrderNo;
         private String cardType;
-
-        private String bCardType;
-        private String settleMer;
-        private String settleTer;
-        private String confirmInfo;
-        private String isRealAuth;
-        private String userNo;
-        private String proName;
-        private String clientName;
-        private String houseSource;
-        private String fundName;
-        private String fundDate;
-
-        private String consumePlatFlow;
         private String merchantName;
         private String merchantNo;
         private String terminalNo;
@@ -71,20 +37,45 @@ public class TransMemo extends BaseBean {
         private String cardNo;
         private String cardIssuerCode;
         private String cardAcquirerCode;
+        private String cardIssuerId;
+        private String cardAcquirerId;
         private String cardInputType;
+        private String transName;
         private String transChnName;
         private String transEngName;
+        private String settleDate;
         private String date;
         private String time;
         private String memInfo;
-        private String isReprint;
+        private Boolean isReprint;
         private String vendor;
         private String cardOrg;
         private String serviceNo;
         private String model;
         private String version;
-        private String qrcode;
-        private String eSignJpeg;
+        private String ARQC;
+        private String UnprNo;
+        private String ATC;
+        private String TVR;
+        private String TSI;
+        private String AID;
+        private String AIP;
+        private String APPLAB;
+        private String APPNAME;
+        private String CVM;
+        private String TermCap;
+        private String IAD;
+        private String CSN;
+        private String CPI;
+        private String payCodeNo;
+        private String payVoucherCode;
+        private String chnSpecInfo;
+        private String bCardType;
+        private String settleMer;
+        private String settleTer;
+        private String consumePlatFlow;
+        private String isRealAuth;
+        private String settleMerName;
 
         public String getResCode() {
             return resCode;
@@ -102,20 +93,28 @@ public class TransMemo extends BaseBean {
             this.resDesc = resDesc;
         }
 
-        public String getUniCode() {
-            return uniCode;
+        public String getOrderStatus() {
+            return orderStatus;
         }
 
-        public void setUniCode(String uniCode) {
-            this.uniCode = uniCode;
+        public void setOrderStatus(String orderStatus) {
+            this.orderStatus = orderStatus;
         }
 
-        public String getExOrderNo() {
-            return exOrderNo;
+        public String getExtBillNo() {
+            return extBillNo;
         }
 
-        public void setExOrderNo(String exOrderNo) {
-            this.exOrderNo = exOrderNo;
+        public void setExtBillNo(String extBillNo) {
+            this.extBillNo = extBillNo;
+        }
+
+        public String getExtOrderNo() {
+            return extOrderNo;
+        }
+
+        public void setExtOrderNo(String extOrderNo) {
+            this.extOrderNo = extOrderNo;
         }
 
         public String getCardType() {
@@ -124,102 +123,6 @@ public class TransMemo extends BaseBean {
 
         public void setCardType(String cardType) {
             this.cardType = cardType;
-        }
-
-        public String getbCardType() {
-            return bCardType;
-        }
-
-        public void setbCardType(String bCardType) {
-            this.bCardType = bCardType;
-        }
-
-        public String getSettleMer() {
-            return settleMer;
-        }
-
-        public void setSettleMer(String settleMer) {
-            this.settleMer = settleMer;
-        }
-
-        public String getSettleTer() {
-            return settleTer;
-        }
-
-        public void setSettleTer(String settleTer) {
-            this.settleTer = settleTer;
-        }
-
-        public String getConfirmInfo() {
-            return confirmInfo;
-        }
-
-        public void setConfirmInfo(String confirmInfo) {
-            this.confirmInfo = confirmInfo;
-        }
-
-        public String getIsRealAuth() {
-            return isRealAuth;
-        }
-
-        public void setIsRealAuth(String isRealAuth) {
-            this.isRealAuth = isRealAuth;
-        }
-
-        public String getUserNo() {
-            return userNo;
-        }
-
-        public void setUserNo(String userNo) {
-            this.userNo = userNo;
-        }
-
-        public String getProName() {
-            return proName;
-        }
-
-        public void setProName(String proName) {
-            this.proName = proName;
-        }
-
-        public String getClientName() {
-            return clientName;
-        }
-
-        public void setClientName(String clientName) {
-            this.clientName = clientName;
-        }
-
-        public String getHouseSource() {
-            return houseSource;
-        }
-
-        public void setHouseSource(String houseSource) {
-            this.houseSource = houseSource;
-        }
-
-        public String getFundName() {
-            return fundName;
-        }
-
-        public void setFundName(String fundName) {
-            this.fundName = fundName;
-        }
-
-        public String getFundDate() {
-            return fundDate;
-        }
-
-        public void setFundDate(String fundDate) {
-            this.fundDate = fundDate;
-        }
-
-        public String getConsumePlatFlow() {
-            return consumePlatFlow;
-        }
-
-        public void setConsumePlatFlow(String consumePlatFlow) {
-            this.consumePlatFlow = consumePlatFlow;
         }
 
         public String getMerchantName() {
@@ -326,12 +229,36 @@ public class TransMemo extends BaseBean {
             this.cardAcquirerCode = cardAcquirerCode;
         }
 
+        public String getCardIssuerId() {
+            return cardIssuerId;
+        }
+
+        public void setCardIssuerId(String cardIssuerId) {
+            this.cardIssuerId = cardIssuerId;
+        }
+
+        public String getCardAcquirerId() {
+            return cardAcquirerId;
+        }
+
+        public void setCardAcquirerId(String cardAcquirerId) {
+            this.cardAcquirerId = cardAcquirerId;
+        }
+
         public String getCardInputType() {
             return cardInputType;
         }
 
         public void setCardInputType(String cardInputType) {
             this.cardInputType = cardInputType;
+        }
+
+        public String getTransName() {
+            return transName;
+        }
+
+        public void setTransName(String transName) {
+            this.transName = transName;
         }
 
         public String getTransChnName() {
@@ -348,6 +275,14 @@ public class TransMemo extends BaseBean {
 
         public void setTransEngName(String transEngName) {
             this.transEngName = transEngName;
+        }
+
+        public String getSettleDate() {
+            return settleDate;
+        }
+
+        public void setSettleDate(String settleDate) {
+            this.settleDate = settleDate;
         }
 
         public String getDate() {
@@ -374,12 +309,12 @@ public class TransMemo extends BaseBean {
             this.memInfo = memInfo;
         }
 
-        public String getIsReprint() {
+        public Boolean getReprint() {
             return isReprint;
         }
 
-        public void setIsReprint(String isReprint) {
-            this.isReprint = isReprint;
+        public void setReprint(Boolean reprint) {
+            isReprint = reprint;
         }
 
         public String getVendor() {
@@ -422,20 +357,228 @@ public class TransMemo extends BaseBean {
             this.version = version;
         }
 
-        public String getQrcode() {
-            return qrcode;
+        public String getARQC() {
+            return ARQC;
         }
 
-        public void setQrcode(String qrcode) {
-            this.qrcode = qrcode;
+        public void setARQC(String ARQC) {
+            this.ARQC = ARQC;
         }
 
-        public String geteSignJpeg() {
-            return eSignJpeg;
+        public String getUnprNo() {
+            return UnprNo;
         }
 
-        public void seteSignJpeg(String eSignJpeg) {
-            this.eSignJpeg = eSignJpeg;
+        public void setUnprNo(String unprNo) {
+            UnprNo = unprNo;
         }
+
+        public String getATC() {
+            return ATC;
+        }
+
+        public void setATC(String ATC) {
+            this.ATC = ATC;
+        }
+
+        public String getTVR() {
+            return TVR;
+        }
+
+        public void setTVR(String TVR) {
+            this.TVR = TVR;
+        }
+
+        public String getTSI() {
+            return TSI;
+        }
+
+        public void setTSI(String TSI) {
+            this.TSI = TSI;
+        }
+
+        public String getAID() {
+            return AID;
+        }
+
+        public void setAID(String AID) {
+            this.AID = AID;
+        }
+
+        public String getAIP() {
+            return AIP;
+        }
+
+        public void setAIP(String AIP) {
+            this.AIP = AIP;
+        }
+
+        public String getAPPLAB() {
+            return APPLAB;
+        }
+
+        public void setAPPLAB(String APPLAB) {
+            this.APPLAB = APPLAB;
+        }
+
+        public String getAPPNAME() {
+            return APPNAME;
+        }
+
+        public void setAPPNAME(String APPNAME) {
+            this.APPNAME = APPNAME;
+        }
+
+        public String getCVM() {
+            return CVM;
+        }
+
+        public void setCVM(String CVM) {
+            this.CVM = CVM;
+        }
+
+        public String getTermCap() {
+            return TermCap;
+        }
+
+        public void setTermCap(String termCap) {
+            TermCap = termCap;
+        }
+
+        public String getIAD() {
+            return IAD;
+        }
+
+        public void setIAD(String IAD) {
+            this.IAD = IAD;
+        }
+
+        public String getCSN() {
+            return CSN;
+        }
+
+        public void setCSN(String CSN) {
+            this.CSN = CSN;
+        }
+
+        public String getCPI() {
+            return CPI;
+        }
+
+        public void setCPI(String CPI) {
+            this.CPI = CPI;
+        }
+
+        public String getPayCodeNo() {
+            return payCodeNo;
+        }
+
+        public void setPayCodeNo(String payCodeNo) {
+            this.payCodeNo = payCodeNo;
+        }
+
+        public String getPayVoucherCode() {
+            return payVoucherCode;
+        }
+
+        public void setPayVoucherCode(String payVoucherCode) {
+            this.payVoucherCode = payVoucherCode;
+        }
+
+        public String getChnSpecInfo() {
+            return chnSpecInfo;
+        }
+
+        public void setChnSpecInfo(String chnSpecInfo) {
+            this.chnSpecInfo = chnSpecInfo;
+        }
+
+        public String getbCardType() {
+            return bCardType;
+        }
+
+        public void setbCardType(String bCardType) {
+            this.bCardType = bCardType;
+        }
+
+        public String getSettleMer() {
+            return settleMer;
+        }
+
+        public void setSettleMer(String settleMer) {
+            this.settleMer = settleMer;
+        }
+
+        public String getSettleTer() {
+            return settleTer;
+        }
+
+        public void setSettleTer(String settleTer) {
+            this.settleTer = settleTer;
+        }
+
+        public String getConsumePlatFlow() {
+            return consumePlatFlow;
+        }
+
+        public void setConsumePlatFlow(String consumePlatFlow) {
+            this.consumePlatFlow = consumePlatFlow;
+        }
+
+        public String getIsRealAuth() {
+            return isRealAuth;
+        }
+
+        public void setIsRealAuth(String isRealAuth) {
+            this.isRealAuth = isRealAuth;
+        }
+
+        public String getSettleMerName() {
+            return settleMerName;
+        }
+
+        public void setSettleMerName(String settleMerName) {
+            this.settleMerName = settleMerName;
+        }
+    }
+
+    public String getAppName() {
+        return appName;
+    }
+
+    public void setAppName(String appName) {
+        this.appName = appName;
+    }
+
+    public String getTransId() {
+        return transId;
+    }
+
+    public void setTransId(String transId) {
+        this.transId = transId;
+    }
+
+    public String getResultCode() {
+        return resultCode;
+    }
+
+    public void setResultCode(String resultCode) {
+        this.resultCode = resultCode;
+    }
+
+    public String getResultMsg() {
+        return resultMsg;
+    }
+
+    public void setResultMsg(String resultMsg) {
+        this.resultMsg = resultMsg;
+    }
+
+    public PayData getTransData() {
+        return transData;
+    }
+
+    public void setTransData(PayData transData) {
+        this.transData = transData;
     }
 }

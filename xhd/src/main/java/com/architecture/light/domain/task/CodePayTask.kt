@@ -1,7 +1,10 @@
 package com.architecture.light.domain.task
 
+import com.android.architecture.constant.ErrorCode
+import com.android.architecture.helper.Logger
 import com.architecture.light.data.pay.bean.TransMemo
 import com.architecture.light.helper.AmountHelper
+import com.architecture.light.helper.TransHelper
 import com.chinaums.mis.bean.RequestPojo
 import org.json.JSONObject
 
@@ -19,9 +22,39 @@ class CodePayTask : PayTask() {
     }
 
     override fun onPostExecute(payData: TransMemo.PayData) {
-        response.payData = payData
-        response.voucherNumber = payData.traceNo
+        if (payData.resCode == "00") {
+            response.responseCode = ErrorCode.SUCCESS
+            response.responseMessage = payData.resDesc
+            response.payData = payData
+            response.voucherNumber = payData.traceNo
+            response.refNo = payData.refNo
+            response.transactionDate = payData.date.replace("/".toRegex(), "")
+            response.transactionTime = payData.time.replace(":".toRegex(), "")
+            Logger.e(
+                "CodePayTask",
+                "date:${response.transactionDate}; time:${response.transactionTime}"
+            )
+            response.serialNumber = TransHelper.getTransactionSerialNumber(response)
+        } else {
+            response.responseCode = payData.resCode
+            response.responseMessage = payData.resDesc
+        }
     }
+
+//    override fun analysisResponse(response: ResponsePojo) {
+//        if (Constant.IS_DEBUG) {
+//            val payData = TransMemo.PayData()
+//            payData.resCode = "00"
+//            payData.resDesc = "交易成功"
+//            payData.traceNo = "000012"
+//            payData.refNo = "123456789012"
+//            payData.date = DateHelper.dateString
+//            payData.time = DateHelper.timeString
+//            onPostExecute(payData)
+//        } else {
+//            super.analysisResponse(response)
+//        }
+//    }
 
     private fun getTransMemo(): String {
         val json = JSONObject()

@@ -20,7 +20,7 @@ class SearchBillTask : HttpTask() {
         val request = SearchBillRequest()
         request.cardID = param.cardID
         request.tel = param.tel
-        if (param.voucherNumber.valid) {
+        if (param.serialNumber.valid) {
             request.serialNumber = TransHelper.getTransactionSerialNumber(param)
         }
         return request

@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp_3"
-            android:textColor="#666666"
+            android:textColor="#EF7029"
             android:textSize="@dimen/sp_11"
             android:visibility="gone"
             tools:text="密码错误（55）" />
@@ -82,7 +82,7 @@
                 android:layout_alignParentEnd="true"
                 android:textColor="#162234"
                 android:textSize="@dimen/sp_11"
-                tools:text="20,000.00" />
+                tools:text="888.88" />
 
         </RelativeLayout>
 
@@ -108,7 +108,7 @@
                 android:layout_alignParentEnd="true"
                 android:textColor="#162234"
                 android:textSize="@dimen/sp_11"
-                tools:text="20,000.00" />
+                tools:text="银行卡" />
 
         </RelativeLayout>
 

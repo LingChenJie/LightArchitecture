@@ -8,16 +8,18 @@ import com.android.architecture.helper.DateHelper
 import com.android.architecture.helper.Logger
 import com.android.architecture.helper.RandomHelper
 import com.architecture.light.R
-import com.architecture.light.constant.AppErrorCode
-import com.architecture.light.constant.Constant
-import com.architecture.light.constant.TransactionPlatform
-import com.architecture.light.constant.TransactionStatus
+import com.architecture.light.constant.*
 import com.architecture.light.data.model.TransDataModel
 import com.architecture.light.domain.task.*
 import com.architecture.light.domain.transaction.action.*
 
 
 class PaymentTrans : BaseTransaction() {
+
+    override fun onPreExecute() {
+        super.onPreExecute()
+        transData.transactionName = TransactionName.Payment.name
+    }
 
     enum class State {
         SELECT_QUERY_METHOD,
@@ -238,24 +240,24 @@ class PaymentTrans : BaseTransaction() {
                 if (code == ErrorCode.SUCCESS) {
                     when (transData.responseCode) {
                         ErrorCode.SUCCESS -> {
-                            transData.transactionStatus = TransactionStatus.PaySucceed.name
+                            transData.transactionStatus = TransactionStatus.TransSucceed.name
                             updateTransData()
                             gotoState(State.SHOW_PAY_RESULT.name)
                         }
                         AppErrorCode.PAY_TIMEOUT -> {
-                            transData.transactionStatus = TransactionStatus.PayTimeout.name
+                            transData.transactionStatus = TransactionStatus.TransTimeout.name
                             updateTransData()
                             gotoState(State.SHOW_PAY_RESULT.name)
                         }
                         else -> {
-                            transData.transactionStatus = TransactionStatus.PayFailed.name
+                            transData.transactionStatus = TransactionStatus.TransFailed.name
                             updateTransData()
                             gotoState(State.SHOW_PAY_RESULT.name)
                         }
                     }
 
                 } else {
-                    transData.transactionStatus = TransactionStatus.PayFailed.name
+                    transData.transactionStatus = TransactionStatus.TransFailed.name
                     updateTransData()
                     gotoState(State.SHOW_PAY_RESULT.name)
                 }
