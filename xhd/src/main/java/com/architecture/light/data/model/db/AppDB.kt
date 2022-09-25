@@ -18,7 +18,7 @@ import com.architecture.light.data.model.db.entity.UserInfo
  */
 @Database(
     entities = [Note::class, UserInfo::class, TransData::class],
-    version = 2,
+    version = 3,
     exportSchema = true
 )
 abstract class AppDB : RoomDatabase() {

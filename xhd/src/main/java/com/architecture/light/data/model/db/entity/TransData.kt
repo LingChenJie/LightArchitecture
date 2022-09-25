@@ -52,6 +52,7 @@ data class TransData(
     var cardID: String? = "",
     var tel: String? = "",
     var roomInfo: String? = "",
+    var projNum: String? = "",
 
     var totalAmount: Double = 0.0,
     var unpaidAmount: Double = 0.0,

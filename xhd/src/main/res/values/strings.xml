@@ -140,7 +140,7 @@
     <string name="payment_result">支付结果</string>
     <string name="payment_result_pay_success">缴费成功</string>
     <string name="payment_result_pay_fail">缴费失败</string>
-    <string name="payment_result_pay_timeout">缴费结果未知</string>
+    <string name="payment_result_pay_timeout">缴费状态不明</string>
     <string name="payment_result_sync_success">缴费成功，同步成功</string>
     <string name="payment_result_sync_fail">缴费成功，同步失败</string>
     <string name="payment_result_this_payment_amount">本次缴纳金额：</string>
@@ -178,7 +178,7 @@
     <string name="void_result">撤销结果</string>
     <string name="void_result_success">撤销成功</string>
     <string name="void_result_fail">撤销失败</string>
-    <string name="void_result_timeout">撤销结果未知</string>
+    <string name="void_result_timeout">撤销状态不明</string>
     <string name="void_result_sync_success">撤销成功，同步成功</string>
     <string name="void_result_sync_fail">撤销成功，同步失败</string>
 
@@ -228,8 +228,24 @@
     <string name="print_bill_third_union_reprint">记账联-重打印</string>
     <string name="print_bill_service_connect_fail">打印服务连接失败，请重试</string>
     <string name="print_bill_data_not_found">打印数据不存在</string>
+
+    <!-- Payment sync -->
+    <string name="payment_sync_no_data">没有交易需要同步</string>
+    <string name="payment_sync_transaction_time">交易时间：</string>
+    <string name="payment_sync_transaction_amount">缴纳金额：</string>
+    <string name="payment_sync_transaction_status">交易状态：</string>
+    <string name="payment_sync_transaction_status_query">缴费状态查询</string>
+    <string name="payment_sync_transaction_status_sync">缴费状态同步</string>
+
+    <!-- Void sync -->
+    <string name="void_sync_voucher_number">原凭证号：</string>
+    <string name="void_sync_amount">撤销金额：</string>
+    <string name="void_sync_transaction_status_query">撤销状态查询</string>
+    <string name="void_sync_transaction_status_sync">撤销状态同步</string>
+
     <string name="amount_symbol">￥</string>
     <string name="_0_00">0.00</string>
+    <string name="second_unit">s</string>
 
 
 </resources>

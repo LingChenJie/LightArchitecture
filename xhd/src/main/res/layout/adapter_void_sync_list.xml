@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.hjq.shape.layout.ShapeLinearLayout
+        android:id="@+id/layout_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/dp_9"
+        android:paddingTop="@dimen/dp_13"
+        android:paddingEnd="@dimen/dp_9"
+        android:paddingBottom="@dimen/dp_10"
+        app:shape_solidColor="@color/white"
+        app:shape_solidSelectedColor="#0061A7"
+        app:shape_topLeftRadius="@dimen/dp_5"
+        app:shape_topRightRadius="@dimen/dp_5">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.hjq.shape.view.ShapeTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/room_custom_name"
+                android:textSize="@dimen/sp_11"
+                android:textStyle="bold"
+                app:shape_textColor="#999999"
+                app:shape_textSelectedColor="@color/white" />
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_custom_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textSize="@dimen/sp_11"
+                app:shape_textColor="#162234"
+                app:shape_textSelectedColor="@color/white"
+                tools:text="XXXX" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <com.hjq.shape.view.ShapeTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/payment_sync_transaction_time"
+                android:textSize="@dimen/sp_11"
+                android:textStyle="bold"
+                app:shape_textColor="#999999"
+                app:shape_textSelectedColor="@color/white" />
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_payment_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textSize="@dimen/sp_11"
+                app:shape_textColor="#162234"
+                app:shape_textSelectedColor="@color/white"
+                tools:text="XXXX" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <com.hjq.shape.view.ShapeTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/void_sync_amount"
+                android:textSize="@dimen/sp_11"
+                android:textStyle="bold"
+                app:shape_textColor="#999999"
+                app:shape_textSelectedColor="@color/white" />
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_amount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textSize="@dimen/sp_11"
+                app:shape_textColor="#162234"
+                app:shape_textSelectedColor="@color/white"
+                tools:text="XXXX" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <com.hjq.shape.view.ShapeTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/payment_sync_transaction_status"
+                android:textSize="@dimen/sp_11"
+                android:textStyle="bold"
+                app:shape_textColor="#999999"
+                app:shape_textSelectedColor="@color/white" />
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_transaction_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textSize="@dimen/sp_11"
+                app:shape_textColor="#162234"
+                app:shape_textSelectedColor="@color/white"
+                tools:text="XXXX" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_room"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10">
+
+            <com.hjq.shape.view.ShapeTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/void_sync_voucher_number"
+                android:textSize="@dimen/sp_11"
+                android:textStyle="bold"
+                app:shape_textColor="#999999"
+                app:shape_textSelectedColor="@color/white" />
+
+            <com.hjq.shape.view.ShapeTextView
+                android:id="@+id/tv_voucher_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:textSize="@dimen/sp_11"
+                app:shape_textColor="#162234"
+                app:shape_textSelectedColor="@color/white"
+                tools:text="XXXX" />
+
+        </LinearLayout>
+
+
+    </com.hjq.shape.layout.ShapeLinearLayout>
+
+    <com.hjq.shape.view.ShapeTextView
+        android:id="@+id/tv_status_query"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_29"
+        android:gravity="center"
+        android:text="@string/void_sync_transaction_status_sync"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_13"
+        android:textStyle="bold"
+        app:shape_bottomLeftRadius="@dimen/dp_5"
+        app:shape_bottomRightRadius="@dimen/dp_5"
+        app:shape_solidColor="@color/theme_color"
+        app:shape_solidPressedColor="@color/theme_color_50" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_10" />
+
+</LinearLayout>

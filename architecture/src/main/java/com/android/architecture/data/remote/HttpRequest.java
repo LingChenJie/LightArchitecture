@@ -1,5 +1,7 @@
 package com.android.architecture.data.remote;
 
+import static com.android.architecture.data.remote.exception.HttpExceptionHandle.handleException;
+
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -138,7 +140,15 @@ public class HttpRequest {
             Logger.d(TAG, "Http Res --> " + result);
             return result;
         } else {
-            throw new IOException("Unexpected code " + response);
+            int code = response.code();
+            String result = null;
+            try {
+                result = response.body().string();
+                Logger.d(TAG, "Http Res --> code:" + code + "; result:" + result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            throw handleException(code, result);
         }
     }
 
@@ -185,7 +195,15 @@ public class HttpRequest {
             Logger.d(TAG, "Http Res --> " + result);
             return result;
         } else {
-            throw new IOException("Unexpected code " + response);
+            int code = response.code();
+            String result = null;
+            try {
+                result = response.body().string();
+                Logger.d(TAG, "Http Res --> code:" + code + "; result:" + result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            throw handleException(code, result);
         }
     }
 

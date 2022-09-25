@@ -28,7 +28,7 @@
             android:layout_marginTop="@dimen/dp_17"
             android:layout_weight="1"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/adapter_print_list" />
+            tools:listitem="@layout/adapter_bill_list" />
 
     </LinearLayout>
 

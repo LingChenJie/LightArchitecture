@@ -1,23 +1,24 @@
 package com.architecture.light.ui.page.activity
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.android.architecture.domain.transaction.TransactionConstant
 import com.android.architecture.extension.click
 import com.android.architecture.extension.openActivity
-import com.android.architecture.helper.DateHelper
-import com.android.architecture.helper.RandomHelper
+import com.android.architecture.helper.AppExecutors
+import com.android.architecture.helper.Logger
+import com.android.architecture.utils.FileUtils
 import com.architecture.light.R
 import com.architecture.light.app.AppActivity
-import com.architecture.light.data.model.db.entity.TransData
+import com.architecture.light.data.model.TransDataModel
 import com.architecture.light.databinding.ActivityMainBinding
-import com.architecture.light.domain.task.BankPayTask
-import com.architecture.light.domain.task.CodePayTask
-import com.architecture.light.domain.task.SearchPaymentTask
-import com.architecture.light.domain.transaction.*
-import com.architecture.light.settings.AccountCache
+import com.architecture.light.domain.transaction.PaymentTrans
+import com.architecture.light.domain.transaction.PrintTrans
+import com.architecture.light.domain.transaction.ReserveTrans
+import com.architecture.light.domain.transaction.VoidTrans
 import com.gyf.immersionbar.ImmersionBar
-import kotlin.concurrent.thread
+import java.io.File
 
 
 /**
@@ -37,6 +38,7 @@ class MainActivity : AppActivity() {
 //        if (!AccountCache.getLoginStatus()) {
 //            LogonTrans().execute()
 //        }
+        clearData()
     }
 
     override fun initView() {
@@ -44,24 +46,23 @@ class MainActivity : AppActivity() {
         ImmersionBar.setTitleBar(this, binding.titleView)
         binding.ivUserAvatar.click { openActivity<AccountManageActivity>() }
         binding.cvPayment.click {
-            //PaymentTrans().execute()
-            thread {
-                val transData = TransData()
-                transData.amount = 0.01
-                transData.bankAccount = "79490188000025851"
-                transData.orderNumber =
-                    DateHelper.dateString + DateHelper.timeString +
-                            RandomHelper.getRandomHexString(3)
-                CodePayTask().execute(transData)
-            }
+            PaymentTrans().execute()
+//            thread {
+//                val transData = TransData()
+//                transData.amount = 0.01
+//                transData.bankAccount = "79490188000025851"
+//                transData.orderNumber =
+//                    DateHelper.dateString + DateHelper.timeString +
+//                            RandomHelper.getRandomHexString(3)
+////                CodePayTask().execute(transData)
+//                BankPayTask().execute(transData)
+//            }
         }
         binding.cvPledgeMoney.click { ReserveTrans().execute() }
         binding.cvVoid.click { VoidTrans().execute() }
         binding.cvPaymentSynchronize.click { openActivity<PaymentSyncActivity>() }
         binding.cvVoidSynchronize.click { openActivity<VoidSyncActivity>() }
-        binding.cvPrint.click {
-            PrintTrans().execute()
-        }
+        binding.cvPrint.click { PrintTrans().execute() }
 
         val bannerImages =
             arrayOf(
@@ -76,6 +77,34 @@ class MainActivity : AppActivity() {
             bannerViews.add(bannerView)
         }
         binding.banner.setData(bannerViews)
+    }
+
+    private fun clearData() {
+        AppExecutors.getInstance().io().execute {
+            deleteLog()
+            deleteTrans()
+        }
+    }
+
+    private fun deleteLog() {
+        val logPath = FileUtils.getSDCardRootPath() + "/umsips/umsgmc.log"
+        val logFile = File(logPath)
+        if (logFile.exists()) {
+            val size = FileUtils.getFileSize(logPath) / FileUtils.MB
+            Log.i(TAG, "log size:$size MB")
+            if (size > 100) {
+                val result = logFile.delete()
+                Logger.e(TAG, "delete log file，result:$result")
+            }
+        }
+    }
+
+    private fun deleteTrans() {
+        val count = TransDataModel.getCount()
+        if (count > 1000) {
+            val size = TransDataModel.deleteOldSuccessData(7)
+            Logger.e(TAG, "delete transData size:$size")
+        }
     }
 
 }

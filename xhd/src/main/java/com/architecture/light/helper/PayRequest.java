@@ -1,7 +1,5 @@
 package com.architecture.light.helper;
 
-import android.util.Log;
-
 import com.android.architecture.helper.Logger;
 import com.architecture.light.settings.PayCache;
 import com.chinaums.mis.bank.BankDAO;
@@ -25,7 +23,6 @@ import java.net.UnknownHostException;
 public class PayRequest {
 
     private static final String TAG = "PayRequest";
-
     private final TransCfx transCfx = new TransCfx();
     private final BankDAO bankDAO = new BankDAO();
 

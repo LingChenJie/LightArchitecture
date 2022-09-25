@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import com.android.architecture.extension.click
 import com.android.architecture.ui.adapter.BaseAdapter
 import com.architecture.light.data.remote.bean.SearchBillResponse
-import com.architecture.light.databinding.AdapterPrintListBinding
+import com.architecture.light.databinding.AdapterBillListBinding
 import com.architecture.light.helper.AmountHelper
 
 /**
@@ -15,11 +15,11 @@ import com.architecture.light.helper.AmountHelper
  * Modify date: 2022/7/31
  * Version: 1
  */
-class ChoosePrintAdapter :
-    BaseAdapter<SearchBillResponse.Data, AdapterPrintListBinding>() {
+class ChooseBillAdapter :
+    BaseAdapter<SearchBillResponse.Data, AdapterBillListBinding>() {
 
-    override fun getViewBinding(viewGroup: ViewGroup): AdapterPrintListBinding {
-        return AdapterPrintListBinding.inflate(
+    override fun getViewBinding(viewGroup: ViewGroup): AdapterBillListBinding {
+        return AdapterBillListBinding.inflate(
             LayoutInflater.from(viewGroup.context),
             viewGroup,
             false
@@ -27,7 +27,7 @@ class ChoosePrintAdapter :
     }
 
     override fun bindViewHolder(
-        holder: ViewHolder<AdapterPrintListBinding>,
+        holder: ViewHolder<AdapterBillListBinding>,
         item: SearchBillResponse.Data,
         position: Int
     ) {

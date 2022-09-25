@@ -25,7 +25,8 @@
             android:layout_marginTop="@dimen/dp_41"
             android:text="@string/payment_payment_id_card_induction_area"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_13" />
+            android:textSize="@dimen/sp_13"
+            android:textStyle="bold" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:layout_width="match_parent"

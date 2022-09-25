@@ -46,10 +46,14 @@ object TransDataModel {
         dao.deleteAll()
     }
 
-    fun deleteOldSuccessData(oldDay: Int) {
+    fun deleteOldSuccessData(oldDay: Int): Int {
         val dayTimeMillis = 24 * 60 * 60 * 1000
         val oldTimeMillis = System.currentTimeMillis() - oldDay * dayTimeMillis
-        dao.deleteOldSuccessData(oldTimeMillis)
+        return dao.deleteOldData(oldTimeMillis)
+    }
+
+    fun getCount(): Int {
+        return dao.getCount()
     }
 
     fun getAll(): List<TransData> {
@@ -62,6 +66,14 @@ object TransDataModel {
 
     fun queryByVoucher(voucherNumber: String): TransData? {
         return dao.queryByVoucher(voucherNumber)
+    }
+
+    fun queryPaymentTimeout2SyncFailedTrans(): List<TransData> {
+        return dao.queryPaymentTimeout2SyncFailedTrans()
+    }
+
+    fun queryVoidTimeout2SyncFailedTrans(): List<TransData> {
+        return dao.queryVoidTimeout2SyncFailedTrans()
     }
 
 }

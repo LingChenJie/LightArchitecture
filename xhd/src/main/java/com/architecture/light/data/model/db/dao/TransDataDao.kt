@@ -25,11 +25,11 @@ interface TransDataDao {
     @Query("DELETE FROM TransData")
     fun deleteAll()
 
-    @Query("DELETE FROM TransData WHERE transactionStatus in ('PaySucceed', 'PayFailed', 'ResultNotifySucceed', 'GetPrintDataSucceed','GetPrintDataFailed','PrintSucceed','PrintFailed') & transactionTimeMillis < :oldTimeMillis")
-    fun deleteOldSuccessData(oldTimeMillis: Long): Int
+    @Query("DELETE FROM TransData WHERE transactionStatus not in ('TransTimeout', 'ResultNotifyFailed') & transactionTimeMillis < :oldTimeMillis")
+    fun deleteOldData(oldTimeMillis: Long): Int
 
     @Query("SELECT COUNT(*) FROM TransData")
-    fun count(): Int
+    fun getCount(): Int
 
     @Query("SELECT * FROM TransData")
     fun getAll(): List<TransData>
@@ -39,5 +39,11 @@ interface TransDataDao {
 
     @Query("SELECT * FROM TransData WHERE voucherNumber = :voucherNumber")
     fun queryByVoucher(voucherNumber: String): TransData?
+
+    @Query("SELECT * FROM TransData WHERE transactionName = 'Payment' & transactionStatus in('TransTimeout', 'ResultNotifyFailed')")
+    fun queryPaymentTimeout2SyncFailedTrans(): List<TransData>
+
+    @Query("SELECT * FROM TransData WHERE transactionName = 'Void' & transactionStatus in('TransTimeout', 'ResultNotifyFailed')")
+    fun queryVoidTimeout2SyncFailedTrans(): List<TransData>
 
 }

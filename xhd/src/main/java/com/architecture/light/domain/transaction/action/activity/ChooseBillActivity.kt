@@ -4,10 +4,10 @@ import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.data.model.db.entity.TransData
-import com.architecture.light.databinding.ActivityChoosePrintBinding
+import com.architecture.light.databinding.ActivityChooseBillBinding
 import com.architecture.light.domain.transaction.action.ActionChooseBill
 import com.architecture.light.domain.transaction.action.UIParams
-import com.architecture.light.ui.adapter.ChoosePrintAdapter
+import com.architecture.light.ui.adapter.ChooseBillAdapter
 
 /**
  * File describe:
@@ -18,11 +18,11 @@ import com.architecture.light.ui.adapter.ChoosePrintAdapter
  */
 class ChooseBillActivity : AppActivityForAction() {
 
-    private val binding: ActivityChoosePrintBinding by lazy {
-        ActivityChoosePrintBinding.inflate(layoutInflater)
+    private val binding: ActivityChooseBillBinding by lazy {
+        ActivityChooseBillBinding.inflate(layoutInflater)
     }
 
-    private val adapter by lazy { ChoosePrintAdapter() }
+    private val adapter by lazy { ChooseBillAdapter() }
 
     override fun initView() {
         setContentView(binding.root)

@@ -1,17 +1,20 @@
 package com.architecture.light.domain.transaction.action.activity
 
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.lifecycleScope
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.valid
 import com.android.architecture.helper.DelayHelper
+import com.android.architecture.utils.Timer
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.Constant
 import com.architecture.light.databinding.ActivityReadIdCardBinding
 import com.architecture.light.domain.transaction.action.ActionReadIdCard
 import com.architecture.light.ext.toast
+import com.architecture.light.ext.toastWarn
 import com.architecture.light.helper.AidlServiceFactory
 import com.sunmi.idcardservice.IDCardInfo
 import kotlinx.coroutines.Dispatchers
@@ -32,6 +35,7 @@ class ReadIdCardActivity : AppActivityForAction() {
     }
 
     val idCardService = AidlServiceFactory.instance.getIDCardService()
+    private var timer: Timer? = null
 
     override fun initView() {
         setContentView(binding.root)
@@ -41,6 +45,7 @@ class ReadIdCardActivity : AppActivityForAction() {
         super.onResume()
         if (idCardService != null) {
             readIdCard()
+            startTimer()
         } else {
             if (Constant.IS_DEBUG) {
                 DelayHelper.sendDelayTask(3000, object : DelayHelper.Task {
@@ -72,6 +77,29 @@ class ReadIdCardActivity : AppActivityForAction() {
                 }
             }
         }
+    }
+
+    private fun startTimer() {
+        binding.titleView.timerView.visibility = View.VISIBLE
+        binding.titleView.timerText.text = "60"
+        timer?.cancel()
+        timer = Timer(60)
+        timer?.setTimerListener(object : Timer.TimerListener {
+            override fun onFinish() {
+                toastWarn("身份证读取超时")
+                finish(ActionResult(AppErrorCode.BACK_TO_PREVIOUS_PAGE))
+            }
+
+            override fun onTick(leftTime: Long) {
+                binding.titleView.timerText.text = leftTime.toString()
+            }
+        })
+        timer?.start()
+    }
+
+    override fun finish(result: ActionResult?) {
+        super.finish(result)
+        timer?.cancel()
     }
 
 }

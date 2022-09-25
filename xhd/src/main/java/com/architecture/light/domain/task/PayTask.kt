@@ -33,7 +33,6 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
     override fun onExecute() {
         val requestBean = onAssembly()
         if (requestBean != null) {
-            Logger.d("PayTask", "Request: " + requestBean.transMemo)
             val isNetworkConnected = NetworkUtils.isConnected()
             if (!isNetworkConnected && PayCache.getPosConnMode() == 1) {
                 setErrorCode(ErrorCode.NETWORK_NO_CONNECTION)
@@ -42,8 +41,9 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
 
             try {
                 requestBean.erpId = ""
+                Logger.d("PayTask", "Request =>>> ${requestBean.toString()}")
                 val response = PayRequest().execute(requestBean)
-                Logger.d("PayTask", response.toString())
+                Logger.d("PayTask", "Response =>>> ${response.toString()}")
                 setErrorCode(ErrorCode.SUCCESS)
                 analysisResponse(response)
 
@@ -53,6 +53,9 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
                 return
 
             }
+        } else {
+            setErrorCode(AppErrorCode.PAY_DATA_ERROR)
+            return
         }
     }
 

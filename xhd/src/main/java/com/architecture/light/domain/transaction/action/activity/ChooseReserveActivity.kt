@@ -32,6 +32,7 @@ class ChooseReserveActivity : AppActivityForAction() {
         adapter.setItemClickListener { _, _, item ->
             val room =
                 ActionChooseReserve.Info(
+                    item.projNum,
                     item.bookingGUID,
                     item.cstName,
                     transData.searchReserveResponse!!

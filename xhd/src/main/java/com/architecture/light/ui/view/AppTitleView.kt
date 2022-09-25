@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
@@ -46,6 +47,11 @@ class AppTitleView @JvmOverloads constructor(
         get() = binding.action1Icon
     val action2Icon: ImageView
         get() = binding.action2Icon
+
+    val timerView: View
+        get() = binding.timerView
+    val timerText: TextView
+        get() = binding.timerText
 
     init {
         initView()
@@ -158,6 +164,10 @@ class AppTitleView @JvmOverloads constructor(
 
     fun setAction2ClickListener(listener: (View) -> Unit) {
         action2Icon.setOnClickListener(listener)
+    }
+
+    fun setTimerText(text: CharSequence) {
+        timerText.text = text
     }
 
 }

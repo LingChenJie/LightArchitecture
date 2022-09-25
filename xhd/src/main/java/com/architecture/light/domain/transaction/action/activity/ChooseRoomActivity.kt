@@ -33,7 +33,12 @@ class ChooseRoomActivity : AppActivityForAction() {
         adapter.setData(data)
         adapter.setItemClickListener { _, _, item ->
             val room =
-                ActionChooseRoom.Room(item.roomGUID, item.cstName, transData.searchRoomResponse!!)
+                ActionChooseRoom.Room(
+                    item.roomInfo,
+                    item.roomGUID,
+                    item.cstName,
+                    transData.searchRoomResponse!!
+                )
             finish(ActionResult(ErrorCode.SUCCESS, room))
         }
         binding.recyclerView.adapter = adapter

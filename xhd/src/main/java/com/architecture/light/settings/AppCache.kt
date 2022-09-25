@@ -34,12 +34,12 @@ object AppCache {
         return CacheHelper.saveString(KEY_APP_BEAN, jsonString)
     }
 
-    fun savePayBean(bean: AppBean): Boolean {
+    fun saveAppBean(bean: AppBean): Boolean {
         this.bean = bean
         return saveBean()
     }
 
-    fun getPayBean(): AppBean {
+    fun getAppBean(): AppBean {
         return bean
     }
 

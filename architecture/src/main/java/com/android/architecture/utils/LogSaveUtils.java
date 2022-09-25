@@ -117,7 +117,7 @@ public class LogSaveUtils {
                 String sdPath = LightConstant.INSTANCE.getSDCARD_PATH();
                 String logPath = sdPath + "/" + LOG_DIR_NAME + "/" + AppUtils.getApp().getPackageName() + "/";
                 File file = new File(logPath);
-                boolean mkdirs = false;
+                boolean mkdirs = true;
                 if (!file.exists()) {
                     mkdirs = file.mkdirs();
                     Log.e(TAG, "创建目录: " + logPath + "; 结果：" + mkdirs);

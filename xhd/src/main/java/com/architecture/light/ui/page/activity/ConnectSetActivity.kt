@@ -8,13 +8,16 @@ import com.android.architecture.data.manage.InputTextManager
 import com.android.architecture.extension.click
 import com.android.architecture.extension.hideKeyboard
 import com.android.architecture.extension.valid
+import com.android.architecture.helper.Logger
 import com.architecture.light.app.AppActivity
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.databinding.ActivityConnectSetBinding
 import com.architecture.light.domain.task.PosSignInTask
 import com.architecture.light.ext.toastSucc
 import com.architecture.light.ext.toastWarn
+import com.architecture.light.helper.PayRequest
 import com.architecture.light.settings.PayCache
+import com.chinaums.mis.bean.RequestPojo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext

@@ -212,6 +212,7 @@ class ReserveTrans : BaseTransaction() {
             State.CHOOSE_RESERVE -> {
                 if (code == ErrorCode.SUCCESS) {
                     val info = data as ActionChooseReserve.Info
+                    transData.projNum = info.projNum
                     transData.bookingGUID = info.bookingGUID
                     transData.cstName = info.cstName
                     transData.searchReserveResponse = info.searchReserveResponse

@@ -38,6 +38,7 @@ class ActionChooseReserve(listener: ActionStartListener) : AAction(listener) {
     }
 
     data class Info(
+        val projNum: String,
         val bookingGUID: String,
         val cstName: String,
         val searchReserveResponse: SearchReserveResponse

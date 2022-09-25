@@ -197,6 +197,7 @@ class PaymentTrans : BaseTransaction() {
             State.CHOOSE_ROOM -> {
                 if (code == ErrorCode.SUCCESS) {
                     val room = data as ActionChooseRoom.Room
+                    transData.roomInfo = room.roomInfo
                     transData.roomGUID = room.roomGUID
                     transData.cstName = room.cstName
                     transData.searchRoomResponse = room.searchRoomResponse

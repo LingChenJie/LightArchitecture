@@ -50,11 +50,11 @@ class InputTelActivity : AppActivityForAction() {
 
     private fun notifyConfirmEnabled() {
         val tel = binding.etTel.text.toString()
-//        if (tel.valid && tel.length == 11) {
-//            binding.keyboard.setConfirmEnabled(true)
-//        } else {
-//            binding.keyboard.setConfirmEnabled(false)
-//        }
+        if (tel.valid && tel.length == 11) {
+            binding.keyboard.setConfirmEnabled(true)
+        } else {
+            binding.keyboard.setConfirmEnabled(false)
+        }
     }
 
 }
