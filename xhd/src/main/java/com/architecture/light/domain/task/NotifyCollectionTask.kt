@@ -20,7 +20,7 @@ class NotifyCollectionTask : HttpTask() {
     override fun onAssembly(): RequestBean {
         val request = NotifyCollectionRequest()
         request.posNO = DeviceUtils.getDeviceSN()
-        request.serialNumber = TransHelper.getTransactionSerialNumber(param)
+        request.serialNumber = param.serialNumber
         request.projGUID = param.projGUID
         request.roomGUID = param.roomGUID
         request.lyrCode = AccountCache.getBillRecipient()

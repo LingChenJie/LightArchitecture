@@ -21,7 +21,7 @@ class SearchBillTask : HttpTask() {
         request.cardID = param.cardID
         request.tel = param.tel
         if (param.serialNumber.valid) {
-            request.serialNumber = TransHelper.getTransactionSerialNumber(param)
+            request.serialNumber = param.serialNumber
         }
         return request
     }

@@ -19,7 +19,7 @@ class NotifyPrepaidTask : HttpTask() {
     override fun onAssembly(): RequestBean {
         val request = NotifyPrepaidRequest()
         request.posNO = DeviceUtils.getDeviceSN()
-        request.serialNumber = TransHelper.getTransactionSerialNumber(param)
+        request.serialNumber = param.serialNumber
         request.projGUID = param.projGUID
         request.bookingGUID = param.bookingGUID
         request.lyrCode = AccountCache.getBillRecipient()
