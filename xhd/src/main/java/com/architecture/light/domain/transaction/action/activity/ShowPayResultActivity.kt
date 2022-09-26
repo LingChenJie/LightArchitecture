@@ -108,14 +108,9 @@ class ShowPayResultActivity : AppActivityForAction() {
                 binding.tvResultTip.text = getString(R.string.payment_result_sync_success)
                 binding.tvFailMessage.visibility = View.GONE
                 binding.tvFailMessage.text = ""
-//                binding.layoutBottomSuccess.visibility = View.VISIBLE
-//                binding.layoutBottomFail.visibility = View.GONE
-//                finish(ActionResult(AppErrorCode.BILL_GET))
-                binding.layoutBottomSuccess.visibility = View.GONE
-                binding.layoutBottomFail.visibility = View.VISIBLE
-                binding.btRepay.visibility = View.GONE
-                binding.btRequery.visibility = View.GONE
-                binding.btResynch.visibility = View.VISIBLE
+                binding.layoutBottomSuccess.visibility = View.VISIBLE
+                binding.layoutBottomFail.visibility = View.GONE
+                finish(ActionResult(AppErrorCode.BILL_GET))
             }
             TransactionStatus.ResultNotifyFailed.name -> {
                 binding.ivResult.setImageResource(R.drawable.icon_result_fail)
