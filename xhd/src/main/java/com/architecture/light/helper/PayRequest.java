@@ -23,8 +23,8 @@ import java.net.UnknownHostException;
 public class PayRequest {
 
     private static final String TAG = "PayRequest";
-    private final TransCfx transCfx = new TransCfx();
-    private final BankDAO bankDAO = new BankDAO();
+    private static final TransCfx transCfx = new TransCfx();
+    private static final BankDAO bankDAO = new BankDAO();
 
     public PayRequest() {
         transCfx.setPosConnMode(PayCache.INSTANCE.getPosConnMode());

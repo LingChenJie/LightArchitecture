@@ -99,7 +99,7 @@ class MainActivity : AppActivity() {
     private fun deleteTrans() {
         val count = TransDataModel.getCount()
         Logger.i(TAG, "transData count:$count")
-        if (count > 1000) {
+        if (count > 2000) {
             val size = TransDataModel.deleteOldSuccessData(7)
             Logger.e(TAG, "delete transData count:$size")
         }

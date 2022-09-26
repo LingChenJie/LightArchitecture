@@ -114,7 +114,7 @@ public class LogSaveUtils {
         try {
             if (Environment.MEDIA_MOUNTED.equals(Environment
                     .getExternalStorageState())) {
-                String sdPath = LightConstant.INSTANCE.getSDCARD_PATH();
+                String sdPath = FileUtils.getSDCardRootPath();
                 String logPath = sdPath + "/" + LOG_DIR_NAME + "/" + AppUtils.getApp().getPackageName() + "/";
                 File file = new File(logPath);
                 boolean mkdirs = true;
