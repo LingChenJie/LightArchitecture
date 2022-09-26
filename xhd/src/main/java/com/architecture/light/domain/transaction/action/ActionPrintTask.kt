@@ -58,6 +58,7 @@ class ActionPrintTask(listener: ActionStartListener) : AAction(listener) {
 
     private fun hideLoading() {
         printingDialog?.dismiss()
+        printingDialog = null
     }
 
     override fun onClear() {

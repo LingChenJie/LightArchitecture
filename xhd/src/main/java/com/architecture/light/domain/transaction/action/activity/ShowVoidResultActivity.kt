@@ -70,8 +70,7 @@ class ShowVoidResultActivity : AppActivityForAction() {
                 binding.tvFailMessage.text = ""
                 binding.layoutBottomSuccess.visibility = View.VISIBLE
                 binding.layoutBottomFail.visibility = View.GONE
-                //TODO
-                //finish(ActionResult(AppErrorCode.PAY_RESULT_NOTIFY))
+                finish(ActionResult(AppErrorCode.VOID_RESULT_NOTIFY))
             }
             TransactionStatus.TransFailed.name -> {
                 binding.ivResult.setImageResource(R.drawable.icon_result_fail)

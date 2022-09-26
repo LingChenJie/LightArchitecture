@@ -18,6 +18,8 @@ class SearchRoomResponseConvert {
     fun objectToString(response: SearchRoomResponse?): String {
         if (response != null) {
             val res = SearchRoomResponse()
+            val data = ArrayList<SearchRoomResponse.Data>()
+            res.data = data
             for (bean in response.data) {
                 if (bean.isChecked) {
                     res.data.add(bean)

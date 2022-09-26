@@ -38,7 +38,7 @@ class ChooseBillAdapter :
         binding.tvPaymentDate.text = item.kpDate
         binding.tvPaymentAmount.text =
             AmountHelper.formatAmount(AmountHelper.convertAmount(item.amount))
-        binding.root.click {
+        binding.tvConfirm.click {
             data.forEach { it.isChecked = false }
             data[position].isChecked = true
             notifyDataSetChanged()

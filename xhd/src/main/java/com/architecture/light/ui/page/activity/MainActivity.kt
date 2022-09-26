@@ -1,6 +1,5 @@
 package com.architecture.light.ui.page.activity
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import com.android.architecture.domain.transaction.TransactionConstant
@@ -13,10 +12,8 @@ import com.architecture.light.R
 import com.architecture.light.app.AppActivity
 import com.architecture.light.data.model.TransDataModel
 import com.architecture.light.databinding.ActivityMainBinding
-import com.architecture.light.domain.transaction.PaymentTrans
-import com.architecture.light.domain.transaction.PrintTrans
-import com.architecture.light.domain.transaction.ReserveTrans
-import com.architecture.light.domain.transaction.VoidTrans
+import com.architecture.light.domain.transaction.*
+import com.architecture.light.settings.AccountCache
 import com.gyf.immersionbar.ImmersionBar
 import java.io.File
 
@@ -35,9 +32,9 @@ class MainActivity : AppActivity() {
     override fun onResume() {
         super.onResume()
         TransactionConstant.getInstance().currentActivity = this
-//        if (!AccountCache.getLoginStatus()) {
-//            LogonTrans().execute()
-//        }
+        if (!AccountCache.getLoginStatus()) {
+            LogonTrans().execute()
+        }
         clearData()
     }
 
@@ -91,8 +88,8 @@ class MainActivity : AppActivity() {
         val logFile = File(logPath)
         if (logFile.exists()) {
             val size = FileUtils.getFileSize(logPath) / FileUtils.MB
-            Log.i(TAG, "log size:$size MB")
-            if (size > 100) {
+            Logger.i(TAG, "log size:$size MB")
+            if (size > 200) {
                 val result = logFile.delete()
                 Logger.e(TAG, "delete log file，result:$result")
             }
@@ -101,9 +98,10 @@ class MainActivity : AppActivity() {
 
     private fun deleteTrans() {
         val count = TransDataModel.getCount()
+        Logger.i(TAG, "transData count:$count")
         if (count > 1000) {
             val size = TransDataModel.deleteOldSuccessData(7)
-            Logger.e(TAG, "delete transData size:$size")
+            Logger.e(TAG, "delete transData count:$size")
         }
     }
 

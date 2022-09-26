@@ -25,25 +25,25 @@ interface TransDataDao {
     @Query("DELETE FROM TransData")
     fun deleteAll()
 
-    @Query("DELETE FROM TransData WHERE transactionStatus not in ('TransTimeout', 'ResultNotifyFailed') & transactionTimeMillis < :oldTimeMillis")
+    @Query("DELETE FROM TransData WHERE transactionStatus NOT IN ('TransTimeout', 'ResultNotifyFailed') & transactionTimeMillis < :oldTimeMillis")
     fun deleteOldData(oldTimeMillis: Long): Int
 
     @Query("SELECT COUNT(*) FROM TransData")
     fun getCount(): Int
 
-    @Query("SELECT * FROM TransData")
+    @Query("SELECT * FROM TransData ORDER BY tId DESC")
     fun getAll(): List<TransData>
 
     @Query("SELECT * FROM TransData WHERE tId = :id")
     fun queryById(id: Long): TransData?
 
-    @Query("SELECT * FROM TransData WHERE voucherNumber = :voucherNumber")
-    fun queryByVoucher(voucherNumber: String): TransData?
+    @Query("SELECT * FROM TransData WHERE voucherNumber = :voucherNumber ORDER BY tId DESC")
+    fun queryByVoucher(voucherNumber: String): List<TransData>
 
-    @Query("SELECT * FROM TransData WHERE transactionName = 'Payment' & transactionStatus in('TransTimeout', 'ResultNotifyFailed')")
+    @Query("SELECT * FROM TransData WHERE transactionName IN ('Payment', 'Reserve') AND transactionStatus IN ('TransTimeout', 'ResultNotifyFailed') ORDER BY tId DESC")
     fun queryPaymentTimeout2SyncFailedTrans(): List<TransData>
 
-    @Query("SELECT * FROM TransData WHERE transactionName = 'Void' & transactionStatus in('TransTimeout', 'ResultNotifyFailed')")
+    @Query("SELECT * FROM TransData WHERE transactionName = 'Void' AND transactionStatus IN ('TransTimeout', 'ResultNotifyFailed') ORDER BY tId DESC")
     fun queryVoidTimeout2SyncFailedTrans(): List<TransData>
 
 }

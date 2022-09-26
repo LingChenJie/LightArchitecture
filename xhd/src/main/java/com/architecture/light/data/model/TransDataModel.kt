@@ -65,7 +65,11 @@ object TransDataModel {
     }
 
     fun queryByVoucher(voucherNumber: String): TransData? {
-        return dao.queryByVoucher(voucherNumber)
+        val list = dao.queryByVoucher(voucherNumber)
+        if (list.isNotEmpty()) {
+            return list[0]
+        }
+        return null
     }
 
     fun queryPaymentTimeout2SyncFailedTrans(): List<TransData> {

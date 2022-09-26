@@ -357,6 +357,7 @@ class PaymentTrans : BaseTransaction() {
     private fun initPay() {
         val timeMillis = System.currentTimeMillis()
         val currentTime = DateHelper.getDateFormatString("yyyyMMddHHmm" + "ss", timeMillis)
+        transData.transactionYear = DateHelper.yearString
         transData.transactionTimeMillis = timeMillis
         transData.orderNumber = currentTime + RandomHelper.getRandomHexString(3)
         insertTransData()

@@ -202,7 +202,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_29"
         android:gravity="center"
-        android:text="@string/payment_sync_transaction_status_query"
+        android:text="@string/payment_sync_transaction_status_sync"
         android:textColor="@color/white"
         android:textSize="@dimen/sp_13"
         android:textStyle="bold"

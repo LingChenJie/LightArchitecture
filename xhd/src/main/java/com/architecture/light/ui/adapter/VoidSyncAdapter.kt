@@ -1,14 +1,11 @@
 package com.architecture.light.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.android.architecture.extension.click
 import com.android.architecture.helper.DateHelper
 import com.android.architecture.ui.adapter.BaseAdapter
-import com.architecture.light.constant.TransactionName
 import com.architecture.light.data.model.db.entity.TransData
-import com.architecture.light.databinding.AdapterPaymentSyncListBinding
 import com.architecture.light.databinding.AdapterVoidSyncListBinding
 import com.architecture.light.helper.AmountHelper
 import com.architecture.light.helper.TransHelper
@@ -45,7 +42,7 @@ class VoidSyncAdapter :
         binding.tvTransactionStatus.text = TransHelper.getVoidStatus(item)
         binding.tvVoucherName.text = item.originalVoucherNumber
 
-        binding.tvStatusQuery.click {
+        binding.tvStatusSync.click {
             mOnItemClickListener?.onItemClick(it.id, position, item)
         }
     }

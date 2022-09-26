@@ -1,12 +1,13 @@
 package com.architecture.light.domain.task
 
+import com.android.architecture.constant.ErrorCode
 import com.android.architecture.helper.DateHelper
 import com.android.architecture.helper.JsonHelper
+import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.data.remote.ResponseCode
 import com.architecture.light.data.remote.bean.NotifyPrepaidRequest
 import com.architecture.light.data.remote.bean.NotifyPrepaidResponse
 import com.architecture.light.data.remote.bean.base.RequestBean
-import com.architecture.light.helper.TransHelper
 import com.architecture.light.settings.AccountCache
 import com.architecture.light.utils.DeviceUtils
 
@@ -48,7 +49,7 @@ class NotifyPrepaidTask : HttpTask() {
     override fun onPostExecute(responseStr: String) {
         val response = JsonHelper.toBean<NotifyPrepaidResponse>(responseStr)
         if (response.code == ResponseCode.SUCCESS) {
-            param.responseMessage = response.msg
+            param.responseMessage = ErrorCode.getMessage(AppErrorCode.TRANS_NOTIFY_SUCCESS)
             param.vouchGUID = response.data.vouchGUID
         } else {
             param.responseCode = response.code

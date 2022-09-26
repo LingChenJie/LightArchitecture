@@ -1,11 +1,15 @@
 package com.architecture.light.domain.task
 
+import android.os.SystemClock
 import com.android.architecture.constant.ErrorCode
+import com.android.architecture.helper.DateHelper
 import com.android.architecture.helper.Logger
+import com.architecture.light.constant.Constant
 import com.architecture.light.data.pay.bean.TransMemo
 import com.architecture.light.helper.AmountHelper
 import com.architecture.light.helper.TransHelper
 import com.chinaums.mis.bean.RequestPojo
+import com.chinaums.mis.bean.ResponsePojo
 import org.json.JSONObject
 import kotlin.math.abs
 
@@ -33,7 +37,7 @@ class PayQueryTask : PayTask() {
             response.transactionDate = payData.date.replace("/".toRegex(), "")
             response.transactionTime = payData.time.replace(":".toRegex(), "")
             Logger.e(
-                "BankVoidTask",
+                "PayQueryTask",
                 "date:${response.transactionDate}; time:${response.transactionTime}"
             )
             response.serialNumber = TransHelper.getTransactionSerialNumber(response)
@@ -43,10 +47,26 @@ class PayQueryTask : PayTask() {
         }
     }
 
+    override fun analysisResponse(response: ResponsePojo) {
+        if (Constant.IS_DEBUG && Constant.IS_SIMULATED_TRANS) {
+            SystemClock.sleep(2000)
+            val payData = TransMemo.PayData()
+            payData.resCode = "00"
+            payData.resDesc = "交易成功"
+            payData.traceNo = "000012"
+            payData.refNo = "123456789012"
+            payData.date = DateHelper.dateString
+            payData.time = DateHelper.timeString
+            onPostExecute(payData)
+        } else {
+            super.analysisResponse(response)
+        }
+    }
+
     private fun getTransMemo(): String {
         val json = JSONObject()
-        json.put("orgTraceNo", param.originalVoucherNumber)
-        json.put("extOrderNo", param.originalOrderNumber)
+        json.put("orgTraceNo", param.voucherNumber)
+        json.put("extOrderNo", param.orderNumber)
         return json.toString()
     }
 

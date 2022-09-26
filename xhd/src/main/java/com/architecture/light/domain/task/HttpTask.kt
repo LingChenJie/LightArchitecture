@@ -82,7 +82,7 @@ abstract class HttpTask : BaseTask<TransData, TransData>() {
     private fun getHeaders(body: String): Map<String, String> {
         val headers = mutableMapOf<String, String>()
         headers["Authorization"] =
-            RequestUtils.getOpenBodySig(Config.appId, Config.appKey, body)
+            RequestUtils.getOpenBodySig(Config.getAppId(), Config.getAppKey(), body)
         return headers
     }
 

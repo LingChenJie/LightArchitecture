@@ -6,8 +6,8 @@ import com.android.architecture.extension.getString
 import com.architecture.light.R
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.Constant
-import com.architecture.light.constant.TransactionStatus
-import com.architecture.light.domain.task.*
+import com.architecture.light.domain.task.PrintTask
+import com.architecture.light.domain.task.SearchBillTask
 import com.architecture.light.domain.transaction.action.*
 
 class PrintTrans : BaseTransaction() {
@@ -77,7 +77,8 @@ class PrintTrans : BaseTransaction() {
                         ActionSelectQueryMethod.QueryMethod.Tel -> {
                             gotoState(State.INPUT_TEL.name)
                         }
-                        else -> {
+                        ActionSelectQueryMethod.QueryMethod.RoomInfo -> {
+                            //ignore
                         }
                     }
                 } else {
@@ -130,6 +131,7 @@ class PrintTrans : BaseTransaction() {
                 if (code == ErrorCode.SUCCESS) {
                     val info = data as ActionChooseBill.Info
                     transData.searchBillResponse = info.searchBillResponse
+                    transData.isRePrint = true
                     gotoState(State.PRINT_BILL_TASK.name)
                 } else {
                     transEnd(ActionResult(AppErrorCode.BACK_TO_MAIN_PAGE))

@@ -159,7 +159,7 @@
     </com.hjq.shape.layout.ShapeLinearLayout>
 
     <com.hjq.shape.view.ShapeTextView
-        android:id="@+id/tv_status_query"
+        android:id="@+id/tv_status_sync"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_29"
         android:gravity="center"

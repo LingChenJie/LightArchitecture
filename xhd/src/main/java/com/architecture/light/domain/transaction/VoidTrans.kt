@@ -11,8 +11,12 @@ import com.architecture.light.constant.TransactionName
 import com.architecture.light.constant.TransactionPlatform
 import com.architecture.light.constant.TransactionStatus
 import com.architecture.light.data.model.TransDataModel
-import com.architecture.light.domain.task.*
+import com.architecture.light.domain.task.BankVoidTask
+import com.architecture.light.domain.task.CodeVoidTask
+import com.architecture.light.domain.task.NotifyVoidTask
+import com.architecture.light.domain.task.VoidQueryTask
 import com.architecture.light.domain.transaction.action.*
+import com.architecture.light.ext.toastWarn
 
 class VoidTrans : BaseTransaction() {
 
@@ -95,12 +99,16 @@ class VoidTrans : BaseTransaction() {
             State.INPUT_VOUCHER_NUMBER -> {
                 if (code == ErrorCode.SUCCESS) {
                     val info = data as ActionInputVoucherNumber.Info
-                    transData.originalVoucherNumber = info.voucherNumber
-                    val originTrans = TransDataModel.queryByVoucher(transData.originalOrderNumber)
-                    if (originTrans != null) {
-                        transData.originalOrderNumber = originTrans.orderNumber
-                        transData.originalSerialNumber = originTrans.serialNumber
+                    val voucherNumber = info.voucherNumber
+                    val originTrans = TransDataModel.queryByVoucher(voucherNumber)
+                    if (originTrans == null) {
+                        toastWarn("原交易不存在，请检查")
+                        gotoState(State.INPUT_VOUCHER_NUMBER.name)
+                        return
                     }
+                    transData.originalVoucherNumber = voucherNumber
+                    transData.originalOrderNumber = originTrans.orderNumber
+                    transData.originalSerialNumber = originTrans.serialNumber
                     initPay()
                     if (transData.transactionPlatform == TransactionPlatform.Bank) {
                         gotoState(State.BANK_VOID_TASK.name)
@@ -186,6 +194,7 @@ class VoidTrans : BaseTransaction() {
     private fun initPay() {
         val timeMillis = System.currentTimeMillis()
         val currentTime = DateHelper.getDateFormatString("yyyyMMddHHmm" + "ss", timeMillis)
+        transData.transactionYear = DateHelper.yearString
         transData.transactionTimeMillis = timeMillis
         transData.orderNumber = currentTime + RandomHelper.getRandomHexString(3)
         insertTransData()
