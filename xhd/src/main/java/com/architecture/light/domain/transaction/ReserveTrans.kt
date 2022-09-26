@@ -306,7 +306,7 @@ class ReserveTrans : BaseTransaction() {
                         gotoState(State.PAY_QUERY_TASK.name)
                     }
                     AppErrorCode.PAY_AGAIN -> {
-                        gotoState(State.SEARCH_RESERVE_TASK.name)
+                        gotoState(State.SELECT_QUERY_METHOD.name)
                     }
                     AppErrorCode.PAY_RESULT_NOTIFY -> {
                         gotoState(State.NOTIFY_COLLECTION.name)

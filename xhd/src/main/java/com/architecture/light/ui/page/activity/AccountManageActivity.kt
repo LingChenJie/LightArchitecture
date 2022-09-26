@@ -3,9 +3,7 @@ package com.architecture.light.ui.page.activity
 import android.view.View
 import androidx.core.view.isVisible
 import com.android.architecture.data.manage.InputTextManager
-import com.android.architecture.extension.click
-import com.android.architecture.extension.openActivity
-import com.android.architecture.extension.valid
+import com.android.architecture.extension.*
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityAccountManageBinding
 import com.architecture.light.ext.toastSucc
@@ -57,6 +55,7 @@ class AccountManageActivity : AppActivity() {
             if (billRecipient.valid) {
                 AccountCache.saveBillRecipient(billRecipient)
                 binding.tvBillRecipient.text = billRecipient
+                hideSoftInput()
                 toastSucc("保存成功")
             }
         }

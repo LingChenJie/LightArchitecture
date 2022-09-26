@@ -7,17 +7,15 @@ import com.android.architecture.constant.ErrorCode
 import com.android.architecture.data.manage.InputTextManager
 import com.android.architecture.extension.click
 import com.android.architecture.extension.hideKeyboard
+import com.android.architecture.extension.hideSoftInput
 import com.android.architecture.extension.valid
-import com.android.architecture.helper.Logger
 import com.architecture.light.app.AppActivity
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.databinding.ActivityConnectSetBinding
 import com.architecture.light.domain.task.PosSignInTask
 import com.architecture.light.ext.toastSucc
 import com.architecture.light.ext.toastWarn
-import com.architecture.light.helper.PayRequest
 import com.architecture.light.settings.PayCache
-import com.chinaums.mis.bean.RequestPojo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -49,18 +47,11 @@ class ConnectSetActivity : AppActivity() {
                 binding.layoutBillRecipientModify.visibility = View.VISIBLE
             }
         }
-        binding.btConfirmWifi.click {
+        binding.btConfirmWifi.click { saveWifiParams() }
+        binding.layoutConnectTest.click {
+            saveWifiParams(false)
             val ip = binding.etIp.text.toString()
             val port = binding.etPort.text.toString()
-            if (ip.valid && port.valid) {
-                PayCache.saveIp(ip)
-                PayCache.savePort(port)
-                toastSucc("保存成功")
-            }
-        }
-        binding.layoutConnectTest.click {
-            val ip = PayCache.getIp()
-            val port = PayCache.getPort()
             if (ip.valid && port.valid) {
                 signIn()
             } else {
@@ -89,6 +80,19 @@ class ConnectSetActivity : AppActivity() {
                 toastSucc("签到成功[$code]")
             } else {
                 toastWarn("$message[$code]")
+            }
+        }
+    }
+
+    private fun saveWifiParams(showTip: Boolean = true) {
+        val ip = binding.etIp.text.toString()
+        val port = binding.etPort.text.toString()
+        if (ip.valid && port.valid) {
+            PayCache.saveIp(ip)
+            PayCache.savePort(port)
+            hideSoftInput()
+            if (showTip) {
+                toastSucc("保存成功")
             }
         }
     }

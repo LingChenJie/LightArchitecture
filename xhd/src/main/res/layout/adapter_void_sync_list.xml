@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:textSize="@dimen/sp_11"
-                app:shape_textColor="#162234"
+                app:shape_textColor="#EF7029"
                 app:shape_textSelectedColor="@color/white"
                 tools:text="XXXX" />
 

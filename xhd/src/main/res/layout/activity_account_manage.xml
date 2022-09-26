@@ -238,7 +238,7 @@
                 app:shape_radius="@dimen/dp_3"
                 app:shape_solidColor="@color/theme_color"
                 app:shape_solidDisabledColor="@color/theme_color_50"
-                app:shape_textPressedColor="@color/theme_color_50" />
+                app:shape_solidPressedColor="@color/theme_color_50" />
 
         </LinearLayout>
 

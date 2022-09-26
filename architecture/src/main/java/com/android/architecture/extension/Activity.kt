@@ -3,6 +3,7 @@ package com.android.architecture.extension
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.view.inputmethod.InputMethodManager
 
 inline fun <reified T : Activity> Context.openActivity(block: Intent.() -> Unit) {
     val intent = Intent(this, T::class.java)
@@ -26,4 +27,10 @@ inline fun <reified T : Activity> Activity.openActivity(block: Intent.() -> Unit
 inline fun <reified T : Activity> Activity.openActivity() {
     val intent = Intent(this, T::class.java)
     startActivity(intent)
+}
+
+fun Activity.hideSoftInput() {
+    val manager =
+        com.android.architecture.extension.getSystemService(InputMethodManager::class.java)
+    manager?.hideSoftInputFromWindow(currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
 }

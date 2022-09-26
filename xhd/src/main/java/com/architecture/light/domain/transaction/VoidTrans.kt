@@ -109,6 +109,7 @@ class VoidTrans : BaseTransaction() {
                     transData.originalVoucherNumber = voucherNumber
                     transData.originalOrderNumber = originTrans.orderNumber
                     transData.originalSerialNumber = originTrans.serialNumber
+                    transData.cstName = originTrans.cstName
                     initPay()
                     if (transData.transactionPlatform == TransactionPlatform.Bank) {
                         gotoState(State.BANK_VOID_TASK.name)
