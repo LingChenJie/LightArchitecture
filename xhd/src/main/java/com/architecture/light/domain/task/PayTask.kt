@@ -1,10 +1,8 @@
 package com.architecture.light.domain.task
 
-import android.os.SystemClock
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.task.BaseTask
 import com.android.architecture.extension.empty
-import com.android.architecture.helper.CloneHelper
 import com.android.architecture.helper.JsonHelper
 import com.android.architecture.helper.Logger
 import com.android.architecture.utils.NetworkUtils
@@ -49,12 +47,10 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
             try {
                 requestBean.erpId = ""
                 Logger.d("PayTask", "Request =>>> $requestBean")
-                val res = PayRequest().execute(requestBean)
-                val json = JsonHelper.toJson(res)
-                SystemClock.sleep(200)
-                Logger.d("PayTask", "Response =>>> $json")
-                processRes(json)
+                val response = PayRequest().execute(requestBean)
+                Logger.d("PayTask", "Response =>>> $response")
                 setErrorCode(ErrorCode.SUCCESS)
+                analysisResponse(response)
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -66,11 +62,6 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
             setErrorCode(AppErrorCode.PAY_DATA_ERROR)
             return
         }
-    }
-
-    private fun processRes(json: String) {
-        val response = JsonHelper.toBean<ResponsePojo>(json)
-        analysisResponse(response)
     }
 
     open fun analysisResponse(response: ResponsePojo) {
