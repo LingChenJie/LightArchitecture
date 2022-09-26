@@ -3,14 +3,12 @@ package com.architecture.light.ui.page.activity
 import android.view.View
 import androidx.core.view.isVisible
 import com.android.architecture.data.manage.InputTextManager
-import com.android.architecture.domain.transaction.TransactionConstant
 import com.android.architecture.extension.click
-import com.android.architecture.extension.hideKeyboard
 import com.android.architecture.extension.openActivity
 import com.android.architecture.extension.valid
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityAccountManageBinding
-import com.architecture.light.domain.transaction.LogonTrans
+import com.architecture.light.ext.toastSucc
 import com.architecture.light.settings.AccountCache
 import com.architecture.light.settings.ProjectCache
 import com.architecture.light.ui.dialog.MessageDialog
@@ -59,6 +57,7 @@ class AccountManageActivity : AppActivity() {
             if (billRecipient.valid) {
                 AccountCache.saveBillRecipient(billRecipient)
                 binding.tvBillRecipient.text = billRecipient
+                toastSucc("保存成功")
             }
         }
         binding.layoutConnectSet.click {

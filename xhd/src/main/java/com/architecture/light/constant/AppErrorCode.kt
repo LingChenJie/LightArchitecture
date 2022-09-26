@@ -18,6 +18,7 @@ object AppErrorCode {
     const val EXIT_LOGIN = "Exit Login"
     const val TASK_TIMEOUT = "Task Timeout"
 
+    const val PAY_PARAMS_NOT_SET = "Pay Params Not Set"
     const val PAY_DATA_ERROR = "Pay Data Error"
     const val PAY_TIMEOUT = "Pay Timeout"
     const val PAY_RESULT_QUERY = "Pay Query"
@@ -45,6 +46,7 @@ object AppErrorCode {
         EXIT_LOGIN to getString(R.string.error_code_exit_login),
         TASK_TIMEOUT to getString(R.string.error_code_task_timeout),
 
+        PAY_PARAMS_NOT_SET to getString(R.string.error_code_pay_params_not_set),
         PAY_DATA_ERROR to getString(R.string.error_code_pay_data_error),
         PAY_TIMEOUT to getString(R.string.error_code_pay_timeout),
         PAY_RESULT_QUERY to getString(R.string.error_code_pay_result_query),

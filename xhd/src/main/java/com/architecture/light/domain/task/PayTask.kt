@@ -2,6 +2,7 @@ package com.architecture.light.domain.task
 
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.task.BaseTask
+import com.android.architecture.extension.empty
 import com.android.architecture.helper.JsonHelper
 import com.android.architecture.helper.Logger
 import com.android.architecture.utils.NetworkUtils
@@ -36,6 +37,10 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
             val isNetworkConnected = NetworkUtils.isConnected()
             if (!isNetworkConnected && PayCache.getPosConnMode() == 1) {
                 setErrorCode(ErrorCode.NETWORK_NO_CONNECTION)
+                return
+            }
+            if (PayCache.getPosConnMode() == 1 && PayCache.getIp().empty) {
+                setErrorCode(AppErrorCode.PAY_PARAMS_NOT_SET)
                 return
             }
 
