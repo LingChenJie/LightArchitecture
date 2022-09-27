@@ -53,6 +53,7 @@
     <string name="loading_reserve_query">认筹金信息查询中&#8230;</string>
     <string name="loading_payment_query">款项信息查询中&#8230;</string>
     <string name="loading_payment_notify">缴款数据同步中&#8230;</string>
+    <string name="loading_void_notify">撤销数据同步中&#8230;</string>
     <string name="loading_bill_query">票据数据查询中&#8230;</string>
     <string name="loading_pay_request">支付请求中&#8230;</string>
     <string name="loading_void_request">撤销请求中&#8230;</string>

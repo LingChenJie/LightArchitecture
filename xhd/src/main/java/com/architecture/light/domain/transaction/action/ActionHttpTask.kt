@@ -72,6 +72,7 @@ class ActionHttpTask(listener: ActionStartListener) : AAction(listener) {
             is SearchPaymentTask -> getString(R.string.loading_payment_query)
             is NotifyCollectionTask -> getString(R.string.loading_payment_notify)
             is NotifyPrepaidTask -> getString(R.string.loading_payment_notify)
+            is NotifyVoidTask -> getString(R.string.loading_void_notify)
             is SearchBillTask -> getString(R.string.loading_bill_query)
             else -> getString(R.string.common_loading)
         }

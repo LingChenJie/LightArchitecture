@@ -23,20 +23,10 @@ class VoidQueryTask : PayTask() {
     }
 
     override fun onPostExecute(payData: TransMemo.PayData) {
-        if (payData.resCode == "00") {
+        if (payData.resCode == "FL" && payData.resDesc.contains("已被撤销")) {
             response.responseCode = ErrorCode.SUCCESS
             response.responseMessage = payData.resDesc
             response.payData = payData
-            response.voucherNumber = payData.traceNo
-            response.refNo = payData.refNo
-            response.amount = abs(AmountHelper.convertAmount(payData.amt))
-            response.transactionDate = payData.date.replace("/".toRegex(), "")
-            response.transactionTime = payData.time.replace(":".toRegex(), "")
-            Logger.e(
-                "BankVoidTask",
-                "date:${response.transactionDate}; time:${response.transactionTime}"
-            )
-            response.serialNumber = TransHelper.getTransactionSerialNumber(response)
         } else {
             response.responseCode = payData.resCode
             response.responseMessage = payData.resDesc

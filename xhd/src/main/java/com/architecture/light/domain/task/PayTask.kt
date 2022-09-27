@@ -14,7 +14,6 @@ import com.architecture.light.helper.PayRequest
 import com.architecture.light.settings.PayCache
 import com.chinaums.mis.bean.RequestPojo
 import com.chinaums.mis.bean.ResponsePojo
-import com.google.gson.Gson
 
 /**
  * Created by SuQi on 2022/8/30.
@@ -68,11 +67,11 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
     }
 
     open fun analysisResponse(response: ResponsePojo) {
-        if (response.rspCode == "00") {
+        if (response.rspCode == "00" || response.rspCode == "FL") {
             val transMemo = JsonHelper.toBean<TransMemo>(response.transMemo)
             if (transMemo.resultCode == "0") {
                 val payData = transMemo.transData
-                if (payData.resCode == "00") {
+                if (payData.resCode == "00" || payData.resCode == "FL") {
                     onPostExecute(payData)
                 } else {
                     param.responseCode = payData.resCode

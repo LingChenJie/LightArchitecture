@@ -11,18 +11,14 @@ import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.TransactionStatus
 import com.architecture.light.data.model.TransDataModel
 import com.architecture.light.data.model.db.entity.TransData
-import com.architecture.light.databinding.ActivityPaymentSyncBinding
 import com.architecture.light.databinding.ActivityVoidSyncBinding
-import com.architecture.light.domain.task.NotifyCollectionTask
 import com.architecture.light.domain.task.NotifyVoidTask
-import com.architecture.light.domain.task.PayQueryTask
+import com.architecture.light.domain.task.VoidQueryTask
 import com.architecture.light.domain.transaction.action.ActionHttpTask
 import com.architecture.light.domain.transaction.action.ActionPayTask
 import com.architecture.light.ext.toastSucc
 import com.architecture.light.ext.toastWarn
-import com.architecture.light.ui.adapter.PaymentSyncAdapter
 import com.architecture.light.ui.adapter.VoidSyncAdapter
-
 
 /**
  * File describe:
@@ -86,9 +82,10 @@ class VoidSyncActivity : AppActivity() {
 
     private fun transQuery(transData: TransData) {
         val actionPayQueryTask = ActionPayTask {
-            (it as ActionPayTask).setParam(PayQueryTask(), transData, this)
+            (it as ActionPayTask).setParam(VoidQueryTask(), transData, this)
         }
         actionPayQueryTask.setEndListener { _, result ->
+            setTransactionStatusMessage(result, transData)
             if (result.code == ErrorCode.SUCCESS) {
                 when (transData.responseCode) {
                     ErrorCode.SUCCESS -> {
@@ -119,6 +116,7 @@ class VoidSyncActivity : AppActivity() {
             (it as ActionHttpTask).setParam(NotifyVoidTask(), transData, this)
         }
         actionNotifyCollectionTask.setEndListener { _, result ->
+            setTransactionStatusMessage(result, transData)
             if (result.code == ErrorCode.SUCCESS) {
                 when (transData.responseCode) {
                     ErrorCode.SUCCESS -> {
@@ -156,6 +154,17 @@ class VoidSyncActivity : AppActivity() {
         }
     }
 
+    private fun setTransactionStatusMessage(actionResult: ActionResult, transData: TransData) {
+        val code = actionResult.code
+        if (code == ErrorCode.SUCCESS) {
+            val responseCode = transData.responseCode
+            val responseMessage = transData.responseMessage
+            transData.transactionStatusMessage = "$responseMessage[$responseCode]"
+        } else {
+            val message = actionResult.message ?: ErrorCode.getMessage(code)
+            transData.transactionStatusMessage = "$message[$code]"
+        }
+    }
 
     private fun updateTransData(transData: TransData) {
         AppExecutors.getInstance().single().execute {

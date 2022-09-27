@@ -52,6 +52,7 @@ class ShowVoidResultActivity : AppActivityForAction() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         Logger.e(TAG, "--onNewIntent")
+        resetFinishedFlag()
         refreshUI(intent)
     }
 
@@ -80,11 +81,8 @@ class ShowVoidResultActivity : AppActivityForAction() {
                 binding.tvFailMessage.text = transData.transactionStatusMessage
                 binding.layoutBottomSuccess.visibility = View.GONE
                 binding.layoutBottomFail.visibility = View.VISIBLE
-                //TODO
-//                binding.btRevoid.visibility = View.VISIBLE
-//                binding.btRequery.visibility = View.GONE
-                binding.btRevoid.visibility = View.GONE
-                binding.btRequery.visibility = View.VISIBLE
+                binding.btRevoid.visibility = View.VISIBLE
+                binding.btRequery.visibility = View.GONE
                 binding.btResynch.visibility = View.GONE
             }
             TransactionStatus.TransTimeout.name -> {

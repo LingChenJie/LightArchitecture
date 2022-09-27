@@ -40,10 +40,10 @@ interface TransDataDao {
     @Query("SELECT * FROM TransData WHERE voucherNumber = :voucherNumber ORDER BY tId DESC")
     fun queryByVoucher(voucherNumber: String): List<TransData>
 
-    @Query("SELECT * FROM TransData WHERE transactionName IN ('Payment', 'Reserve') AND transactionStatus IN ('TransTimeout', 'ResultNotifyFailed') ORDER BY tId DESC")
+    @Query("SELECT * FROM TransData WHERE transactionName IN ('Payment', 'Reserve') AND transactionStatus IN ('TransTimeout', 'TransSucceed', 'ResultNotifyFailed') ORDER BY tId DESC")
     fun queryPaymentTimeout2SyncFailedTrans(): List<TransData>
 
-    @Query("SELECT * FROM TransData WHERE transactionName = 'Void' AND transactionStatus IN ('TransTimeout', 'ResultNotifyFailed') ORDER BY tId DESC")
+    @Query("SELECT * FROM TransData WHERE transactionName = 'Void' AND transactionStatus IN ('TransTimeout', 'TransSucceed', 'ResultNotifyFailed') ORDER BY tId DESC")
     fun queryVoidTimeout2SyncFailedTrans(): List<TransData>
 
 }

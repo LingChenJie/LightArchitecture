@@ -1,5 +1,6 @@
 package com.architecture.light.domain.task
 
+import android.os.ConditionVariable
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.task.BaseTask
 import com.architecture.light.constant.AppErrorCode
@@ -31,17 +32,21 @@ class PrintTask : BaseTask<TransData, TransData>() {
         }
         if (data != null) {
             BillHelper.saveBill(data, param.isRePrint)
+            val cv = ConditionVariable()
             BillHelper.printBill(object : BillHelper.PrintResult {
                 override fun success(msg: String) {
                     param.responseCode = ErrorCode.SUCCESS
                     param.responseMessage = msg
+                    cv.open()
                 }
 
                 override fun fail(code: Int, msg: String) {
                     param.responseCode = code.toString()
                     param.responseMessage = msg
+                    cv.open()
                 }
             })
+            cv.block()
         } else {
             param.responseCode = AppErrorCode.PRINT_DATA_NOT_FOUND
             param.responseMessage = ErrorCode.getMessage(param.responseCode)

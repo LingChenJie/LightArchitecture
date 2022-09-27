@@ -56,6 +56,7 @@ class ShowPayResultActivity : AppActivityForAction() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         e(TAG, "--onNewIntent")
+        resetFinishedFlag()
         refreshUI(intent)
     }
 

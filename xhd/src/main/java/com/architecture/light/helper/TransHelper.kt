@@ -93,4 +93,17 @@ object TransHelper {
         return result
     }
 
+    fun getPaymentSyncIsSuccess(transData: TransData): Boolean {
+        val status = transData.transactionStatus
+        if (status == TransactionStatus.ResultNotifySucceed.name
+            || status == TransactionStatus.GetPrintDataSucceed.name
+            || status == TransactionStatus.GetPrintDataFailed.name
+            || status == TransactionStatus.PrintSucceed.name
+            || status == TransactionStatus.PrintFailed.name
+        ) {
+            return true
+        }
+        return false
+    }
+
 }

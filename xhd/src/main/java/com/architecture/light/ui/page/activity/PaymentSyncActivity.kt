@@ -91,6 +91,7 @@ class PaymentSyncActivity : AppActivity() {
             (it as ActionPayTask).setParam(PayQueryTask(), transData, this)
         }
         actionPayQueryTask.setEndListener { _, result ->
+            setTransactionStatusMessage(result, transData)
             if (result.code == ErrorCode.SUCCESS) {
                 when (transData.responseCode) {
                     ErrorCode.SUCCESS -> {
@@ -121,6 +122,7 @@ class PaymentSyncActivity : AppActivity() {
             (it as ActionHttpTask).setParam(NotifyCollectionTask(), transData, this)
         }
         actionNotifyCollectionTask.setEndListener { _, result ->
+            setTransactionStatusMessage(result, transData)
             if (result.code == ErrorCode.SUCCESS) {
                 when (transData.responseCode) {
                     ErrorCode.SUCCESS -> {
@@ -155,6 +157,18 @@ class PaymentSyncActivity : AppActivity() {
             toastSucc("$message[$code]")
         } else {
             toastWarn("$message[$code]")
+        }
+    }
+
+    private fun setTransactionStatusMessage(actionResult: ActionResult, transData: TransData) {
+        val code = actionResult.code
+        if (code == ErrorCode.SUCCESS) {
+            val responseCode = transData.responseCode
+            val responseMessage = transData.responseMessage
+            transData.transactionStatusMessage = "$responseMessage[$responseCode]"
+        } else {
+            val message = actionResult.message ?: ErrorCode.getMessage(code)
+            transData.transactionStatusMessage = "$message[$code]"
         }
     }
 

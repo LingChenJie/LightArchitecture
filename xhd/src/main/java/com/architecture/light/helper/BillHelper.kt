@@ -97,7 +97,7 @@ object BillHelper {
                 return@execute
             }
             if (result.a == 0) {
-                SystemClock.sleep(10 * 1000)
+                SystemClock.sleep(6 * 1000)
                 printResult.success(result.b)
             } else {
                 printResult.fail(result.a, result.b)

@@ -17,6 +17,7 @@ import com.architecture.light.domain.task.NotifyVoidTask
 import com.architecture.light.domain.task.VoidQueryTask
 import com.architecture.light.domain.transaction.action.*
 import com.architecture.light.ext.toastWarn
+import com.architecture.light.helper.TransHelper
 
 class VoidTrans : BaseTransaction() {
 
@@ -106,10 +107,16 @@ class VoidTrans : BaseTransaction() {
                         gotoState(State.INPUT_VOUCHER_NUMBER.name)
                         return
                     }
+                    if (!TransHelper.getPaymentSyncIsSuccess(originTrans)) {
+                        toastWarn("原交易未同步成功，请先同步缴款信息")
+                        gotoState(State.INPUT_VOUCHER_NUMBER.name)
+                        return
+                    }
                     transData.originalVoucherNumber = voucherNumber
                     transData.originalOrderNumber = originTrans.orderNumber
                     transData.originalSerialNumber = originTrans.serialNumber
                     transData.cstName = originTrans.cstName
+                    transData.amount = originTrans.amount
                     initPay()
                     if (transData.transactionPlatform == TransactionPlatform.Bank) {
                         gotoState(State.BANK_VOID_TASK.name)
