@@ -27,7 +27,7 @@ public class PayRequest {
     private static final BankDAO bankDAO = new BankDAO();
 
     public PayRequest() {
-        transCfx.setPosConnMode(PayCache.INSTANCE.getPosConnMode());
+        transCfx.setPosConnMode(2);
         transCfx.setIp(PayCache.INSTANCE.getIp());
         transCfx.setDevPath(PayCache.INSTANCE.getComNo());
         transCfx.setBaudRate(PayCache.INSTANCE.getBoundNo());
