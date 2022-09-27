@@ -1,6 +1,7 @@
 package com.architecture.light.helper;
 
 import com.android.architecture.helper.Logger;
+import com.architecture.light.constant.PosConnMode;
 import com.architecture.light.settings.PayCache;
 import com.chinaums.mis.bank.BankDAO;
 import com.chinaums.mis.bank.ICallBack;
@@ -27,7 +28,7 @@ public class PayRequest {
     private static final BankDAO bankDAO = new BankDAO();
 
     public PayRequest() {
-        transCfx.setPosConnMode(2);
+        transCfx.setPosConnMode(PosConnMode.WIFI);
         transCfx.setIp(PayCache.INSTANCE.getIp());
         transCfx.setDevPath(PayCache.INSTANCE.getComNo());
         transCfx.setBaudRate(PayCache.INSTANCE.getBoundNo());

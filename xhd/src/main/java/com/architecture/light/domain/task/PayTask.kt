@@ -7,6 +7,7 @@ import com.android.architecture.helper.JsonHelper
 import com.android.architecture.helper.Logger
 import com.android.architecture.utils.NetworkUtils
 import com.architecture.light.constant.AppErrorCode
+import com.architecture.light.constant.PosConnMode
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.data.pay.bean.TransMemo
 import com.architecture.light.helper.PayRequest
@@ -35,11 +36,12 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
         val requestBean = onAssembly()
         if (requestBean != null) {
             val isNetworkConnected = NetworkUtils.isConnected()
-            if (!isNetworkConnected && PayCache.getPosConnMode() == 1) {
+            val posConnMode = PayCache.getPosConnMode()
+            if (!isNetworkConnected && (posConnMode == PosConnMode.WIFI_SO || posConnMode == PosConnMode.WIFI)) {
                 setErrorCode(ErrorCode.NETWORK_NO_CONNECTION)
                 return
             }
-            if (PayCache.getPosConnMode() == 1 && PayCache.getIp().empty) {
+            if ((posConnMode == PosConnMode.WIFI_SO || posConnMode == PosConnMode.WIFI) && PayCache.getIp().empty) {
                 setErrorCode(AppErrorCode.PAY_PARAMS_NOT_SET)
                 return
             }
