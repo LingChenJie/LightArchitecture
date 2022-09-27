@@ -13,6 +13,7 @@ import com.architecture.light.helper.PayRequest
 import com.architecture.light.settings.PayCache
 import com.chinaums.mis.bean.RequestPojo
 import com.chinaums.mis.bean.ResponsePojo
+import com.google.gson.Gson
 
 /**
  * Created by SuQi on 2022/8/30.
