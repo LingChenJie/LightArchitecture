@@ -3,8 +3,7 @@ package com.architecture.light.domain.transaction.action
 import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.extension.openActivity
 import com.android.architecture.ui.page.BaseActivity
-import com.architecture.light.domain.event.Messages
-import com.architecture.light.domain.transaction.action.activity.*
+import com.architecture.light.domain.transaction.action.activity.InputAmountActivity
 
 /**
  * File describe:
@@ -16,13 +15,17 @@ import com.architecture.light.domain.transaction.action.activity.*
 class ActionInputAmount(listener: ActionStartListener) : AAction(listener) {
 
     private var activity: BaseActivity? = null
+    private lateinit var titleName: String
 
-    fun setParam(activity: BaseActivity?) {
+    fun setParam(activity: BaseActivity?, titleName: String) {
         this.activity = activity
+        this.titleName = titleName
     }
 
     override fun onExecute() {
-        activity!!.openActivity<InputAmountActivity>()
+        activity!!.openActivity<InputAmountActivity> {
+            putExtra(UIParams.TITLE_NAME, titleName)
+        }
     }
 
     override fun onClear() {

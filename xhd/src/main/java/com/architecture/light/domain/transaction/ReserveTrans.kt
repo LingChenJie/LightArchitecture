@@ -70,7 +70,11 @@ class ReserveTrans : BaseTransaction() {
         }
         bind(State.SEARCH_RESERVE_TASK.name, actionSearchReserveTask)
         val actionChooseReserve = ActionChooseReserve {
-            (it as ActionChooseReserve).setParam(currentActivity, transData)
+            (it as ActionChooseReserve).setParam(
+                currentActivity,
+                transData,
+                getString(R.string.main_pledge_money)
+            )
         }
         bind(State.CHOOSE_RESERVE.name, actionChooseReserve)
         val actionSearchPaymentTask = ActionHttpTask {
@@ -78,11 +82,18 @@ class ReserveTrans : BaseTransaction() {
         }
         bind(State.SEARCH_PAYMENT_TASK.name, actionSearchPaymentTask)
         val actionChoosePayment = ActionChoosePaymentReserve {
-            (it as ActionChoosePaymentReserve).setParam(currentActivity, transData)
+            (it as ActionChoosePaymentReserve).setParam(
+                currentActivity,
+                transData,
+                getString(R.string.main_pledge_money)
+            )
         }
         bind(State.CHOOSE_PAYMENT.name, actionChoosePayment)
         val actionInputAmount = ActionInputAmount {
-            (it as ActionInputAmount).setParam(currentActivity)
+            (it as ActionInputAmount).setParam(
+                currentActivity,
+                getString(R.string.main_pledge_money)
+            )
         }
         bind(State.INPUT_AMOUNT.name, actionInputAmount)
         val actionChoosePaymentMethod = ActionChoosePaymentMethod {

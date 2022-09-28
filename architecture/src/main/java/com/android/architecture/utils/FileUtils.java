@@ -2,19 +2,28 @@ package com.android.architecture.utils;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+
+import androidx.annotation.NonNull;
 
 import com.android.architecture.helper.Logger;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.channels.Channels;
+import java.nio.channels.FileChannel;
+import java.nio.channels.ReadableByteChannel;
 import java.text.DecimalFormat;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
@@ -389,6 +398,63 @@ public class FileUtils {
 
     public static String getSDCacheDir(Context context) {
         return context == null ? null : context.getExternalCacheDir().toString();
+    }
+
+    /**
+     * 拷贝文件到对应的路径
+     *
+     * @param file
+     * @param destPath
+     */
+    public static boolean copyFile(File file, String destPath) {
+        if ((file == null) || (destPath == null)) {
+            return false;
+        }
+        File destFile = new File(destPath);
+        if (destFile.exists()) {
+            boolean delete = destFile.delete();// delete file
+            System.out.println("删除旧文件：" + delete);
+        }
+        try {
+            boolean newFile = destFile.createNewFile();
+            System.out.println("createNewFile：" + newFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        FileInputStream fileInputStream = null;
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileInputStream = new FileInputStream(file);
+            fileOutputStream = new FileOutputStream(destFile);
+            copy(fileInputStream.getChannel(), fileOutputStream.getChannel());
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            CloseableUtils.close(fileInputStream);
+            CloseableUtils.close(fileOutputStream);
+        }
+        return true;
+    }
+
+    public static void copy(@NonNull ReadableByteChannel input, @NonNull FileChannel output) throws IOException {
+        try {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+                output.transferFrom(input, 0, Long.MAX_VALUE);
+            } else {
+                InputStream inputStream = Channels.newInputStream(input);
+                OutputStream outputStream = Channels.newOutputStream(output);
+                int length;
+                byte[] buffer = new byte[1024 * 4];
+                while ((length = inputStream.read(buffer)) > 0) {
+                    outputStream.write(buffer, 0, length);
+                }
+            }
+            output.force(false);
+        } finally {
+            input.close();
+            output.close();
+        }
     }
 
     public static void test(Context context) {

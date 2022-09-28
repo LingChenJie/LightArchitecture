@@ -8,7 +8,7 @@ import com.android.architecture.helper.AmountInputFilter
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.databinding.ActivityInputAmountBinding
 import com.architecture.light.domain.transaction.action.ActionInputAmount
-import com.architecture.light.domain.transaction.action.ActionInputTel
+import com.architecture.light.domain.transaction.action.UIParams
 import com.architecture.light.ui.view.NumberKeyboardView
 
 /**
@@ -26,7 +26,9 @@ class InputAmountActivity : AppActivityForAction() {
 
     override fun initView() {
         setContentView(binding.root)
+        val titleName = intent.getStringExtra(UIParams.TITLE_NAME)
         val filters = arrayOf<InputFilter>(AmountInputFilter())
+        binding.titleView.titleText.text = titleName
         binding.etAmount.filters = filters
         binding.keyboard.bindEditText(binding.etAmount)
         binding.keyboard.setOnInputListener(object : NumberKeyboardView.OnInputListener {

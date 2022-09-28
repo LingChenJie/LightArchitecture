@@ -81,8 +81,11 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
                 param.responseCode = transMemo.resultCode
                 param.responseMessage = transMemo.resultMsg
             }
+        } else if (response.rspCode == "E4") {
+            param.responseCode = response.rspCode
+            param.responseMessage = ErrorCode.getMessage(AppErrorCode.PAY_SEND_FAIL)
         } else if (response.rspCode == "E5") {
-            param.responseCode = AppErrorCode.PAY_TIMEOUT
+            param.responseCode = response.rspCode
             param.responseMessage = ErrorCode.getMessage(AppErrorCode.PAY_TIMEOUT)
         } else {
             param.responseCode = response.rspCode

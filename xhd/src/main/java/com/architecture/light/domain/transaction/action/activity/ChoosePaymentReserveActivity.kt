@@ -28,9 +28,11 @@ class ChoosePaymentReserveActivity : AppActivityForAction() {
 
     override fun initView() {
         setContentView(binding.root)
+        val titleName = intent.getStringExtra(UIParams.TITLE_NAME)
         val transData = intent.getSerializableExtra(UIParams.TRANS_DATA) as TransData
         paymentData = transData.searchPaymentResponse!!.data
         adapter.data = getParentPayment()
+        binding.titleView.titleText.text = titleName
         binding.recyclerView.adapter = adapter
         adapter.setItemClickListener { _, _, item ->
             if (item.isSubLevel) {

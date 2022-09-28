@@ -26,8 +26,10 @@ class ChooseReserveActivity : AppActivityForAction() {
 
     override fun initView() {
         setContentView(binding.root)
+        val titleName = intent.getStringExtra(UIParams.TITLE_NAME)
         val transData = intent.getSerializableExtra(UIParams.TRANS_DATA) as TransData
         val data = transData.searchReserveResponse!!.data
+        binding.titleView.titleText.text = titleName
         adapter.data = data
         adapter.setItemClickListener { _, _, item ->
             val room =

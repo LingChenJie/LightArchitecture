@@ -18,15 +18,18 @@ class ActionChoosePaymentReserve(listener: ActionStartListener) : AAction(listen
 
     private var activity: BaseActivity? = null
     private lateinit var transData: TransData
+    private lateinit var titleName: String
 
-    fun setParam(activity: BaseActivity, transData: TransData) {
+    fun setParam(activity: BaseActivity, transData: TransData, titleName: String) {
         this.activity = activity
         this.transData = transData
+        this.titleName = titleName
     }
 
     override fun onExecute() {
         activity!!.openActivity<ChoosePaymentReserveActivity> {
             putExtra(UIParams.TRANS_DATA, transData)
+            putExtra(UIParams.TITLE_NAME, titleName)
         }
     }
 
