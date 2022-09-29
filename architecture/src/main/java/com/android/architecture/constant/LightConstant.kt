@@ -17,7 +17,7 @@ object LightConstant {
 
     val SDCARD_PATH: String =
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P)
-            getContext().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)!!.path
+            getContext().filesDir.absolutePath
         else Environment.getExternalStorageDirectory().absolutePath
 
     val FILE_PATH: String = getContext().filesDir.absolutePath

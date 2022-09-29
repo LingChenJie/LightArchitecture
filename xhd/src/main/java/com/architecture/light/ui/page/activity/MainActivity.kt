@@ -63,9 +63,9 @@ class MainActivity : AppActivity() {
 
         val bannerImages =
             arrayOf(
-                R.drawable.icon_main_banner_1,
-                R.drawable.icon_main_banner_2,
-                R.drawable.icon_main_banner_3,
+                R.drawable.icon_main_banner_new_1,
+                R.drawable.icon_main_banner_new_2,
+                R.drawable.icon_main_banner_new_3,
             )
         val bannerViews = mutableListOf<View>()
         for (bannerImage in bannerImages) {
