@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="error_code_print_0">打印数据发送成功，打印机将执行</string>
+    <string name="error_code_print_0">打印即将完成</string>
     <string name="error_code_print_1">打印机离线或打印机未准备好</string>
     <string name="error_code_print_2">缓存已满，不接收打印数据</string>
     <string name="error_code_print_3">发送打印数据异常</string>

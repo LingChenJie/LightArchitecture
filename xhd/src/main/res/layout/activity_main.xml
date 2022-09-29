@@ -50,11 +50,11 @@
                 android:layout_marginEnd="@dimen/dp_17"
                 app:banner_pageChangeDuration="2000"
                 app:banner_pointAutoPlayAble="true"
-                app:banner_pointAutoPlayInterval="2000"
+                app:banner_pointAutoPlayInterval="5000"
                 app:banner_pointContainerBackground="@android:color/transparent"
                 app:banner_pointDrawable="@drawable/main_banner_point_selector"
                 app:banner_pointTopBottomMargin="@dimen/dp_3"
-                app:banner_transitionEffect="stack" />
+                app:banner_transitionEffect="defaultEffect" />
 
         </RelativeLayout>
 

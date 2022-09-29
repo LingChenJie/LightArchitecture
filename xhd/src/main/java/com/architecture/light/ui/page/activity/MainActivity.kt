@@ -42,19 +42,7 @@ class MainActivity : AppActivity() {
         setContentView(binding.root)
         ImmersionBar.setTitleBar(this, binding.titleView)
         binding.ivUserAvatar.click { openActivity<AccountManageActivity>() }
-        binding.cvPayment.click {
-            PaymentTrans().execute()
-//            thread {
-//                val transData = TransData()
-//                transData.amount = 0.01
-//                transData.bankAccount = "79490188000025851"
-//                transData.orderNumber =
-//                    DateHelper.dateString + DateHelper.timeString +
-//                            RandomHelper.getRandomHexString(3)
-////                CodePayTask().execute(transData)
-//                BankPayTask().execute(transData)
-//            }
-        }
+        binding.cvPayment.click { PaymentTrans().execute() }
         binding.cvPledgeMoney.click { ReserveTrans().execute() }
         binding.cvVoid.click { VoidTrans().execute() }
         binding.cvPaymentSynchronize.click { openActivity<PaymentSyncActivity>() }
