@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">新华地产</string>
+    <string name="app_name">新华地产智慧收款</string>
     <string name="title">标题</string>
     <string name="content">内容</string>
     <string name="edit">编辑</string>
@@ -79,7 +79,7 @@
     <string name="main_void">撤销</string>
     <string name="main_payment_synchronize">缴款信息同步</string>
     <string name="main_void_synchronize">撤销信息同步</string>
-    <string name="main_print">打印交易信息</string>
+    <string name="main_print">补打印</string>
 
     <!-- 账户管理 -->
     <string name="account_manage">账户管理</string>
@@ -210,7 +210,7 @@
     <string name="print_bill_amount">收款金额：</string>
     <string name="print_bill_paying_unit">缴款单位：</string>
     <string name="print_bill_rmb_capital">人民币（大写）：</string>
-    <string name="print_bill_rmb_lower">金额小写：</string>
+    <string name="print_bill_rmb_lower">金额小写：￥</string>
     <string name="print_bill_paying_way">缴款方式：</string>
     <string name="print_bill_paying_reason">收款事由：</string>
     <string name="print_bill_summary_notes">摘要备注：</string>
