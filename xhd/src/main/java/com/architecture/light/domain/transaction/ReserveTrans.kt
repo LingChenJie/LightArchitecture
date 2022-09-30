@@ -184,11 +184,7 @@ class ReserveTrans : BaseTransaction() {
             State.INPUT_TEL -> {
                 if (code == ErrorCode.SUCCESS) {
                     val telInfo = data as ActionInputTel.TelInfo
-                    if (Constant.IS_DEBUG) {
-                        transData.tel = "18155723385"
-                    } else {
-                        transData.tel = telInfo.tel
-                    }
+                    transData.tel = telInfo.tel// 18155723385
                     transData.cardID = ""
                     transData.roomInfo = ""
                     gotoState(State.SEARCH_RESERVE_TASK.name)
