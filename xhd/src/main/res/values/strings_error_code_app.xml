@@ -6,10 +6,10 @@
     <string name="error_code_exit_app">退出程序</string>
     <string name="error_code_exit_login">退出登录</string>
     <string name="error_code_task_timeout">任务超时</string>
-    <string name="error_code_pay_params_not_set">POS连接参数未配置</string>
-    <string name="error_code_pay_data_error">交易数据错误</string>
+    <string name="error_code_pay_params_not_set">连接参数未配置</string>
+    <string name="error_code_pay_data_error">连接参数有误</string>
     <string name="error_code_pay_send_fail">交易数据发送失败</string>
-    <string name="error_code_pay_timeout">交易超时，请查询</string>
+    <string name="error_code_pay_timeout">交易超时，请重试</string>
     <string name="error_code_pay_result_query">支付结果查询</string>
     <string name="error_code_pay_result_notify">支付结果同步</string>
     <string name="error_code_void_result_query">撤销结果查询</string>
