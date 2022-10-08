@@ -46,11 +46,11 @@ android {
             )
         }
     }
-    libraryVariants.all { variant ->
-        variant.outputs.all { output ->
-            outputFileName = "light_architecture_" + defaultConfig.versionName + "_" + buildDate() + ".aar"
-        }
-    }
+//    libraryVariants.all { variant ->
+//        variant.outputs.all { output ->
+//            outputFileName = "light_architecture_" + defaultConfig.versionName + "_" + buildDate() + ".aar"
+//        }
+//    }
 }
 
 dependencies {
