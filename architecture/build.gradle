@@ -4,6 +4,29 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'maven-publish'
+}
+
+task generateSourcesJar(type: Jar){
+    from android.sourceSets.main.java.srcDirs
+    classifier  'sources'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // Applies the component for the release build variant.
+                from components.release
+
+                // You can then customize attributes of the publication as shown below.
+                groupId = 'com.github.LingChenJie'
+                artifactId = 'architecture'
+                version = 'v1.0.4'
+            }
+        }
+    }
 }
 
 static def buildDate() {
@@ -18,8 +41,8 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 32
-        versionCode 3
-        versionName "v1.0.3"
+        versionCode 4
+        versionName "v1.0.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -50,6 +73,9 @@ android {
         variant.outputs.all { output ->
             outputFileName = "light_architecture_" + defaultConfig.versionName + "_" + buildDate() + ".aar"
         }
+    }
+    publishing {//这个不能少
+        singleVariant("release")
     }
 }
 
