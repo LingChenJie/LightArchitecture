@@ -44,7 +44,6 @@ class ReserveTrans : BaseTransaction() {
     override fun bindStateOnAction() {
         val actionSelectQueryMethod = ActionSelectQueryMethod {
             (it as ActionSelectQueryMethod).setParam(
-                currentActivity,
                 getString(R.string.main_pledge_money),
                 arrayOf(
                     ActionSelectQueryMethod.QueryMethod.IdCard.toString(),
@@ -54,36 +53,31 @@ class ReserveTrans : BaseTransaction() {
         }
         bind(State.SELECT_QUERY_METHOD.name, actionSelectQueryMethod)
         val actionReadIdCard = ActionReadIdCard {
-            (it as ActionReadIdCard).setParam(currentActivity)
         }
         bind(State.READ_ID_CARD.name, actionReadIdCard)
         val actionInputTel = ActionInputTel {
-            (it as ActionInputTel).setParam(currentActivity)
         }
         bind(State.INPUT_TEL.name, actionInputTel)
         val actionInputRoomInfo = ActionInputRoomInfo {
-            (it as ActionInputRoomInfo).setParam(currentActivity)
         }
         bind(State.INPUT_ROOM_INFO.name, actionInputRoomInfo)
         val actionSearchReserveTask = ActionHttpTask {
-            (it as ActionHttpTask).setParam(SearchReserveTask(), transData, currentActivity)
+            (it as ActionHttpTask).setParam(SearchReserveTask(), transData)
         }
         bind(State.SEARCH_RESERVE_TASK.name, actionSearchReserveTask)
         val actionChooseReserve = ActionChooseReserve {
             (it as ActionChooseReserve).setParam(
-                currentActivity,
                 transData,
                 getString(R.string.main_pledge_money)
             )
         }
         bind(State.CHOOSE_RESERVE.name, actionChooseReserve)
         val actionSearchPaymentTask = ActionHttpTask {
-            (it as ActionHttpTask).setParam(SearchPaymentTask(), transData, currentActivity)
+            (it as ActionHttpTask).setParam(SearchPaymentTask(), transData)
         }
         bind(State.SEARCH_PAYMENT_TASK.name, actionSearchPaymentTask)
         val actionChoosePayment = ActionChoosePaymentReserve {
             (it as ActionChoosePaymentReserve).setParam(
-                currentActivity,
                 transData,
                 getString(R.string.main_pledge_money)
             )
@@ -91,14 +85,12 @@ class ReserveTrans : BaseTransaction() {
         bind(State.CHOOSE_PAYMENT.name, actionChoosePayment)
         val actionInputAmount = ActionInputAmount {
             (it as ActionInputAmount).setParam(
-                currentActivity,
                 getString(R.string.main_pledge_money)
             )
         }
         bind(State.INPUT_AMOUNT.name, actionInputAmount)
         val actionChoosePaymentMethod = ActionChoosePaymentMethod {
             (it as ActionChoosePaymentMethod).setParam(
-                currentActivity,
                 getString(R.string.main_pledge_money),
                 transData,
                 false
@@ -106,15 +98,15 @@ class ReserveTrans : BaseTransaction() {
         }
         bind(State.CHOOSE_PAYMENT_METHOD.name, actionChoosePaymentMethod)
         val actionBankPayTask = ActionPayTask {
-            (it as ActionPayTask).setParam(BankPayTask(), transData, currentActivity)
+            (it as ActionPayTask).setParam(BankPayTask(), transData)
         }
         bind(State.BANK_PAY_TASK.name, actionBankPayTask)
         val actionCodePayTask = ActionPayTask {
-            (it as ActionPayTask).setParam(CodePayTask(), transData, currentActivity)
+            (it as ActionPayTask).setParam(CodePayTask(), transData)
         }
         bind(State.CODE_PAY_TASK.name, actionCodePayTask)
         val actionPayQueryTask = ActionPayTask {
-            (it as ActionPayTask).setParam(PayQueryTask(), transData, currentActivity)
+            (it as ActionPayTask).setParam(PayQueryTask(), transData)
         }
         bind(State.PAY_QUERY_TASK.name, actionPayQueryTask)
         val actionShowPayResult = ActionShowPayResult {
@@ -122,20 +114,19 @@ class ReserveTrans : BaseTransaction() {
                 getString(R.string.main_pledge_money),
                 actionResult!!,
                 transData,
-                currentActivity
             )
         }
         bind(State.SHOW_PAY_RESULT.name, actionShowPayResult)
         val actionNotifyCollectionTask = ActionHttpTask {
-            (it as ActionHttpTask).setParam(NotifyPrepaidTask(), transData, currentActivity)
+            (it as ActionHttpTask).setParam(NotifyPrepaidTask(), transData)
         }
         bind(State.NOTIFY_COLLECTION.name, actionNotifyCollectionTask)
         val actionSearchBillTask = ActionHttpTask {
-            (it as ActionHttpTask).setParam(SearchBillTask(), transData, currentActivity)
+            (it as ActionHttpTask).setParam(SearchBillTask(), transData)
         }
         bind(State.SEARCH_BILL_TASK.name, actionSearchBillTask)
         val actionPrintBill = ActionPrintTask {
-            (it as ActionPrintTask).setParam(PrintTask(), transData, currentActivity)
+            (it as ActionPrintTask).setParam(PrintTask(), transData)
         }
         bind(State.PRINT_BILL_TASK.name, actionPrintBill)
         gotoState(State.SELECT_QUERY_METHOD.name)

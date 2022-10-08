@@ -3,6 +3,7 @@ package com.architecture.light.ui.page.activity
 import android.view.View
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
+import com.android.architecture.domain.transaction.TransactionConstant
 import com.android.architecture.extension.click
 import com.android.architecture.helper.AppExecutors
 import com.android.architecture.helper.Logger
@@ -36,6 +37,11 @@ class VoidSyncActivity : AppActivity() {
     }
 
     private val adapter by lazy { VoidSyncAdapter() }
+
+    override fun onResume() {
+        super.onResume()
+        TransactionConstant.getInstance().currentActivity = this
+    }
 
     override fun initView() {
         setContentView(binding.root)
@@ -82,7 +88,7 @@ class VoidSyncActivity : AppActivity() {
 
     private fun transQuery(transData: TransData) {
         val actionPayQueryTask = ActionPayTask {
-            (it as ActionPayTask).setParam(VoidQueryTask(), transData, this)
+            (it as ActionPayTask).setParam(VoidQueryTask(), transData)
         }
         actionPayQueryTask.setEndListener { _, result ->
             setTransactionStatusMessage(result, transData)
@@ -113,7 +119,7 @@ class VoidSyncActivity : AppActivity() {
 
     private fun notifyResult(transData: TransData) {
         val actionNotifyCollectionTask = ActionHttpTask {
-            (it as ActionHttpTask).setParam(NotifyVoidTask(), transData, this)
+            (it as ActionHttpTask).setParam(NotifyVoidTask(), transData)
         }
         actionNotifyCollectionTask.setEndListener { _, result ->
             setTransactionStatusMessage(result, transData)

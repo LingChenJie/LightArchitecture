@@ -1,9 +1,9 @@
 package com.architecture.light.ui.page.activity
 
 import android.view.View
-import androidx.lifecycle.lifecycleScope
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
+import com.android.architecture.domain.transaction.TransactionConstant
 import com.android.architecture.extension.click
 import com.android.architecture.helper.AppExecutors
 import com.android.architecture.helper.Logger
@@ -15,15 +15,11 @@ import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.databinding.ActivityPaymentSyncBinding
 import com.architecture.light.domain.task.NotifyCollectionTask
 import com.architecture.light.domain.task.PayQueryTask
-import com.architecture.light.domain.transaction.PaymentTrans
 import com.architecture.light.domain.transaction.action.ActionHttpTask
 import com.architecture.light.domain.transaction.action.ActionPayTask
 import com.architecture.light.ext.toastSucc
 import com.architecture.light.ext.toastWarn
 import com.architecture.light.ui.adapter.PaymentSyncAdapter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 /**
@@ -42,6 +38,11 @@ class PaymentSyncActivity : AppActivity() {
     }
 
     private val adapter by lazy { PaymentSyncAdapter() }
+
+    override fun onResume() {
+        super.onResume()
+        TransactionConstant.getInstance().currentActivity = this
+    }
 
     override fun initView() {
         setContentView(binding.root)
@@ -88,7 +89,7 @@ class PaymentSyncActivity : AppActivity() {
 
     private fun transQuery(transData: TransData) {
         val actionPayQueryTask = ActionPayTask {
-            (it as ActionPayTask).setParam(PayQueryTask(), transData, this)
+            (it as ActionPayTask).setParam(PayQueryTask(), transData)
         }
         actionPayQueryTask.setEndListener { _, result ->
             setTransactionStatusMessage(result, transData)
@@ -119,7 +120,7 @@ class PaymentSyncActivity : AppActivity() {
 
     private fun notifyResult(transData: TransData) {
         val actionNotifyCollectionTask = ActionHttpTask {
-            (it as ActionHttpTask).setParam(NotifyCollectionTask(), transData, this)
+            (it as ActionHttpTask).setParam(NotifyCollectionTask(), transData)
         }
         actionNotifyCollectionTask.setEndListener { _, result ->
             setTransactionStatusMessage(result, transData)

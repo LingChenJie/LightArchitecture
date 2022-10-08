@@ -39,35 +39,32 @@ class VoidTrans : BaseTransaction() {
 
     override fun bindStateOnAction() {
         val actionInputManagePwd = ActionInputManagePwd {
-            (it as ActionInputManagePwd).setParam(currentActivity)
         }
         bind(State.INPUT_MANAGE_PWD.name, actionInputManagePwd)
         val actionChooseOriginalPaymentMethod = ActionChooseOriginalPaymentMethod {
-            (it as ActionChooseOriginalPaymentMethod).setParam(currentActivity)
         }
         bind(State.CHOOSE_ORIGIN_PAYMENT_METHOD.name, actionChooseOriginalPaymentMethod)
         val actionInputVoucherNumber = ActionInputVoucherNumber {
-            (it as ActionInputVoucherNumber).setParam(currentActivity)
         }
         bind(State.INPUT_VOUCHER_NUMBER.name, actionInputVoucherNumber)
         val actionBankVoidTask = ActionPayTask {
-            (it as ActionPayTask).setParam(BankVoidTask(), transData, currentActivity)
+            (it as ActionPayTask).setParam(BankVoidTask(), transData)
         }
         bind(State.BANK_VOID_TASK.name, actionBankVoidTask)
         val actionCodeVoidTask = ActionPayTask {
-            (it as ActionPayTask).setParam(CodeVoidTask(), transData, currentActivity)
+            (it as ActionPayTask).setParam(CodeVoidTask(), transData)
         }
         bind(State.CODE_VOID_TASK.name, actionCodeVoidTask)
         val actionVoidQueryTask = ActionPayTask {
-            (it as ActionPayTask).setParam(VoidQueryTask(), transData, currentActivity)
+            (it as ActionPayTask).setParam(VoidQueryTask(), transData)
         }
         bind(State.VOID_QUERY_TASK.name, actionVoidQueryTask)
         val actionShowVoidResult = ActionShowVoidResult {
-            (it as ActionShowVoidResult).setParam(actionResult!!, transData, currentActivity)
+            (it as ActionShowVoidResult).setParam(actionResult!!, transData)
         }
         bind(State.SHOW_VOID_RESULT.name, actionShowVoidResult)
         val actionNotifyVoidTask = ActionPayTask {
-            (it as ActionPayTask).setParam(NotifyVoidTask(), transData, currentActivity)
+            (it as ActionPayTask).setParam(NotifyVoidTask(), transData)
         }
         bind(State.NOTIFY_VOID_TASK.name, actionNotifyVoidTask)
         gotoState(State.INPUT_MANAGE_PWD.name)

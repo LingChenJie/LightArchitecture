@@ -5,7 +5,6 @@ import com.android.architecture.domain.task.ITask
 import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.getString
-import com.android.architecture.ui.page.BaseActivity
 import com.android.architecture.ui.page.BaseDialog
 import com.architecture.light.R
 import com.architecture.light.data.model.db.entity.TransData
@@ -18,19 +17,16 @@ class ActionPayTask(listener: ActionStartListener) : AAction(listener) {
     private lateinit var job: Job
     private lateinit var task: ITask<TransData, TransData>
     private lateinit var transData: TransData
-    private var activity: BaseActivity? = null
     private var delayRequestTime: Long = 0
     private var loadingDialog: BaseDialog? = null
 
     fun setParam(
         task: ITask<TransData, TransData>,
         transData: TransData,
-        activity: BaseActivity?,
         delayRequestTime: Long = 0
     ) {
         this.task = task
         this.transData = transData
-        this.activity = activity
         this.delayRequestTime = delayRequestTime
     }
 
@@ -68,11 +64,6 @@ class ActionPayTask(listener: ActionStartListener) : AAction(listener) {
     private fun hideLoading() {
         loadingDialog?.dismiss()
         loadingDialog = null
-    }
-
-    override fun onClear() {
-        super.onClear()
-        activity = null
     }
 
 }

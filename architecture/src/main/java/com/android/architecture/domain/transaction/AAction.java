@@ -1,5 +1,7 @@
 package com.android.architecture.domain.transaction;
 
+import com.android.architecture.ui.page.BaseActivity;
+
 /**
  * File describe:定义交易的每一步骤
  * Author: SuQi
@@ -106,6 +108,15 @@ public abstract class AAction {
         if (isSingleAction()) {
             TransactionConstant.getInstance().removeSingleAction(ACTION_NAME);
         }
+    }
+
+    /**
+     * 获取当前交易的栈顶Activity
+     *
+     * @return
+     */
+    protected BaseActivity getActivity() {
+        return TransactionConstant.getInstance().getCurrentActivity();
     }
 
     /**

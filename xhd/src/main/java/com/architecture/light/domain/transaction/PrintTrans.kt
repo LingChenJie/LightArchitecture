@@ -24,7 +24,6 @@ class PrintTrans : BaseTransaction() {
     override fun bindStateOnAction() {
         val actionSelectQueryMethod = ActionSelectQueryMethod {
             (it as ActionSelectQueryMethod).setParam(
-                currentActivity,
                 getString(R.string.main_print),
                 arrayOf(
                     ActionSelectQueryMethod.QueryMethod.IdCard.toString(),
@@ -34,27 +33,24 @@ class PrintTrans : BaseTransaction() {
         }
         bind(State.SELECT_QUERY_METHOD.name, actionSelectQueryMethod)
         val actionReadIdCard = ActionReadIdCard {
-            (it as ActionReadIdCard).setParam(currentActivity)
         }
         bind(State.READ_ID_CARD.name, actionReadIdCard)
         val actionInputTel = ActionInputTel {
-            (it as ActionInputTel).setParam(currentActivity)
         }
         bind(State.INPUT_TEL.name, actionInputTel)
         val actionSearchBillTask = ActionHttpTask {
-            (it as ActionHttpTask).setParam(SearchBillTask(), transData, currentActivity)
+            (it as ActionHttpTask).setParam(SearchBillTask(), transData)
         }
         bind(State.SEARCH_BILL_TASK.name, actionSearchBillTask)
         val actionChooseBill = ActionChooseBill {
             (it as ActionChooseBill).setParam(
-                currentActivity,
                 transData,
                 getString(R.string.main_print)
             )
         }
         bind(State.CHOOSE_BILL.name, actionChooseBill)
         val actionPrintBill = ActionPrintTask {
-            (it as ActionPrintTask).setParam(PrintTask(), transData, currentActivity)
+            (it as ActionPrintTask).setParam(PrintTask(), transData)
         }
         bind(State.PRINT_BILL_TASK.name, actionPrintBill)
         gotoState(State.SELECT_QUERY_METHOD.name)

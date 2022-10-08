@@ -2,7 +2,6 @@ package com.architecture.light.domain.transaction.action
 
 import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.extension.openActivity
-import com.android.architecture.ui.page.BaseActivity
 import com.architecture.light.domain.transaction.action.activity.InputLoginInfoActivity
 
 /**
@@ -14,19 +13,8 @@ import com.architecture.light.domain.transaction.action.activity.InputLoginInfoA
  */
 class ActionInputLoginInfo(listener: ActionStartListener) : AAction(listener) {
 
-    private var activity: BaseActivity? = null
-
-    fun setParam(activity: BaseActivity?) {
-        this.activity = activity
-    }
-
     override fun onExecute() {
-        activity!!.openActivity<InputLoginInfoActivity>()
-    }
-
-    override fun onClear() {
-        super.onClear()
-        activity = null
+        activity.openActivity<InputLoginInfoActivity>()
     }
 
     class LoginInfo(val username: String, val password: String)

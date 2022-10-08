@@ -25,19 +25,16 @@ class LogonTrans : BaseTransaction() {
 
     override fun bindStateOnAction() {
         val actionInputLoginInfo = ActionInputLoginInfo {
-            (it as ActionInputLoginInfo).setParam(currentActivity)
         }
         bind(State.INPUT_LOGIN_INFO.name, actionInputLoginInfo)
         val actionLogonTask = ActionHttpTask {
-            (it as ActionHttpTask).setParam(LogonTask(), transData, currentActivity)
+            (it as ActionHttpTask).setParam(LogonTask(), transData)
         }
         bind(State.LOGON_TASK.name, actionLogonTask)
         val actionProjectChoose = ActionProjectChoose {
-            (it as ActionProjectChoose).setParam(currentActivity)
         }
         bind(State.PROJECT_CHOOSE.name, actionProjectChoose)
         val actionInputBillRecipient = ActionInputBillRecipient {
-            (it as ActionInputBillRecipient).setParam(currentActivity)
         }
         bind(State.INPUT_BILL_RECIPIENT.name, actionInputBillRecipient)
         gotoState(State.INPUT_LOGIN_INFO.name)

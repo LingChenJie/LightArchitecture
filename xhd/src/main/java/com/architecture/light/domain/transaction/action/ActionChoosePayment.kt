@@ -2,7 +2,6 @@ package com.architecture.light.domain.transaction.action
 
 import com.android.architecture.domain.transaction.AAction
 import com.android.architecture.extension.openActivity
-import com.android.architecture.ui.page.BaseActivity
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.domain.transaction.action.activity.ChoosePaymentActivity
@@ -16,23 +15,16 @@ import com.architecture.light.domain.transaction.action.activity.ChoosePaymentAc
  */
 class ActionChoosePayment(listener: ActionStartListener) : AAction(listener) {
 
-    private var activity: BaseActivity? = null
     private lateinit var transData: TransData
 
-    fun setParam(activity: BaseActivity, transData: TransData) {
-        this.activity = activity
+    fun setParam(transData: TransData) {
         this.transData = transData
     }
 
     override fun onExecute() {
-        activity!!.openActivity<ChoosePaymentActivity> {
+        activity.openActivity<ChoosePaymentActivity> {
             putExtra(UIParams.TRANS_DATA, transData)
         }
-    }
-
-    override fun onClear() {
-        super.onClear()
-        activity = null
     }
 
     data class PaymentInfo(
