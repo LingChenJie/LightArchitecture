@@ -5,7 +5,6 @@ import com.android.architecture.domain.task.BaseTask
 import com.android.architecture.extension.empty
 import com.android.architecture.helper.JsonHelper
 import com.android.architecture.helper.Logger
-import com.android.architecture.utils.NetworkUtils
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.PosConnMode
 import com.architecture.light.data.model.db.entity.TransData
@@ -35,12 +34,7 @@ abstract class PayTask : BaseTask<TransData, TransData>() {
     override fun onExecute() {
         val requestBean = onAssembly()
         if (requestBean != null) {
-            val isNetworkConnected = NetworkUtils.isConnected()
             val posConnMode = PayCache.getPosConnMode()
-            if (!isNetworkConnected && (posConnMode == PosConnMode.WIFI_SO || posConnMode == PosConnMode.WIFI)) {
-                setErrorCode(ErrorCode.NETWORK_NO_CONNECTION)
-                return
-            }
             if ((posConnMode == PosConnMode.WIFI_SO || posConnMode == PosConnMode.WIFI) && PayCache.getIp().empty) {
                 setErrorCode(AppErrorCode.PAY_PARAMS_NOT_SET)
                 return
