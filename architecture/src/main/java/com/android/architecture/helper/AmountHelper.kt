@@ -1,4 +1,4 @@
-package com.architecture.light.helper
+package com.android.architecture.helper
 
 import java.math.BigDecimal
 import java.math.RoundingMode
@@ -69,7 +69,7 @@ object AmountHelper {
     }
 
     /**
-     * 10,001.00 -> 10001.00
+     * 10,001.00 -> 10001.0
      */
     fun convertAmount(amount: String): Double {
         val amt = amount.replace(",".toRegex(), "").toDouble()

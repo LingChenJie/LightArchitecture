@@ -1,13 +1,9 @@
 package com.architecture.light.domain.task
 
 import com.android.architecture.constant.ErrorCode
-import com.android.architecture.helper.Logger
 import com.architecture.light.data.pay.bean.TransMemo
-import com.architecture.light.helper.AmountHelper
-import com.architecture.light.helper.TransHelper
 import com.chinaums.mis.bean.RequestPojo
 import org.json.JSONObject
-import kotlin.math.abs
 
 /**
  * Created by SuQi on 2022/9/1.

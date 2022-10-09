@@ -3,6 +3,7 @@ package com.architecture.light.domain.transaction.action.activity
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
+import com.android.architecture.helper.AmountHelper
 import com.android.architecture.utils.DoubleUtils
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.data.model.db.entity.TransData
@@ -10,7 +11,6 @@ import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.databinding.ActivityChoosePaymentBinding
 import com.architecture.light.domain.transaction.action.ActionChoosePayment
 import com.architecture.light.domain.transaction.action.UIParams
-import com.architecture.light.helper.AmountHelper
 import com.architecture.light.ui.adapter.ChoosePaymentAdapter
 
 /**

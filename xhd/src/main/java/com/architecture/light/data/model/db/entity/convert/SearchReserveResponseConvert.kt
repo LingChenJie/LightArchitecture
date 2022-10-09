@@ -15,9 +15,9 @@ import com.architecture.light.data.remote.bean.SearchReserveResponse
 class SearchReserveResponseConvert {
 
     @TypeConverter
-    fun objectToString(responsee: SearchReserveResponse?): String {
-        if (responsee != null) {
-            return JsonHelper.toJson(responsee)
+    fun objectToString(response: SearchReserveResponse?): String {
+        if (response != null) {
+            return JsonHelper.toJson(response)
         }
         return ""
     }

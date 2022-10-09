@@ -9,12 +9,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.architecture.helper.AmountHelper;
 import com.android.architecture.helper.AmountInputFilter;
 import com.android.architecture.helper.Logger;
 import com.android.architecture.ui.page.BaseDialog;
 import com.android.architecture.ui.page.action.AnimAction;
 import com.architecture.light.R;
-import com.architecture.light.helper.AmountHelper;
 import com.architecture.light.ui.view.NumberKeyboardView;
 
 /**

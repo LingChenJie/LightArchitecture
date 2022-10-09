@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.View
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
+import com.android.architecture.helper.AmountHelper
 import com.android.architecture.helper.Logger.e
 import com.architecture.light.R
 import com.architecture.light.app.AppActivityForAction
@@ -14,7 +15,6 @@ import com.architecture.light.databinding.ActivityShowPayResultBinding
 import com.architecture.light.domain.transaction.action.UIParams
 import com.architecture.light.ext.toastSucc
 import com.architecture.light.ext.toastWarn
-import com.architecture.light.helper.AmountHelper
 import com.architecture.light.helper.TransHelper
 
 /**

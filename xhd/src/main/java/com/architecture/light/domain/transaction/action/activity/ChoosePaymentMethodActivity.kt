@@ -6,6 +6,7 @@ import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
 import com.android.architecture.extension.empty
 import com.android.architecture.extension.valid
+import com.android.architecture.helper.AmountHelper
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.TransactionPlatform
 import com.architecture.light.data.model.db.entity.TransData
@@ -13,7 +14,6 @@ import com.architecture.light.data.remote.bean.LoginResponse
 import com.architecture.light.databinding.ActivityChoosePaymentMethodBinding
 import com.architecture.light.domain.transaction.action.ActionChoosePaymentMethod
 import com.architecture.light.domain.transaction.action.UIParams
-import com.architecture.light.helper.AmountHelper
 import com.architecture.light.settings.ProjectCache
 import com.architecture.light.ui.popup.BankAccountListPopup
 

@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.architecture.extension.click
+import com.android.architecture.helper.AmountHelper
 import com.android.architecture.helper.DateHelper
 import com.android.architecture.ui.adapter.BaseAdapter
 import com.architecture.light.constant.TransactionName
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.databinding.AdapterPaymentSyncListBinding
-import com.architecture.light.helper.AmountHelper
 import com.architecture.light.helper.TransHelper
 
 /**

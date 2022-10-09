@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.View
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
+import com.android.architecture.helper.AmountHelper
 import com.android.architecture.helper.Logger
 import com.architecture.light.R
 import com.architecture.light.app.AppActivityForAction
@@ -12,7 +13,6 @@ import com.architecture.light.constant.TransactionStatus
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.databinding.ActivityShowVoidResultBinding
 import com.architecture.light.domain.transaction.action.UIParams
-import com.architecture.light.helper.AmountHelper
 import com.architecture.light.helper.TransHelper
 
 /**

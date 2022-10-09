@@ -4,10 +4,10 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
+import com.android.architecture.helper.AmountHelper
 import com.android.architecture.helper.DateHelper
 import com.architecture.light.data.remote.bean.SearchBillResponse
 import com.architecture.light.databinding.ViewPreviewBillBinding
-import com.architecture.light.helper.AmountHelper
 
 /**
  * File describe:

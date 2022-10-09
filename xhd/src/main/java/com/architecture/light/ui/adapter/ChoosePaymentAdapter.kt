@@ -4,10 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.android.architecture.extension.click
+import com.android.architecture.helper.AmountHelper
 import com.android.architecture.ui.adapter.BaseAdapter
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.databinding.AdapterPaymentListBinding
-import com.architecture.light.helper.AmountHelper
 import com.architecture.light.ui.dialog.AmountModifyDialog
 
 /**
