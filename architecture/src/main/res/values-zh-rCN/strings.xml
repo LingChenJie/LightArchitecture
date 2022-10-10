@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="common_network_hint">当前没有网络连接</string>
+    <string name="network_disconnection">网络断开</string>
+    <string name="code_success">成功</string>
+    <string name="code_fail">失败</string>
+</resources>

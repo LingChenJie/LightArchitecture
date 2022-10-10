@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_code_success">成功</string>
+    <string name="error_code_user_cancel">用户取消</string>
+    <string name="error_code_network_no_connection">网络未连接，请检查网络</string>
+    <string name="error_code_network_timeout">网络超时，请重试</string>
+    <string name="error_code_network_error">网络错误，请重试</string>
+    <string name="error_code_network_data_error">网络数据解析失败，请重试</string>
+    <string name="error_code_data_empty">数据为空，请重试</string>
+
+    <string name="error_code_undefined">未定义</string>
+</resources>
