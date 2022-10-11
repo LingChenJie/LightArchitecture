@@ -55,6 +55,7 @@ class BankPayTask : PayTask() {
             payData.refNo = "123456789012"
             payData.date = DateHelper.dateString
             payData.time = DateHelper.timeString
+            payData.cardType = "借"
             onPostExecute(payData)
         } else {
             super.analysisResponse(response)
