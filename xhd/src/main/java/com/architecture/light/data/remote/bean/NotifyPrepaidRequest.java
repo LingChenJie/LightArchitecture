@@ -17,6 +17,7 @@ public class NotifyPrepaidRequest extends RequestBean {
     private String SkDate;
     private String kpr;
     private String Jkr;
+    private String PayMode;
     private List<Getin> GetinList;
     private String Remark;
 
@@ -153,6 +154,14 @@ public class NotifyPrepaidRequest extends RequestBean {
 
     public void setJkr(String jkr) {
         Jkr = jkr;
+    }
+
+    public String getPayMode() {
+        return PayMode;
+    }
+
+    public void setPayMode(String payMode) {
+        PayMode = payMode;
     }
 
     public List<Getin> getGetinList() {

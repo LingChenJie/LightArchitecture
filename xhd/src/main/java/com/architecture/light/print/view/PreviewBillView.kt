@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
+import com.android.architecture.extension.valid
 import com.android.architecture.helper.AmountHelper
 import com.android.architecture.helper.DateHelper
 import com.architecture.light.data.remote.bean.SearchBillResponse
@@ -36,7 +37,11 @@ class PreviewBillView(
         binding.tvPayingUnit.text = bean.jkr
         binding.tvRmbCapital.text = bean.amountString
         binding.tvRmbLower.text = AmountHelper.formatAmount(AmountHelper.convertAmount(bean.amount))
-        binding.tvPayingWay.text = bean.payMode
+        if (bean.payMode.valid) {
+            val amount = "￥" + AmountHelper.formatAmount(AmountHelper.convertAmount(bean.amount))
+            val payWay = bean.payMode + " " + amount
+            binding.tvPayingWay.text = payWay
+        }
         binding.tvPayingReason.text = bean.payRemark
         //binding.tvSummaryNotes.text
         binding.tvIssuer.text = bean.kpr

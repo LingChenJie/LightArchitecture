@@ -1,13 +1,16 @@
 package com.architecture.light.domain.task
 
 import com.android.architecture.constant.ErrorCode
+import com.android.architecture.extension.valid
 import com.android.architecture.helper.DateHelper
 import com.android.architecture.helper.JsonHelper
 import com.architecture.light.constant.AppErrorCode
+import com.architecture.light.constant.TransactionPlatform
 import com.architecture.light.data.remote.ResponseCode
 import com.architecture.light.data.remote.bean.NotifyPrepaidRequest
 import com.architecture.light.data.remote.bean.NotifyPrepaidResponse
 import com.architecture.light.data.remote.bean.base.RequestBean
+import com.architecture.light.helper.TransHelper
 import com.architecture.light.settings.AccountCache
 import com.architecture.light.utils.DeviceUtils
 
@@ -27,6 +30,16 @@ class NotifyPrepaidTask : HttpTask() {
         request.skDate = DateHelper.getDateFormatString(millis = param.transactionTimeMillis)
         request.kpr = AccountCache.getAccount()
         request.jkr = param.cstName
+        if (param.transactionPlatform == TransactionPlatform.Bank) {
+            var cardType = ""
+            if (param.payData != null && param.payData!!.cardType.valid) {
+                cardType = param.payData!!.cardType + "记卡"
+            }
+            request.payMode =
+                TransHelper.getTransactionPlatform(param.transactionPlatform) + cardType
+        } else {
+            request.payMode = TransHelper.getTransactionPlatform(param.transactionPlatform)
+        }
         val searchPaymentResponse = param.searchPaymentResponse!!
         val getinList = mutableListOf<NotifyPrepaidRequest.Getin>()
         val getin: NotifyPrepaidRequest.Getin
