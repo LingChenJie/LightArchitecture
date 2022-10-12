@@ -3,6 +3,7 @@ package com.architecture.light.domain.transaction
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.transaction.ATransaction
 import com.android.architecture.domain.transaction.ActionResult
+import com.android.architecture.extension.openActivity
 import com.android.architecture.helper.JsonHelper
 import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.ActivityStack
@@ -30,7 +31,7 @@ abstract class BaseTransaction(listener: TransEndListener? = null) : ATransactio
         GlobalParams.resetTransData()
         when (result.code) {
             AppErrorCode.BACK_TO_MAIN_PAGE -> {
-                ActivityStack.getInstance().removeAllButFew(MainActivity::class.java)
+                ActivityStack.getInstance().topActivity.openActivity<MainActivity>()
             }
             AppErrorCode.EXIT_APP -> {
                 ActivityStack.getInstance().removeAll()

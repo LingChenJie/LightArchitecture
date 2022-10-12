@@ -27,7 +27,11 @@ public class HttpExceptionHandle {
     public static HttpException handleException(int code, String result) {
         HttpException httpException = new HttpException(code);
         if (!TextUtils.isEmpty(result)) {
-            httpException.setMessage(result);
+            if (result.length() < 20) {
+                httpException.setMessage(result);
+            } else {
+                httpException.setMessage("网络错误");
+            }
         } else {
             httpException.setMessage("网络错误");
         }

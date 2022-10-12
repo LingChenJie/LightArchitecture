@@ -3,9 +3,7 @@ package com.architecture.light.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.android.architecture.extension.click
-import com.android.architecture.extension.getColor
 import com.android.architecture.ui.adapter.BaseAdapter
-import com.architecture.light.R
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.databinding.AdapterRoomListBinding
 

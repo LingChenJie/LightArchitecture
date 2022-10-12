@@ -169,17 +169,18 @@ public abstract class ATransaction {
     }
 
     /**
-     * 交易结果监听
+     * 获取当前交易前一个执行的的State
+     *
+     * @return
      */
-    public interface TransEndListener {
-        void onEnd(ActionResult result);
-    }
-
     public String getPreviousState() {
         return previousState;
     }
 
-    public void setCurrentState(String currentState) {
-        this.currentState = currentState;
+    /**
+     * 交易结果监听
+     */
+    public interface TransEndListener {
+        void onEnd(ActionResult result);
     }
 }
