@@ -73,7 +73,7 @@ object AmountHelper {
      */
     fun convertAmount(amount: String): Double {
         val amt = amount.replace(",".toRegex(), "").toDouble()
-        val decimalHelper = BigDecimal(amt)
+        val decimalHelper = BigDecimal(amt.toString())
         return decimalHelper.setScale(2, RoundingMode.DOWN).toDouble()
     }
 

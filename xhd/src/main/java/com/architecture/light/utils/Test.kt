@@ -7,8 +7,8 @@ import com.android.architecture.helper.AmountHelper
  * Describe:
  */
 fun main(args: Array<String>) {
-    println(AmountHelper.convertAmount("1,010,000.006"))
-    val stringCent2Long = AmountHelper.formatAmount(AmountHelper.convertAmount("1,010,000.0"))
+    println(AmountHelper.convertAmount("1,010,000.18"))
+    val stringCent2Long = AmountHelper.formatAmount(AmountHelper.convertAmount("0.18"))
     println(stringCent2Long)
 //    val yuan2Fen12 = AmountHelper.yuan2Fen12(-1.100001)
 //    println(yuan2Fen12)
