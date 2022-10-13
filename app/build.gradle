@@ -13,7 +13,7 @@ android {
         minSdk 23
         targetSdk 32
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -41,7 +41,7 @@ android {
             def build_name = "${buildType.name}"
             def formattedDate = new Date().format('yyyy_MM_dd')
             def ver = "${defaultConfig.versionName}"
-            outputFileName = app + "-" + build_name + "-" + formattedDate + "-v" + ver + ".apk"
+            outputFileName = app + "_V" + ver + "_" + formattedDate + "_" + build_name + ".apk"
         }
     }
 

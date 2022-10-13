@@ -131,29 +131,21 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
         return NavHostFragment.findNavController(this);
     }
 
-    private final OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(true) {
-        @Override
-        public void handleOnBackPressed() {
-            if (!onBackPressed()) {
-                requireActivity().getOnBackPressedDispatcher().onBackPressed();
-            }
-        }
-    };
-
     private void addOnBackPressed() {
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
-    }
-
-    protected void setBackPressed(boolean enabled) {
-        if (onBackPressed()) {
-            onBackPressedCallback.setEnabled(enabled);
-        }
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (!onBackPressed()) {
+                    setEnabled(false);
+                    requireActivity().getOnBackPressedDispatcher().onBackPressed();
+                }
+            }
+        });
     }
 
     protected boolean onBackPressed() {
         return false;
     }
-
 
     protected <T extends ViewModel> T getFragmentScopeViewModel(@NonNull Class<T> modelClass) {
         return mViewModelScope.getFragmentScopeViewModel(this, modelClass);
