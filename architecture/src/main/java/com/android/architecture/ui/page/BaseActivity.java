@@ -1,6 +1,7 @@
 package com.android.architecture.ui.page;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
@@ -63,6 +64,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
         } else {
             return AdaptScreenUtils.adaptHeight(super.getResources(), 640);
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Logger.e(TAG, "--onNewIntent");
     }
 
     @Override

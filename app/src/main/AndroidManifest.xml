@@ -24,8 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.page.activity.MviActivity"/>
-        <activity android:name=".ui.page.activity.CommonActivity"/>
+        <activity android:name=".ui.page.activity.MviActivity" />
+        <activity android:name=".ui.page.activity.CommonActivity" />
+        <activity android:name=".domain.navigation.activity.NavigationActivity" />
 
     </application>
 

@@ -1,5 +1,6 @@
 package com.android.architecture.domain.transaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
@@ -26,6 +27,7 @@ public abstract class BaseActivityForAction extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TransactionConstant.getInstance().setCurrentActivity(this);
         isForSingleAction = getIntent().getBooleanExtra(SINGLE_ACTION, false);
         if (isForSingleAction) {
             AAction action = TransactionConstant.getInstance().getSingleAction(getSingleActionName());
@@ -35,6 +37,13 @@ public abstract class BaseActivityForAction extends BaseActivity {
                 Logger.e(LightConstant.TAG, TAG + " can't find a match Action");
             }
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        resetFinishedFlag();
+        TransactionConstant.getInstance().setCurrentActivity(this);
     }
 
     @Override

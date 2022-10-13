@@ -86,6 +86,12 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        Logger.i(TAG, "----onHiddenChanged: hidden:" + hidden);
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         Logger.i(TAG, "----onPause");
@@ -125,16 +131,23 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
         return NavHostFragment.findNavController(this);
     }
 
-    private void addOnBackPressed() {
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                if (!onBackPressed()) {
-                    setEnabled(false);
-                    requireActivity().getOnBackPressedDispatcher().onBackPressed();
-                }
+    private final OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            if (!onBackPressed()) {
+                requireActivity().getOnBackPressedDispatcher().onBackPressed();
             }
-        });
+        }
+    };
+
+    private void addOnBackPressed() {
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
+    }
+
+    protected void setBackPressed(boolean enabled) {
+        if (onBackPressed()) {
+            onBackPressedCallback.setEnabled(enabled);
+        }
     }
 
     protected boolean onBackPressed() {

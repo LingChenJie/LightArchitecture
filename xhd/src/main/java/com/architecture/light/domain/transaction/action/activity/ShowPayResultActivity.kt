@@ -5,7 +5,6 @@ import android.view.View
 import com.android.architecture.domain.transaction.ActionResult
 import com.android.architecture.extension.click
 import com.android.architecture.helper.AmountHelper
-import com.android.architecture.helper.Logger.e
 import com.architecture.light.R
 import com.architecture.light.app.AppActivityForAction
 import com.architecture.light.constant.AppErrorCode
@@ -55,8 +54,6 @@ class ShowPayResultActivity : AppActivityForAction() {
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        e(TAG, "--onNewIntent")
-        resetFinishedFlag()
         refreshUI(intent)
     }
 

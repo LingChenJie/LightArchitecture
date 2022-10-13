@@ -37,7 +37,7 @@ public class DoubleUtils {
     }
 
     public static double format(double d) {
-        BigDecimal b = new BigDecimal(d);
+        BigDecimal b = new BigDecimal(Double.toString(d));
         return b.setScale(2, RoundingMode.DOWN).doubleValue();
     }
 
