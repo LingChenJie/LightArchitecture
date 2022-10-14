@@ -37,10 +37,10 @@
     </style>
 
     <style name="fade" parent="@android:style/Animation.Activity">
-        <item name="android:activityOpenEnterAnimation">@anim/right_in_activity</item>
-        <item name="android:activityOpenExitAnimation">@anim/left_out_activity</item>
-        <item name="android:activityCloseEnterAnimation">@anim/left_in_activity</item>
-        <item name="android:activityCloseExitAnimation">@anim/right_out_activity</item>
+        <item name="android:activityOpenEnterAnimation">@anim/activity_right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_right_out</item>
     </style>
 
 </resources>

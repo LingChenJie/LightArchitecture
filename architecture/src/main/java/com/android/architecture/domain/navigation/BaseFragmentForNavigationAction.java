@@ -23,6 +23,14 @@ public abstract class BaseFragmentForNavigationAction<A extends BaseActivityForN
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+            resetFinishedFlag();
+        }
+    }
+
+    @Override
     protected boolean onBackPressed() {
         clickBack();
         return true;

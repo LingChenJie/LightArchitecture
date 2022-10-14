@@ -87,9 +87,7 @@ class NavigationDemo(context: Context) : BaseNavigation(context) {
                     break;
                 }
             }
-            HANDLER.post {
-                gotoState(State.FIRST_FRAGMENT.name)
-            }
+            gotoState(State.FIRST_FRAGMENT.name)
         }
     }
 
