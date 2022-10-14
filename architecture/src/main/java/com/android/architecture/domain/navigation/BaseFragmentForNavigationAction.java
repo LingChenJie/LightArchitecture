@@ -25,8 +25,9 @@ public abstract class BaseFragmentForNavigationAction<A extends BaseActivityForN
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (hidden) {
+        if (!hidden) {
             resetFinishedFlag();
+            NavigationConstant.getInstance().setCurrentFragment(this);
         }
     }
 

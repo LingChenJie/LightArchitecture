@@ -24,18 +24,22 @@ class NavigationActivity : AppActivityForNavigationAction() {
         setContentView(binding.root)
     }
 
+    private fun getFragmentLayoutId(): Int {
+        return binding.container.id
+    }
+
     private val backStack = ArrayDeque<AppFragmentForNavigationAction>()
 
     /**
-     * 添加Fragment到堆栈顶部
+     * 将Fragment添加到回退栈中
      */
-    fun addFragment(fragment: AppFragmentForNavigationAction) {
+    fun addFragmentToStack(fragment: AppFragmentForNavigationAction) {
         val fragmentManager = supportFragmentManager
         if (fragmentManager.isStateSaved) {
             return
         }
         if (backStack.size > 0) {
-            val hideFrag = backStack.peekLast()
+            val hideFrag = backStack.peekLast()!!
             backStack.add(fragment)
             fragmentManager.beginTransaction()
                 .setCustomAnimations(
@@ -44,84 +48,84 @@ class NavigationActivity : AppActivityForNavigationAction() {
                     R.anim.fragment_left_in,
                     R.anim.fragment_right_out
                 )
-                .hide(hideFrag!!)
-                .add(binding.container.id, fragment, fragment.getTagName())
+                .hide(hideFrag)
+                .add(getFragmentLayoutId(), fragment, fragment.getTagName())
                 .addToBackStack(fragment.getTagName())
                 .commit()
         } else {
-            backStack.add(fragment)
-            fragmentManager.beginTransaction()
-                .setCustomAnimations(
-                    R.anim.fragment_right_in,
-                    R.anim.fragment_left_out,
-                    R.anim.fragment_left_in,
-                    R.anim.fragment_right_out
-                )
-                .add(binding.container.id, fragment, fragment.getTagName())
-                .addToBackStack(fragment.getTagName())
-                .commit()
+            replaceFragmentOnStack(fragment)
         }
     }
 
     /**
-     * 移除堆栈中的Fragment
+     * 移除回退栈的顶部Fragment
      */
-    fun removeTopFragmentUtilSelf(fragment: AppFragmentForNavigationAction) {
+    fun removeFragmentOnStackUtilSelf(fragment: AppFragmentForNavigationAction) {
         val fragmentManager = supportFragmentManager
         if (fragmentManager.isStateSaved) {
             return
         }
-        var previousFragment: AppFragmentForNavigationAction? = null
-        val array = backStack.toArray()
-        for (index in array.size - 1 downTo 0) {
-            val temp = array[index] as AppFragmentForNavigationAction
-            if (temp.getTagName() == fragment.getTagName()) {
-                break
-            }
-            previousFragment = temp
-        }
-        if (previousFragment != null) {
+        val topFragment = findTopFragment(backStack, fragment)
+        if (topFragment != null) {
             fragmentManager.popBackStack(
-                previousFragment.getTagName(),
+                topFragment.getTagName(),
                 FragmentManager.POP_BACK_STACK_INCLUSIVE
             )
-        }
-        for (index in array.indices) {
-            val peekLast = backStack.peekLast()
-            if (peekLast.getTagName() == fragment.getTagName()) {
-                break
+            for (index in backStack.indices) {
+                backStack.removeLast()
+                fragmentManager.fragments.removeAt(backStack.size)
+                if (topFragment.getTagName() == fragment.getTagName()) {
+                    break
+                }
             }
-            backStack.removeLast()
-            fragmentManager.fragments.removeAt(backStack.size)
         }
     }
 
     /**
-     * 替换堆栈底部Fragment
+     * 替换回退栈的底部Fragment
      */
-    fun replaceBottomFragment(fragment: AppFragmentForNavigationAction) {
-        if (supportFragmentManager.isStateSaved) {
+    fun replaceFragmentOnStack(fragment: AppFragmentForNavigationAction) {
+        val fragmentManager = supportFragmentManager
+        if (fragmentManager.isStateSaved) {
             return
         }
-        supportFragmentManager.beginTransaction()
+        backStack.add(fragment)
+        fragmentManager.beginTransaction()
             .setCustomAnimations(
                 R.anim.fragment_right_in,
                 R.anim.fragment_left_out,
                 R.anim.fragment_left_in,
                 R.anim.fragment_right_out
             )
-            .replace(binding.container.id, fragment, fragment.getTagName())
+            .replace(getFragmentLayoutId(), fragment, fragment.getTagName())
+            .addToBackStack(fragment.getTagName())
             .commit()
     }
 
     /**
-     * 查找堆栈中是否存在Fragment
+     * 根据tagName查询回退栈中的Fragment
      */
     fun findFragmentByTag(tagName: String): AppFragmentForNavigationAction? {
-        val fragment = supportFragmentManager.findFragmentByTag(tagName)
+        val fragmentManager = supportFragmentManager
+        val fragment = fragmentManager.findFragmentByTag(tagName)
         if (fragment != null) {
             fragment as AppFragmentForNavigationAction
             return fragment
+        }
+        return null
+    }
+
+    private fun findTopFragment(
+        backStack: ArrayDeque<AppFragmentForNavigationAction>,
+        fragment: AppFragmentForNavigationAction
+    ): AppFragmentForNavigationAction? {
+        val array = backStack.toArray()
+        for (item in array.reversed()) {
+            val temp = item as AppFragmentForNavigationAction
+            if (temp.getTagName() == fragment.getTagName()) {
+                break
+            }
+            return temp
         }
         return null
     }
