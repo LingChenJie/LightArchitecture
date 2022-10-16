@@ -3,6 +3,7 @@ package com.architecture.light.domain.navigation.action
 import com.android.architecture.domain.navigation.ANavigationAction
 import com.architecture.light.domain.navigation.action.fragment.ThirdFragment
 import com.architecture.light.domain.navigation.activity.NavigationActivity
+import com.architecture.light.helper.FragmentHelper
 
 /**
  * File describe:
@@ -15,11 +16,11 @@ class ActionThirdFragment(listener: ActionStartListener) : ANavigationAction(lis
 
     override fun onExecute() {
         val fragment = ThirdFragment.newInstance()
-        if (activity.findFragmentByTag(fragment.getTagName()) == null) {
-            activity.addFragmentOnStack(fragment)
+        if (activity.findFragmentByTag(fragment.tagName) == null) {
+            activity.addFragmentOnStack(fragment, FragmentHelper.getAnim())
         } else {
             activity.backFragment(fragment)
-//            activity.showFragmentOnStack(fragment)
+//            activity.showFragmentOnStack(fragment, FragmentHelper.getAnim())
         }
     }
 

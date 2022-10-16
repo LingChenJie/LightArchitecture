@@ -31,6 +31,10 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     private View mRootView;
     private final ViewModelScope mViewModelScope = new ViewModelScope();
 
+    public String getTagName() {
+        return TAG;
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public void onAttach(@NonNull Context context) {

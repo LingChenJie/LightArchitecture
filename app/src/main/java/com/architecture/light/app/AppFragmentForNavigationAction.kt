@@ -18,10 +18,6 @@ import com.gyf.immersionbar.ImmersionBar
 abstract class AppFragmentForNavigationAction :
     BaseFragmentForNavigationAction<AppActivityForNavigationAction>() {
 
-    fun getTagName(): String {
-        return TAG
-    }
-
     override fun onResume() {
         super.onResume()
         if (isStatusBarEnabled()) {

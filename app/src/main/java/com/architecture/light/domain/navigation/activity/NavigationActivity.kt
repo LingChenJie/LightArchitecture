@@ -3,6 +3,7 @@ package com.architecture.light.domain.navigation.activity
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import com.android.architecture.helper.Logger
+import com.android.architecture.ui.page.action.FragmentAction
 import com.architecture.light.app.AppActivityForNavigationAction
 import com.architecture.light.databinding.ActivityNavigationBinding
 import java.util.*
@@ -14,7 +15,7 @@ import java.util.*
  * Modify date: 2022/10/13
  * Version: 1
  */
-class NavigationActivity : AppActivityForNavigationAction(), FragmentStackAction {
+class NavigationActivity : AppActivityForNavigationAction(), FragmentAction {
 
     private val binding: ActivityNavigationBinding by lazy {
         ActivityNavigationBinding.inflate(layoutInflater)

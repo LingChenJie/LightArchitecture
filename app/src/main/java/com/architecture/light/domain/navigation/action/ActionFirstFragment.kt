@@ -1,10 +1,10 @@
 package com.architecture.light.domain.navigation.action
 
-import android.content.Intent
 import android.os.Bundle
 import com.android.architecture.domain.navigation.ANavigationAction
 import com.architecture.light.domain.navigation.action.fragment.FirstFragment
 import com.architecture.light.domain.navigation.activity.NavigationActivity
+import com.architecture.light.helper.FragmentHelper
 
 /**
  * File describe:
@@ -17,14 +17,11 @@ class ActionFirstFragment(listener: ActionStartListener) : ANavigationAction(lis
 
     override fun onExecute() {
         val fragment = FirstFragment.newInstance()
-        val bundle = Bundle()
-        bundle.putString("key", "suqi")
-        fragment.arguments = bundle
-        if (activity.findFragmentByTag(fragment.getTagName()) == null) {
-            activity.addFragmentOnStack(fragment)
+        if (activity.findFragmentByTag(fragment.tagName) == null) {
+            activity.addFragmentOnStack(fragment, FragmentHelper.getAnim())
         } else {
             activity.backFragment(fragment)
-//            activity.showFragmentOnStack(fragment)
+//            activity.showFragmentOnStack(fragment, FragmentHelper.getAnim())
         }
     }
 
