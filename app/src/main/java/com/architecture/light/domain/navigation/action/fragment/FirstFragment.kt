@@ -32,6 +32,10 @@ class FirstFragment : AppFragmentForNavigationAction() {
     }
 
     override fun initView() {
+        if (arguments != null) {
+            val value = arguments?.getString("key")
+            com.android.architecture.helper.Logger.e(TAG, "value:$value")
+        }
         binding.btTo2.click {
             finish(NavigationResult(ErrorCode.SUCCESS))
         }

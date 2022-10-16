@@ -89,6 +89,9 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         Logger.i(TAG, "----onHiddenChanged: hidden:" + hidden);
+        if (!hidden) {
+            addOnBackPressed();
+        }
     }
 
     @Override

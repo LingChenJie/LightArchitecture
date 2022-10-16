@@ -19,6 +19,7 @@ class ActionThirdFragment(listener: ActionStartListener) : ANavigationAction(lis
             activity.addFragmentOnStack(fragment)
         } else {
             activity.backFragment(fragment)
+//            activity.showFragmentOnStack(fragment)
         }
     }
 

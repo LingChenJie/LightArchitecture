@@ -22,10 +22,9 @@ interface FragmentStackAction {
     fun getStackFragmentId(): Int
 
     /**
-     * 获取FragmentManager
+     * 获取回退栈的FragmentManager
      */
     fun getStackFragmentManager(): FragmentManager
-
 
     /**
      * 将Fragment添加到回退栈中
@@ -64,18 +63,15 @@ interface FragmentStackAction {
         if (fragmentManager.isStateSaved) {
             return
         }
-        val topTagName = findTopFragmentTagName(backStack, fragment.getTagName())
-        if (topTagName != null) {
-            fragmentManager.popBackStack(
-                topTagName,
-                FragmentManager.POP_BACK_STACK_INCLUSIVE
-            )
+        val hasFragment = backStack.contains(fragment.getTagName())
+        if (hasFragment) {
+            fragmentManager.popBackStack(fragment.getTagName(), 0)
             for (item in backStack.reversed()) {
-                backStack.removeLast()
-                fragmentManager.fragments.removeAt(backStack.size)
-                if (topTagName == item) {
+                if (fragment.getTagName() == item) {
                     break
                 }
+                backStack.removeLast()
+                fragmentManager.fragments.removeAt(backStack.size)
             }
         }
     }
@@ -104,6 +100,43 @@ interface FragmentStackAction {
     }
 
     /**
+     * 显示回退栈中的Fragment
+     */
+    fun showFragmentOnStack(fragment: AppFragmentForNavigationAction) {
+        val backStack = getBackStack()
+        val fragmentManager = getStackFragmentManager()
+        if (fragmentManager.isStateSaved) {
+            return
+        }
+        val hasFragment = backStack.contains(fragment.getTagName())
+        if (hasFragment) {
+            val hideFrag = findShowFragment()!!
+            val showFrag = findFragmentByTag(fragment.getTagName())!!
+            if (fragment.getTagName() != hideFrag.getTagName()) {
+                val showIndex = findStackIndex(fragment.getTagName())
+                val hideIndex = findStackIndex(hideFrag.getTagName())
+                val enterAnim: Int
+                val exitAnim: Int
+                if (showIndex > hideIndex) {
+                    enterAnim = R.anim.fragment_right_in
+                    exitAnim = R.anim.fragment_left_out
+                } else {
+                    enterAnim = R.anim.fragment_left_in
+                    exitAnim = R.anim.fragment_right_out
+                }
+                fragmentManager.beginTransaction()
+                    .setCustomAnimations(
+                        enterAnim,
+                        exitAnim,
+                    )
+                    .hide(hideFrag)
+                    .show(showFrag)
+                    .commit()
+            }
+        }
+    }
+
+    /**
      * 根据tagName查询回退栈中的Fragment
      */
     fun findFragmentByTag(tagName: String): AppFragmentForNavigationAction? {
@@ -117,22 +150,32 @@ interface FragmentStackAction {
     }
 
     /**
-     * 找到指定Fragment的上层FragmentTagName
+     * 查找当前正在显示的Fragment
      */
-    private fun findTopFragmentTagName(
-        backStack: ArrayDeque<String>,
-        currentFragmentTagName: String
-    ): String? {
-        var topTagName: String? = null
-        val array = backStack.toArray()
-        for (item in array.reversed()) {
-            val temp = item as String
-            if (temp == currentFragmentTagName) {
-                break
+    fun findShowFragment(): AppFragmentForNavigationAction? {
+        val backStack = getBackStack()
+        val fragmentManager = getStackFragmentManager()
+        for (item in backStack) {
+            val fragment = fragmentManager.findFragmentByTag(item)
+            if (fragment != null && !fragment.isHidden) {
+                fragment as AppFragmentForNavigationAction
+                return fragment
             }
-            topTagName = temp
         }
-        return topTagName
+        return null
+    }
+
+    /**
+     * 根据tagName查找Fragment在栈中的位置
+     */
+    fun findStackIndex(tagName: String): Int {
+        val backStack = getBackStack()
+        for ((index, item) in backStack.withIndex()) {
+            if (item == tagName) {
+                return index
+            }
+        }
+        return -1
     }
 
 }

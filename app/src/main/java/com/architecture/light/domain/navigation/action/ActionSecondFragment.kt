@@ -19,6 +19,7 @@ class ActionSecondFragment(listener: ActionStartListener) : ANavigationAction(li
             activity.addFragmentOnStack(fragment)
         } else {
             activity.backFragment(fragment)
+//            activity.showFragmentOnStack(fragment)
         }
     }
 

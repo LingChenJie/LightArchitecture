@@ -25,7 +25,7 @@ class NavigationActivity : AppActivityForNavigationAction(), FragmentStackAction
         super.onCreate(savedInstanceState)
         if (savedInstanceState != null) {
             val stack = savedInstanceState.getStringArray("FRAGMENT_BACK_STACK")
-            Logger.e(TAG, "stack:${stack.contentToString()}")
+            Logger.e(TAG, "fragmentBackStack:${stack.contentToString()}")
             stack?.forEach { item ->
                 fragmentBackStack.add(item)
             }
@@ -38,10 +38,9 @@ class NavigationActivity : AppActivityForNavigationAction(), FragmentStackAction
         for ((index, item) in fragmentBackStack.withIndex()) {
             stack[index] = item
         }
-        Logger.e(TAG, "stack:${stack.contentToString()}")
+        Logger.e(TAG, "fragmentBackStack:${stack.contentToString()}")
         outState.putStringArray("FRAGMENT_BACK_STACK", stack)
     }
-
 
 
     override fun initView() {
