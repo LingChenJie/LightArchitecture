@@ -7,7 +7,7 @@ import com.android.architecture.helper.JsonHelper
 import com.android.architecture.helper.Logger
 import com.architecture.light.constant.GlobalParams
 
-abstract class BaseNavigation(val context: Context, listener: TransEndListener? = null) :
+abstract class BaseNavigation(listener: TransEndListener? = null) :
     ANavigation(listener) {
 
     val bean = GlobalParams.initNavigationBean()

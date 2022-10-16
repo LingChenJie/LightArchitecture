@@ -16,9 +16,9 @@ class ActionSecondFragment(listener: ActionStartListener) : ANavigationAction(li
     override fun onExecute() {
         val fragment = SecondFragment.newInstance()
         if (activity.findFragmentByTag(fragment.getTagName()) == null) {
-            activity.addFragmentToStack(fragment)
+            activity.addFragmentOnStack(fragment)
         } else {
-            activity.removeFragmentOnStackUtilSelf(fragment)
+            activity.backFragment(fragment)
         }
     }
 
