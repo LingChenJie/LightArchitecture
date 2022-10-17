@@ -30,7 +30,7 @@ class MainActivity : AppActivity() {
             startActivity(Intent(this, CommonActivity::class.java))
         }
         binding.layoutNavigation.click {
-            NavigationDemo(this).execute()
+            NavigationDemo().execute()
         }
         binding.layoutTransaction.click {
 

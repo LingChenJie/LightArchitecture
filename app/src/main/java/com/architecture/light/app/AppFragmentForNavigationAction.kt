@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import com.android.architecture.domain.navigation.BaseFragmentForNavigationAction
+import com.android.architecture.extension.click
 import com.android.architecture.ui.widget.layout.TitleView
 import com.gyf.immersionbar.ImmersionBar
 
@@ -16,10 +17,6 @@ import com.gyf.immersionbar.ImmersionBar
  */
 abstract class AppFragmentForNavigationAction :
     BaseFragmentForNavigationAction<AppActivityForNavigationAction>() {
-
-    fun getTagName(): String {
-        return TAG
-    }
 
     override fun onResume() {
         super.onResume()
@@ -34,8 +31,12 @@ abstract class AppFragmentForNavigationAction :
 
         if (isStatusBarEnabled()) {
             getStatusBarConfig().init()
-            getTitleView()?.let {
+            val titleView = getTitleView()
+            titleView?.let {
                 ImmersionBar.setTitleBar(this, it)
+            }
+            titleView?.backView?.click {
+                clickBack()
             }
         }
     }

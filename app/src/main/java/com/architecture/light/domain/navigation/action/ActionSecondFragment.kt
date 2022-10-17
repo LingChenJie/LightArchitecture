@@ -3,6 +3,7 @@ package com.architecture.light.domain.navigation.action
 import com.android.architecture.domain.navigation.ANavigationAction
 import com.architecture.light.domain.navigation.action.fragment.SecondFragment
 import com.architecture.light.domain.navigation.activity.NavigationActivity
+import com.architecture.light.helper.FragmentHelper
 
 /**
  * File describe:
@@ -16,9 +17,10 @@ class ActionSecondFragment(listener: ActionStartListener) : ANavigationAction(li
     override fun onExecute() {
         val fragment = SecondFragment.newInstance()
         if (activity.findFragmentByTag(fragment.getTagName()) == null) {
-            activity.addFragment(fragment)
+            activity.addFragmentOnStack(fragment, FragmentHelper.getAnim())
         } else {
-            activity.removeTopFragmentUtilSelf(fragment)
+            activity.backFragment(fragment)
+//            activity.showFragmentOnStack(fragment, FragmentHelper.getAnim())
         }
     }
 

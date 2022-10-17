@@ -31,6 +31,10 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     private View mRootView;
     private final ViewModelScope mViewModelScope = new ViewModelScope();
 
+    public String getTagName() {
+        return TAG;
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public void onAttach(@NonNull Context context) {
@@ -43,7 +47,6 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Logger.i(TAG, "----onCreate");
-        addOnBackPressed();
     }
 
     @Nullable
@@ -83,12 +86,16 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     public void onResume() {
         super.onResume();
         Logger.i(TAG, "----onResume");
+        addOnBackPressed();
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         Logger.i(TAG, "----onHiddenChanged: hidden:" + hidden);
+        if (!hidden) {
+            addOnBackPressed();
+        }
     }
 
     @Override
@@ -131,16 +138,18 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
         return NavHostFragment.findNavController(this);
     }
 
-    private void addOnBackPressed() {
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                if (!onBackPressed()) {
-                    setEnabled(false);
-                    requireActivity().getOnBackPressedDispatcher().onBackPressed();
-                }
+    protected OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            if (!onBackPressed()) {
+                setEnabled(false);
+                requireActivity().getOnBackPressedDispatcher().onBackPressed();
             }
-        });
+        }
+    };
+
+    private void addOnBackPressed() {
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
     }
 
     protected boolean onBackPressed() {

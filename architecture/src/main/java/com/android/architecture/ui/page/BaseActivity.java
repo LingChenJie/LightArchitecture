@@ -58,6 +58,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
     }
 
     @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Logger.e(TAG, "--onSaveInstanceState");
+    }
+
+    @Override
     public Resources getResources() {
         if (ScreenUtils.isPortrait()) {
             return AdaptScreenUtils.adaptWidth(super.getResources(), 360);

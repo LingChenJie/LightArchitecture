@@ -1,11 +1,10 @@
 package com.architecture.light.domain.navigation
 
-import android.content.Context
 import com.android.architecture.constant.ErrorCode
-import com.android.architecture.domain.navigation.NavigationConstant
 import com.android.architecture.domain.navigation.NavigationResult
 import com.android.architecture.extension.openActivity
 import com.android.architecture.helper.AppExecutors
+import com.android.architecture.ui.page.ActivityStack
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.domain.navigation.action.ActionFirstFragment
 import com.architecture.light.domain.navigation.action.ActionSecondFragment
@@ -19,7 +18,7 @@ import com.architecture.light.domain.navigation.activity.NavigationActivity
  * Modify date: 2022/10/13
  * Version: 1
  */
-class NavigationDemo(context: Context) : BaseNavigation(context) {
+class NavigationDemo() : BaseNavigation() {
 
     enum class State {
         FIRST_FRAGMENT,
@@ -80,11 +79,11 @@ class NavigationDemo(context: Context) : BaseNavigation(context) {
     }
 
     private fun gotoFirstState() {
-        context.openActivity<NavigationActivity>()
+        ActivityStack.getInstance().topActivity.openActivity<NavigationActivity>()
         AppExecutors.getInstance().io().execute {
             while (true) {
-                if (NavigationConstant.getInstance().currentActivity != null) {
-                    break;
+                if (currentActivity != null) {
+                    break
                 }
             }
             gotoState(State.FIRST_FRAGMENT.name)

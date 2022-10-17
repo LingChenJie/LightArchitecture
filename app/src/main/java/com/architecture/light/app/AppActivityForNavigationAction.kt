@@ -3,6 +3,7 @@ package com.architecture.light.app
 import android.os.Bundle
 import android.view.ViewGroup
 import com.android.architecture.domain.navigation.BaseActivityForNavigationAction
+import com.android.architecture.extension.click
 import com.android.architecture.ui.page.BaseDialog
 import com.android.architecture.ui.widget.layout.TitleView
 import com.architecture.light.R
@@ -25,8 +26,12 @@ abstract class AppActivityForNavigationAction : BaseActivityForNavigationAction(
         super.onCreate(savedInstanceState)
         if (isStatusBarEnabled()) {
             getStatusBarConfig().init()
-            getTitleView()?.let {
+            val titleView = getTitleView()
+            titleView?.let {
                 ImmersionBar.setTitleBar(this, it)
+            }
+            titleView?.backView?.click {
+                clickBack()
             }
         }
     }
