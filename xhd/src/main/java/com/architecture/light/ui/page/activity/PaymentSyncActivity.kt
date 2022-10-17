@@ -9,11 +9,14 @@ import com.android.architecture.helper.AppExecutors
 import com.android.architecture.helper.Logger
 import com.architecture.light.app.AppActivity
 import com.architecture.light.constant.AppErrorCode
+import com.architecture.light.constant.TransactionName
 import com.architecture.light.constant.TransactionStatus
 import com.architecture.light.data.model.TransDataModel
 import com.architecture.light.data.model.db.entity.TransData
 import com.architecture.light.databinding.ActivityPaymentSyncBinding
+import com.architecture.light.domain.task.HttpTask
 import com.architecture.light.domain.task.NotifyCollectionTask
+import com.architecture.light.domain.task.NotifyPrepaidTask
 import com.architecture.light.domain.task.PayQueryTask
 import com.architecture.light.domain.transaction.action.ActionHttpTask
 import com.architecture.light.domain.transaction.action.ActionPayTask
@@ -119,8 +122,18 @@ class PaymentSyncActivity : AppActivity() {
     }
 
     private fun notifyResult(transData: TransData) {
+        val transactionName = transData.transactionName
+        var task: HttpTask? = null
+        if (transactionName == TransactionName.Payment.name) {
+            task = NotifyCollectionTask()
+        } else if (transactionName == TransactionName.Reserve.name) {
+            task = NotifyPrepaidTask()
+        }
+        if (task == null) {
+            return
+        }
         val actionNotifyCollectionTask = ActionHttpTask {
-            (it as ActionHttpTask).setParam(NotifyCollectionTask(), transData)
+            (it as ActionHttpTask).setParam(task, transData)
         }
         actionNotifyCollectionTask.setEndListener { _, result ->
             setTransactionStatusMessage(result, transData)
