@@ -20,14 +20,6 @@ class HomeTabAdapter(private val fixedWidth: Boolean = true) :
 
     private var onTabListener: OnTabListener? = null
     private var selectedPosition = 0
-        set(value) {
-            if (field == value) {
-                return
-            }
-            notifyItemChanged(field)
-            field = value
-            notifyItemChanged(value)
-        }
 
     init {
         registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
@@ -95,6 +87,15 @@ class HomeTabAdapter(private val fixedWidth: Boolean = true) :
         super.onAttachedToRecyclerView(recyclerView)
         // 禁用 RecyclerView 条目动画
         recyclerView.itemAnimator = null
+    }
+
+    fun setSelectedPosition(position: Int) {
+        if (selectedPosition == position) {
+            return
+        }
+        notifyItemChanged(selectedPosition)
+        selectedPosition = position
+        notifyItemChanged(position)
     }
 
     private fun refreshLayoutManager() {
