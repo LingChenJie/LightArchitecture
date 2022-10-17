@@ -14,7 +14,7 @@ import java.util.Map;
  * Describe:控制导航执行的状态
  */
 public abstract class ANavigation {
-    protected String TAG = this.getClass().getSimpleName();
+    protected final String TAG = this.getClass().getSimpleName();
 
     private Map<String, ANavigationAction> state2ActionMap;// state和action绑定关系表
     private String previousState;// 前一个执行步骤
