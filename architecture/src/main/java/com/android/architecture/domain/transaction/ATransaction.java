@@ -14,7 +14,7 @@ import java.util.Map;
  * Describe:控制交易执行的状态
  */
 public abstract class ATransaction {
-    protected String TAG = this.getClass().getSimpleName();
+    protected final String TAG = this.getClass().getSimpleName();
 
     private Map<String, AAction> state2ActionMap;// state和action绑定关系表
     private String previousState;// 前一个执行步骤
