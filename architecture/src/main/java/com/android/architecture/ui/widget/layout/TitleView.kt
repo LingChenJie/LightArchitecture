@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -16,7 +15,7 @@ class TitleView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : RelativeLayout(context, attrs, defStyleAttr) {
+) : SimpleLayout(context, attrs, defStyleAttr) {
 
     private val binding: ViewTitleBinding by lazy {
         ViewTitleBinding.inflate(LayoutInflater.from(context), this, true)

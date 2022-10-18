@@ -1,4 +1,4 @@
-package com.architecture.light.ui.page.fragment
+package com.architecture.light.ui.page.mvi.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,10 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
-import com.android.architecture.extension.click
-import com.android.architecture.extension.empty
-import com.android.architecture.extension.toast
-import com.android.architecture.extension.toggleSoftInput
+import com.android.architecture.extension.*
 import com.android.architecture.helper.DateHelper
 import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.StateHolder
@@ -22,7 +19,7 @@ import com.architecture.light.domain.event.Messages
 import com.architecture.light.domain.event.NoteEvent
 import com.architecture.light.domain.message.PageMessenger
 import com.architecture.light.domain.request.NoteRequester
-import com.architecture.light.ui.page.activity.MviActivity
+import com.architecture.light.ui.page.mvi.MviActivity
 import com.gyf.immersionbar.ImmersionBar
 
 /**
@@ -43,7 +40,7 @@ class EditorFragment : AppFragment<MviActivity>() {
         }
     }
 
-    private lateinit var binding: FragmentEditorBinding
+    private val binding: FragmentEditorBinding by binding()
     private val state by viewModels<State>()
     private val noteRequester by viewModels<NoteRequester>()
     private val messenger by activityViewModels<PageMessenger>()
@@ -53,7 +50,6 @@ class EditorFragment : AppFragment<MviActivity>() {
     }
 
     override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
-        binding = FragmentEditorBinding.inflate(inflater, container, false)
         return binding.root
     }
 

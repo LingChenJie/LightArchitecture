@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.android.architecture.R
@@ -14,7 +13,7 @@ class ItemView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
-) : RelativeLayout(context, attrs, defStyleAttr) {
+) : SimpleLayout(context, attrs, defStyleAttr) {
 
     private val binding: ViewItemBinding by lazy {
         ViewItemBinding.inflate(LayoutInflater.from(context), this, true)

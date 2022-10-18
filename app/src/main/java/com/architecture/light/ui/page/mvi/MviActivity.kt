@@ -1,4 +1,4 @@
-package com.architecture.light.ui.page.activity
+package com.architecture.light.ui.page.mvi
 
 import androidx.activity.viewModels
 import com.android.architecture.helper.Logger

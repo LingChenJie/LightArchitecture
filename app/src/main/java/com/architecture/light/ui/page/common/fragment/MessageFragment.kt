@@ -1,11 +1,12 @@
-package com.architecture.light.ui.page.fragment
+package com.architecture.light.ui.page.common.fragment
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.android.architecture.extension.binding
 import com.architecture.light.app.AppFragment
 import com.architecture.light.databinding.FragmentMessageBinding
-import com.architecture.light.ui.page.activity.CommonActivity
+import com.architecture.light.ui.page.common.CommonActivity
 
 /**
  * File describe:
@@ -22,10 +23,9 @@ class MessageFragment : AppFragment<CommonActivity>() {
         }
     }
 
-    private lateinit var binding: FragmentMessageBinding
+    private val binding: FragmentMessageBinding by binding()
 
     override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
-        binding = FragmentMessageBinding.inflate(inflater, container, false)
         return binding.root
     }
 

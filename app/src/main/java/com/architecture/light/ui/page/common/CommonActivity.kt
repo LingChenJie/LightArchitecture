@@ -1,4 +1,4 @@
-package com.architecture.light.ui.page.activity
+package com.architecture.light.ui.page.common
 
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.architecture.ui.adapter.FragmentPagerAdapter
@@ -7,10 +7,10 @@ import com.architecture.light.app.AppActivity
 import com.architecture.light.app.AppFragment
 import com.architecture.light.databinding.ActivityCommonBinding
 import com.architecture.light.ui.adapter.NavigationAdapter
-import com.architecture.light.ui.page.fragment.FoundFragment
-import com.architecture.light.ui.page.fragment.HomeFragment
-import com.architecture.light.ui.page.fragment.MeFragment
-import com.architecture.light.ui.page.fragment.MessageFragment
+import com.architecture.light.ui.page.common.fragment.FoundFragment
+import com.architecture.light.ui.page.common.fragment.HomeFragment
+import com.architecture.light.ui.page.common.fragment.MeFragment
+import com.architecture.light.ui.page.common.fragment.MessageFragment
 
 /**
  * File describe:

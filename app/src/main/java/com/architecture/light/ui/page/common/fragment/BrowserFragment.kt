@@ -1,11 +1,12 @@
-package com.architecture.light.ui.page.fragment
+package com.architecture.light.ui.page.common.fragment
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.android.architecture.extension.binding
 import com.architecture.light.app.AppFragment
 import com.architecture.light.databinding.FragmentBrowserBinding
-import com.architecture.light.ui.page.activity.CommonActivity
+import com.architecture.light.ui.page.common.CommonActivity
 
 /**
  * Created by SuQi on 2022/8/21.
@@ -19,10 +20,9 @@ class BrowserFragment : AppFragment<CommonActivity>() {
         }
     }
 
-    private lateinit var binding: FragmentBrowserBinding
+    private val binding: FragmentBrowserBinding by binding()
 
     override fun getRootView(inflater: LayoutInflater, container: ViewGroup): View {
-        binding = FragmentBrowserBinding.inflate(inflater, container, false)
         return binding.root
     }
 

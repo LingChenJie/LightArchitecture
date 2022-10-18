@@ -1,11 +1,12 @@
-package com.architecture.light.ui.page.fragment
+package com.architecture.light.ui.page.common.fragment
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.android.architecture.extension.binding
 import com.architecture.light.app.AppFragment
-import com.architecture.light.databinding.FragmentMeBinding
-import com.architecture.light.ui.page.activity.CommonActivity
+import com.architecture.light.databinding.FragmentFoundBinding
+import com.architecture.light.ui.page.common.CommonActivity
 
 /**
  * File describe:
@@ -14,18 +15,17 @@ import com.architecture.light.ui.page.activity.CommonActivity
  * Modify date: 2022/8/14
  * Version: 1
  */
-class MeFragment : AppFragment<CommonActivity>() {
+class FoundFragment : AppFragment<CommonActivity>() {
 
     companion object {
-        fun newInstance(): MeFragment {
-            return MeFragment()
+        fun newInstance(): FoundFragment {
+            return FoundFragment()
         }
     }
 
-    private lateinit var binding: FragmentMeBinding
+    private val binding: FragmentFoundBinding by binding()
 
     override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
-        binding = FragmentMeBinding.inflate(inflater, container, false)
         return binding.root
     }
 

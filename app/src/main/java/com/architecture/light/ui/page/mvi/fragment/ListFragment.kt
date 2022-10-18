@@ -1,10 +1,11 @@
-package com.architecture.light.ui.page.fragment
+package com.architecture.light.ui.page.mvi.fragment
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import com.android.architecture.extension.binding
 import com.android.architecture.extension.click
 import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.StateHolder
@@ -19,7 +20,7 @@ import com.architecture.light.domain.message.PageMessenger
 import com.architecture.light.domain.request.ComplexRequester
 import com.architecture.light.domain.request.NoteRequester
 import com.architecture.light.ui.adapter.NoteAdapter
-import com.architecture.light.ui.page.activity.MviActivity
+import com.architecture.light.ui.page.mvi.MviActivity
 import com.gyf.immersionbar.ImmersionBar
 
 /**
@@ -31,7 +32,7 @@ import com.gyf.immersionbar.ImmersionBar
  */
 class ListFragment : AppFragment<MviActivity>() {
 
-    private lateinit var binding: FragmentListBinding
+    private val binding: FragmentListBinding by binding()
     private val state by viewModels<State>()
     private val noteRequester by viewModels<NoteRequester>()
     private val messenger by activityViewModels<PageMessenger>()
@@ -43,7 +44,6 @@ class ListFragment : AppFragment<MviActivity>() {
     }
 
     override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
-        binding = FragmentListBinding.inflate(inflater, container, false)
         return binding.root
     }
 

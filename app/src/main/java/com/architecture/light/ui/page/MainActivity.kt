@@ -1,4 +1,4 @@
-package com.architecture.light.ui.page.activity
+package com.architecture.light.ui.page
 
 import android.content.Intent
 import android.view.View
@@ -6,6 +6,8 @@ import com.android.architecture.extension.click
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityMainBinding
 import com.architecture.light.domain.navigation.NavigationDemo
+import com.architecture.light.ui.page.common.CommonActivity
+import com.architecture.light.ui.page.mvi.MviActivity
 
 /**
  * File describe:

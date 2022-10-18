@@ -1,15 +1,16 @@
-package com.architecture.light.ui.page.fragment
+package com.architecture.light.ui.page.common.fragment
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.android.architecture.extension.binding
 import com.android.architecture.ui.adapter.FragmentPagerAdapter
 import com.architecture.light.app.AppFragment
 import com.architecture.light.databinding.FragmentHomeBinding
 import com.architecture.light.ui.adapter.HomeTabAdapter
-import com.architecture.light.ui.page.activity.CommonActivity
+import com.architecture.light.ui.page.common.CommonActivity
 import com.gyf.immersionbar.ImmersionBar
 
 /**
@@ -28,7 +29,7 @@ class HomeFragment : AppFragment<CommonActivity>(), HomeTabAdapter.OnTabListener
         }
     }
 
-    private lateinit var binding: FragmentHomeBinding
+    private val binding: FragmentHomeBinding by binding()
     private val pagerAdapter: FragmentPagerAdapter<AppFragment<*>> by lazy {
         FragmentPagerAdapter(this)
     }
@@ -39,7 +40,6 @@ class HomeFragment : AppFragment<CommonActivity>(), HomeTabAdapter.OnTabListener
     }
 
     override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
         ImmersionBar.setTitleBar(this, binding.toolbar)
         return binding.root
     }
