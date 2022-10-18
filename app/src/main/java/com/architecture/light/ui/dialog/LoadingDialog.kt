@@ -16,8 +16,7 @@ import com.architecture.light.R
  */
 class LoadingDialog {
 
-    @Suppress("UNCHECKED_CAST")
-    class Builder<B : Builder<B>>(context: Context) : BaseDialog.Builder<B>(context) {
+    class Builder(context: Context) : BaseDialog.Builder<Builder>(context) {
 
         private val tvMessage: TextView
 
@@ -29,10 +28,10 @@ class LoadingDialog {
             tvMessage = findViewById(R.id.tv_wait_message)
         }
 
-        fun message(text: String): B {
+        fun message(text: String): Builder {
             tvMessage.text = text
             tvMessage.visibility = if (text.empty) View.GONE else View.VISIBLE
-            return this as B
+            return this
         }
 
     }

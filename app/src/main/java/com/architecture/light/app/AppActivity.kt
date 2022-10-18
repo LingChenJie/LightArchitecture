@@ -19,7 +19,7 @@ import com.gyf.immersionbar.ImmersionBar
 abstract class AppActivity : BaseActivity() {
 
     private var mLoadingDialog: BaseDialog? = null
-    private var mLoadingDialogBuilder: LoadingDialog.Builder<*>? = null
+    private var mLoadingDialogBuilder: LoadingDialog.Builder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

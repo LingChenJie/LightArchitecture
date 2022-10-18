@@ -16,7 +16,7 @@ import com.architecture.light.R
 class MessageDialog {
 
     @Suppress("UNCHECKED_CAST")
-    class Builder<B : Builder<B>>(context: Context) : CommonDialog.Builder<B>(context) {
+    class Builder(context: Context) : CommonDialog.Builder<Builder>(context) {
 
         private val tvMessage: TextView
 
@@ -25,9 +25,9 @@ class MessageDialog {
             tvMessage = findViewById(R.id.tv_message_message)
         }
 
-        fun message(text: String): B {
+        fun message(text: String): Builder {
             tvMessage.text = text
-            return this as B
+            return this
         }
 
         override fun create(): BaseDialog {
