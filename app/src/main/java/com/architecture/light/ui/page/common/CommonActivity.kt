@@ -1,6 +1,7 @@
 package com.architecture.light.ui.page.common
 
 import androidx.recyclerview.widget.GridLayoutManager
+import com.android.architecture.extension.binding
 import com.android.architecture.ui.adapter.FragmentPagerAdapter
 import com.architecture.light.R
 import com.architecture.light.app.AppActivity
@@ -21,9 +22,7 @@ import com.architecture.light.ui.page.common.fragment.MessageFragment
  */
 class CommonActivity : AppActivity() {
 
-    private val binding: ActivityCommonBinding by lazy {
-        ActivityCommonBinding.inflate(layoutInflater)
-    }
+    private val binding: ActivityCommonBinding by binding()
 
     private val pagerAdapter: FragmentPagerAdapter<AppFragment<CommonActivity>> =
         FragmentPagerAdapter(this)

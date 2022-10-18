@@ -2,6 +2,7 @@ package com.architecture.light.domain.navigation.activity
 
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
+import com.android.architecture.extension.binding
 import com.android.architecture.helper.Logger
 import com.android.architecture.ui.page.action.FragmentAction
 import com.architecture.light.app.AppActivityForNavigationAction
@@ -17,9 +18,7 @@ import java.util.*
  */
 class NavigationActivity : AppActivityForNavigationAction(), FragmentAction {
 
-    private val binding: ActivityNavigationBinding by lazy {
-        ActivityNavigationBinding.inflate(layoutInflater)
-    }
+    private val binding: ActivityNavigationBinding by binding()
     private val fragmentBackStack = ArrayDeque<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {

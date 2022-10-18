@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.navigation.NavigationResult
+import com.android.architecture.extension.binding
 import com.android.architecture.extension.click
 import com.architecture.light.app.AppFragmentForNavigationAction
 import com.architecture.light.databinding.Fragment3Binding
@@ -24,10 +25,9 @@ class ThirdFragment : AppFragmentForNavigationAction() {
         }
     }
 
-    private lateinit var binding: Fragment3Binding
+    private val binding: Fragment3Binding by binding()
 
     override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
-        binding = Fragment3Binding.inflate(inflater, container, false)
         return binding.root
     }
 

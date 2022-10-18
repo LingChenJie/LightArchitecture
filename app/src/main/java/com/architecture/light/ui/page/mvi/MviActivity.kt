@@ -1,6 +1,7 @@
 package com.architecture.light.ui.page.mvi
 
 import androidx.activity.viewModels
+import com.android.architecture.extension.binding
 import com.android.architecture.helper.Logger
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityMviBinding
@@ -18,7 +19,7 @@ import com.architecture.light.domain.request.ComplexRequester
  */
 class MviActivity : AppActivity() {
 
-    private val binding: ActivityMviBinding by lazy { ActivityMviBinding.inflate(layoutInflater) }
+    private val binding: ActivityMviBinding by binding()
     private val complexRequester by viewModels<ComplexRequester>()
     private val messenger by viewModels<PageMessenger>()
 

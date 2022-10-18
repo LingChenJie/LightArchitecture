@@ -1,6 +1,5 @@
 package com.android.architecture.helper
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
@@ -15,20 +14,20 @@ import kotlin.reflect.KProperty
  * Modify date: 2022/10/18
  * Version: 1
  */
-class LifecycleAwareViewBinding<F : Fragment, V : ViewBinding>(
-    private val bindingCreator: (F) -> V
-) : ReadOnlyProperty<F, V>, LifecycleEventObserver {
+class LifecycleAwareViewBinding<L : LifecycleOwner, V : ViewBinding>(
+    private val bindingCreator: (L) -> V
+) : ReadOnlyProperty<L, V>, LifecycleEventObserver {
 
     private var binding: V? = null
 
-    override fun getValue(thisRef: F, property: KProperty<*>): V {
+    override fun getValue(thisRef: L, property: KProperty<*>): V {
         binding?.let {
             return it
         }
-        val lifecycle = thisRef.viewLifecycleOwner.lifecycle
+        val lifecycle = thisRef.lifecycle
         if (lifecycle.currentState == Lifecycle.State.DESTROYED) {
             this.binding = null
-            throw IllegalStateException("Can't access ViewBinding after onDestroyView")
+            throw IllegalStateException("Can't access ViewBinding after Lifecycle State DESTROYED")
         } else {
             lifecycle.addObserver(this)
             val viewBinding = bindingCreator.invoke(thisRef)

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.navigation.NavigationResult
+import com.android.architecture.extension.binding
 import com.android.architecture.extension.click
 import com.architecture.light.app.AppFragmentForNavigationAction
 import com.architecture.light.databinding.Fragment2Binding
@@ -24,10 +25,9 @@ class SecondFragment : AppFragmentForNavigationAction() {
         }
     }
 
-    private lateinit var binding: Fragment2Binding
+    private val binding: Fragment2Binding by binding()
 
     override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
-        binding = Fragment2Binding.inflate(inflater, container, false)
         return binding.root
     }
 

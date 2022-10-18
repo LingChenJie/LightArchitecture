@@ -2,6 +2,7 @@ package com.architecture.light.ui.page
 
 import android.content.Intent
 import android.view.View
+import com.android.architecture.extension.binding
 import com.android.architecture.extension.click
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityMainBinding
@@ -18,7 +19,7 @@ import com.architecture.light.ui.page.mvi.MviActivity
  */
 class MainActivity : AppActivity() {
 
-    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+    private val binding: ActivityMainBinding by binding()
 
     override fun initView() {
         setContentView(binding.root)
