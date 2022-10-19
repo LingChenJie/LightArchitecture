@@ -16,11 +16,10 @@ class ActionSecondFragment(listener: ActionStartListener) : ANavigationAction(li
 
     override fun onExecute() {
         val fragment = SecondFragment.newInstance()
-        if (activity.findFragmentByTag(fragment.getTagName()) == null) {
+        if (activity.findFragmentByTag(fragment.tagName) == null) {
             activity.addFragmentOnStack(fragment, FragmentHelper.getAnim())
         } else {
             activity.backFragment(fragment)
-//            activity.showFragmentOnStack(fragment, FragmentHelper.getAnim())
         }
     }
 

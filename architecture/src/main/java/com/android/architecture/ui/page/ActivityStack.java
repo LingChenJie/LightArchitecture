@@ -15,9 +15,9 @@ public class ActivityStack {
 
     @SuppressLint("StaticFieldLeak")
     private static final ActivityStack INSTANCE = new ActivityStack();
-    private static Stack<Activity> activityStack;
-    private Activity topActivity;
-    private Activity resumedActivity;
+    private static Stack<BaseActivity> activityStack;
+    private BaseActivity topActivity;
+    private BaseActivity resumedActivity;
 
     private ActivityStack() {
     }
@@ -31,7 +31,7 @@ public class ActivityStack {
      *
      * @param activity
      */
-    public void add(Activity activity) {
+    public void add(BaseActivity activity) {
         if (activityStack == null) {
             activityStack = new Stack<>();
         }
@@ -43,7 +43,7 @@ public class ActivityStack {
      *
      * @param activity
      */
-    public void remove(Activity activity) {
+    public void remove(BaseActivity activity) {
         if (activityStack != null) {
             activityStack.remove(activity);
         }
@@ -55,7 +55,7 @@ public class ActivityStack {
     public void removeTop() {
         try {
             if (activityStack != null) {
-                Activity activity = activityStack.lastElement();
+                BaseActivity activity = activityStack.lastElement();
                 if (activity != null) {
                     activityStack.remove(activity);
                     activity.finish();
@@ -71,10 +71,10 @@ public class ActivityStack {
      *
      * @param activity
      */
-    public void removeTopUtilSelf(Activity activity) {
+    public void removeTopUtilSelf(BaseActivity activity) {
         if (activity != null) {
             while (true) {
-                Activity top = getTop();
+                BaseActivity top = getTop();
                 if (activity == top) {
                     break;
                 }
@@ -91,7 +91,7 @@ public class ActivityStack {
      *
      * @return
      */
-    private Activity getTop() {
+    private BaseActivity getTop() {
         if (activityStack.empty()) {
             return null;
         }
@@ -108,7 +108,7 @@ public class ActivityStack {
      */
     public void removeAllUtilBottom() {
         while (true) {
-            Activity top = getTop();
+            BaseActivity top = getTop();
             if (top == null || top == activityStack.firstElement()) {
                 break;
             }
@@ -123,12 +123,12 @@ public class ActivityStack {
      * @param classArray 白名单 Activity
      */
     @SafeVarargs
-    public final void removeAllButFew(Class<? extends Activity>... classArray) {
+    public final void removeAllButFew(Class<? extends BaseActivity>... classArray) {
         if (activityStack == null) {
             return;
         }
-        Stack<Activity> removeStack = new Stack<>();
-        for (Activity activity : activityStack) {
+        Stack<BaseActivity> removeStack = new Stack<>();
+        for (BaseActivity activity : activityStack) {
             boolean whiteClazz = false;
             if (classArray != null) {
                 for (Class<? extends Activity> clazz : classArray) {
@@ -142,7 +142,7 @@ public class ActivityStack {
                 }
             }
         }
-        for (Activity activity : removeStack) {
+        for (BaseActivity activity : removeStack) {
             activityStack.remove(activity);
             activity.finish();
         }
@@ -156,7 +156,7 @@ public class ActivityStack {
             return;
         }
         while (true) {
-            Activity top = getTop();
+            BaseActivity top = getTop();
             if (top == null) {
                 break;
             }
@@ -166,19 +166,19 @@ public class ActivityStack {
         }
     }
 
-    public Activity getTopActivity() {
+    public BaseActivity getTopActivity() {
         return topActivity;
     }
 
-    void setTopActivity(Activity topActivity) {
+    void setTopActivity(BaseActivity topActivity) {
         this.topActivity = topActivity;
     }
 
-    public Activity getResumedActivity() {
+    public BaseActivity getResumedActivity() {
         return resumedActivity;
     }
 
-    void setResumedActivity(Activity resumedActivity) {
+    void setResumedActivity(BaseActivity resumedActivity) {
         this.resumedActivity = resumedActivity;
     }
 

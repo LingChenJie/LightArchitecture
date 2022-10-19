@@ -66,11 +66,11 @@ interface FragmentAction {
         if (fragmentManager.isStateSaved) {
             return
         }
-        val hasFragment = backStack.contains(fragment.getTagName())
+        val hasFragment = backStack.contains(fragment.tagName)
         if (hasFragment) {
-            fragmentManager.popBackStack(fragment.getTagName(), 0)
+            fragmentManager.popBackStack(fragment.tagName, 0)
             for (item in backStack.reversed()) {
-                if (fragment.getTagName() == item) {
+                if (fragment.tagName == item) {
                     break
                 }
                 backStack.removeLast()

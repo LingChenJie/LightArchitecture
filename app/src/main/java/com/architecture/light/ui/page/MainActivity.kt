@@ -7,6 +7,7 @@ import com.android.architecture.extension.click
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityMainBinding
 import com.architecture.light.domain.navigation.NavigationDemo
+import com.architecture.light.domain.transaction.TransactionDemo
 import com.architecture.light.ui.page.common.CommonActivity
 import com.architecture.light.ui.page.mvi.MviActivity
 
@@ -36,7 +37,7 @@ class MainActivity : AppActivity() {
             NavigationDemo().execute()
         }
         binding.layoutTransaction.click {
-
+            TransactionDemo().execute()
         }
     }
 

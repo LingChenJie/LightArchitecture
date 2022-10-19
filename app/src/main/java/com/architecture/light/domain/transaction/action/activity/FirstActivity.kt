@@ -1,16 +1,13 @@
-package com.architecture.light.domain.navigation.action.fragment
+package com.architecture.light.domain.transaction.action.activity
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.domain.navigation.NavigationResult
 import com.android.architecture.extension.argument
 import com.android.architecture.extension.binding
 import com.android.architecture.extension.click
 import com.android.architecture.helper.Logger
-import com.architecture.light.app.AppFragmentForNavigationAction
-import com.architecture.light.databinding.Fragment1Binding
+import com.architecture.light.app.AppActivityForNavigationAction
+import com.architecture.light.databinding.Activity1Binding
 
 /**
  * File describe:
@@ -19,22 +16,13 @@ import com.architecture.light.databinding.Fragment1Binding
  * Modify date: 2022/10/13
  * Version: 1
  */
-class FirstFragment : AppFragmentForNavigationAction() {
+class FirstActivity : AppActivityForNavigationAction() {
 
-    companion object {
-        fun newInstance(): FirstFragment {
-            return FirstFragment()
-        }
-    }
-
-    private val binding: Fragment1Binding by binding()
+    private val binding: Activity1Binding by binding()
     private val name: String by argument()
 
-    override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
-        return binding.root
-    }
-
     override fun initView() {
+        setContentView(binding.root)
         Logger.e(TAG, "name:$name")
         binding.btTo2.click {
             finish(NavigationResult(ErrorCode.SUCCESS))

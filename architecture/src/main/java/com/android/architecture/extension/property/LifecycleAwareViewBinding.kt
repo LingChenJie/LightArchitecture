@@ -1,4 +1,4 @@
-package com.android.architecture.helper
+package com.android.architecture.extension.property
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -8,7 +8,7 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 /**
- * File describe:
+ * File describe:使用时自动初始化ViewBinding，根据生命周期当DESTROYED自动置空，防止内存泄漏
  * Author: SuQi
  * Create date: 2022/10/18
  * Modify date: 2022/10/18

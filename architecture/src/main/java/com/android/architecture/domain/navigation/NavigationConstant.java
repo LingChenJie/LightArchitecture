@@ -14,8 +14,8 @@ public class NavigationConstant {
     private static final String TAG = NavigationConstant.class.getSimpleName();
     private static final NavigationConstant INSTANCE = new NavigationConstant();
 
-    private BaseActivityForNavigationAction currentActivity;
-    private BaseFragmentForNavigationAction<? extends BaseActivityForNavigationAction> currentFragment;
+    private BaseActivity currentActivity;
+    private BaseFragment<? extends BaseActivity> currentFragment;
     private ANavigationAction currentAction;
 
     private NavigationConstant() {
@@ -25,19 +25,19 @@ public class NavigationConstant {
         return INSTANCE;
     }
 
-    public BaseActivityForNavigationAction getCurrentActivity() {
+    public BaseActivity getCurrentActivity() {
         return currentActivity;
     }
 
-    public void setCurrentActivity(BaseActivityForNavigationAction currentActivity) {
+    public void setCurrentActivity(BaseActivity currentActivity) {
         this.currentActivity = currentActivity;
     }
 
-    public BaseFragmentForNavigationAction<? extends BaseActivityForNavigationAction> getCurrentFragment() {
+    public BaseFragment<? extends BaseActivity> getCurrentFragment() {
         return currentFragment;
     }
 
-    public void setCurrentFragment(BaseFragmentForNavigationAction<? extends BaseActivityForNavigationAction> currentFragment) {
+    public void setCurrentFragment(BaseFragment<? extends BaseActivity> currentFragment) {
         this.currentFragment = currentFragment;
     }
 

@@ -7,7 +7,8 @@ import android.view.LayoutInflater
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
-import com.android.architecture.helper.LifecycleAwareViewBinding
+import com.android.architecture.extension.property.ActivityArgumentProperty
+import com.android.architecture.extension.property.LifecycleAwareViewBinding
 
 inline fun <reified T : Activity> Context.openActivity(block: Intent.() -> Unit) {
     val intent = Intent(this, T::class.java)
@@ -39,6 +40,9 @@ fun Activity.hideSoftInput() {
     manager?.hideSoftInputFromWindow(currentFocus?.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
 }
 
+/**
+ * Activity的ViewBinding初始化
+ */
 inline fun <reified V : ViewBinding> Activity.binding(): LifecycleAwareViewBinding<AppCompatActivity, V> {
     val method = V::class.java.getMethod(
         "inflate",
@@ -46,3 +50,8 @@ inline fun <reified V : ViewBinding> Activity.binding(): LifecycleAwareViewBindi
     )
     return LifecycleAwareViewBinding { method.invoke(null, layoutInflater) as V }
 }
+
+/**
+ * Activity参数的获取
+ */
+fun <T> Activity.argument(defaultValue: T? = null) = ActivityArgumentProperty(defaultValue)

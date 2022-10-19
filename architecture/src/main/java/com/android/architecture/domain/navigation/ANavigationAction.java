@@ -1,5 +1,8 @@
 package com.android.architecture.domain.navigation;
 
+import com.android.architecture.ui.page.BaseActivity;
+import com.android.architecture.ui.page.BaseFragment;
+
 /**
  * File describe:定义导航的每一步骤
  * Author: SuQi
@@ -90,7 +93,7 @@ public abstract class ANavigationAction {
      *
      * @return
      */
-    protected BaseActivityForNavigationAction getActivity() {
+    protected BaseActivity getActivity() {
         return NavigationConstant.getInstance().getCurrentActivity();
     }
 
@@ -99,7 +102,7 @@ public abstract class ANavigationAction {
      *
      * @return
      */
-    protected BaseFragmentForNavigationAction<? extends BaseActivityForNavigationAction> getFragment() {
+    protected BaseFragment<? extends BaseActivity> getFragment() {
         return NavigationConstant.getInstance().getCurrentFragment();
     }
 

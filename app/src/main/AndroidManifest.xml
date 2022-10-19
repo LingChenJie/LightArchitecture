@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.architecture.light">
 
-<!--    <uses-permission android:name="android.permission.WAKE_LOCK" />-->
+    <!--    <uses-permission android:name="android.permission.WAKE_LOCK" />-->
 
     <application
         android:name=".app.App"
@@ -29,6 +29,18 @@
         <activity android:name=".ui.page.mvi.MviActivity" />
         <activity android:name=".ui.page.common.CommonActivity" />
         <activity android:name=".domain.navigation.activity.NavigationActivity" />
+        <activity
+            android:name=".domain.transaction.action.activity.FirstActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
+        <activity
+            android:name=".domain.transaction.action.activity.SecondActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
+        <activity
+            android:name=".domain.transaction.action.activity.ThirdActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
 
     </application>
 
