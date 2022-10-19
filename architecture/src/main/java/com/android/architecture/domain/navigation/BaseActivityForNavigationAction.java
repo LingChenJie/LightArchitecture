@@ -2,7 +2,6 @@ package com.android.architecture.domain.navigation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
@@ -45,6 +44,9 @@ public abstract class BaseActivityForNavigationAction extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+        if (this == NavigationConstant.getInstance().getCurrentActivity()) {
+            NavigationConstant.getInstance().setCurrentActivity(null);
+        }
         super.onDestroy();
     }
 

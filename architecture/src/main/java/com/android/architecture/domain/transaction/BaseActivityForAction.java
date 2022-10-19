@@ -58,6 +58,9 @@ public abstract class BaseActivityForAction extends BaseActivity {
     @Override
     protected void onDestroy() {
         clearAction();
+        if (this == TransactionConstant.getInstance().getCurrentActivity()) {
+            TransactionConstant.getInstance().setCurrentActivity(null);
+        }
         super.onDestroy();
     }
 

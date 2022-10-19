@@ -1,6 +1,5 @@
 package com.architecture.light.domain.navigation
 
-import android.content.Context
 import com.android.architecture.domain.navigation.ANavigation
 import com.android.architecture.domain.navigation.NavigationResult
 import com.android.architecture.helper.JsonHelper

@@ -102,8 +102,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
     protected void onStop() {
         super.onStop();
         Logger.e(TAG, "--onStop");
-        Activity resumedActivity = ActivityStack.getInstance().getResumedActivity();
-        if (resumedActivity == this) {
+        if (this == ActivityStack.getInstance().getResumedActivity()) {
             ActivityStack.getInstance().setResumedActivity(null);
         }
     }
@@ -112,8 +111,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
     protected void onDestroy() {
         Logger.e(TAG, "--onDestroy");
         ActivityStack.getInstance().remove(this);
-        Activity topActivity = ActivityStack.getInstance().getTopActivity();
-        if (topActivity == this) {
+        if (this == ActivityStack.getInstance().getTopActivity()) {
             ActivityStack.getInstance().setTopActivity(null);
         }
         super.onDestroy();

@@ -32,6 +32,14 @@ public abstract class BaseFragmentForNavigationAction<A extends BaseActivityForN
     }
 
     @Override
+    public void onDestroy() {
+        if (this == NavigationConstant.getInstance().getCurrentFragment()) {
+            NavigationConstant.getInstance().setCurrentFragment(null);
+        }
+        super.onDestroy();
+    }
+
+    @Override
     protected boolean onBackPressed() {
         clickBack();
         return true;
