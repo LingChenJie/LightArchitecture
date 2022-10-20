@@ -8,13 +8,10 @@ import android.os.StatFs;
 
 import androidx.annotation.NonNull;
 
-import com.android.architecture.helper.Logger;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -25,9 +22,6 @@ import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.text.DecimalFormat;
-import java.util.Enumeration;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
 
 /**
  * Created by SuQi on 2022/9/25.
@@ -217,80 +211,6 @@ public class FileUtils {
 
     }
 
-    public static void unzip(File zipFile, String unzipPath, FileUtils.ZipResultCallback callback) {
-        if (zipFile == null) {
-            Logger.w(TAG, "[解压失败] " + zipFile.toString());
-            if (callback != null) {
-                callback.onUnZipFailed();
-            }
-
-        } else {
-            InputStream in = null;
-            FileOutputStream out = null;
-
-            try {
-                ZipFile zip = new ZipFile(zipFile);
-                Enumeration entries = zip.entries();
-
-                while (true) {
-                    String outPath;
-                    do {
-                        if (!entries.hasMoreElements()) {
-                            return;
-                        }
-
-                        ZipEntry entry = (ZipEntry) entries.nextElement();
-                        String zipEntryName = entry.getName();
-                        in = zip.getInputStream(entry);
-                        outPath = (unzipPath + File.separator + zipEntryName).replaceAll("\\*", "/");
-                        File file = new File(outPath.substring(0, outPath.lastIndexOf(47)));
-                        if (!file.exists()) {
-                            file.mkdirs();
-                        }
-                    } while ((new File(outPath)).isDirectory());
-
-                    out = new FileOutputStream(outPath);
-                    byte[] buf1 = new byte[1024];
-
-                    int len;
-                    while ((len = in.read(buf1)) > 0) {
-                        out.write(buf1, 0, len);
-                    }
-                }
-            } catch (IOException var21) {
-                zipFile.delete();
-                Logger.w(TAG, "[解压失败] " + zipFile.toString());
-                var21.printStackTrace();
-                if (callback != null) {
-                    callback.onUnZipFailed();
-                }
-            } finally {
-                try {
-                    if (in != null) {
-                        in.close();
-                    }
-
-                    if (out != null) {
-                        out.close();
-                    }
-                } catch (IOException var20) {
-                    Logger.w(TAG, "[解压失败] " + zipFile.toString());
-                    var20.printStackTrace();
-                    zipFile.delete();
-                    if (callback != null) {
-                        callback.onUnZipFailed();
-                    }
-                }
-
-                if (callback != null) {
-                    Logger.w(TAG, "[解压完成] " + zipFile.toString());
-                    callback.onUnZipFinished(unzipPath);
-                }
-            }
-
-        }
-    }
-
     public static synchronized void writeCache(Context context, String fileName, String content) {
         String dir = getCacheDir(context);
         File file = new File(dir + File.separator + fileName);
@@ -472,12 +392,6 @@ public class FileUtils {
         System.out.println("SD卡剩余空间== " + sdFreeSize);
         String phonePath = getPhoneStorageRootPath();
         System.out.println("内置存储路径== " + phonePath);
-    }
-
-    public interface ZipResultCallback {
-        void onUnZipFailed();
-
-        void onUnZipFinished(String var1);
     }
 
 }

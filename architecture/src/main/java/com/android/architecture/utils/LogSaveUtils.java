@@ -5,8 +5,6 @@ import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.android.architecture.constant.LightConstant;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -93,7 +91,7 @@ public class LogSaveUtils {
                     }
                 }
 
-                String filePath = logSavePath + getLogFileName();
+                String filePath = logSavePath + getCurrentLogFileName();
                 @SuppressLint("SimpleDateFormat")
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
                 String time = format.format(System.currentTimeMillis());
@@ -107,7 +105,7 @@ public class LogSaveUtils {
         });
     }
 
-    private static String getLogSavePath() {
+    public static String getLogSavePath() {
         if (!TextUtils.isEmpty(LOG_DIR_PATH)) {
             return LOG_DIR_PATH;
         }
@@ -141,7 +139,7 @@ public class LogSaveUtils {
         return logPath;
     }
 
-    private static String getLogFileName() {
+    public static String getCurrentLogFileName() {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
         return LOG_PREFIX + sf.format(System.currentTimeMillis()) + LOG_SUFFIX;

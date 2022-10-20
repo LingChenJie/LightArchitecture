@@ -4,10 +4,13 @@ import android.content.Intent
 import android.view.View
 import com.android.architecture.extension.binding
 import com.android.architecture.extension.click
+import com.android.architecture.helper.AppExecutors
+import com.android.architecture.helper.Logger
+import com.android.architecture.utils.LogSaveUtils
+import com.android.architecture.utils.ZipUtils
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityMainBinding
 import com.architecture.light.domain.navigation.NavigationDemo
-import com.architecture.light.domain.transaction.TransactionDemo
 import com.architecture.light.ui.page.common.CommonActivity
 import com.architecture.light.ui.page.mvi.MviActivity
 
@@ -37,7 +40,12 @@ class MainActivity : AppActivity() {
             NavigationDemo().execute()
         }
         binding.layoutTransaction.click {
-            TransactionDemo().execute()
+//            TransactionDemo().execute()
+            AppExecutors.getInstance().io().execute {
+                val path = LogSaveUtils.getLogSavePath() + LogSaveUtils.getCurrentLogFileName()
+                val re = ZipUtils.zip(path, LogSaveUtils.getLogSavePath() + "log.zip")
+                Logger.e("aa", "re:$re")
+            }
         }
     }
 
