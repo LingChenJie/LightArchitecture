@@ -53,6 +53,7 @@ public class ZipUtils {
                     }
                 }
             }
+            Logger.w(TAG, "[压缩完成]");
             return true;
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -99,7 +100,6 @@ public class ZipUtils {
         }
     }
 
-
     /**
      * 解压文件
      *
@@ -118,43 +118,31 @@ public class ZipUtils {
                 Enumeration<? extends ZipEntry> entries = zip.entries();
                 String outPath = null;
                 do {
-                    if (!entries.hasMoreElements()) {
-                        break;
-                    }
-                    ZipEntry entry = (ZipEntry) entries.nextElement();
-                    String zipEntryName = entry.getName();
-                    input = new BufferedInputStream(zip.getInputStream(entry));
-                    outPath = (unzipPath + File.separator + zipEntryName).replaceAll("\\*", "/");
-                    File file = new File(outPath.substring(0, outPath.lastIndexOf(47)));
-                    if (!file.exists()) {
-                        file.mkdirs();
+                    while (entries.hasMoreElements()) {
+                        ZipEntry entry = entries.nextElement();
+                        String zipEntryName = entry.getName();
+                        input = new BufferedInputStream(zip.getInputStream(entry));
+                        outPath = (unzipPath + File.separator + zipEntryName).replaceAll("\\*", "/");
+                        File file = new File(outPath.substring(0, outPath.lastIndexOf(47)));
+                        if (!file.exists()) {
+                            file.mkdirs();
+                        }
+                        output = new BufferedOutputStream(new FileOutputStream(outPath));
+                        byte[] buffer = new byte[BUFFER_SIZE];
+                        int len;
+                        while ((len = input.read(buffer)) != -1) {
+                            output.write(buffer, 0, len);
+                            output.flush();
+                        }
+                        CloseableUtils.close(input);
+                        CloseableUtils.close(output);
                     }
                 } while ((new File(outPath)).isDirectory());
-
-                output = new BufferedOutputStream(new FileOutputStream(outPath));
-                byte[] buffer = new byte[BUFFER_SIZE];
-                int len;
-                while ((len = input.read(buffer)) != -1) {
-                    output.write(buffer, 0, len);
-                    output.flush();
-                }
                 Logger.w(TAG, "[解压完成]");
                 return true;
-            } catch (IOException var21) {
+            } catch (Exception var21) {
                 Logger.w(TAG, "[解压失败] " + zipFile);
                 var21.printStackTrace();
-            } finally {
-                try {
-                    if (input != null) {
-                        input.close();
-                    }
-                    if (output != null) {
-                        output.close();
-                    }
-                } catch (IOException var20) {
-                    Logger.w(TAG, "[解压失败] " + zipFile);
-                    var20.printStackTrace();
-                }
             }
             return false;
         }

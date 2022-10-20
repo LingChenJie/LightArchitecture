@@ -7,8 +7,9 @@ import android.util.Log;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -21,7 +22,7 @@ public class LogSaveUtils {
     private static final int ERROR_LEVER = 3;
 
     private static final String LOG_DIR_NAME = "LightArchitectureApp";
-    private static final int SAVE_LOG_DAY = 7;
+    private static int SAVE_LOG_COUNT = 7;// 日志保存的数量，默认为7
     private static final String LOG_PREFIX = "app_";
     private static final String LOG_SUFFIX = ".log";
 
@@ -44,6 +45,15 @@ public class LogSaveUtils {
         } else {
             mLogLever = logLever;
         }
+    }
+
+    /**
+     * 设置保存日志的数量
+     *
+     * @param count
+     */
+    public static void setSaveLogCount(int count) {
+        SAVE_LOG_COUNT = count;
     }
 
     public static void debug(String tag, String log) {
@@ -84,13 +94,10 @@ public class LogSaveUtils {
                     Log.e(TAG, "创建目录:" + logSavePath + "; 结果:" + result);
                 } else {
                     File[] files = dirFile.listFiles();
-                    if (files != null) {
-                        if (files.length > SAVE_LOG_DAY) {
-                            deleteLogFile();
-                        }
+                    if (files != null && files.length > SAVE_LOG_COUNT) {
+                        deleteLogFile();
                     }
                 }
-
                 String filePath = logSavePath + getCurrentLogFileName();
                 @SuppressLint("SimpleDateFormat")
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
@@ -105,6 +112,11 @@ public class LogSaveUtils {
         });
     }
 
+    /**
+     * 设置日志保存的路径
+     *
+     * @return
+     */
     public static String getLogSavePath() {
         if (!TextUtils.isEmpty(LOG_DIR_PATH)) {
             return LOG_DIR_PATH;
@@ -122,7 +134,7 @@ public class LogSaveUtils {
                 }
                 if (mkdirs) {
                     LOG_DIR_PATH = logPath;
-                    return logPath;
+                    return LOG_DIR_PATH;
                 }
             }
         } catch (Exception e) {
@@ -136,15 +148,23 @@ public class LogSaveUtils {
             Log.e(TAG, "创建目录: " + logPath + "; 结果：" + mkdirs);
         }
         LOG_DIR_PATH = logPath;
-        return logPath;
+        return LOG_DIR_PATH;
     }
 
+    /**
+     * 获取当前日志的文件名
+     *
+     * @return
+     */
     public static String getCurrentLogFileName() {
         @SuppressLint("SimpleDateFormat")
         SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
         return LOG_PREFIX + sf.format(System.currentTimeMillis()) + LOG_SUFFIX;
     }
 
+    /**
+     * 删除多余的日志
+     */
     private static void deleteLogFile() {
         String logSavePath = getLogSavePath();
         File dirFile = new File(logSavePath);
@@ -154,31 +174,26 @@ public class LogSaveUtils {
         if (!dirFile.isDirectory()) {
             return;
         }
-        List<String> excludeNames = getExcludeDeleteLogName();
         File[] files = dirFile.listFiles();
         if (files == null || files.length <= 0) {
             return;
         }
-        for (File file : files) {
-            if (excludeNames.contains(file.getName())) {
+        List<File> list = Arrays.asList(files);
+        // 按最晚修改的文件时间倒排序
+        Collections.sort(list, new Comparator<File>() {
+            @Override
+            public int compare(File file, File newFile) {
+                return Long.compare(newFile.lastModified(), file.lastModified());
+            }
+        });
+        for (int i = 0; i < list.size(); i++) {
+            if (i < SAVE_LOG_COUNT) {
                 continue;
             }
+            File file = list.get(i);
             boolean delete = file.delete();
             LogSaveUtils.debug(TAG, file.getName() + " delete:" + delete);
         }
-    }
-
-    private static List<String> getExcludeDeleteLogName() {
-        List<String> dates = new ArrayList<>();
-        @SuppressLint("SimpleDateFormat")
-        SimpleDateFormat sf = new SimpleDateFormat("yyyyMMdd");
-        Calendar calendar = Calendar.getInstance();
-        for (int i = 0; i < SAVE_LOG_DAY; i++) {
-            String date = sf.format(calendar.getTime());
-            dates.add(LOG_PREFIX + date + LOG_SUFFIX);
-            calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) - 1);
-        }
-        return dates;
     }
 
 }
