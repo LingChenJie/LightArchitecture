@@ -10,10 +10,10 @@ import androidx.navigation.NavController
 import com.android.architecture.extension.*
 import com.android.architecture.helper.DateHelper
 import com.android.architecture.helper.Logger
-import com.android.architecture.ui.page.StateHolder
+import com.android.architecture.ui.page.BaseState
 import com.architecture.light.R
 import com.architecture.light.app.AppFragment
-import com.architecture.light.data.model.db.entity.Note
+import com.architecture.light.data.local.db.entity.Note
 import com.architecture.light.databinding.FragmentEditorBinding
 import com.architecture.light.domain.event.Messages
 import com.architecture.light.domain.event.NoteEvent
@@ -122,7 +122,7 @@ class EditorFragment : AppFragment<MviActivity>() {
         noteRequester.input(NoteEvent.AddItem.setNote(state.tempNote))
     }
 
-    class State : StateHolder() {
+    class State : BaseState() {
         var originNote: Note = Note()
         var tempNote: Note = Note()
         var title: String = ""

@@ -1,4 +1,4 @@
-package com.architecture.light.data.model.db.entity
+package com.architecture.light.data.local.db.entity
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo

@@ -1,6 +1,6 @@
 package com.architecture.light.domain.event
 
-import com.architecture.light.data.model.db.entity.Note
+import com.architecture.light.data.local.db.entity.Note
 
 /**
  * File describe:

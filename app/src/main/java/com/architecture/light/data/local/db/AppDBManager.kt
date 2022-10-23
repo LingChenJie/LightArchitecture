@@ -1,4 +1,4 @@
-package com.architecture.light.data.model.db
+package com.architecture.light.data.local.db
 
 import androidx.room.Room
 import com.android.architecture.utils.AppUtils

@@ -8,10 +8,10 @@ import androidx.fragment.app.viewModels
 import com.android.architecture.extension.binding
 import com.android.architecture.extension.click
 import com.android.architecture.helper.Logger
-import com.android.architecture.ui.page.StateHolder
+import com.android.architecture.ui.page.BaseState
 import com.architecture.light.R
 import com.architecture.light.app.AppFragment
-import com.architecture.light.data.model.db.entity.Note
+import com.architecture.light.data.local.db.entity.Note
 import com.architecture.light.databinding.FragmentListBinding
 import com.architecture.light.domain.event.ComplexEvent
 import com.architecture.light.domain.event.Messages
@@ -122,7 +122,7 @@ class ListFragment : AppFragment<MviActivity>() {
         return true
     }
 
-    class State : StateHolder() {
+    class State : BaseState() {
         var list = mutableListOf<Note>()
     }
 

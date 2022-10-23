@@ -17,6 +17,8 @@
     <string name="common">Common</string>
     <string name="navigation">Navigation</string>
     <string name="transaction">Transaction</string>
+    <string name="paging">Paging</string>
+    <string name="test">Test</string>
 
     <!-- Common相关 -->
     <string name="common_nav_index">首页</string>

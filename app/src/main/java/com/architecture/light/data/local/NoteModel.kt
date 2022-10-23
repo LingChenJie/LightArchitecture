@@ -1,8 +1,8 @@
-package com.architecture.light.data.model
+package com.architecture.light.data.local
 
-import com.architecture.light.data.model.db.AppDBManager
-import com.architecture.light.data.model.db.dao.NoteDao
-import com.architecture.light.data.model.db.entity.Note
+import com.architecture.light.data.local.db.AppDBManager
+import com.architecture.light.data.local.db.dao.NoteDao
+import com.architecture.light.data.local.db.entity.Note
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext

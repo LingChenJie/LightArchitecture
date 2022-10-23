@@ -7,7 +7,7 @@ import com.android.architecture.extension.click
 import com.android.architecture.helper.DateHelper
 import com.android.architecture.ui.adapter.BaseAdapter
 import com.architecture.light.R
-import com.architecture.light.data.model.db.entity.Note
+import com.architecture.light.data.local.db.entity.Note
 import com.architecture.light.databinding.AdapterNoteListBinding
 
 /**
