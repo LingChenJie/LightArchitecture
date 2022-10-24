@@ -30,10 +30,34 @@ public class DoubleUtils {
      * @param d2
      * @return
      */
-    public static double minus(double d1, double d2) {
+    public static double subtract(double d1, double d2) {
         BigDecimal bd1 = new BigDecimal(Double.toString(d1));
         BigDecimal bd2 = new BigDecimal(Double.toString(d2));
         return bd1.subtract(bd2).doubleValue();
+    }
+
+    /**
+     * double 相乘
+     *
+     * @param d1
+     * @param d2
+     * @return
+     */
+    public static double multiply(double d1, double d2) {
+        BigDecimal bd1 = new BigDecimal(Double.toString(d1));
+        BigDecimal bd2 = new BigDecimal(Double.toString(d2));
+        return bd1.multiply(bd2).doubleValue();
+    }
+
+    /**
+     * 四舍五入保留两位小数
+     *
+     * @param d
+     * @return
+     */
+    public static double halfUpTwoDecimalPlaces(double d) {
+        BigDecimal bd = new BigDecimal(Double.toString(d));
+        return bd.setScale(2, RoundingMode.HALF_UP).doubleValue();
     }
 
     public static double format(double d) {
