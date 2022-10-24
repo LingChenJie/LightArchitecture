@@ -26,7 +26,7 @@ import kotlinx.coroutines.launch
 class RepoActivity : AppActivity() {
 
     private val binding: ActivityRepoBinding by binding()
-    private val state by viewModels<State>()
+    private val state: State by viewModels()
     private val repoAdapter = RepoAdapter()
 
     override fun initView() {

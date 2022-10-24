@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.Flow
  * Describe:
  */
 object RepoRepository {
-    private const val PAGE_SIZE = 50
+    private const val PAGE_SIZE = 20
     private val githubService = GithubService.create()
 
     fun getPagingData(): Flow<PagingData<Repo>> {
