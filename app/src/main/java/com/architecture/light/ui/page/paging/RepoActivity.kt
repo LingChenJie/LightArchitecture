@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.architecture.extension.binding
 import com.android.architecture.extension.click
 import com.android.architecture.extension.toast
@@ -37,7 +36,6 @@ class RepoActivity : AppActivity() {
                 repoAdapter.submitData(it)
             }
         }
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = repoAdapter
         repoAdapter.addLoadStateListener {
             when (it.refresh) {
