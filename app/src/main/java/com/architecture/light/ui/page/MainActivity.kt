@@ -1,6 +1,5 @@
 package com.architecture.light.ui.page
 
-import android.content.Intent
 import android.view.View
 import com.android.architecture.extension.binding
 import com.android.architecture.extension.click
@@ -12,6 +11,7 @@ import com.architecture.light.domain.transaction.TransactionDemo
 import com.architecture.light.ui.page.common.CommonActivity
 import com.architecture.light.ui.page.mvi.MviActivity
 import com.architecture.light.ui.page.paging.RepoActivity
+import com.architecture.light.ui.page.test.TestActivity
 
 /**
  * File describe:
@@ -45,7 +45,7 @@ class MainActivity : AppActivity() {
             openActivity<RepoActivity>()
         }
         binding.layoutTest.click {
-
+            openActivity<TestActivity>()
         }
     }
 

@@ -29,6 +29,7 @@
         <activity android:name=".ui.page.mvi.MviActivity" />
         <activity android:name=".ui.page.common.CommonActivity" />
         <activity android:name=".ui.page.paging.RepoActivity" />
+        <activity android:name=".ui.page.test.TestActivity" />
         <activity android:name=".domain.navigation.activity.NavigationActivity" />
         <activity
             android:name=".domain.transaction.action.activity.FirstActivity"
