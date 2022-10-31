@@ -26,4 +26,7 @@
     <string name="common_nav_message">消息</string>
     <string name="common_nav_me">我的</string>
 
+    <string name="NestedContentBehavior">com.architecture.light.ui.page.nested.demo1.NestedContentBehavior</string>
+    <string name="NestedHeaderBehavior">com.architecture.light.ui.page.nested.demo1.NestedHeaderBehavior</string>
+
 </resources>

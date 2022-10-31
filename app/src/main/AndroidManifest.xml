@@ -29,6 +29,8 @@
         <activity android:name=".ui.page.mvi.MviActivity" />
         <activity android:name=".ui.page.common.CommonActivity" />
         <activity android:name=".ui.page.paging.RepoActivity" />
+        <activity android:name=".ui.page.nested.NestedActivity" />
+        <activity android:name=".ui.page.nested.demo1.NestedDemo1Activity" />
         <activity android:name=".ui.page.test.TestActivity" />
         <activity android:name=".domain.navigation.activity.NavigationActivity" />
         <activity
