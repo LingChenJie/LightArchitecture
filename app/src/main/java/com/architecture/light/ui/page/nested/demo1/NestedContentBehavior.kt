@@ -70,19 +70,31 @@ class NestedContentBehavior(context: Context, attrs: AttributeSet?) :
         type: Int
     ) {
         stopAutoScroll()
-        // 只处理手指上滑
-        if (dy > 0) {
-            val newTranslationY = child.translationY - dy
+//        // 只处理手指上滑
+//        if (dy > 0) {
+//            val newTranslationY = child.translationY - dy
+//            if (newTranslationY >= -headerHeight) {
+//                // 完全消耗滑动距离后没有完全贴顶或刚好贴顶
+//                // 那么就声明消耗所有滑动距离，并上移 RecyclerView
+//                consumed[1] = dy
+//                child.translationY = newTranslationY
+//            } else {
+//                // 如果完全消耗那么会导致 RecyclerView 超出可视区域
+//                // 那么只消耗恰好让 RecyclerView 贴顶的距离
+//                consumed[1] = headerHeight + child.translationY.toInt()
+//                child.translationY = -headerHeight.toFloat()
+//            }
+//        }
+        val newTranslationY = child.translationY - dy
+        if (dy > 0) {// 手指上滑
             if (newTranslationY >= -headerHeight) {
-                // 完全消耗滑动距离后没有完全贴顶或刚好贴顶
-                // 那么就声明消耗所有滑动距离，并上移 RecyclerView
-                consumed[1] = dy
                 child.translationY = newTranslationY
-            } else {
-                // 如果完全消耗那么会导致 RecyclerView 超出可视区域
-                // 那么只消耗恰好让 RecyclerView 贴顶的距离
-                consumed[1] = headerHeight + child.translationY.toInt()
-                child.translationY = -headerHeight.toFloat()
+                consumed[1] = dy
+            }
+        } else {// 手指下滑
+            if (newTranslationY <= 0 && !target.canScrollVertically(-1)) {
+                child.translationY = newTranslationY
+                consumed[1] = dy
             }
         }
     }
@@ -101,8 +113,8 @@ class NestedContentBehavior(context: Context, attrs: AttributeSet?) :
         stopAutoScroll()
         // 此时 RV 已经完成了滑动，dyUnconsumed 表示剩余未消耗的滑动距离
         // 只处理手指向下滑动的情况
-        if (dyUnconsumed < 0) {
-            val newTranslationY = child.translationY - dyUnconsumed
+        if (dyUnconsumed < 0 && type == ViewCompat.TYPE_NON_TOUCH) {
+            val newTranslationY = child.translationY - dyUnconsumed * 100000
             if (newTranslationY <= 0) {
                 child.translationY = newTranslationY
             } else {
@@ -122,10 +134,10 @@ class NestedContentBehavior(context: Context, attrs: AttributeSet?) :
         }
         if (child.translationY <= -headerHeight * 0.5f) {
             stopAutoScroll()
-//            startAutoScroll(child.translationY.toInt(), -headerHeight, 1000)
+            startAutoScroll(child.translationY.toInt(), -headerHeight, 1000)
         } else {
             stopAutoScroll()
-//            startAutoScroll(child.translationY.toInt(), 0, 600)
+            startAutoScroll(child.translationY.toInt(), 0, 600)
         }
     }
 
