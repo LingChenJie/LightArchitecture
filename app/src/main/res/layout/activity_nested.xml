@@ -12,6 +12,12 @@
         app:title_text="@string/transaction" />
 
     <Button
+        android:id="@+id/btn_nested_scrolling_tradition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="嵌套滑动传统机制" />
+
+    <Button
         android:id="@+id/bt_nested_demo1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

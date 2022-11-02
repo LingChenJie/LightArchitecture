@@ -6,6 +6,7 @@ import com.android.architecture.extension.openActivity
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityNestedBinding
 import com.architecture.light.ui.page.nested.demo1.NestedDemo1Activity
+import com.architecture.light.ui.page.nested.scrolling.TraditionActivity
 
 /**
  * File describe:
@@ -20,6 +21,7 @@ class NestedActivity : AppActivity() {
 
     override fun initView() {
         setContentView(binding.root)
+        binding.btnNestedScrollingTradition.click { openActivity<TraditionActivity>() }
         binding.btNestedDemo1.click { openActivity<NestedDemo1Activity>() }
     }
 
