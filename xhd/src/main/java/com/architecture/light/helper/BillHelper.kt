@@ -11,7 +11,9 @@ import com.android.architecture.utils.TupleUtil
 import com.architecture.light.R
 import com.architecture.light.constant.Constant
 import com.architecture.light.constant.PrintErrorCode
+import com.architecture.light.constant.PrinterStatusCode
 import com.architecture.light.data.remote.bean.SearchBillResponse
+import com.architecture.light.ext.toastWarn
 import com.architecture.light.print.view.PreviewBillView
 import com.architecture.light.utils.ImageUtils
 import com.sunmi.a4printerservice.ICallback
@@ -112,11 +114,31 @@ object BillHelper {
     }
 
     private fun checkPrinterStatus(): TupleUtil.Tuple<Int, String> {
-        var retCode = 0
-        var retMsg = ""
+        val retCode: Int
+        val retMsg: String
         val printerService = AidlServiceFactory.instance.getA4PrinterService()
         val printerStatus = printerService!!.printerStatus
 
+        if (printerStatus == PrinterStatusCode.CODE_12 ||
+            printerStatus == PrinterStatusCode.CODE_13 ||
+            printerStatus == PrinterStatusCode.CODE_14 ||
+            printerStatus == PrinterStatusCode.CODE_15 ||
+            printerStatus == PrinterStatusCode.CODE_16 ||
+            printerStatus == PrinterStatusCode.CODE_17 ||
+            printerStatus == PrinterStatusCode.CODE__5
+        ) {
+            retCode = 0
+            retMsg = PrinterStatusCode.getMessage(printerStatus)
+            if (printerStatus == PrinterStatusCode.CODE_14 ||
+                printerStatus == PrinterStatusCode.CODE_15 ||
+                printerStatus == PrinterStatusCode.CODE_16
+            ) {
+                toastWarn(retMsg)
+            }
+        } else {
+            retCode = printerStatus
+            retMsg = PrinterStatusCode.getMessage(printerStatus)
+        }
         return TupleUtil.Tuple<Int, String>(retCode, retMsg)
     }
 
