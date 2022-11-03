@@ -3,6 +3,7 @@ package com.architecture.light.ui.page.nested.view
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewConfiguration
@@ -50,13 +51,18 @@ class NestedTraditionLayout(context: Context, attrs: AttributeSet) : LinearLayou
             MotionEvent.ACTION_MOVE -> {
                 val dy = mLastY - y
                 //如果父控件拦截，根据传统事件传递机制，如果父控件确定拦截事件，那么在同一事件序列中，子控件是没有办法获取到事件的。
-                if (abs(dy) > ViewConfiguration.get(context).scaledTouchSlop) {
+                if (abs(dy) > ViewConfiguration.getTouchSlop()) {
                     if (dy > 0 && !isHeadHide) {// 如果是向上滑，且当前headView没有隐藏，那么就拦截
+                        //如果是向上滑，且当前headView没有隐藏，那么就拦截
+                        Log.d("NestedTraditionLayout", "onInterceptTouchEvent: 开始向上拦截")
                         return true
                     } else if (dy < 0 && isHeadHide) {// 如果是向下, 且将headView已经隐藏，那么就拦截
+                        //如果是向下, 且将headView已经隐藏，那么就拦截
+                        Log.d("NestedTraditionLayout", "onInterceptTouchEvent: 开始向下拦截")
                         return true
                     }
                 }
+                Log.d("NestedTraditionLayout", "onInterceptTouchEvent: 开始向下拦截")
             }
         }
         return super.onInterceptTouchEvent(ev)//不拦截事件，把事件让给子控件。
@@ -72,7 +78,7 @@ class NestedTraditionLayout(context: Context, attrs: AttributeSet) : LinearLayou
             }
             MotionEvent.ACTION_MOVE -> {
                 val dy = mLastY - y
-                if (abs(dy) > ViewConfiguration.get(context).scaledTouchSlop) {
+                if (abs(dy) > ViewConfiguration.getTouchSlop()) {
                     scrollBy(0, dy)
                 }
                 mLastY = y

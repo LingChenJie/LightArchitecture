@@ -78,6 +78,11 @@ object BillHelper {
             printResult.fail(-1, getString(R.string.print_bill_service_connect_fail))
             return
         }
+        val status = checkPrinterStatus()
+        if (status.a != 0) {
+            printResult.fail(status.a, status.b)
+            return
+        }
         val firstPath = path + File.separator + ONE
         val secondPath = path + File.separator + TWO
         val thirdPath = path + File.separator + THREE
@@ -104,6 +109,15 @@ object BillHelper {
                 return@execute
             }
         }
+    }
+
+    private fun checkPrinterStatus(): TupleUtil.Tuple<Int, String> {
+        var retCode = 0
+        var retMsg = ""
+        val printerService = AidlServiceFactory.instance.getA4PrinterService()
+        val printerStatus = printerService!!.printerStatus
+
+        return TupleUtil.Tuple<Int, String>(retCode, retMsg)
     }
 
     private fun printImage(path: String): TupleUtil.Tuple<Int, String> {
