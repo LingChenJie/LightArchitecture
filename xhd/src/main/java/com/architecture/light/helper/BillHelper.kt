@@ -81,8 +81,8 @@ object BillHelper {
             return
         }
         val status = checkPrinterStatus()
-        if (status.a != 0) {
-            printResult.fail(status.a, status.b)
+        if (status.param1 != 0) {
+            printResult.fail(status.param1, status.param2)
             return
         }
         val firstPath = path + File.separator + ONE
@@ -90,24 +90,24 @@ object BillHelper {
         val thirdPath = path + File.separator + THREE
         AppExecutors.getInstance().single().execute {
             var result = printImage(firstPath)
-            if (result.a == 0) {
+            if (result.param1 == 0) {
                 result = printImage(secondPath)
 
             } else {
-                printResult.fail(result.a, result.b)
+                printResult.fail(result.param1, result.param2)
                 return@execute
             }
-            if (result.a == 0) {
+            if (result.param1 == 0) {
                 result = printImage(thirdPath)
             } else {
-                printResult.fail(result.a, result.b)
+                printResult.fail(result.param1, result.param2)
                 return@execute
             }
-            if (result.a == 0) {
+            if (result.param1 == 0) {
                 SystemClock.sleep(6 * 1000)
-                printResult.success(result.b)
+                printResult.success(result.param2)
             } else {
-                printResult.fail(result.a, result.b)
+                printResult.fail(result.param1, result.param2)
                 return@execute
             }
         }
