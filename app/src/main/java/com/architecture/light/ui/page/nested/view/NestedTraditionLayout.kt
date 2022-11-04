@@ -19,6 +19,8 @@ import kotlin.math.abs
  *
  * 在下面的例子中，如果是同一事件序列中滑动导致headView隐藏，那么除非手指抬起，不然子控件是不能响应事件的。
  */
+private const val TAG = "NestedTraditionLayout"
+
 class NestedTraditionLayout(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
     private lateinit var mHeadView: View
@@ -46,23 +48,27 @@ class NestedTraditionLayout(context: Context, attrs: AttributeSet) : LinearLayou
         val y = ev.y.toInt()
         when (action) {
             MotionEvent.ACTION_DOWN -> {
+                Log.d(TAG, "onInterceptTouchEvent ACTION_DOWN y:$y")
                 mLastY = y
             }
             MotionEvent.ACTION_MOVE -> {
+                Log.d(TAG, "onInterceptTouchEvent ACTION_MOVE y:$y")
                 val dy = mLastY - y
                 //如果父控件拦截，根据传统事件传递机制，如果父控件确定拦截事件，那么在同一事件序列中，子控件是没有办法获取到事件的。
-                if (abs(dy) > ViewConfiguration.getTouchSlop()) {
+                if (abs(dy) > ViewConfiguration.get(context).scaledTouchSlop) {
                     if (dy > 0 && !isHeadHide) {// 如果是向上滑，且当前headView没有隐藏，那么就拦截
                         //如果是向上滑，且当前headView没有隐藏，那么就拦截
-                        Log.d("NestedTraditionLayout", "onInterceptTouchEvent: 开始向上拦截")
+                        Log.d(TAG, "onInterceptTouchEvent: 开始向上拦截")
                         return true
                     } else if (dy < 0 && isHeadHide) {// 如果是向下, 且将headView已经隐藏，那么就拦截
                         //如果是向下, 且将headView已经隐藏，那么就拦截
-                        Log.d("NestedTraditionLayout", "onInterceptTouchEvent: 开始向下拦截")
+                        Log.d(TAG, "onInterceptTouchEvent: 开始向下拦截")
                         return true
                     }
                 }
-                Log.d("NestedTraditionLayout", "onInterceptTouchEvent: 开始向下拦截")
+            }
+            MotionEvent.ACTION_UP -> {
+                Log.d(TAG, "onInterceptTouchEvent ACTION_UP y:$y")
             }
         }
         return super.onInterceptTouchEvent(ev)//不拦截事件，把事件让给子控件。
@@ -74,14 +80,19 @@ class NestedTraditionLayout(context: Context, attrs: AttributeSet) : LinearLayou
         val y = event.y.toInt()
         when (action) {
             MotionEvent.ACTION_DOWN -> {
+                Log.d(TAG, "onTouchEvent ACTION_DOWN y:$y")
                 mLastY = y
             }
             MotionEvent.ACTION_MOVE -> {
+                Log.d(TAG, "onTouchEvent ACTION_MOVE y:$y")
                 val dy = mLastY - y
-                if (abs(dy) > ViewConfiguration.getTouchSlop()) {
+                if (abs(dy) > 0) {
                     scrollBy(0, dy)
                 }
                 mLastY = y
+            }
+            MotionEvent.ACTION_UP -> {
+                Log.d(TAG, "onTouchEvent ACTION_UP y:$y")
             }
         }
         return super.onTouchEvent(event)
