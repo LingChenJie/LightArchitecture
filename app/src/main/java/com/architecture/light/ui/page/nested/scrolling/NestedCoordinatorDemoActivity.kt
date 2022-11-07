@@ -16,6 +16,10 @@ class NestedCoordinatorDemoActivity : AppActivity() {
 
     private val binding: ActivityNestedCoordinatorDemoBinding by binding()
 
+    override fun isStatusBarEnabled(): Boolean {
+        return false
+    }
+
     override fun initView() {
         setContentView(binding.root)
         val adapter = TabFragment.SimpleStringAdapter()

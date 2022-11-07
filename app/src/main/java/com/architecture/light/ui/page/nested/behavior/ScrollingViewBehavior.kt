@@ -13,7 +13,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
  * Modify date: 2022/11/7
  * Version: 1
  */
-class ScrollingViewBehavior(context: Context, attrs: AttributeSet) :
+class ScrollingViewBehavior(context: Context, attrs: AttributeSet?) :
     HeaderScrollingViewBehavior(context, attrs) {
 
     override fun layoutDependsOn(

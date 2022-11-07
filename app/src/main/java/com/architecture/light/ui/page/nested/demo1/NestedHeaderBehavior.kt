@@ -23,7 +23,7 @@ class NestedHeaderBehavior(context: Context, attrs: AttributeSet?) :
     ): Boolean {
         // child: 当前 Behavior 所关联的 View，此处是 HeaderView
         // dependency: 待判断是否需要监听的其他子 View
-        return dependency.id == R.id.content_layout
+        return dependency.id == R.id.recycler_view
     }
 
     override fun onDependentViewChanged(

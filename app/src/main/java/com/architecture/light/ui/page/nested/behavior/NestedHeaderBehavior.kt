@@ -2,6 +2,7 @@ package com.architecture.light.ui.page.nested.behavior
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -15,7 +16,9 @@ import java.lang.ref.WeakReference
  * Modify date: 2022/11/7
  * Version: 1
  */
-class NestedHeaderBehavior(context: Context, attrs: AttributeSet) :
+private const val TAG = "NestedHeaderBehavior"
+
+class NestedHeaderBehavior(context: Context, attrs: AttributeSet?) :
     CoordinatorLayout.Behavior<View>(context, attrs) {
 
     private lateinit var mNestedScrollingChildRef: WeakReference<View>
@@ -59,6 +62,7 @@ class NestedHeaderBehavior(context: Context, attrs: AttributeSet) :
         val newTop = currentTop - dy
         if (dy > 0) {//向上滑动
             if (newTop >= -child.height) {
+                Log.i(TAG, "onNestedPreScroll:向上移动currentTop--->$currentTop newTop--->$newTop")
                 consumed[1] = dy
                 mOffset = -dy
                 ViewCompat.offsetTopAndBottom(child, -dy)
@@ -71,6 +75,7 @@ class NestedHeaderBehavior(context: Context, attrs: AttributeSet) :
             }
         }
         if (dy < 0) {// 向下滑动
+            Log.i(TAG, "onNestedPreScroll:向下移动currentTop--->$currentTop newTop--->$newTop")
             if (newTop <= 0 && !target.canScrollVertically(-1)) {
                 consumed[1] = dy
                 mOffset = -dy
@@ -95,7 +100,11 @@ class NestedHeaderBehavior(context: Context, attrs: AttributeSet) :
             val currentTop = child.top
             val newTop = currentTop - dyUnconsumed
             if (newTop <= 0) {
-                ViewCompat.offsetTopAndBottom(child, -currentTop)
+                Log.i(
+                    TAG,
+                    "onNestedScroll: dyUnconsumed--> $dyUnconsumed currentTop--->$currentTop newTop--->$newTop"
+                )
+                ViewCompat.offsetTopAndBottom(child, -dyUnconsumed)
                 mOffset = -dyUnconsumed
             } else {//如果当前的值大于最大的偏移量，那么就直接滚动到-currentTop就行了
                 ViewCompat.offsetTopAndBottom(child, -currentTop)

@@ -11,7 +11,7 @@
         android:layout_height="@dimen/dp_200"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_behavior="@string/NestedHeaderBehavior">
+        app:layout_behavior="com.architecture.light.ui.page.nested.demo1.NestedHeaderBehavior">
 
         <TextView
             android:layout_width="wrap_content"
@@ -22,11 +22,11 @@
     </com.android.architecture.ui.widget.layout.NestedLinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/content_layout"
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_behavior="@string/NestedContentBehavior"
+        app:layout_behavior="com.architecture.light.ui.page.nested.demo1.NestedContentBehavior"
         tools:listitem="@layout/item_single_text" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -22,7 +22,7 @@ class NestedDemo1Activity : AppActivity() {
 
     override fun initView() {
         setContentView(binding.root)
-        binding.contentLayout.adapter = adapter
+        binding.recyclerView.adapter = adapter
         val data = simulatedData()
         adapter.addData(data)
     }

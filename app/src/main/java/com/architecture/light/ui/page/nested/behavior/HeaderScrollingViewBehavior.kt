@@ -3,6 +3,7 @@ package com.architecture.light.ui.page.nested.behavior
 import android.content.Context
 import android.graphics.Rect
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,9 @@ import androidx.core.view.ViewCompat
  * Modify date: 2022/11/7
  * Version: 1
  */
-open class HeaderScrollingViewBehavior(context: Context, attrs: AttributeSet) :
+private const val TAG = "HeaderScrolling"
+
+open class HeaderScrollingViewBehavior(context: Context, attrs: AttributeSet?) :
     CoordinatorLayout.Behavior<View>(context, attrs) {
 
     private val mTempRect1 = Rect()
@@ -125,10 +128,18 @@ open class HeaderScrollingViewBehavior(context: Context, attrs: AttributeSet) :
     private fun offsetChildAsNeeded(parent: CoordinatorLayout, child: View, dependency: View) {
         val behavior = (dependency.layoutParams as CoordinatorLayout.LayoutParams).behavior
         if (behavior is NestedHeaderBehavior) {
-            ViewCompat.offsetTopAndBottom(
-                child,
-                dependency.bottom - child.top + behavior.getOffset()
+            Log.i(
+                TAG,
+                "offsetChildAsNeeded: " + dependency.bottom + "--->" + child.top + "---->" + behavior.getOffset()
             )
+            if (dependency.bottom == 0 && child.top == 0 && behavior.getOffset() == 0) {
+
+            } else {
+                ViewCompat.offsetTopAndBottom(
+                    child,
+                    dependency.bottom - child.top + behavior.getOffset()
+                )
+            }
         }
     }
 
