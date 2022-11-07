@@ -12,7 +12,9 @@
         android:src="@drawable/ic_launcher_background" />
 
     <!--标题栏-->
-    <include layout="@layout/layout_common_toolbar" />
+    <include
+        android:id="@+id/title_view"
+        layout="@layout/layout_common_toolbar" />
 
     <!--嵌套滑动父控件-->
     <com.architecture.light.ui.page.nested.view.StickyNavLayout

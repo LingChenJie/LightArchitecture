@@ -138,7 +138,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/layout_test"
+                    android:id="@+id/layout_nested"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/dp_112"
                     android:layout_marginStart="@dimen/dp_6"
@@ -151,7 +151,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@string/test"
+                        android:text="@string/nested"
                         android:textColor="@color/white"
                         android:textSize="@dimen/sp_16" />
 

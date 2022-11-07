@@ -27,6 +27,6 @@
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/NestedContentBehavior"
-        tools:listitem="@layout/item_nested_list" />
+        tools:listitem="@layout/item_single_text" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -13,19 +13,25 @@
 
     <Button
         android:id="@+id/btn_nested_scrolling_tradition"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="嵌套滑动传统机制" />
 
     <Button
-        android:id="@+id/btn_nested_scrolling2_demo"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_nested_scrolling2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Nested Scrolling2" />
 
     <Button
+        android:id="@+id/btn_nested_coordinator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Behavior的嵌套滑动" />
+
+    <Button
         android:id="@+id/bt_nested_demo1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="nested demo1" />
 

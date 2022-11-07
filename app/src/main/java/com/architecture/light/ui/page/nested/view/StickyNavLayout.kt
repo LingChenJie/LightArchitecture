@@ -26,7 +26,10 @@ class StickyNavLayout(context: Context, attrs: AttributeSet) : LinearLayout(cont
     private lateinit var mNavView: View
     private lateinit var mViewPager: ViewPager
 
-    private var mCanScrollDistance = 0
+    // 父控件可以滚动的距离
+    private var mCanScrollDistance = 0F
+    // 滚动监听
+    private var mScrollChangeListener: ((moveRatio: Float) -> Unit)? = null
 
 
     override fun onStartNestedScroll(child: View, target: View, axes: Int, type: Int): Boolean {
@@ -89,8 +92,8 @@ class StickyNavLayout(context: Context, attrs: AttributeSet) : LinearLayout(cont
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        mCanScrollDistance =
-            (mTopView.measuredHeight - resources.getDimension(com.android.architecture.R.dimen.dp_48)).toInt()
+        val titleHeight = resources.getDimension(com.android.architecture.R.dimen.dp_48)
+        mCanScrollDistance = mTopView.measuredHeight - titleHeight
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -102,16 +105,21 @@ class StickyNavLayout(context: Context, attrs: AttributeSet) : LinearLayout(cont
     }
 
     override fun scrollTo(x: Int, y: Int) {
-        var tempY = 0
+        var tempY = y
         if (y < 0) {
             tempY = 0
         }
         if (y > mCanScrollDistance) {
-            tempY = mCanScrollDistance
+            tempY = mCanScrollDistance.toInt()
         }
+        mScrollChangeListener?.invoke(tempY / mCanScrollDistance)
         if (scrollY != tempY) {
             super.scrollTo(x, tempY)
         }
+    }
+
+    fun setScrollChangeListener(listener: (moveRatio: Float) -> Unit) {
+        mScrollChangeListener = listener
     }
 
 }

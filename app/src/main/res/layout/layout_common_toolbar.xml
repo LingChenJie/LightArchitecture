@@ -18,9 +18,11 @@
 
     <ImageView
         android:id="@+id/iv_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dp_26"
+        android:layout_height="@dimen/dp_26"
         android:layout_alignParentStart="true"
-        android:src="@drawable/icon_back_white" />
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/dp_6"
+        android:src="@drawable/icon_back_black" />
 
 </RelativeLayout>

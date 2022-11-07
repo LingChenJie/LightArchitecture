@@ -44,7 +44,7 @@ class MainActivity : AppActivity() {
         binding.layoutPaging.click {
             openActivity<RepoActivity>()
         }
-        binding.layoutTest.click {
+        binding.layoutNested.click {
             openActivity<NestedActivity>()
         }
     }
