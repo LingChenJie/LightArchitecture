@@ -18,9 +18,7 @@ import com.architecture.light.ui.page.common.CommonActivity
 class MessageFragment : AppFragment<CommonActivity>() {
 
     companion object {
-        fun newInstance(): MessageFragment {
-            return MessageFragment()
-        }
+        fun newInstance() = MessageFragment()
     }
 
     private val binding: FragmentMessageBinding by binding()

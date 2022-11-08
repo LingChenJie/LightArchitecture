@@ -15,9 +15,7 @@ import com.architecture.light.ui.page.common.CommonActivity
 class BrowserFragment : AppFragment<CommonActivity>() {
 
     companion object {
-        fun newInstance(): BrowserFragment {
-            return BrowserFragment()
-        }
+        fun newInstance() = BrowserFragment()
     }
 
     private val binding: FragmentBrowserBinding by binding()

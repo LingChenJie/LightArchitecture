@@ -19,10 +19,10 @@ import com.architecture.light.databinding.AdapterNoteListBinding
  */
 class NoteAdapter : BaseAdapter<Note, AdapterNoteListBinding>() {
 
-    override fun getViewBinding(viewGroup: ViewGroup): AdapterNoteListBinding {
+    override fun getViewBinding(parent: ViewGroup): AdapterNoteListBinding {
         return AdapterNoteListBinding.inflate(
-            LayoutInflater.from(viewGroup.context),
-            viewGroup,
+            LayoutInflater.from(parent.context),
+            parent,
             false
         )
     }

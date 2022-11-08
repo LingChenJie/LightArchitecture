@@ -18,9 +18,7 @@ import com.architecture.light.ui.page.common.CommonActivity
 class MeFragment : AppFragment<CommonActivity>() {
 
     companion object {
-        fun newInstance(): MeFragment {
-            return MeFragment()
-        }
+        fun newInstance() = MeFragment()
     }
 
     private val binding: FragmentMeBinding by binding()

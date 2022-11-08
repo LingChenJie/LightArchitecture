@@ -23,10 +23,10 @@ class NavigationAdapter :
     private var mSelectPosition = 0
     private var mNavigationListener: ((position: Int) -> Unit)? = null
 
-    override fun getViewBinding(viewGroup: ViewGroup): ItemCommonNavigationBinding {
+    override fun getViewBinding(parent: ViewGroup): ItemCommonNavigationBinding {
         return ItemCommonNavigationBinding.inflate(
-            LayoutInflater.from(viewGroup.context),
-            viewGroup,
+            LayoutInflater.from(parent.context),
+            parent,
             false
         )
     }

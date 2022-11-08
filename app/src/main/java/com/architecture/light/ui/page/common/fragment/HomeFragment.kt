@@ -24,9 +24,7 @@ class HomeFragment : AppFragment<CommonActivity>(), HomeTabAdapter.OnTabListener
     ViewPager.OnPageChangeListener {
 
     companion object {
-        fun newInstance(): HomeFragment {
-            return HomeFragment()
-        }
+        fun newInstance() = HomeFragment()
     }
 
     private val binding: FragmentHomeBinding by binding()

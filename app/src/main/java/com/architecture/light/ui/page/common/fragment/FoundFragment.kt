@@ -18,9 +18,7 @@ import com.architecture.light.ui.page.common.CommonActivity
 class FoundFragment : AppFragment<CommonActivity>() {
 
     companion object {
-        fun newInstance(): FoundFragment {
-            return FoundFragment()
-        }
+        fun newInstance() = FoundFragment()
     }
 
     private val binding: FragmentFoundBinding by binding()

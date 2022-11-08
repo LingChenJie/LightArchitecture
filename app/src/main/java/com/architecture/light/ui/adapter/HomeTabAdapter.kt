@@ -40,9 +40,8 @@ class HomeTabAdapter(private val fixedWidth: Boolean = true) :
         })
     }
 
-    override fun getViewBinding(viewGroup: ViewGroup): ItemHomeTabBinding {
-        val binding =
-            ItemHomeTabBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
+    override fun getViewBinding(parent: ViewGroup): ItemHomeTabBinding {
+        val binding = ItemHomeTabBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         binding.root.layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
         return binding
     }

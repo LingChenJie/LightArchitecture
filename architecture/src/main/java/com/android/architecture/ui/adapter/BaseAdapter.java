@@ -54,8 +54,8 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
 
     @NonNull
     @Override
-    public ViewHolder<V> onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ViewHolder<>(getViewBinding(viewGroup));
+    public ViewHolder<V> onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        return new ViewHolder<>(getViewBinding(parent));
     }
 
     @Override
@@ -86,7 +86,7 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
         this.recyclerView = null;
     }
 
-    protected abstract V getViewBinding(ViewGroup viewGroup);
+    protected abstract V getViewBinding(ViewGroup parent);
 
     protected abstract void bindViewHolder(ViewHolder<V> holder, T item, int position);
 
