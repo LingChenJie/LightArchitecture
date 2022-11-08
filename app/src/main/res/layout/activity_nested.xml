@@ -30,6 +30,18 @@
         android:text="Behavior的嵌套滑动" />
 
     <Button
+        android:id="@+id/btn_nested_appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Coordinator中使用AppBarLayout" />
+
+    <Button
+        android:id="@+id/btn_nested_collapsing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Coordinator中使用CollapsingToolbarLayout" />
+
+    <Button
         android:id="@+id/bt_nested_demo1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

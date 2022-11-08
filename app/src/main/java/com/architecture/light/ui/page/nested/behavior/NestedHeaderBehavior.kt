@@ -55,7 +55,7 @@ class NestedHeaderBehavior(context: Context, attrs: AttributeSet?) :
         type: Int
     ) {
         val scrollingChild = mNestedScrollingChildRef.get()
-        if (target !== scrollingChild) {
+        if (target != scrollingChild) {
             return
         }
         val currentTop = child.top

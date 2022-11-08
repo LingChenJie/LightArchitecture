@@ -132,14 +132,10 @@ open class HeaderScrollingViewBehavior(context: Context, attrs: AttributeSet?) :
                 TAG,
                 "offsetChildAsNeeded: " + dependency.bottom + "--->" + child.top + "---->" + behavior.getOffset()
             )
-            if (dependency.bottom == 0 && child.top == 0 && behavior.getOffset() == 0) {
-
-            } else {
-                ViewCompat.offsetTopAndBottom(
-                    child,
-                    dependency.bottom - child.top + behavior.getOffset()
-                )
-            }
+            ViewCompat.offsetTopAndBottom(
+                child,
+                dependency.bottom - child.top// + behavior.getOffset()
+            )
         }
     }
 

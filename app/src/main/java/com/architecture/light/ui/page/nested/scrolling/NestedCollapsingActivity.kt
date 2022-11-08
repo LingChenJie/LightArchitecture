@@ -3,19 +3,19 @@ package com.architecture.light.ui.page.nested.scrolling
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.android.architecture.extension.binding
 import com.architecture.light.app.AppActivity
-import com.architecture.light.databinding.ActivityNestedCoordinatorDemoBinding
+import com.architecture.light.databinding.ActivityNestedCollapsingBinding
 import com.architecture.light.ui.page.nested.adapter.SimpleStringAdapter
 
 /**
  * File describe:
  * Author: SuQi
- * Create date: 2022/11/7
- * Modify date: 2022/11/7
+ * Create date: 2022/11/8
+ * Modify date: 2022/11/8
  * Version: 1
  */
-class NestedCoordinatorDemoActivity : AppActivity() {
+class NestedCollapsingActivity : AppActivity() {
 
-    private val binding: ActivityNestedCoordinatorDemoBinding by binding()
+    private val binding: ActivityNestedCollapsingBinding by binding()
 
     override fun isStatusBarEnabled(): Boolean {
         return false
@@ -34,7 +34,7 @@ class NestedCoordinatorDemoActivity : AppActivity() {
     private fun initStrings(): List<String> {
         val list: MutableList<String> = ArrayList()
         for (i in 0..99) {
-            list.add("Behavior的嵌套滑动")
+            list.add("简单文本$i")
         }
         return list
     }

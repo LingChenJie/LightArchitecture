@@ -114,7 +114,7 @@ class NestedContentBehavior(context: Context, attrs: AttributeSet?) :
         // 此时 RV 已经完成了滑动，dyUnconsumed 表示剩余未消耗的滑动距离
         // 只处理手指向下滑动的情况
         if (dyUnconsumed < 0 && type == ViewCompat.TYPE_NON_TOUCH) {
-            val newTranslationY = child.translationY - dyUnconsumed * 100000
+            val newTranslationY = child.translationY - dyUnconsumed * 10
             if (newTranslationY <= 0) {
                 child.translationY = newTranslationY
             } else {

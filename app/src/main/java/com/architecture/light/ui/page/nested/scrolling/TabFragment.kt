@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.android.architecture.extension.argument
 import com.android.architecture.extension.binding
-import com.android.architecture.ui.adapter.BaseAdapter
 import com.architecture.light.app.AppActivity
 import com.architecture.light.app.AppFragment
 import com.architecture.light.databinding.FragmentTabBinding
-import com.architecture.light.databinding.ItemSingleTextBinding
+import com.architecture.light.ui.page.nested.adapter.SimpleStringAdapter
 
 /**
  * Created by SuQi on 2022/11/2.
@@ -55,22 +54,4 @@ class TabFragment : AppFragment<AppActivity>() {
         return list
     }
 
-    class SimpleStringAdapter : BaseAdapter<String, ItemSingleTextBinding>() {
-        override fun getViewBinding(viewGroup: ViewGroup): ItemSingleTextBinding {
-            return ItemSingleTextBinding.inflate(
-                LayoutInflater.from(viewGroup.context),
-                viewGroup,
-                false
-            )
-        }
-
-        override fun bindViewHolder(
-            holder: ViewHolder<ItemSingleTextBinding>,
-            item: String,
-            position: Int
-        ) {
-            holder.binding.tvText.text = item
-        }
-
-    }
 }

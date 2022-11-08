@@ -34,6 +34,8 @@
         <activity android:name=".ui.page.nested.scrolling.NestedTraditionActivity" />
         <activity android:name=".ui.page.nested.scrolling.NestedScrolling2DemoActivity" />
         <activity android:name=".ui.page.nested.scrolling.NestedCoordinatorDemoActivity" />
+        <activity android:name=".ui.page.nested.scrolling.NestedAppBarActivity" />
+        <activity android:name=".ui.page.nested.scrolling.NestedCollapsingActivity" />
         <activity android:name=".ui.page.test.TestActivity" />
         <activity android:name=".domain.navigation.activity.NavigationActivity" />
         <activity
