@@ -101,7 +101,7 @@ public final class InputDialog {
          */
         @Override
         public void onShow(BaseDialog dialog) {
-            postDelayed(() -> ViewKt.showKeyboard(mInputView), 500);
+            postDelayed(500, () -> ViewKt.showKeyboard(mInputView));
         }
 
         /**

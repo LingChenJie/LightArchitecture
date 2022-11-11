@@ -29,6 +29,11 @@ public abstract class BaseAdapter<T, V extends ViewBinding> extends RecyclerView
         data = new ArrayList<>();
     }
 
+    public void clearData() {
+        this.data.clear();
+        notifyDataSetChanged();
+    }
+
     public void setData(List<T> data) {
         this.data.clear();
         this.data.addAll(data);

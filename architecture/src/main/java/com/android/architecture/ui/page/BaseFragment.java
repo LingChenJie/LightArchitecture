@@ -30,6 +30,7 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
     protected final String TAG = this.getClass().getSimpleName();
     protected A mActivity;
     private View mRootView;
+    private boolean mLoading;
     private final ViewModelScope mViewModelScope = new ViewModelScope();
 
     public String getTagName() {
@@ -71,6 +72,9 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
 
     protected abstract void initView();
 
+    protected void initData() {
+    }
+
     protected void input() {
     }
 
@@ -88,6 +92,10 @@ public abstract class BaseFragment<A extends BaseActivity> extends Fragment {
         super.onResume();
         Logger.i(TAG, "----onResume");
         addOnBackPressed();
+        if (!mLoading) {
+            mLoading = true;
+            initData();
+        }
     }
 
     @Override

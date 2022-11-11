@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.android.architecture.extension.click
 import com.architecture.light.R
 import com.architecture.light.data.remote.bean.Repo
 
@@ -28,6 +29,8 @@ class RepoAdapter : PagingDataAdapter<Repo, RepoAdapter.ViewHolder>(COMPARATOR) 
         }
     }
 
+    private var mListener: ((item: Repo) -> Unit)? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_repo, parent, false)
         return ViewHolder(view)
@@ -40,12 +43,19 @@ class RepoAdapter : PagingDataAdapter<Repo, RepoAdapter.ViewHolder>(COMPARATOR) 
             holder.description.text = repo.description
             holder.starCount.text = repo.starCount.toString()
         }
+        holder.itemView.click {
+            mListener?.invoke(repo!!)
+        }
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.name_text)
         val description: TextView = itemView.findViewById(R.id.description_text)
         val starCount: TextView = itemView.findViewById(R.id.star_count_text)
+    }
+
+    fun setItemListener(listener: (item: Repo) -> Unit) {
+        mListener = listener
     }
 
 }

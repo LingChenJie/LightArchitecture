@@ -61,7 +61,7 @@ abstract class AppFragment<A : AppActivity> : BaseFragment<A>() {
     /**
      * 获取状态栏沉浸的配置对象
      */
-    private fun getStatusBarConfig(): ImmersionBar {
+    fun getStatusBarConfig(): ImmersionBar {
         return ImmersionBar.with(this)
             .statusBarDarkFont(isStatusBarDarkFont())
             .autoDarkModeEnable(true, 0.2f);

@@ -1,12 +1,18 @@
 package com.architecture.light.ui.page.common.fragment
 
+import android.annotation.SuppressLint
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.android.architecture.extension.binding
+import com.android.architecture.extension.getColor
 import com.android.architecture.ui.adapter.FragmentPagerAdapter
+import com.android.architecture.ui.widget.layout.XCollapsingToolbarLayout
+import com.architecture.light.R
 import com.architecture.light.app.AppFragment
 import com.architecture.light.databinding.FragmentHomeBinding
 import com.architecture.light.ui.adapter.HomeTabAdapter
@@ -21,7 +27,7 @@ import com.gyf.immersionbar.ImmersionBar
  * Version: 1
  */
 class HomeFragment : AppFragment<CommonActivity>(), HomeTabAdapter.OnTabListener,
-    ViewPager.OnPageChangeListener {
+    ViewPager.OnPageChangeListener, XCollapsingToolbarLayout.OnScrimsListener {
 
     companion object {
         fun newInstance() = HomeFragment()
@@ -43,8 +49,12 @@ class HomeFragment : AppFragment<CommonActivity>(), HomeTabAdapter.OnTabListener
     }
 
     override fun initView() {
+        binding.collapsingToolbarLayout.setOnScrimsListener(this)
         pagerAdapter.addFragment(StatusFragment.newInstance(), "列表演示")
-        pagerAdapter.addFragment(BrowserFragment.newInstance(), "网页演示")
+        pagerAdapter.addFragment(
+            BrowserFragment.newInstance("https://github.com/LingChenJie"),
+            "网页演示"
+        )
         tabAdapter.addData(listOf("列表演示", "网页演示"))
         tabAdapter.setOnTabListener(this)
         binding.viewPager.adapter = pagerAdapter
@@ -64,6 +74,21 @@ class HomeFragment : AppFragment<CommonActivity>(), HomeTabAdapter.OnTabListener
     }
 
     override fun onPageScrollStateChanged(state: Int) {
+    }
+
+    @SuppressLint("RestrictedApi")
+    override fun onScrimsStateChange(layout: XCollapsingToolbarLayout, shown: Boolean) {
+        getStatusBarConfig().statusBarDarkFont(shown).init()
+        binding.tvAddress.setTextColor(
+            ContextCompat.getColor(
+                mActivity,
+                if (shown) com.android.architecture.R.color.black else com.android.architecture.R.color.white
+            )
+        )
+        binding.tvHint.setBackgroundResource(if (shown) R.drawable.home_search_bar_gray_bg else R.drawable.home_search_bar_transparent_bg)
+        binding.tvHint.setTextColor(getColor(if (shown) com.android.architecture.R.color.black60 else com.android.architecture.R.color.white60))
+        binding.ivHomeSearch.supportImageTintList =
+            ColorStateList.valueOf(getColor(if (shown) R.color.common_icon_color else com.android.architecture.R.color.white))
     }
 
 }

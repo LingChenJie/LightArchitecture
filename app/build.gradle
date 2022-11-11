@@ -85,6 +85,9 @@ dependencies {
     implementation 'com.scwang.smart:refresh-layout-kernel:2.0.3'
     implementation 'com.scwang.smart:refresh-header-material:2.0.3'
 
+    // 标题栏
+    implementation 'com.github.getActivity:TitleBar:9.2'
+
     debugImplementation 'com.guolindev.glance:glance:1.1.0'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
 

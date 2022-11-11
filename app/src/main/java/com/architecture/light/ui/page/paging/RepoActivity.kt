@@ -15,6 +15,7 @@ import com.architecture.light.app.AppActivity
 import com.architecture.light.data.remote.bean.Repo
 import com.architecture.light.data.repository.RepoRepository
 import com.architecture.light.databinding.ActivityRepoBinding
+import com.architecture.light.ui.page.common.BrowserActivity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
@@ -37,6 +38,9 @@ class RepoActivity : AppActivity() {
             }
         }
         binding.recyclerView.adapter = repoAdapter
+        repoAdapter.setItemListener {
+            BrowserActivity.start(this, it.url)
+        }
         repoAdapter.addLoadStateListener {
             when (it.refresh) {
                 is LoadState.NotLoading -> {

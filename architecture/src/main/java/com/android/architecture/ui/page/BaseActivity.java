@@ -45,11 +45,15 @@ public abstract class BaseActivity extends AppCompatActivity implements BundleAc
         getLifecycle().addObserver(NetworkStateManager.getInstance());
 
         initView();
+        initData();
         output();
         input();
     }
 
     protected abstract void initView();
+
+    protected void initData() {
+    }
 
     protected void input() {
     }

@@ -13,10 +13,10 @@ import com.architecture.light.R;
 
 
 /**
- *    author : Android 轮子哥
- *    github : https://github.com/getActivity/AndroidProject
- *    time   : 2018/12/2
- *    desc   : 提示对话框
+ * author : Android 轮子哥
+ * github : https://github.com/getActivity/AndroidProject
+ * time   : 2018/12/2
+ * desc   : 提示对话框
  */
 public final class TipsDialog {
 
@@ -59,6 +59,7 @@ public final class TipsDialog {
         public Builder setMessage(@StringRes int id) {
             return setMessage(getString(id));
         }
+
         public Builder setMessage(CharSequence text) {
             mMessageView.setText(text);
             return this;
@@ -81,7 +82,7 @@ public final class TipsDialog {
         @Override
         public void onShow(BaseDialog dialog) {
             // 延迟自动关闭
-            postDelayed(this, mDuration);
+            postDelayed(mDuration, this);
         }
 
         @Override

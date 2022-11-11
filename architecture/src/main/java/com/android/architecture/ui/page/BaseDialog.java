@@ -1050,7 +1050,7 @@ public class BaseDialog extends AppCompatDialog implements LifecycleOwner,
         /**
          * 延迟一段时间执行
          */
-        public final void postDelayed(Runnable runnable, long delayMillis) {
+        public final void postDelayed(long delayMillis, Runnable runnable) {
             if (isShowing()) {
                 mDialog.postDelayed(runnable, delayMillis);
             } else {
