@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.android.architecture.extension.binding
+import com.android.architecture.extension.click
 import com.architecture.light.app.AppFragment
 import com.architecture.light.databinding.FragmentMeBinding
 import com.architecture.light.ui.page.common.CommonActivity
@@ -23,11 +24,24 @@ class MeFragment : AppFragment<CommonActivity>() {
 
     private val binding: FragmentMeBinding by binding()
 
+    override fun isStatusBarEnabled(): Boolean {
+        return true
+    }
+
     override fun getRootView(inflater: LayoutInflater, container: ViewGroup?): View {
         return binding.root
     }
 
     override fun initView() {
+        binding.titleView.apply {
+            backView.visibility = View.GONE
+        }
+        binding.btnMineDialog.click {
+
+        }
+        binding.btnMineHint.click {
+
+        }
     }
 
 }

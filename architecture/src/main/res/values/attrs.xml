@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- 自定义ItemView -->
     <declare-styleable name="CustomItemView">
         <attr name="back_icon" format="reference" />
         <attr name="arrow_icon" format="reference" />
@@ -99,6 +100,12 @@
         <attr name="drawableWidth" format="dimension" />
         <!-- Drawable 高度 -->
         <attr name="drawableHeight" format="dimension" />
+    </declare-styleable>
+
+    <!-- 按照比例显示的 FrameLayout -->
+    <declare-styleable name="RatioFrameLayout">
+        <!-- 宽高比例 -->
+        <attr name="sizeRatio" format="string" />
     </declare-styleable>
 
 </resources>

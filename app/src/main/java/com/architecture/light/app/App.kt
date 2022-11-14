@@ -5,8 +5,11 @@ import androidx.core.content.ContextCompat
 import com.android.architecture.app.BaseApplication
 import com.android.architecture.constant.ErrorCode
 import com.architecture.light.R
+import com.architecture.light.config.ToastStyle
+import com.architecture.light.config.glide.GlideApp
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.ui.view.SmartBallPulseFooter
+import com.hjq.toast.ToastUtils
 import com.scwang.smart.refresh.header.MaterialHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.scwang.smart.refresh.layout.api.RefreshLayout
@@ -50,6 +53,19 @@ class App : BaseApplication() {
                 // 仿苹果越界效果开关
                 .setEnableOverScrollDrag(false)
         }
+
+        // 初始化吐司
+        ToastUtils.init(this, ToastStyle())
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        GlideApp.get(this).onLowMemory()
+    }
+
+    override fun onTrimMemory(level: Int) {
+        super.onTrimMemory(level)
+        GlideApp.get(this).onTrimMemory(level)
     }
 
 }
