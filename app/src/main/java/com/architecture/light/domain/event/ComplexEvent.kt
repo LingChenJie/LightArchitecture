@@ -13,4 +13,3 @@ sealed class ComplexEvent {
     data class ResultTest3(val count: Int = 0) : ComplexEvent()
     data class ResultTest4(val count: Int = 0) : ComplexEvent()
 }
-git
