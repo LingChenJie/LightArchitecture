@@ -288,6 +288,17 @@
         android:layout_weight="1" />
 
     <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:gravity="center"
+        android:textColor="@color/panda"
+        android:textSize="@dimen/sp_10"
+        android:visibility="visible"
+        tools:text="Version:1.0.1" />
+
+    <TextView
         android:id="@+id/bt_exit_account"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"

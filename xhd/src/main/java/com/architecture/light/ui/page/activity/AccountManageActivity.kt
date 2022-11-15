@@ -3,7 +3,10 @@ package com.architecture.light.ui.page.activity
 import android.view.View
 import androidx.core.view.isVisible
 import com.android.architecture.data.manage.InputTextManager
-import com.android.architecture.extension.*
+import com.android.architecture.extension.click
+import com.android.architecture.extension.hideSoftInput
+import com.android.architecture.extension.openActivity
+import com.android.architecture.extension.valid
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityAccountManageBinding
 import com.architecture.light.ext.toastSucc
@@ -40,6 +43,8 @@ class AccountManageActivity : AppActivity() {
         binding.tvUsername.text = AccountCache.getUsername()
         binding.tvUserguid.text = AccountCache.getUserGUID()
         binding.tvBillRecipient.text = AccountCache.getBillRecipient()
+        val version = "Version:" + getVersionName()
+        binding.tvVersion.text = version
         binding.layoutProject.click {
             openActivity<ChooseProjectActivity>()
         }
@@ -75,6 +80,11 @@ class AccountManageActivity : AppActivity() {
                 }
                 .show()
         }
+    }
+
+    private fun getVersionName(): String {
+        val packInfo = packageManager.getPackageInfo(packageName, 0)
+        return packInfo.versionName
     }
 
 }
