@@ -55,11 +55,14 @@ class HomeFragment : AppFragment<CommonActivity>(), HomeTabAdapter.OnTabListener
             BrowserFragment.newInstance("https://github.com/LingChenJie"),
             "网页演示"
         )
-        tabAdapter.addData(listOf("列表演示", "网页演示"))
-        tabAdapter.setOnTabListener(this)
         binding.viewPager.adapter = pagerAdapter
         binding.viewPager.addOnPageChangeListener(this)
         binding.rvTab.adapter = tabAdapter
+    }
+
+    override fun initData() {
+        tabAdapter.addData(listOf("列表演示", "网页演示"))
+        tabAdapter.setOnTabListener(this)
     }
 
     override fun onTabSelected(recyclerView: RecyclerView, position: Int) {

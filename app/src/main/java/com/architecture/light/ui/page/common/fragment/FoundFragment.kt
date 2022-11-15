@@ -42,6 +42,12 @@ class FoundFragment : AppFragment<CommonActivity>() {
         binding.titleView.apply {
             backView.visibility = View.GONE
         }
+        binding.sbFindSwitch.setOnCheckedChangeListener { _, checked ->
+            toast(checked.toString())
+        }
+    }
+
+    override fun initData() {
         GlideApp.with(this)
             .load(R.drawable.example_bg)
             .transform(MultiTransformation(CenterCrop(), CircleCrop()))
@@ -58,9 +64,6 @@ class FoundFragment : AppFragment<CommonActivity>() {
                 )
             )
             .into(binding.ivFindCorner)
-        binding.sbFindSwitch.setOnCheckedChangeListener { _, checked ->
-            toast(checked.toString())
-        }
     }
 
 }

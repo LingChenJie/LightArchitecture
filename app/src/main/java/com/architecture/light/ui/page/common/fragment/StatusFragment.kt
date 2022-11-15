@@ -47,10 +47,13 @@ class StatusFragment : AppFragment<AppActivity>(), OnRefreshListener, OnRefreshL
         footerView.text = "我是尾部"
         footerView.click { toast("点击了尾部") }
 
-        adapter.data = analogData()
         adapter.setItemClickListener { _, _, item ->
             toast(item)
         }
+    }
+
+    override fun initData() {
+        adapter.data = analogData()
     }
 
     override fun onRefresh(refreshLayout: RefreshLayout) {
