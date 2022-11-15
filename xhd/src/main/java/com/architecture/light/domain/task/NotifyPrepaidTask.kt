@@ -28,7 +28,7 @@ class NotifyPrepaidTask : HttpTask() {
         request.bookingGUID = param.bookingGUID
         request.lyrCode = AccountCache.getBillRecipient()
         request.skDate = DateHelper.getDateFormatString(millis = param.transactionTimeMillis)
-        request.kpr = AccountCache.getAccount()
+        request.kpr = AccountCache.getUsername()
         request.jkr = param.cstName
         if (param.transactionPlatform == TransactionPlatform.Bank) {
             var cardType = ""
