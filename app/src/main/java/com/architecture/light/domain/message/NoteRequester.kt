@@ -1,4 +1,4 @@
-package com.architecture.light.domain.request
+package com.architecture.light.domain.message
 
 import com.android.architecture.domain.dispatcher.MviDispatcher
 import com.android.architecture.helper.Logger

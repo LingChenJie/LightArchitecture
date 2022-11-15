@@ -3,12 +3,15 @@ package com.architecture.light.ui.page.common.fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.android.architecture.extension.binding
 import com.android.architecture.extension.click
 import com.android.architecture.extension.toast
 import com.architecture.light.app.AppFragment
 import com.architecture.light.config.glide.GlideApp
 import com.architecture.light.databinding.FragmentMessageBinding
+import com.architecture.light.domain.event.CommonMessages
+import com.architecture.light.domain.message.CommonMessenger
 import com.architecture.light.helper.PermissionsHelper
 import com.architecture.light.ui.page.common.CommonActivity
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -29,6 +32,7 @@ class MessageFragment : AppFragment<CommonActivity>() {
     }
 
     private val binding: FragmentMessageBinding by binding()
+    private val messenger by activityViewModels<CommonMessenger>()
 
     override fun isStatusBarEnabled(): Boolean {
         return true
@@ -88,7 +92,7 @@ class MessageFragment : AppFragment<CommonActivity>() {
                 .init()
         }
         binding.btnMessageTab.click {
-
+            messenger.input(CommonMessages.ToHomeTab)
         }
     }
 

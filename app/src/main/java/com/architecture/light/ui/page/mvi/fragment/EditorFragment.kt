@@ -15,10 +15,10 @@ import com.architecture.light.R
 import com.architecture.light.app.AppFragment
 import com.architecture.light.data.local.db.entity.Note
 import com.architecture.light.databinding.FragmentEditorBinding
-import com.architecture.light.domain.event.Messages
+import com.architecture.light.domain.event.MviMessages
 import com.architecture.light.domain.event.NoteEvent
+import com.architecture.light.domain.message.NoteRequester
 import com.architecture.light.domain.message.PageMessenger
-import com.architecture.light.domain.request.NoteRequester
 import com.architecture.light.ui.page.mvi.MviActivity
 import com.gyf.immersionbar.ImmersionBar
 
@@ -82,7 +82,7 @@ class EditorFragment : AppFragment<MviActivity>() {
         super.output()
         noteRequester.output(this) { noteEvent ->
             if (noteEvent is NoteEvent.AddItem) {
-                messenger.input(Messages.RefreshNoteList)
+                messenger.input(MviMessages.RefreshNoteList)
                 toast(getString(R.string.saved))
                 navController.navigateUp()
             }

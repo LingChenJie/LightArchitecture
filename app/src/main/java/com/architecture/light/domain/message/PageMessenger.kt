@@ -1,7 +1,7 @@
 package com.architecture.light.domain.message
 
 import com.android.architecture.domain.dispatcher.MviDispatcher
-import com.architecture.light.domain.event.Messages
+import com.architecture.light.domain.event.MviMessages
 
 /**
  * File describe:
@@ -10,9 +10,9 @@ import com.architecture.light.domain.event.Messages
  * Modify date: 2022/7/31
  * Version: 1
  */
-class PageMessenger : MviDispatcher<Messages>() {
+class PageMessenger : MviDispatcher<MviMessages>() {
 
-    override suspend fun onHandle(event: Messages) {
+    override suspend fun onHandle(event: MviMessages) {
         sendResult(event)
     }
 

@@ -6,9 +6,9 @@ import com.android.architecture.helper.Logger
 import com.architecture.light.app.AppActivity
 import com.architecture.light.databinding.ActivityMviBinding
 import com.architecture.light.domain.event.ComplexEvent
-import com.architecture.light.domain.event.Messages
+import com.architecture.light.domain.event.MviMessages
+import com.architecture.light.domain.message.ComplexRequester
 import com.architecture.light.domain.message.PageMessenger
-import com.architecture.light.domain.request.ComplexRequester
 
 /**
  * File describe:
@@ -61,7 +61,7 @@ class MviActivity : AppActivity() {
             }
         }
         messenger.output(this) {
-            if (it is Messages.FinishActivity) {
+            if (it is MviMessages.FinishActivity) {
                 finish()
             }
         }

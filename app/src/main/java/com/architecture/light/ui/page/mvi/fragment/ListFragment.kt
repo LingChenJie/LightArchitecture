@@ -14,11 +14,11 @@ import com.architecture.light.app.AppFragment
 import com.architecture.light.data.local.db.entity.Note
 import com.architecture.light.databinding.FragmentListBinding
 import com.architecture.light.domain.event.ComplexEvent
-import com.architecture.light.domain.event.Messages
+import com.architecture.light.domain.event.MviMessages
 import com.architecture.light.domain.event.NoteEvent
+import com.architecture.light.domain.message.ComplexRequester
+import com.architecture.light.domain.message.NoteRequester
 import com.architecture.light.domain.message.PageMessenger
-import com.architecture.light.domain.request.ComplexRequester
-import com.architecture.light.domain.request.NoteRequester
 import com.architecture.light.ui.adapter.NoteAdapter
 import com.architecture.light.ui.page.mvi.MviActivity
 import com.gyf.immersionbar.ImmersionBar
@@ -78,7 +78,7 @@ class ListFragment : AppFragment<MviActivity>() {
     override fun output() {
         messenger.output(this) {
             Logger.e(TAG, "it:$it")
-            if (it is Messages.RefreshNoteList) {
+            if (it is MviMessages.RefreshNoteList) {
                 noteRequester.input(NoteEvent.GetNoteList())
             }
         }
@@ -118,7 +118,7 @@ class ListFragment : AppFragment<MviActivity>() {
     }
 
     override fun onBackPressed(): Boolean {
-        messenger.input(Messages.FinishActivity)
+        messenger.input(MviMessages.FinishActivity)
         return true
     }
 

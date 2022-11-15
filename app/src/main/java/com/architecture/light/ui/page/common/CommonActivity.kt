@@ -1,5 +1,6 @@
 package com.architecture.light.ui.page.common
 
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.architecture.extension.binding
 import com.android.architecture.ui.adapter.FragmentPagerAdapter
@@ -7,6 +8,8 @@ import com.architecture.light.R
 import com.architecture.light.app.AppActivity
 import com.architecture.light.app.AppFragment
 import com.architecture.light.databinding.ActivityCommonBinding
+import com.architecture.light.domain.event.CommonMessages
+import com.architecture.light.domain.message.CommonMessenger
 import com.architecture.light.ui.adapter.NavigationAdapter
 import com.architecture.light.ui.page.common.fragment.FoundFragment
 import com.architecture.light.ui.page.common.fragment.HomeFragment
@@ -23,6 +26,7 @@ import com.architecture.light.ui.page.common.fragment.MessageFragment
 class CommonActivity : AppActivity() {
 
     private val binding: ActivityCommonBinding by binding()
+    private val messenger by viewModels<CommonMessenger>()
 
     private val pagerAdapter: FragmentPagerAdapter<AppFragment<CommonActivity>> =
         FragmentPagerAdapter(this)
@@ -63,6 +67,18 @@ class CommonActivity : AppActivity() {
         }
         binding.rvNavigation.layoutManager = GridLayoutManager(this, 4)
         binding.rvNavigation.adapter = navigationAdapter
+    }
+
+    override fun output() {
+        messenger.output(this) {
+            when (it) {
+                CommonMessages.ToHomeTab -> {
+                    val position = 0
+                    binding.viewPager.currentItem = position
+                    navigationAdapter.setSelectedPosition(position)
+                }
+            }
+        }
     }
 
 }

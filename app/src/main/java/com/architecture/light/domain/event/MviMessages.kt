@@ -7,7 +7,7 @@ package com.architecture.light.domain.event
  * Modify date: 2022/7/31
  * Version: 1
  */
-sealed class Messages {
-    object RefreshNoteList : Messages()
-    object FinishActivity : Messages()
+sealed class MviMessages {
+    object RefreshNoteList : MviMessages()
+    object FinishActivity : MviMessages()
 }
