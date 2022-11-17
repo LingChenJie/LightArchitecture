@@ -18,8 +18,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * <pre>
@@ -106,6 +108,18 @@ public final class AppUtils {
         return app;
     }
 
+    public static Activity getTopActivity() {
+        return ACTIVITY_LIFECYCLE.getTopActivity();
+    }
+
+    public static void addOnAppStatusChangedListener(final OnAppStatusChangedListener listener) {
+        ACTIVITY_LIFECYCLE.addOnAppStatusChangedListener(listener);
+    }
+
+    public static void removeOnAppStatusChangedListener(final OnAppStatusChangedListener listener) {
+        ACTIVITY_LIFECYCLE.removeOnAppStatusChangedListener(listener);
+    }
+
     private static Application getApplicationByReflect() {
         try {
             @SuppressLint("PrivateApi")
@@ -139,7 +153,7 @@ public final class AppUtils {
     static class ActivityLifecycleImpl implements ActivityLifecycleCallbacks {
 
         final LinkedList<Activity> mActivityList = new LinkedList<>();
-        final Map<Object, OnAppStatusChangedListener> mStatusListenerMap = new HashMap<>();
+        final List<OnAppStatusChangedListener> mStatusListeners = new CopyOnWriteArrayList<>();
         final Map<Activity, Set<OnActivityDestroyedListener>> mDestroyedListenerMap = new HashMap<>();
 
         private int mForegroundCount = 0;
@@ -259,13 +273,12 @@ public final class AppUtils {
             }
         }
 
-        void addOnAppStatusChangedListener(final Object object,
-                                           final OnAppStatusChangedListener listener) {
-            mStatusListenerMap.put(object, listener);
+        void addOnAppStatusChangedListener(final OnAppStatusChangedListener listener) {
+            mStatusListeners.add(listener);
         }
 
-        void removeOnAppStatusChangedListener(final Object object) {
-            mStatusListenerMap.remove(object);
+        void removeOnAppStatusChangedListener(final OnAppStatusChangedListener listener) {
+            mStatusListeners.remove(listener);
         }
 
         void removeOnActivityDestroyedListener(final Activity activity) {
@@ -294,17 +307,12 @@ public final class AppUtils {
         }
 
         private void postStatus(final boolean isForeground) {
-            if (mStatusListenerMap.isEmpty()) {
-                return;
-            }
-            for (OnAppStatusChangedListener onAppStatusChangedListener : mStatusListenerMap.values()) {
-                if (onAppStatusChangedListener == null) {
-                    return;
-                }
+            if (mStatusListeners.isEmpty()) return;
+            for (OnAppStatusChangedListener statusListener : mStatusListeners) {
                 if (isForeground) {
-                    onAppStatusChangedListener.onForeground();
+                    statusListener.onForeground();
                 } else {
-                    onAppStatusChangedListener.onBackground();
+                    statusListener.onBackground();
                 }
             }
         }
