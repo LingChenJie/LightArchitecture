@@ -1,7 +1,6 @@
 package com.architecture.light.utils
 
-import com.android.architecture.helper.AmountHelper
-import com.android.architecture.utils.DoubleUtils
+import com.architecture.light.helper.FeeHelper
 
 /**
  * Created by SuQi on 2022/8/3.
@@ -15,6 +14,12 @@ fun main(args: Array<String>) {
 //    println(yuan2Fen12)
 //    val result = DoubleUtils.halfUpTwoDecimalPlaces(10.004555)
 //    println(result)
-    val result = DoubleUtils.multiply(3723.0, 0.0045)
-    println(result)
+//    val result = DoubleUtils.multiply(3723.0, 0.0045)
+//    println(result)
+    var calcFee = FeeHelper.calcFee("支付宝", "0")
+    println(calcFee)
+    calcFee = FeeHelper.calcFee("银行卡贷记卡", "0.000000")
+    println(calcFee)
+    calcFee = FeeHelper.calcFee("银行卡借记卡", "0.220000")
+    println(calcFee)
 }

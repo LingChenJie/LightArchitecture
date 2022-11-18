@@ -10,6 +10,7 @@ import com.architecture.light.data.remote.ResponseCode
 import com.architecture.light.data.remote.bean.NotifyPrepaidRequest
 import com.architecture.light.data.remote.bean.NotifyPrepaidResponse
 import com.architecture.light.data.remote.bean.base.RequestBean
+import com.architecture.light.helper.FeeHelper
 import com.architecture.light.helper.TransHelper
 import com.architecture.light.settings.AccountCache
 import com.architecture.light.utils.DeviceUtils
@@ -40,6 +41,7 @@ class NotifyPrepaidTask : HttpTask() {
         } else {
             request.payMode = TransHelper.getTransactionPlatform(param.transactionPlatform)
         }
+        request.posAmount = FeeHelper.calcFee(request.payMode, param.amount)
         val searchPaymentResponse = param.searchPaymentResponse!!
         val getinList = mutableListOf<NotifyPrepaidRequest.Getin>()
         val getin: NotifyPrepaidRequest.Getin

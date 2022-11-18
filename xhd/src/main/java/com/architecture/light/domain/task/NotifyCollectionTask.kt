@@ -11,6 +11,7 @@ import com.architecture.light.data.remote.bean.NotifyCollectionRequest
 import com.architecture.light.data.remote.bean.NotifyCollectionResponse
 import com.architecture.light.data.remote.bean.SearchRoomResponse
 import com.architecture.light.data.remote.bean.base.RequestBean
+import com.architecture.light.helper.FeeHelper
 import com.architecture.light.helper.TransHelper
 import com.architecture.light.settings.AccountCache
 import com.architecture.light.utils.DeviceUtils
@@ -41,6 +42,7 @@ class NotifyCollectionTask : HttpTask() {
         } else {
             request.payMode = TransHelper.getTransactionPlatform(param.transactionPlatform)
         }
+        request.posAmount = FeeHelper.calcFee(request.payMode, param.amount)
         val roomResponse = param.searchRoomResponse!!
         var selectRoom: SearchRoomResponse.Data? = null
         for (room in roomResponse.data) {

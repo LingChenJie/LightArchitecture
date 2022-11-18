@@ -18,6 +18,7 @@ public class NotifyPrepaidRequest extends RequestBean {
     private String kpr;
     private String Jkr;
     private String PayMode;
+    private double PosAmount;
     private List<Getin> GetinList;
     private String Remark;
 
@@ -162,6 +163,14 @@ public class NotifyPrepaidRequest extends RequestBean {
 
     public void setPayMode(String payMode) {
         PayMode = payMode;
+    }
+
+    public double getPosAmount() {
+        return PosAmount;
+    }
+
+    public void setPosAmount(double posAmount) {
+        PosAmount = posAmount;
     }
 
     public List<Getin> getGetinList() {
