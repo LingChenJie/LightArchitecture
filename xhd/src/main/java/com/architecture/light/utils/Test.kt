@@ -16,10 +16,10 @@ fun main(args: Array<String>) {
 //    println(result)
 //    val result = DoubleUtils.multiply(3723.0, 0.0045)
 //    println(result)
-    var calcFee = FeeHelper.calcFee("支付宝", "0")
+    var calcFee = FeeHelper.calcFee("支付宝", 0.0)
     println(calcFee)
-    calcFee = FeeHelper.calcFee("银行卡贷记卡", "0.000000")
+    calcFee = FeeHelper.calcFee("银行卡贷记卡", 0.000000)
     println(calcFee)
-    calcFee = FeeHelper.calcFee("银行卡借记卡", "0.220000")
+    calcFee = FeeHelper.calcFee("银行卡借记卡", 2290.220000)
     println(calcFee)
 }
