@@ -26,11 +26,12 @@ object FeeHelper {
                 )
             }
             "银行卡借记卡" -> {
-                var result =
+                var result = DoubleUtils.halfUpTwoDecimalPlaces(
                     DoubleUtils.multiply(
                         amount,
                         0.0045
                     )
+                )
                 if (result > 16.75) {
                     result = 16.75
                 }
