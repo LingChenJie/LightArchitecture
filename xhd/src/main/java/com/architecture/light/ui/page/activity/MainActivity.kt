@@ -44,6 +44,7 @@ class MainActivity : AppActivity() {
         binding.ivUserAvatar.click { openActivity<AccountManageActivity>() }
         binding.cvPayment.click { PaymentTrans().execute() }
         binding.cvPledgeMoney.click { ReserveTrans().execute() }
+        binding.cvAdvancesReceived.click { AdvancesReceivedTrans().execute() }
         binding.cvVoid.click { VoidTrans().execute() }
         binding.cvPaymentSynchronize.click { openActivity<PaymentSyncActivity>() }
         binding.cvVoidSynchronize.click { openActivity<VoidSyncActivity>() }

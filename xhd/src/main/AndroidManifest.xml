@@ -136,6 +136,10 @@
             android:name=".domain.transaction.action.activity.ChooseBillActivity"
             android:launchMode="singleTask"
             android:theme="@style/Anim_fade" />
+        <activity
+            android:name=".domain.transaction.action.activity.InputCustomNameActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/Anim_fade" />
 
 
     </application>

@@ -10,5 +10,6 @@ package com.architecture.light.constant
 enum class TransactionName {
     Payment,
     Reserve,
+    AdvancesReceived,
     Void,
 }

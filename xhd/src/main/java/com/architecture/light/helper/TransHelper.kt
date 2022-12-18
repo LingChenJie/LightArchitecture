@@ -42,6 +42,9 @@ object TransHelper {
             TransactionName.Reserve.name -> {
                 result = getString(R.string.main_pledge_money)
             }
+            TransactionName.AdvancesReceived.name -> {
+                result = getString(R.string.main_advances_received)
+            }
             TransactionName.Void.name -> {
                 result = getString(R.string.main_void)
             }

@@ -58,186 +58,237 @@
 
         </RelativeLayout>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="@dimen/dp_24"
-            android:orientation="vertical">
+            android:layout_marginBottom="@dimen/dp_2">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingStart="@dimen/dp_17"
-                android:paddingEnd="@dimen/dp_17">
+                android:orientation="vertical">
 
-                <com.hjq.shape.layout.ShapeLinearLayout
-                    android:id="@+id/cv_payment"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_123"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    app:shape_radius="@dimen/dp_5"
-                    app:shape_solidColor="#DFF6FF">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/dp_17"
+                    android:paddingEnd="@dimen/dp_17">
 
-                    <com.android.architecture.ui.widget.view.DrawableTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableTop="@drawable/icon_main_payment"
-                        android:drawablePadding="@dimen/dp_14"
+                    <com.hjq.shape.layout.ShapeLinearLayout
+                        android:id="@+id/cv_payment"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_123"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/main_payment"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_11"
-                        android:textStyle="bold"
-                        app:drawableHeight="@dimen/dp_52"
-                        app:drawableWidth="@dimen/dp_52" />
+                        app:shape_radius="@dimen/dp_5"
+                        app:shape_solidColor="#DFF6FF">
 
-                </com.hjq.shape.layout.ShapeLinearLayout>
+                        <com.android.architecture.ui.widget.view.DrawableTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/icon_main_payment"
+                            android:drawablePadding="@dimen/dp_14"
+                            android:gravity="center"
+                            android:text="@string/main_payment"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_11"
+                            android:textStyle="bold"
+                            app:drawableHeight="@dimen/dp_52"
+                            app:drawableWidth="@dimen/dp_52" />
 
-                <com.hjq.shape.layout.ShapeLinearLayout
-                    android:id="@+id/cv_pledge_money"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_123"
-                    android:layout_marginStart="@dimen/dp_13"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    app:shape_radius="@dimen/dp_5"
-                    app:shape_solidColor="#DFF6FF">
+                    </com.hjq.shape.layout.ShapeLinearLayout>
 
-                    <com.android.architecture.ui.widget.view.DrawableTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:drawableTop="@drawable/icon_main_pledge_money"
-                        android:drawablePadding="@dimen/dp_14"
+                    <com.hjq.shape.layout.ShapeLinearLayout
+                        android:id="@+id/cv_pledge_money"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_123"
+                        android:layout_marginStart="@dimen/dp_13"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/main_pledge_money"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_11"
-                        android:textStyle="bold"
-                        app:drawableHeight="@dimen/dp_52"
-                        app:drawableWidth="@dimen/dp_52" />
+                        app:shape_radius="@dimen/dp_5"
+                        app:shape_solidColor="#DFF6FF">
 
-                </com.hjq.shape.layout.ShapeLinearLayout>
+                        <com.android.architecture.ui.widget.view.DrawableTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:drawableTop="@drawable/icon_main_pledge_money"
+                            android:drawablePadding="@dimen/dp_14"
+                            android:gravity="center"
+                            android:text="@string/main_pledge_money"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_11"
+                            android:textStyle="bold"
+                            app:drawableHeight="@dimen/dp_52"
+                            app:drawableWidth="@dimen/dp_52" />
 
-                <com.hjq.shape.layout.ShapeLinearLayout
-                    android:id="@+id/cv_void"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_123"
-                    android:layout_marginStart="@dimen/dp_13"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    app:shape_radius="@dimen/dp_5"
-                    app:shape_solidColor="#DFF6FF">
+                    </com.hjq.shape.layout.ShapeLinearLayout>
 
-
-                    <com.android.architecture.ui.widget.view.DrawableTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:drawableTop="@drawable/icon_main_void"
-                        android:drawablePadding="@dimen/dp_14"
+                    <com.hjq.shape.layout.ShapeLinearLayout
+                        android:id="@+id/cv_advances_received"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_123"
+                        android:layout_marginStart="@dimen/dp_13"
+                        android:layout_weight="1"
                         android:gravity="center"
-                        android:text="@string/main_void"
-                        android:textColor="@color/black"
+                        app:shape_radius="@dimen/dp_5"
+                        app:shape_solidColor="#DFF6FF">
 
-                        android:textSize="@dimen/sp_11"
-                        android:textStyle="bold"
-                        app:drawableHeight="@dimen/dp_52"
-                        app:drawableWidth="@dimen/dp_52" />
+                        <com.android.architecture.ui.widget.view.DrawableTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:drawableTop="@drawable/icon_main_advances_received"
+                            android:drawablePadding="@dimen/dp_14"
+                            android:gravity="center"
+                            android:text="@string/main_advances_received"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_11"
+                            android:textStyle="bold"
+                            app:drawableHeight="@dimen/dp_52"
+                            app:drawableWidth="@dimen/dp_52" />
 
-                </com.hjq.shape.layout.ShapeLinearLayout>
+                    </com.hjq.shape.layout.ShapeLinearLayout>
 
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:paddingStart="@dimen/dp_17"
+                    android:paddingEnd="@dimen/dp_17">
+
+                    <com.hjq.shape.layout.ShapeLinearLayout
+                        android:id="@+id/cv_void"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_123"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        app:shape_radius="@dimen/dp_5"
+                        app:shape_solidColor="#DFF6FF">
+
+                        <com.android.architecture.ui.widget.view.DrawableTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:drawableTop="@drawable/icon_main_void"
+                            android:drawablePadding="@dimen/dp_14"
+                            android:gravity="center"
+                            android:text="@string/main_void"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_11"
+                            android:textStyle="bold"
+                            app:drawableHeight="@dimen/dp_52"
+                            app:drawableWidth="@dimen/dp_52" />
+
+                    </com.hjq.shape.layout.ShapeLinearLayout>
+
+                    <com.hjq.shape.layout.ShapeLinearLayout
+                        android:id="@+id/cv_payment_synchronize"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_123"
+                        android:layout_marginStart="@dimen/dp_13"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        app:shape_radius="@dimen/dp_5"
+                        app:shape_solidColor="#DFF6FF">
+
+                        <com.android.architecture.ui.widget.view.DrawableTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:drawableTop="@drawable/icon_main_payment_synchronize"
+                            android:drawablePadding="@dimen/dp_14"
+                            android:gravity="center"
+                            android:text="@string/main_payment_synchronize"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_11"
+                            android:textStyle="bold"
+                            app:drawableHeight="@dimen/dp_52"
+                            app:drawableWidth="@dimen/dp_52" />
+
+                    </com.hjq.shape.layout.ShapeLinearLayout>
+
+                    <com.hjq.shape.layout.ShapeLinearLayout
+                        android:id="@+id/cv_void_synchronize"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_123"
+                        android:layout_marginStart="@dimen/dp_13"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        app:shape_radius="@dimen/dp_5"
+                        app:shape_solidColor="#DFF6FF">
+
+                        <com.android.architecture.ui.widget.view.DrawableTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:drawableTop="@drawable/icon_main_void_synchronize"
+                            android:drawablePadding="@dimen/dp_14"
+                            android:gravity="center"
+                            android:text="@string/main_void_synchronize"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_11"
+                            android:textStyle="bold"
+                            app:drawableHeight="@dimen/dp_52"
+                            app:drawableWidth="@dimen/dp_52" />
+
+                    </com.hjq.shape.layout.ShapeLinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:paddingStart="@dimen/dp_17"
+                    android:paddingEnd="@dimen/dp_17">
+
+                    <com.hjq.shape.layout.ShapeLinearLayout
+                        android:id="@+id/cv_print"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/dp_123"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        app:shape_radius="@dimen/dp_5"
+                        app:shape_solidColor="#DFF6FF">
+
+                        <com.android.architecture.ui.widget.view.DrawableTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:drawableTop="@drawable/icon_main_print"
+                            android:drawablePadding="@dimen/dp_14"
+                            android:gravity="center"
+                            android:text="@string/main_print"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_11"
+                            android:textStyle="bold"
+                            app:drawableHeight="@dimen/dp_52"
+                            app:drawableWidth="@dimen/dp_52" />
+
+                    </com.hjq.shape.layout.ShapeLinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/dp_13"
+                        android:layout_weight="1" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="@dimen/dp_13"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
 
             </LinearLayout>
+        </ScrollView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_20"
-                android:paddingStart="@dimen/dp_17"
-                android:paddingEnd="@dimen/dp_17">
-
-                <com.hjq.shape.layout.ShapeLinearLayout
-                    android:id="@+id/cv_payment_synchronize"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_123"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    app:shape_radius="@dimen/dp_5"
-                    app:shape_solidColor="#DFF6FF">
-
-                    <com.android.architecture.ui.widget.view.DrawableTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:drawableTop="@drawable/icon_main_payment_synchronize"
-                        android:drawablePadding="@dimen/dp_14"
-                        android:gravity="center"
-                        android:text="@string/main_payment_synchronize"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_11"
-                        android:textStyle="bold"
-                        app:drawableHeight="@dimen/dp_52"
-                        app:drawableWidth="@dimen/dp_52" />
-
-                </com.hjq.shape.layout.ShapeLinearLayout>
-
-                <com.hjq.shape.layout.ShapeLinearLayout
-                    android:id="@+id/cv_void_synchronize"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_123"
-                    android:layout_marginStart="@dimen/dp_13"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    app:shape_radius="@dimen/dp_5"
-                    app:shape_solidColor="#DFF6FF">
-
-                    <com.android.architecture.ui.widget.view.DrawableTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:drawableTop="@drawable/icon_main_void_synchronize"
-                        android:drawablePadding="@dimen/dp_14"
-                        android:gravity="center"
-                        android:text="@string/main_void_synchronize"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_11"
-                        android:textStyle="bold"
-                        app:drawableHeight="@dimen/dp_52"
-                        app:drawableWidth="@dimen/dp_52" />
-
-                </com.hjq.shape.layout.ShapeLinearLayout>
-
-                <com.hjq.shape.layout.ShapeLinearLayout
-                    android:id="@+id/cv_print"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/dp_123"
-                    android:layout_marginStart="@dimen/dp_13"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    app:shape_radius="@dimen/dp_5"
-                    app:shape_solidColor="#DFF6FF">
-
-                    <com.android.architecture.ui.widget.view.DrawableTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:drawableTop="@drawable/icon_main_print"
-                        android:drawablePadding="@dimen/dp_14"
-                        android:gravity="center"
-                        android:text="@string/main_print"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/sp_11"
-                        android:textStyle="bold"
-                        app:drawableHeight="@dimen/dp_52"
-                        app:drawableWidth="@dimen/dp_52" />
-
-                </com.hjq.shape.layout.ShapeLinearLayout>
-
-            </LinearLayout>
-
-        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

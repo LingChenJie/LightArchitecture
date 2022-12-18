@@ -76,6 +76,7 @@
     <!-- Main相关 -->
     <string name="main_payment">查询缴款</string>
     <string name="main_pledge_money">认筹金</string>
+    <string name="main_advances_received">预收款</string>
     <string name="main_void">撤销</string>
     <string name="main_payment_synchronize">缴款信息同步</string>
     <string name="main_void_synchronize">撤销信息同步</string>
@@ -110,6 +111,7 @@
     <string name="payment_alipay">支付宝</string>
     <string name="payment_phone_num">电话号码：</string>
     <string name="payment_room_num">房间号码：</string>
+    <string name="payment_custom_name">请输入客户姓名：</string>
     <string name="payment_select_room">选择缴款房间</string>
     <string name="payment_select_room_please">请选择缴款房间：</string>
     <string name="payment_select_payment">选择缴款款项</string>

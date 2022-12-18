@@ -124,10 +124,16 @@ class PaymentSyncActivity : AppActivity() {
     private fun notifyResult(transData: TransData) {
         val transactionName = transData.transactionName
         var task: HttpTask? = null
-        if (transactionName == TransactionName.Payment.name) {
-            task = NotifyCollectionTask()
-        } else if (transactionName == TransactionName.Reserve.name) {
-            task = NotifyPrepaidTask()
+        when (transactionName) {
+            TransactionName.Payment.name -> {
+                task = NotifyCollectionTask()
+            }
+            TransactionName.Reserve.name -> {
+                task = NotifyPrepaidTask()
+            }
+            TransactionName.AdvancesReceived.name -> {
+                task = NotifyPrepaidTask()
+            }
         }
         if (task == null) {
             return

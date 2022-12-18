@@ -43,12 +43,19 @@ class PaymentSyncAdapter :
         binding.tvPaymentAmount.text =
             AmountHelper.formatAmount(item.amount)
         binding.tvTransactionStatus.text = TransHelper.getPaymentStatus(item)
-        if (item.transactionName == TransactionName.Payment.name) {
-            binding.layoutRoom.visibility = View.VISIBLE
-            binding.layoutProject.visibility = View.GONE
-        } else {
-            binding.layoutRoom.visibility = View.GONE
-            binding.layoutProject.visibility = View.VISIBLE
+        when (item.transactionName) {
+            TransactionName.Payment.name -> {
+                binding.layoutRoom.visibility = View.VISIBLE
+                binding.layoutProject.visibility = View.GONE
+            }
+            TransactionName.Reserve.name -> {
+                binding.layoutRoom.visibility = View.GONE
+                binding.layoutProject.visibility = View.VISIBLE
+            }
+            TransactionName.AdvancesReceived.name -> {
+                binding.layoutRoom.visibility = View.GONE
+                binding.layoutProject.visibility = View.GONE
+            }
         }
         binding.tvRoomName.text = item.roomInfo
         binding.tvProjectNum.text = item.projNum
