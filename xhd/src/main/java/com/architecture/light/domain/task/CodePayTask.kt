@@ -46,7 +46,7 @@ class CodePayTask : PayTask() {
     }
 
     override fun analysisResponse(response: ResponsePojo) {
-        if (Constant.IS_DEBUG && Constant.IS_SIMULATED_TRANS) {
+        if (Constant.IS_SIMULATED_TRANS) {
             SystemClock.sleep(2000)
             val payData = TransMemo.PayData()
             payData.resCode = "00"

@@ -11,7 +11,7 @@ import java.io.File
 object Constant {
 
     const val IS_DEBUG = BuildConfig.IS_DEBUG
-    const val IS_SIMULATED_TRANS = true
+    const val IS_SIMULATED_TRANS = BuildConfig.IS_SIMULATED_TRANS
 
     val ROOT_PATH = LightConstant.SDCARD_PATH + File.separator + "XHD"
     val BILL_PATH = ROOT_PATH + File.separator + "Bill"

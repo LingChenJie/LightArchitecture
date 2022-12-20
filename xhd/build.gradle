@@ -45,12 +45,14 @@ android {
     buildTypes {
         debug {
             buildConfigField "boolean", "IS_DEBUG", "true"
+            buildConfigField "boolean", "IS_SIMULATED_TRANS", "true"
             minifyEnabled false
             signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         release {
             buildConfigField "boolean", "IS_DEBUG", "false"
+            buildConfigField "boolean", "IS_SIMULATED_TRANS", "false"
             minifyEnabled false
             signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
