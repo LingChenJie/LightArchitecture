@@ -46,9 +46,12 @@ android {
         }
         release {
             buildConfigField "boolean", "IS_DEBUG", "false"
-            minifyEnabled false
+            minifyEnabled true // 开启混淆
+            //shrinkResources true // 开启资源压缩
+            //zipAlignEnabled true // k对齐
             signingConfig signingConfigs.config
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard/proguard-base.pro', 'proguard/proguard-app.pro', 'proguard/proguard-third.pro'
         }
     }
 
@@ -56,7 +59,7 @@ android {
         variant.outputs.all {
             def app = "LightArchitectureDemo"
             def build_name = "${buildType.name}"
-            def formattedDate = new Date().format('yyyy_MM_dd')
+            def formattedDate = new Date().format('yyyyMMdd')
             def ver = "${defaultConfig.versionName}"
             outputFileName = app + "_V" + ver + "_" + formattedDate + "_" + build_name + ".apk"
         }
