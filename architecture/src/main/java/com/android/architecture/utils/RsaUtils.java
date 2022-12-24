@@ -176,15 +176,15 @@ public class RsaUtils {
         KeyPair keyPair = generateRSAKeyPair(DEFAULT_KEY_SIZE);
         byte[] privateKey = getPrivateKey(keyPair);
         byte[] publicKey = getPublicKey(keyPair);
-        System.out.println("privateKey:" + ByteUtil.bytes2HexString(privateKey));
-        System.out.println("publicKey:" + ByteUtil.bytes2HexString(publicKey));
+        System.out.println("privateKey:" + ByteUtil.bytes2HexStr(privateKey));
+        System.out.println("publicKey:" + ByteUtil.bytes2HexStr(publicKey));
 
-        byte[] data = ByteUtil.hexString2Bytes("11223344556677881122334455667788");
+        byte[] data = ByteUtil.hexStr2Bytes("11223344556677881122334455667788");
         byte[] encryptResult = encryptByPublicKey(publicKey, data);
-        System.out.println("encryptResult:" + ByteUtil.bytes2HexString(encryptResult));
+        System.out.println("encryptResult:" + ByteUtil.bytes2HexStr(encryptResult));
 
         byte[] decryptResult = decryptByPrivateKey(privateKey, encryptResult);
-        System.out.println("decryptResult:" + ByteUtil.bytes2HexString(decryptResult));
+        System.out.println("decryptResult:" + ByteUtil.bytes2HexStr(decryptResult));
 
 
 //        String module = "c0301ed3994f78d29b5282230ca43b493d4a55f0daf5944369d4d5d2add167bc86b812b4c11a1b17a1ceaee39530ca05e67ef12bce88859d217311fff2db06684fe7aa400fbf4dfdb6ede6780ac277c01751a41d4c558ee9259236520e84d9a2f89530cd74c00f974c2ba3a1f85cb225e1792d81cee7af6f76d6b3edb5d9cc7fcc0d39000a7d997077b054ed1d6f753191804c3e8e0b26a64c7b9449f275e89248d917e788ee8f63bae94c235f85ac976c90e4a8894934bb721b04c2dff53dae9a2b42b642f9db2015ef2fc67412a7a48333c19d4f62ca6ed90de35db1249cac3a197d762c7ba4a0384a950e5f73ae472c7bd72ac4bf51276e4f5bef3b278b07";

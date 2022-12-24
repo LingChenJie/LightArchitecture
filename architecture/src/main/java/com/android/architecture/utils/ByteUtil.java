@@ -11,14 +11,13 @@ public final class ByteUtil {
         System.arraycopy(source, 0, dest, 0, len);
     }
 
-    public static String bytes2HexString(byte[] var0) {
-        byte[] var1 = new byte[var0.length * 2];
+    public static String bytes2HexStr(byte[] bytes) {
+        byte[] var1 = new byte[bytes.length * 2];
         int var2 = 0;
-
         int var5;
-        for (int var3 = 0; var2 < var0.length; var3 = var5) {
+        for (int var3 = 0; var2 < bytes.length; var3 = var5) {
             byte var4;
-            byte var10001 = var4 = var0[var2];
+            byte var10001 = var4 = bytes[var2];
             var1[var3++] = (byte) int2HexChar(var4 >> 4 & 15);
             var5 = var3 + 1;
             var1[var3] = (byte) int2HexChar(var10001 & 15);
@@ -28,13 +27,13 @@ public final class ByteUtil {
         return new String(var1);
     }
 
-    public static byte[] hexString2Bytes(String var0) {
-        if (var0.length() % 2 != 0) {
+    public static byte[] hexStr2Bytes(String hexStr) {
+        if (hexStr.length() % 2 != 0) {
             throw new RuntimeException("The hexString length has to be a multiple of 2.");
         } else {
             int var5;
-            byte[] var1 = new byte[var5 = var0.length() / 2];
-            char[] var2 = var0.toCharArray();
+            byte[] var1 = new byte[var5 = hexStr.length() / 2];
+            char[] var2 = hexStr.toCharArray();
 
             for (int var3 = 0; var3 < var5; ++var3) {
                 int var10003 = var3 * 2;
@@ -191,7 +190,7 @@ public final class ByteUtil {
             boolean var10001;
             byte[] var6;
             try {
-                var6 = hexString2Bytes(var0);
+                var6 = hexStr2Bytes(var0);
             } catch (Exception var4) {
                 var10000 = var4;
                 var10001 = false;
@@ -230,7 +229,7 @@ public final class ByteUtil {
             boolean var10001;
             byte[] var6;
             try {
-                var6 = hexString2Bytes(var0);
+                var6 = hexStr2Bytes(var0);
             } catch (Exception var4) {
                 var10000 = var4;
                 var10001 = false;
@@ -282,7 +281,7 @@ public final class ByteUtil {
 
             byte[] var7;
             try {
-                var7 = hexString2Bytes(var6);
+                var7 = hexStr2Bytes(var6);
             } catch (Exception var3) {
                 var10000 = var3;
                 var10001 = false;
@@ -305,7 +304,7 @@ public final class ByteUtil {
 
     public static String string2HexString(String var0) {
         try {
-            return bytes2HexString(var0.getBytes(Charset.forName("US-ASCII")));
+            return bytes2HexStr(var0.getBytes(Charset.forName("US-ASCII")));
         } catch (Exception var1) {
             var1.printStackTrace();
             return null;
