@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -355,6 +356,42 @@ public class FileUtils {
             CloseableUtils.close(fileOutputStream);
         }
         return true;
+    }
+
+    /**
+     * 从assets目录中复制整个文件夹内容
+     *
+     * @param context Context 使用CopyFiles类的Activity
+     * @param oldPath String  原文件路径  如：aa (assets/aa)
+     * @param newPath String  复制后路径  如：xx:/bb/cc (sdcard/bb/cc)
+     */
+    public static void copyFilesFromAssets(Context context, String oldPath, String newPath) {
+        try {
+            String[] fileNames;
+            fileNames = context.getAssets().list(oldPath);
+            if (fileNames.length > 0) {//如果是目录
+                File file = new File(newPath);
+                file.mkdirs();//如果文件夹不存在，则递归
+                for (String fileName : fileNames) {
+                    copyFilesFromAssets(context, oldPath + "/" + fileName, newPath + "/" + fileName);
+                }
+            } else {
+                InputStream is = context.getAssets().open(oldPath);
+                FileOutputStream fos = new FileOutputStream(newPath);
+                byte[] buffer = new byte[1024 * 10];
+                int byteCount = 0;
+                while ((byteCount = is.read(buffer)) != -1) {
+                    fos.write(buffer, 0, byteCount);
+                }
+                fos.flush();
+                is.close();
+                fos.close();
+            }
+            Log.i("copy", "success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.i("copy", "fail");
+        }
     }
 
     public static void copy(@NonNull ReadableByteChannel input, @NonNull FileChannel output) throws IOException {
