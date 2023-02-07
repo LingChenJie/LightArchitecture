@@ -56,7 +56,7 @@ public class RsaUtils {
         return null;
     }
 
-    public static byte[] getPublicKey(KeyPair keyPair) {
+    public static byte[] getPublicKeyEncoded(KeyPair keyPair) {
         RSAPublicKey key = (RSAPublicKey) keyPair.getPublic();
         System.out.println("publicKey modules(N):" + key.getModulus().toString(16).toUpperCase());
         System.out.println("publicKey exponent(E):" + key.getPublicExponent().toString(16).toUpperCase());
@@ -64,7 +64,7 @@ public class RsaUtils {
         return key.getEncoded();
     }
 
-    public static byte[] getPrivateKey(KeyPair keyPair) {
+    public static byte[] getPrivateKeyEncoded(KeyPair keyPair) {
         RSAPrivateKey key = (RSAPrivateKey) keyPair.getPrivate();
         System.out.println("privateKey modules(N):" + key.getModulus().toString(16).toUpperCase());
         System.out.println("privateKey exponent(E):" + key.getPrivateExponent().toString(16).toUpperCase());
@@ -88,7 +88,7 @@ public class RsaUtils {
      * @param publicExponent 16进制
      * @return
      */
-    public static byte[] getPublicKey(String modulus, String publicExponent) {
+    public static byte[] getPublicKeyEncoded(String modulus, String publicExponent) {
         try {
             BigInteger bigIntModulus = new BigInteger(modulus, 16);
             BigInteger bigIntPublicExponent = new BigInteger(publicExponent, 16);
@@ -109,7 +109,7 @@ public class RsaUtils {
      * @param privateExponent 16进制
      * @return
      */
-    public static byte[] getPrivateKey(String modulus, String privateExponent) {
+    public static byte[] getPrivateKeyEncoded(String modulus, String privateExponent) {
         try {
             BigInteger bigIntModulus = new BigInteger(modulus, 16);
             BigInteger bigIntPrivateExponent = new BigInteger(privateExponent, 16);
@@ -126,13 +126,13 @@ public class RsaUtils {
     /**
      * getPublicKey
      *
-     * @param privateKey 私钥
+     * @param privateKeyEncoded 私钥
      * @return
      */
-    public static byte[] getPublicKey(byte[] privateKey) {
+    public static byte[] getPublicKeyEncoded(byte[] privateKeyEncoded) {
         try {
             KeyFactory keyFactory = KeyFactory.getInstance(RSA);
-            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKey);
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyEncoded);
             PrivateKey priKey = keyFactory.generatePrivate(keySpec);
             RSAPrivateKeySpec priv = keyFactory.getKeySpec(priKey, RSAPrivateKeySpec.class);
             RSAPublicKeySpec keySpec2 = new RSAPublicKeySpec(priv.getModulus(), BigInteger.valueOf(65537));
@@ -144,11 +144,52 @@ public class RsaUtils {
         return null;
     }
 
-    public static byte[] encryptByPublicKey(byte[] publicKey, byte[] data) {
+    /**
+     * getPublicKey
+     *
+     * @param publicKeyEncoded 公钥编码
+     * @return
+     */
+    public static RSAPublicKey getPublicKey(byte[] publicKeyEncoded) {
         try {
-            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKey);
+            X509EncodedKeySpec keySpec = new X509EncodedKeySpec(publicKeyEncoded);
             KeyFactory keyFactory = KeyFactory.getInstance(RSA);
             PublicKey key = keyFactory.generatePublic(keySpec);
+            return (RSAPublicKey) key;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * getPrivateKey
+     *
+     * @param privateKeyEncoded 私钥编码
+     * @return
+     */
+    public static RSAPrivateKey getPrivateKey(byte[] privateKeyEncoded) {
+        try {
+            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKeyEncoded);
+            KeyFactory keyFactory = KeyFactory.getInstance(RSA);
+            PrivateKey key = keyFactory.generatePrivate(keySpec);
+            return (RSAPrivateKey) key;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * 公钥加密
+     *
+     * @param publicKeyEncoded
+     * @param data
+     * @return
+     */
+    public static byte[] encryptByPublicKey(byte[] publicKeyEncoded, byte[] data) {
+        try {
+            RSAPublicKey key = getPublicKey(publicKeyEncoded);
             Cipher cipher = Cipher.getInstance(ECB_PKCS1_PADDING);
             cipher.init(Cipher.ENCRYPT_MODE, key);
             return cipher.doFinal(data);
@@ -158,11 +199,9 @@ public class RsaUtils {
         return null;
     }
 
-    public static byte[] decryptByPrivateKey(byte[] privateKey, byte[] data) {
+    public static byte[] decryptByPrivateKey(byte[] privateKeyEncoded, byte[] data) {
         try {
-            PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(privateKey);
-            KeyFactory keyFactory = KeyFactory.getInstance(RSA);
-            PrivateKey key = keyFactory.generatePrivate(keySpec);
+            RSAPrivateKey key = getPrivateKey(privateKeyEncoded);
             Cipher cipher = Cipher.getInstance(ECB_PKCS1_PADDING);
             cipher.init(Cipher.DECRYPT_MODE, key);
             return cipher.doFinal(data);
@@ -173,27 +212,45 @@ public class RsaUtils {
     }
 
     public static void main(String[] args) {
+        test();
+//        test2();
+//        test3();
+    }
+
+    public static void test() {
         KeyPair keyPair = generateRSAKeyPair(DEFAULT_KEY_SIZE);
-        byte[] privateKey = getPrivateKey(keyPair);
-        byte[] publicKey = getPublicKey(keyPair);
-        System.out.println("privateKey:" + ByteUtil.bytes2HexStr(privateKey));
-        System.out.println("publicKey:" + ByteUtil.bytes2HexStr(publicKey));
+        byte[] privateKey = getPrivateKeyEncoded(keyPair);
+        byte[] publicKey = getPublicKeyEncoded(keyPair);
+        System.out.println("------------------");
+        System.out.println("------------------");
+        System.out.println("privateKey(HEX):" + ByteUtil.bytes2HexStr(privateKey));
+        System.out.println("publicKey(HEX):" + ByteUtil.bytes2HexStr(publicKey));
 
         byte[] data = ByteUtil.hexStr2Bytes("11223344556677881122334455667788");
         byte[] encryptResult = encryptByPublicKey(publicKey, data);
-        System.out.println("encryptResult:" + ByteUtil.bytes2HexStr(encryptResult));
+        System.out.println("------------------");
+        System.out.println("encryptResult(HEX):" + ByteUtil.bytes2HexStr(encryptResult));
 
         byte[] decryptResult = decryptByPrivateKey(privateKey, encryptResult);
-        System.out.println("decryptResult:" + ByteUtil.bytes2HexStr(decryptResult));
+        System.out.println("------------------");
+        System.out.println("decryptResult(HEX):" + ByteUtil.bytes2HexStr(decryptResult));
+    }
 
+    public static void test2() {
+        String module = "c0301ed3994f78d29b5282230ca43b493d4a55f0daf5944369d4d5d2add167bc86b812b4c11a1b17a1ceaee39530ca05e67ef12bce88859d217311fff2db06684fe7aa400fbf4dfdb6ede6780ac277c01751a41d4c558ee9259236520e84d9a2f89530cd74c00f974c2ba3a1f85cb225e1792d81cee7af6f76d6b3edb5d9cc7fcc0d39000a7d997077b054ed1d6f753191804c3e8e0b26a64c7b9449f275e89248d917e788ee8f63bae94c235f85ac976c90e4a8894934bb721b04c2dff53dae9a2b42b642f9db2015ef2fc67412a7a48333c19d4f62ca6ed90de35db1249cac3a197d762c7ba4a0384a950e5f73ae472c7bd72ac4bf51276e4f5bef3b278b07";
+        String exponent = "300f9895e7dff4e20e0f9b15b2c29b44dc7beb73f8fdb2df0ce739b59edc202a08329e12efbb5c8d135cc1658e588e1cdda05f254a57dfba04b4670aefab9035a3cdd64880e7a154525bb9e7c9210a9b51f98ba5fc01e5642e8e1ae1785a06a6f7ad2f7021c329e2f71c6ea6419ac4be2e5d8460d2e223802762d7ca1950e70f9acf9a9ae12206180553f8837e9cffa212bde1e209f49ed793cc2028bee76e5ce035f10dcf9f6ec3fea98fd2213883780a88847c7892a69b5382425bc1aef627c35b83d0a39902c9b89816b7c28cfbdf41625e57e74fbeb417425020d18eddca0ccb1f3740529e59adee1d38d3d93293665c9e7485f24c47bba7c2cd2ab52591";
+        byte[] privateKey = getPrivateKeyEncoded(module, exponent);
 
-//        String module = "c0301ed3994f78d29b5282230ca43b493d4a55f0daf5944369d4d5d2add167bc86b812b4c11a1b17a1ceaee39530ca05e67ef12bce88859d217311fff2db06684fe7aa400fbf4dfdb6ede6780ac277c01751a41d4c558ee9259236520e84d9a2f89530cd74c00f974c2ba3a1f85cb225e1792d81cee7af6f76d6b3edb5d9cc7fcc0d39000a7d997077b054ed1d6f753191804c3e8e0b26a64c7b9449f275e89248d917e788ee8f63bae94c235f85ac976c90e4a8894934bb721b04c2dff53dae9a2b42b642f9db2015ef2fc67412a7a48333c19d4f62ca6ed90de35db1249cac3a197d762c7ba4a0384a950e5f73ae472c7bd72ac4bf51276e4f5bef3b278b07";
-//        String exponent = "300f9895e7dff4e20e0f9b15b2c29b44dc7beb73f8fdb2df0ce739b59edc202a08329e12efbb5c8d135cc1658e588e1cdda05f254a57dfba04b4670aefab9035a3cdd64880e7a154525bb9e7c9210a9b51f98ba5fc01e5642e8e1ae1785a06a6f7ad2f7021c329e2f71c6ea6419ac4be2e5d8460d2e223802762d7ca1950e70f9acf9a9ae12206180553f8837e9cffa212bde1e209f49ed793cc2028bee76e5ce035f10dcf9f6ec3fea98fd2213883780a88847c7892a69b5382425bc1aef627c35b83d0a39902c9b89816b7c28cfbdf41625e57e74fbeb417425020d18eddca0ccb1f3740529e59adee1d38d3d93293665c9e7485f24c47bba7c2cd2ab52591";
-//        byte[] privateKey = getPrivateKey(module, exponent);
-//
-//        byte[] en = ByteUtil.hexString2Bytes("124DCD2654F46B4296BE416D1B63568AF74A196DD2A2FB993AA6E3D024C6C95AD74F423FA9D48381C09A9807A285F4A37E8C9ABC3974FEF29294FD66563B3DAB8067FB20B3FA4326E806A009D879ED319AB63EDD0D2D8219AD17CF2BB8311A58EEDB29089352531AB93D85D1B7031352D2B5870C2179BE89A2412076E3C4B14492194DA0E838BC46FD4E8FB5139AD22FBB7B90C6C371B78B203448956D682AA8793D8C78FF61CCEB408DC1E516909D5C0F6AC5DD5CDC19687B58B7794003E1CE2118902633823C4EB320E8BA5AC2C48F0841FEB7FB171B59F73D7808E91E5FB59DD606CC215ECB269A91202A4401D91C256504BF260DDFF4C01524A43C1586C6");
-//        byte[] bytes = decryptByPrivateKey(privateKey, en);
-//        System.out.println("bytes:" + ByteUtil.bytes2HexString(bytes));
+        byte[] en = ByteUtil.hexStr2Bytes("124DCD2654F46B4296BE416D1B63568AF74A196DD2A2FB993AA6E3D024C6C95AD74F423FA9D48381C09A9807A285F4A37E8C9ABC3974FEF29294FD66563B3DAB8067FB20B3FA4326E806A009D879ED319AB63EDD0D2D8219AD17CF2BB8311A58EEDB29089352531AB93D85D1B7031352D2B5870C2179BE89A2412076E3C4B14492194DA0E838BC46FD4E8FB5139AD22FBB7B90C6C371B78B203448956D682AA8793D8C78FF61CCEB408DC1E516909D5C0F6AC5DD5CDC19687B58B7794003E1CE2118902633823C4EB320E8BA5AC2C48F0841FEB7FB171B59F73D7808E91E5FB59DD606CC215ECB269A91202A4401D91C256504BF260DDFF4C01524A43C1586C6");
+        byte[] bytes = decryptByPrivateKey(privateKey, en);
+        System.out.println("bytes:" + ByteUtil.bytes2HexStr(bytes));
+    }
+
+    public static void test3() {
+        String publicKey = "30820122300D06092A864886F70D01010105000382010F003082010A0282010100F231050B587D6829370BC3A826E4B93A025BE7D068852CB8AE1E9BA828C69F8D082F6657F53DF393742576F71A2A4725275BCA6A010261484BB03057C09B1E8C30A3BD59A70717621AC9CE1E070737C6A0DE318961127D03EF076436EF4FB98E5C48BFAB12357BFE7340FAFCE4E80346E8CEEA616D36E51B31EDFFC95701A0DE833C615E55B38B7FAFA059AECBF4A74C1DC8337E4DA251EF1C14B0070D140E37778CCD5896BA4442FB2203650D638A5BD84E9181DC7E68F01D4A9C03BABC6682B123A54D9D6401A4DD37415E4EB3D3A163E085360C1F5F0225AB80DB62CC8E5EC0BA2FE400D393E1C722823C8553ABFAD0DEF72DED0A9CFFFF1CB21D498A45C50203010001";
+        byte[] data = ByteUtil.hexStr2Bytes("11223344556677881122334455667799");
+        byte[] encryptResult = encryptByPublicKey(ByteUtil.hexStr2Bytes(publicKey), data);
+        System.out.println("encryptResult:" + ByteUtil.bytes2HexStr(encryptResult));
     }
 
 }
