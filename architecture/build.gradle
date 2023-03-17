@@ -13,13 +13,13 @@ static def buildDate() {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         minSdk 21
-        targetSdk 32
-        versionCode 10
-        versionName "1.1.0"
+        targetSdk 33
+        versionCode 12
+        versionName "1.1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -57,19 +57,19 @@ dependencies {
     //api fileTree(dir: "libs", include: ["*.jar", "*.aar"])
     api files('libs/commons-codec-1.15-ext.jar')
 
-    api 'androidx.appcompat:appcompat:1.5.1'
+    api 'androidx.appcompat:appcompat:1.6.1'
     api "androidx.navigation:navigation-runtime-ktx:2.5.3"
     api 'androidx.constraintlayout:constraintlayout:2.1.4'
     api 'androidx.recyclerview:recyclerview:1.2.1'
-    api "androidx.core:core-ktx:1.8.0"
+    api "androidx.core:core-ktx:1.9.0"
     api 'androidx.fragment:fragment-ktx:1.5.4'
 
     api "androidx.room:room-runtime:2.4.3"
     api "androidx.room:room-ktx:2.4.3"
     kapt "androidx.room:room-compiler:2.4.3"
 
-    api 'com.google.android.material:material:1.7.0'
-    api 'com.google.code.gson:gson:2.9.1'
+    api 'com.google.android.material:material:1.8.0'
+    api 'com.google.code.gson:gson:2.10.1'
     api 'com.google.zxing:core:3.4.1'
 
     api 'com.github.KunMinX:UnPeek-LiveData:v7.6.0'
@@ -93,12 +93,12 @@ dependencies {
 
     api 'com.airbnb.android:lottie:4.1.0'
 
-    api 'com.github.getActivity:ToastUtils:10.5'
-    api 'com.github.getActivity:XXPermissions:15.0'
+    api 'com.github.getActivity:ToastUtils:11.2'
+    api 'com.github.getActivity:XXPermissions:16.8'
     api 'com.github.getActivity:ShapeView:8.3'
 
 
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
