@@ -1,0 +1,5 @@
+// 查看bks证书库信息
+keytool -list -v -keystore ca.bks -provider org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath "bcprov-jdk15on-1.70.jar" -storetype BKS -storepass '123456'
+
+// 查看bks证书库列表
+keytool -list -rfc -keystore ca.bks -storetype BKS -provider org.bouncycastle.jce.provider.BouncyCastleProvider -providerpath "bcprov-jdk15on-1.70.jar" -storepass '123456'

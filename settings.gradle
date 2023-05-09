@@ -23,3 +23,4 @@ rootProject.name = "LightArchitecture"
 include ':app'
 include ':architecture'
 include ':xhd'
+include ':certificate'

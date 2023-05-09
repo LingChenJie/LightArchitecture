@@ -78,7 +78,6 @@ android {
 dependencies {
 
     implementation project(":architecture")
-    implementation files('libs/bcprov-jdk15on-1.70.jar')
     kapt "androidx.room:room-compiler:2.4.3"
 //    implementation 'com.github.LingChenJie:LightArchitecture:v1.0.6'
 
