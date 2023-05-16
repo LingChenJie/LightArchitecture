@@ -4,10 +4,12 @@ import android.content.Context
 import androidx.core.content.ContextCompat
 import com.android.architecture.app.BaseApplication
 import com.android.architecture.constant.ErrorCode
+import com.android.architecture.helper.Logger
 import com.architecture.light.R
 import com.architecture.light.config.ToastStyle
 import com.architecture.light.config.glide.GlideApp
 import com.architecture.light.constant.AppErrorCode
+import com.architecture.light.constant.Constant
 import com.architecture.light.ui.view.SmartBallPulseFooter
 import com.hjq.toast.ToastUtils
 import com.scwang.smart.refresh.header.MaterialHeader
@@ -25,6 +27,7 @@ class App : BaseApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        Logger.e(Constant.TAG, "onCreate()")
         ErrorCode.add(AppErrorCode.errorCodeMap)
         init()
     }

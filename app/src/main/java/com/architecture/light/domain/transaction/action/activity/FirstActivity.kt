@@ -5,6 +5,7 @@ import com.android.architecture.domain.navigation.NavigationResult
 import com.android.architecture.extension.argument
 import com.android.architecture.extension.binding
 import com.android.architecture.extension.click
+import com.android.architecture.extension.toast
 import com.android.architecture.helper.Logger
 import com.architecture.light.app.AppActivityForNavigationAction
 import com.architecture.light.databinding.Activity1Binding
@@ -26,6 +27,9 @@ class FirstActivity : AppActivityForNavigationAction() {
         Logger.e(TAG, "name:$name")
         binding.btTo2.click {
             finish(NavigationResult(ErrorCode.SUCCESS))
+        }
+        binding.btTest.click {
+            toast("version:333333333")
         }
     }
 

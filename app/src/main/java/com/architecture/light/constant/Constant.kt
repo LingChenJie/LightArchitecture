@@ -11,6 +11,7 @@ import com.architecture.light.BuildConfig
  */
 object Constant {
 
+    const val TAG = "LightArchitectureApp"
     const val IS_DEBUG = BuildConfig.IS_DEBUG
 
 }
