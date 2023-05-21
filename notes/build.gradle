@@ -1,18 +1,19 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 
 android {
-    namespace 'com.architecture.light'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.architecture.light"
-        minSdk 24
+        applicationId "com.architecture.light.notes"
+        minSdk 23
         targetSdk 33
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -27,18 +28,50 @@ android {
         }
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    signingConfigs {
+        config {
+            storeFile file(StoreFile)
+            storePassword StorePassword
+            keyAlias KeyAlias
+            keyPassword KeyPassword
         }
     }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "IS_DEBUG", "true"
+            minifyEnabled false
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            buildConfigField "boolean", "IS_DEBUG", "false"
+            minifyEnabled true // 开启混淆
+            //shrinkResources true // 开启资源压缩
+            //zipAlignEnabled true // k对齐
+            signingConfig signingConfigs.config
+            //proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles 'proguard/proguard-base.pro', 'proguard/proguard-app.pro', 'proguard/proguard-third.pro'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            def app = "LightArchitectureDemo"
+            def build_name = "${buildType.name}"
+            def formattedDate = new Date().format('yyyyMMdd')
+            def ver = "${defaultConfig.versionName}"
+            outputFileName = app + "_V" + ver + "_" + formattedDate + "_" + build_name + ".apk"
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
+
+    buildFeatures {
+        viewBinding true
     }
 }
 
@@ -50,6 +83,13 @@ dependencies {
 
     // paging
     implementation 'androidx.paging:paging-runtime:3.1.1'
+
+    // 手势密码
+    implementation 'com.github.ihsg:PatternLocker:2.5.7'
+
+    // 上拉刷新下拉加载框架：https://github.com/scwang90/SmartRefreshLayout
+    implementation 'com.scwang.smart:refresh-layout-kernel:2.0.3'
+    implementation 'com.scwang.smart:refresh-header-material:2.0.3'
 
     // 标题栏
     implementation 'com.github.getActivity:TitleBar:9.2'
@@ -66,4 +106,5 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
 }

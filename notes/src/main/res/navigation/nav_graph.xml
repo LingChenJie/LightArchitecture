@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/listFragment">
+
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.architecture.light.ui.page.mvi.fragment.ListFragment"
+        android:label="ListFragment"
+        tools:layout="@layout/fragment_list">
+        <action
+            android:id="@+id/action_listFragment_to_editorFragment"
+            app:destination="@id/editorFragment"
+            app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_listFragment_to_lockListFragment"
+            app:destination="@id/lockListFragment"
+            app:launchSingleTop="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editorFragment"
+        android:name="com.architecture.light.ui.page.mvi.fragment.EditorFragment"
+        android:label="EditorFragment"
+        tools:layout="@layout/fragment_editor" />
+    <fragment
+        android:id="@+id/lockListFragment"
+        android:name="com.architecture.light.ui.page.mvi.fragment.LockListFragment"
+        android:label="LockListFragment"
+        tools:layout="@layout/fragment_lock_list">
+        <action
+            android:id="@+id/action_lockListFragment_to_editorFragment"
+            app:destination="@id/editorFragment"
+            app:launchSingleTop="true" />
+    </fragment>
+</navigation>
