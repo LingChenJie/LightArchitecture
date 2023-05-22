@@ -20,7 +20,6 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         AppUtils.init(this);
-        MMKV.initialize(this);
         ToastUtils.init(this, new ToastStyle());
     }
 

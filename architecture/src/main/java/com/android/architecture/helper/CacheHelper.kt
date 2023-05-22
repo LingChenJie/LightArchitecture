@@ -1,10 +1,14 @@
 package com.android.architecture.helper
 
+import com.android.architecture.utils.AppUtils
 import com.tencent.mmkv.MMKV
 
 object CacheHelper {
 
-    private val instance by lazy { MMKV.defaultMMKV() }
+    private val instance by lazy {
+        MMKV.initialize(AppUtils.getApp())
+        MMKV.defaultMMKV()
+    }
 
     fun saveString(key: String, value: String? = null): Boolean {
         return if (value == null) {
