@@ -1,5 +1,6 @@
 package com.architecture.light.domain.event
 
+import com.android.architecture.domain.dispatcher.event.BaseEvent
 import com.architecture.light.data.local.db.entity.Note
 
 /**
@@ -9,7 +10,7 @@ import com.architecture.light.data.local.db.entity.Note
  * Modify date: 2022/7/31
  * Version: 1
  */
-sealed class NoteEvent {
+sealed class NoteEvent : BaseEvent() {
     var note: Note? = null
     fun setNote(note: Note): NoteEvent {
         this.note = note
