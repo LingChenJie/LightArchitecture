@@ -78,11 +78,12 @@ android {
 dependencies {
 
     implementation project(":architecture")
-    kapt "androidx.room:room-compiler:2.4.3"
-//    implementation 'com.github.LingChenJie:LightArchitecture:v1.0.6'
+    // 使用ROOM数据库需要加入编译器
+    kapt "androidx.room:room-compiler:2.5.1"
+//    implementation 'com.github.LingChenJie:LightArchitecture:v1.1.4'
 
     // paging
-    implementation 'androidx.paging:paging-runtime:3.1.1'
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
 
     // 上拉刷新下拉加载框架：https://github.com/scwang90/SmartRefreshLayout
     implementation 'com.scwang.smart:refresh-layout-kernel:2.0.3'
