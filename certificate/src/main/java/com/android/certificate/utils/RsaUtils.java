@@ -1,4 +1,9 @@
-package com.android.architecture.utils;
+package com.android.certificate.utils;
+
+import com.android.architecture.utils.Base64Utils;
+import com.android.architecture.utils.ByteUtil;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.io.ByteArrayInputStream;
 import java.math.BigInteger;
@@ -8,7 +13,7 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.security.Signature;
+import java.security.Security;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
@@ -41,11 +46,15 @@ public class RsaUtils {
     public static final String ECB_PKCS5_PADDING = "RSA/ECB/PKCS5Padding";
     public static final String ECB_PKCS7_PADDING = "RSA/ECB/PKCS7Padding";
     public static final String NONE_OAEP_PADDING = "RSA/NONE/OAEPPadding";
-    private static final String SIGNATURE_ALGORITHM_SHA1 = "Sha1WithRSA";
-    private static final String SIGNATURE_ALGORITHM_SHA256 = "Sha256WithRSA";
-    private static final String SIGNATURE_ALGORITHM_SHA512 = "Sha512WithRSA";
     // 当前秘钥支持加密的最大字节数
     public static final int DEFAULT_BUFFER_SIZE = (DEFAULT_KEY_SIZE / 8) - 11;
+
+    static {
+        if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+            System.out.println("security provider BC not found");
+            Security.addProvider(new BouncyCastleProvider());
+        }
+    }
 
 
     /**
@@ -209,13 +218,6 @@ public class RsaUtils {
         return null;
     }
 
-    /**
-     * 私钥解密
-     *
-     * @param privateKeyEncoded
-     * @param data
-     * @return
-     */
     public static byte[] decryptByPrivateKey(byte[] privateKeyEncoded, byte[] data) {
         try {
             RSAPrivateKey key = getPrivateKey(privateKeyEncoded);
@@ -228,59 +230,13 @@ public class RsaUtils {
         return null;
     }
 
-    /**
-     * 私钥签名
-     *
-     * @param privateKeyEncoded
-     * @param data
-     * @return
-     */
-    public static byte[] signByPrivateKey(byte[] privateKeyEncoded, byte[] data) {
-        try {
-            RSAPrivateKey key = getPrivateKey(privateKeyEncoded);
-            Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM_SHA256);
-            signature.initSign(key);
-            signature.update(data);
-            return signature.sign();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-
-    /**
-     * 公钥验签
-     *
-     * @param publicKeyEncoded
-     * @param data
-     * @param signInfo
-     * @return
-     */
-    public static boolean verifyByPublicKey(byte[] publicKeyEncoded, byte[] data, byte[] signInfo) {
-        try {
-            RSAPublicKey key = getPublicKey(publicKeyEncoded);
-            Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM_SHA256);
-            signature.initVerify(key);
-            signature.update(data);
-            return signature.verify(signInfo);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-
     public static void main(String[] args) {
-        try {
 //        test();
 //        test2();
 //        test3();
-
-//            test4();
-//            test5();
-            test6();
-            test7();
+        try {
+            test4();
+            test5();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -353,7 +309,7 @@ public class RsaUtils {
     }
 
     public static void test5() {
-        String enData = "BA64D05DB" +
+        String data = "BA64D05DB" +
                 "BF2E1E5A8D98DF53B8DDDE28C630A59662DE05BD83F1EBB54744710E96F6B0AD9046D0CBA23086122" +
                 "D05DFD4D46FCFE4D5C0A1D06214615920C1B3848D2F7B05E88F2FE7C00598445E1037D9F033497F7F" +
                 "232316BFC783507D16A727FBF1BA75EA26D8306F8654A514B6319DABD1633FB4C50945C97323F30F7" +
@@ -361,136 +317,36 @@ public class RsaUtils {
                 "8DBF93EC29C9F2CFC0CBA1CCC93C5CD714B614A2902BCAF5BDF8DDACC8482FCE236D4A89DE903BD21" +
                 "700061A778CD802EA527F7DF0637AD5567FDF97D0B50B9DD2DE9695B81F22994A118B0B98877CDFF6" +
                 "1C1C44257071B64D9";
-//        String enData = "4AE90D70EE1F37771E5E6786694376DAAAF88684502C51028024C8DDDB102C9ED824F99A01B9FFBA0ADD57649E97D0150A8C843080511F230F37B4917858596C75A9350E044762D3512091C348B8B9D0B34B5FDE1A73D903AD65066C9D49A4E0DBE7C237CE97E71EB6D90D0DD24822E0744229EB89D256BC7998A07BC4F38549309E20BB5E2EFA06991BABBF10F90E67DCFC1F997C8073E92A66B000F73C4C32337817E60913E780F45B41F520A1F34AA4CC480C8585304931B32ECB409691F5A57287A7E1AB7245F7B5FFF5F578E4209F4F1DF8977F644B245B4442CB1D8B60253FBEB5EBDFCC78BA6304449274B037CCA3E0ACFB5D134529015B37D98BBE6E";
-        String privateKeyBase64Str =
-                "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9Jquy2FY9XMis" +
-                        "CkJVlLyB3C4P4vZoJ/1fAjXF36qHkU5aOJ9kasKK9cA8T3tsQ0GrqvGNcxyhj17h" +
-                        "AlC5cqJK/BgOwShj67uG7F/loyNZEdbogSFW1BlRAU0vwS/JNTFUS+jje1aP7/a4" +
-                        "sYPEW9JToWR/cK/C69JMwaOz3FNZEfYZLmqS9KHugFTgxlp8BJwZ+5gxgte3IF90" +
-                        "Ip1pzlEDZK2GjLbuBXEi99KJl2YzvMJJ38IruiONM7GkoCZqc53/I3iPuHEoPpaC" +
-                        "MqfhOD2DOe0L6CbvYKLyEfReLFQG5abCXaweV/b9EzvvUl0u24RuATgzELLAg8GG" +
-                        "2hsOH+IhAgMBAAECggEBAJuBClF7R9Mkz5mYyZZANIXydS/8YKWaktQkJf8qdbEE" +
-                        "hczolinhF1VU2pj6ozaLSJcQb4vhoh00mEUWOTVtB/3rqP+gT0tuhvpSpDhPWYUl" +
-                        "hHAbkUQoFTQihMmI4ndhss9hpPI3+R9WoZiP4AtzjcPRgKTBCM6QP5F49NOuhBtJ" +
-                        "nIQTYYFYl2Cu2wt0bvprclbVQthCrkPnZywF5fOzk7wTiByhGeYA52ZMRO4WHg6r" +
-                        "XVBU/xb8VBZbTjhEzgIeGwMf1pixHf8UbuvsSbQ1V3b8t3CHt9xtbZUGTYt4LIoI" +
-                        "rcMHKg8e2YpO6qmu91YZp4qw2xxqfh0R0mFlaSgGV9ECgYEA8cHQWGUAQouhiQ28" +
-                        "5dACbOmA4BMq6ez5meJ02EgGbQFwTLIwafLa35GBP8TTGSpWf3XEQ86v2S3HX20o" +
-                        "M2ICBI9yVIyKTrpJv9P6N7UqaxSGJ3cMGooIrUiSFZ7BORFnkQ5b8ASlHF2WahJN" +
-                        "W30z1oPly6IBso5XAzKaOMbptqUCgYEAyEtzk+ml7uoxhh2DPcLFOaVWPo1DGd2R" +
-                        "M9UdadwVv+Ok7LWpK7/Z1MVYW7BYWUXF+RuCgG4tLMN7ERT5LlcVWvWO6bq5EQij" +
-                        "+YfAkmrwOidV5YiMR7/gCg/6W7D4guUCSJn1w/7vPHohR5mSFHicIWP7qrCSWbDB" +
-                        "vXabmiBUIM0CgYBnpWEuVHbtELH7cTFYEXrIuL8w0ebnDVrhV44in5Zpq2E68HYD" +
-                        "JkQh717LORYLxvP4h0PSkk0fvhmo1sKSbOVSkTFCAFLXd9Rgcn/m3DvIVq9BQi+l" +
-                        "PSKFMAS5UiuizMxrCw3tdABZjeILrbcOjznnMPsW92jk5VN2on4t81GFpQKBgCzn" +
-                        "pZjiyD3hKYs88KCXGyqKY+SQPRv+bcBmJjsGiaXEvsQHEk9pqsemGuIrjhMtrm3j" +
-                        "+gUbLmubw+qXfioigforlYfXQgiMnF6kTctFyGfxS7OzQmgPn4YCAQovifemqjVm" +
-                        "tw/jBvXTF8T6rCKEy9Q8mz6waY9MLpNwlQAgAVx9AoGAI47mJnDj0Doo59WXjIXT" +
-                        "eB2SE/0YoWZDvTvUxFQOm5n3Ed6mq9nVcl1RSH8bhkrZQRiFsrrLz6iJR4BmjRgw" +
-                        "67WlKYG8mX7HXvEjYf5yAsuxdh0N5xnYlyeXhSciyij6YE4caQoja+VRBgMPzlYv" +
-                        "IDkIK7tutsTEsyrc7SHy9j4=";
+        String privateKeyBase64Str = "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9Jquy2FY9XMis" +
+                "CkJVlLyB3C4P4vZoJ/1fAjXF36qHkU5aOJ9kasKK9cA8T3tsQ0GrqvGNcxyhj17h" +
+                "AlC5cqJK/BgOwShj67uG7F/loyNZEdbogSFW1BlRAU0vwS/JNTFUS+jje1aP7/a4" +
+                "sYPEW9JToWR/cK/C69JMwaOz3FNZEfYZLmqS9KHugFTgxlp8BJwZ+5gxgte3IF90" +
+                "Ip1pzlEDZK2GjLbuBXEi99KJl2YzvMJJ38IruiONM7GkoCZqc53/I3iPuHEoPpaC" +
+                "MqfhOD2DOe0L6CbvYKLyEfReLFQG5abCXaweV/b9EzvvUl0u24RuATgzELLAg8GG" +
+                "2hsOH+IhAgMBAAECggEBAJuBClF7R9Mkz5mYyZZANIXydS/8YKWaktQkJf8qdbEE" +
+                "hczolinhF1VU2pj6ozaLSJcQb4vhoh00mEUWOTVtB/3rqP+gT0tuhvpSpDhPWYUl" +
+                "hHAbkUQoFTQihMmI4ndhss9hpPI3+R9WoZiP4AtzjcPRgKTBCM6QP5F49NOuhBtJ" +
+                "nIQTYYFYl2Cu2wt0bvprclbVQthCrkPnZywF5fOzk7wTiByhGeYA52ZMRO4WHg6r" +
+                "XVBU/xb8VBZbTjhEzgIeGwMf1pixHf8UbuvsSbQ1V3b8t3CHt9xtbZUGTYt4LIoI" +
+                "rcMHKg8e2YpO6qmu91YZp4qw2xxqfh0R0mFlaSgGV9ECgYEA8cHQWGUAQouhiQ28" +
+                "5dACbOmA4BMq6ez5meJ02EgGbQFwTLIwafLa35GBP8TTGSpWf3XEQ86v2S3HX20o" +
+                "M2ICBI9yVIyKTrpJv9P6N7UqaxSGJ3cMGooIrUiSFZ7BORFnkQ5b8ASlHF2WahJN" +
+                "W30z1oPly6IBso5XAzKaOMbptqUCgYEAyEtzk+ml7uoxhh2DPcLFOaVWPo1DGd2R" +
+                "M9UdadwVv+Ok7LWpK7/Z1MVYW7BYWUXF+RuCgG4tLMN7ERT5LlcVWvWO6bq5EQij" +
+                "+YfAkmrwOidV5YiMR7/gCg/6W7D4guUCSJn1w/7vPHohR5mSFHicIWP7qrCSWbDB" +
+                "vXabmiBUIM0CgYBnpWEuVHbtELH7cTFYEXrIuL8w0ebnDVrhV44in5Zpq2E68HYD" +
+                "JkQh717LORYLxvP4h0PSkk0fvhmo1sKSbOVSkTFCAFLXd9Rgcn/m3DvIVq9BQi+l" +
+                "PSKFMAS5UiuizMxrCw3tdABZjeILrbcOjznnMPsW92jk5VN2on4t81GFpQKBgCzn" +
+                "pZjiyD3hKYs88KCXGyqKY+SQPRv+bcBmJjsGiaXEvsQHEk9pqsemGuIrjhMtrm3j" +
+                "+gUbLmubw+qXfioigforlYfXQgiMnF6kTctFyGfxS7OzQmgPn4YCAQovifemqjVm" +
+                "tw/jBvXTF8T6rCKEy9Q8mz6waY9MLpNwlQAgAVx9AoGAI47mJnDj0Doo59WXjIXT" +
+                "eB2SE/0YoWZDvTvUxFQOm5n3Ed6mq9nVcl1RSH8bhkrZQRiFsrrLz6iJR4BmjRgw" +
+                "67WlKYG8mX7HXvEjYf5yAsuxdh0N5xnYlyeXhSciyij6YE4caQoja+VRBgMPzlYv" +
+                "IDkIK7tutsTEsyrc7SHy9j4=";
 
-        byte[] dataBytes = ByteUtil.hexStr2Bytes(enData);
+        byte[] dataBytes = ByteUtil.hexStr2Bytes(data);
         byte[] decryptResult = decryptByPrivateKey(Base64Utils.decode(privateKeyBase64Str), dataBytes);
         System.out.println("decryptResult:" + ByteUtil.bytes2HexStr(decryptResult));
-    }
-
-    public static void test6() throws CertificateException {
-        String certificateBase64Str =
-                "MIICzTCCAbWgAwIBAgIIAJvBVAAAEpQwDQYJKoZIhvcNAQELBQAwKzELMAkGA1UE\n" +
-                        "BhMCUFQxHDAaBgNVBAMME01ORlN1YkNBIEtEQyBTaWduZXIwHhcNMTgwNjE1MDAw\n" +
-                        "MDAwWhcNMTkwNjE1MDAwMDAwWjAiMQswCQYDVQQGEwJQVDETMBEGA1UEAwwKS0RD\n" +
-                        "S2V5UGFpcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALxDC+lZUoO8\n" +
-                        "zIod49pqw5DsegAdBpyYTgN07uhaiOhibU78z7VpMRJ+aJd2GNsDPbmYSoSUsbE4\n" +
-                        "FLrIH9Zc7Xm2AL1fUgEe7gkEMbqNunqfMJUO8BRNJNww2BpbASiaVZtFYzF7BuOl\n" +
-                        "6l4+yMQNZb/bteXQ3dhRefGB7+IFyGlpTtWTmQkHWVGEH+7OwYoIAVHUVXy8XJlp\n" +
-                        "olqVgsMIkk1NZs4GrzHOvYTfwpFg98tIO6gt4y3mv4Jwd7ZnZ5o+Bz/zfmGiKtVe\n" +
-                        "mUTNnRUOXz9C0bVJJ9acd2HZZb3rEVXiM5NbbUFBuYuO1eCsGwqvH54fSYcidHj1\n" +
-                        "j3heLA3yKzcCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAeKPA3qRuKhgI3Oo09FQ7\n" +
-                        "bG5sdqp9IMc/zNSYGSOUyn13eYrpLOhTq7jZ2oYP6TlcT5HNv8ubTfFGqxqw5mCp\n" +
-                        "lM7BTmyQ1jw94QtVmHCwBzYAwNhtLbor3CKIl1qL6G9B2lJXGjTDROoYPYhngJrM\n" +
-                        "Py2vrXZukT3IvMCzxil7GswV68H5Nau4w1fIUoSGFK9BQWnmBCv4Q9gW/xkeuph9\n" +
-                        "Shy1vIgJhyTWxD+zRW/f5girW0YvMHCHSXRm8lLjjFC0J41hsc48M3vUbjiRyoXY\n" +
-                        "lVuL93Z6MAY1Q70Lur14XZJPbdmtFBOrU8MP7uE6eEoyIdh3QA/vwMr7uFkpCaGh\n" +
-                        "jQ==";
-        CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
-        Certificate certificate = certificateFactory.generateCertificate(new ByteArrayInputStream(Base64Utils.decode(certificateBase64Str)));
-        X509Certificate x509Certificate = (X509Certificate) certificate;
-
-//        String data =
-//                "DE7436D0556F31AD154C1AF340DF9648B0120B1TX01S0100KS18FF041112345678E00000BA64D05DB" +
-//                "BF2E1E5A8D98DF53B8DDDE28C630A59662DE05BD83F1EBB54744710E96F6B0AD9046D0CBA23086122" +
-//                "D05DFD4D46FCFE4D5C0A1D06214615920C1B3848D2F7B05E88F2FE7C00598445E1037D9F033497F7F" +
-//                "232316BFC783507D16A727FBF1BA75EA26D8306F8654A514B6319DABD1633FB4C50945C97323F30F7" +
-//                "9D7296864A5DD7FEEBA0BAAB3A609064162E656A3CFA126C6D397DC868E35553398CFE55E942F480E" +
-//                "8DBF93EC29C9F2CFC0CBA1CCC93C5CD714B614A2902BCAF5BDF8DDACC8482FCE236D4A89DE903BD21" +
-//                "700061A778CD802EA527F7DF0637AD5567FDF97D0B50B9DD2DE9695B81F22994A118B0B98877CDFF6" +
-//                "1C1C44257071B64D9CB6A00AAE574E0DAEE1FAA67E0906C11EADD8CEB799042E16BBF053D36131517" +
-//                "95C27EBFF26BE494";
-        String data = "DE7436D0556F31AD154C1AF340DF9648B0120B1TX01S0100KS18FF041112345678E00000BA64D05DB" +
-                "BF2E1E5A8D98DF53B8DDDE28C630A59662DE05BD83F1EBB54744710E96F6B0AD9046D0CBA23086122" +
-                "D05DFD4D46FCFE4D5C0A1D06214615920C1B3848D2F7B05E88F2FE7C00598445E1037D9F033497F7F" +
-                "232316BFC783507D16A727FBF1BA75EA26D8306F8654A514B6319DABD1633FB4C50945C97323F30F7" +
-                "9D7296864A5DD7FEEBA0BAAB3A609064162E656A3CFA126C6D397DC868E35553398CFE55E942F480E" +
-                "8DBF93EC29C9F2CFC0CBA1CCC93C5CD714B614A2902BCAF5BDF8DDACC8482FCE236D4A89DE903BD21" +
-                "700061A778CD802EA527F7DF0637AD5567FDF97D0B50B9DD2DE9695B81F22994A118B0B98877CDFF6" +
-                "1C1C44257071B64D9D8FF0E717302DBEFE0FC7C3C65E0335D863449592349638AAFE6D5A064AD221E" +
-                "9A2E674CBD5828B7";
-        String signInfo = "2741A8EE3B14585D805F2A3B68B49805211D2C97D83745AC3ECFA00494C1F993D" +
-                "97C68F4B0D379CBF340951F893BA126CEC065AAE4CFD177DE096C3850A17A6CBC3C48DDBA9C74CAC9" +
-                "75D5DEE444D39E102B79D2FD5938A4C558924CE3D478AF22FD146A4E941AAF577CD3E0B2B217566BB" +
-                "3A31FBC1EDF7F8F4CF384512DEC212F85C4B277FBECB10D439856A92E0C02C1BC65325810AC10E1D6" +
-                "EF1287C034540528034E5DDAB38797335F3DF70F8843270C148E227CA9B6ED64D376CDC4D40A33506" +
-                "BBDEBFC40242E0BB00A135360373DA61A8D5EA7FBFEFA3D911D17F74600E370E3BD3A367B3FC6ACA4" +
-                "F025C43E49ED485AA7C66CED90940019EA6984B5F3";
-//        String signInfo = "457BCD2F17776FB186FC9AFC88B0B3242BFC1FDF5A6FAA780D5A32F785B42D1FA816E18980DD8DE1EBA85972B0DA05ED4B997F9B924EC06A27D29E5E0EF7AE9AA4F460E5C1567AFA83BFA4A279462E51C9673EC0025DF5EA90464A098360C6276B6814EC81DC7FCFB06C947E06836082B2930DBAFD92D8C5D5C8A9B5E7EE79C88B6C7DC89EC018AAED02B8FACF07DFDB597DD1D47C8608CDAEC9725BC87C76B90D17C728E4B91AF743236A1069CBFDF58DAEF4F7B24104A1EE20B93E70D05D3EE60D276032D2BE307509C7E3277D25849C38B5B85B10021C4A99C3BE83193B835926F3F077EB12869BA1970CD97F14CA656E59BCC9B042BF096FF1F248C07CDC";
-
-        boolean verifyResult = verifyByPublicKey(x509Certificate.getPublicKey().getEncoded(), ByteUtil.hexStr2Bytes(data), ByteUtil.hexStr2Bytes(signInfo));
-        System.out.println("publicKey verifyResult:" + verifyResult);
-    }
-
-    public static void test7() {
-        String data =
-                "DE7436D0556F31AD154C1AF340DF9648B0120B1TX01S0100KS18FF041112345678E00000BA64D05DB" +
-                "BF2E1E5A8D98DF53B8DDDE28C630A59662DE05BD83F1EBB54744710E96F6B0AD9046D0CBA23086122" +
-                "D05DFD4D46FCFE4D5C0A1D06214615920C1B3848D2F7B05E88F2FE7C00598445E1037D9F033497F7F" +
-                "232316BFC783507D16A727FBF1BA75EA26D8306F8654A514B6319DABD1633FB4C50945C97323F30F7" +
-                "9D7296864A5DD7FEEBA0BAAB3A609064162E656A3CFA126C6D397DC868E35553398CFE55E942F480E" +
-                "8DBF93EC29C9F2CFC0CBA1CCC93C5CD714B614A2902BCAF5BDF8DDACC8482FCE236D4A89DE903BD21" +
-                "700061A778CD802EA527F7DF0637AD5567FDF97D0B50B9DD2DE9695B81F22994A118B0B98877CDFF6" +
-                "1C1C44257071B64D9CB6A00AAE574E0DAEE1FAA67E0906C11EADD8CEB799042E16BBF053D36131517" +
-                "95C27EBFF26BE494";
-        String privateKeyBase64Str =
-                "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC8QwvpWVKDvMyK\n" +
-                "HePaasOQ7HoAHQacmE4DdO7oWojoYm1O/M+1aTESfmiXdhjbAz25mEqElLGxOBS6\n" +
-                "yB/WXO15tgC9X1IBHu4JBDG6jbp6nzCVDvAUTSTcMNgaWwEomlWbRWMxewbjpepe\n" +
-                "PsjEDWW/27Xl0N3YUXnxge/iBchpaU7Vk5kJB1lRhB/uzsGKCAFR1FV8vFyZaaJa\n" +
-                "lYLDCJJNTWbOBq8xzr2E38KRYPfLSDuoLeMt5r+CcHe2Z2eaPgc/835hoirVXplE\n" +
-                "zZ0VDl8/QtG1SSfWnHdh2WW96xFV4jOTW21BQbmLjtXgrBsKrx+eH0mHInR49Y94\n" +
-                "XiwN8is3AgMBAAECggEAPq1nutG1KgziYB1hbadb4tUILR98wwfl+TqmC4+QwyV5\n" +
-                "1PFQScpyvwB82+hCkC/9DdxI+ujyW9ka9bCJAPpBSeMxTdr9V0gv4aqWz9A9xHNZ\n" +
-                "Xlbx0SB55CES4Xto4Fa5p48rXh7ihUoIxEXM25DGTmDcp12pbkp5+dDTx4E7XvRR\n" +
-                "NF6IN1rp/m8dgCkdPQ/Mi1nh5w0exdFh7ZU9FO1zYsS3fG9wKME4CuMbfOziutFw\n" +
-                "572yfUJZKWzytf6oLOMSVz7lp9tk4yCPlzFEzOs3IE9CyCE9j6FkiGay59MG8RA5\n" +
-                "KUh3Hnk8yhn8X1t6/DCI36l+NZEGjlvCSoapYcagGQKBgQDkG+Y9Q5BMpXDz51CD\n" +
-                "6H9KD+jNFstgghlA7yNwCk956BIFgcMeRI3wwuPSbu55NyaiLsWOBVYwXdl7ZqCK\n" +
-                "mAEBR3kgS4CCitOtc91x+q7Ahr9o0NpKE+T+Z/B+9MFm7NoNrR8uM0uCiGXzJdfx\n" +
-                "W+9J0mDdNm/2wysiTlsNlnGgtQKBgQDTR+IIRQkGrC3gd1jp6iwE1WjESJ7eR0y5\n" +
-                "DZecT68VXaO6vGhmgpW/lJl7oGU9hfG1hoSSLobi5R0RR2suNKnX3kyTQEaDbpq0\n" +
-                "iJ5F2hC6PW5EF+eu+KpCaLBkbV2KHsu+ldWOKI5aK/4pH4Wtb2W5zIOPiWNH5ghe\n" +
-                "VJRlkyILuwKBgQCVZfxuxZB90qFe7XIbYqvzquXTZQmAxNSbZcR0/hu9gRREjQ9p\n" +
-                "BIdeV5Z03XjM5SUldbKn6LDhbqYhHz8oZpPJ7bDUSP77AMfQw6EWpJPNvrMgiCFg\n" +
-                "ARWq1hJ6Y/1DVv8dk/RnAuuCq6jyDigXiRn45JPSbnP4Ty0yA9W42X7EPQKBgDWf\n" +
-                "Q82nf7/yyP30LFvJs/xSEXHnoHJ3lBBPU9A3JQ9+IYTONoz1zX2/ACkxLyCrMwpI\n" +
-                "JrNXHaLOVU9CWgBzGzwPTk38/Sh0VM1G8yx1SNOLrcWYb5OnxsZt/X6vhxL79+fZ\n" +
-                "7UZUIrTd/3Z+apX29NFwB1/RlaH0zuDqBHO3IOfrAoGAJPt5TO14aeEdhKEGhBXS\n" +
-                "KtNG8SpIJ80d41WhPQQNBrwZcwqyOe67qHZDRSMhb+zJsdvwkboZArP8xRjZTcvj\n" +
-                "ue7HBtEukzAimp6QX8uolqNFGCpCgrLrB3djLVSEPgFW2emI7xjqVvEXjxY3Hh1M\n" +
-                "P5U5PLVtAn9prWsVYrwqfqw=";
-
-        byte[] bytes = signByPrivateKey(Base64Utils.decode(privateKeyBase64Str), ByteUtil.hexStr2Bytes(data));
-        System.out.println("PrivateKey signInfo:" + ByteUtil.bytes2HexStr(bytes));
-
     }
 
 
