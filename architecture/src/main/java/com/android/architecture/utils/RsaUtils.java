@@ -279,8 +279,9 @@ public class RsaUtils {
 
 //            test4();
 //            test5();
-            test6();
-            test7();
+//            test6();
+//            test7();
+            test8();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -323,22 +324,43 @@ public class RsaUtils {
     }
 
     public static void test4() throws CertificateException {
-        String certificateBase64Str = "MIIC0DCCAbigAwIBAgIIAJvBVAAAEpMwDQYJKoZIhvcNAQELBQAwLjELMAkGA1UE" +
-                "BhMCUFQxHzAdBgNVBAMMFk1ORlN1YkNBIERldmljZSBTaWduZXIwHhcNMTgwNjE1" +
-                "MDAwMDAwWhcNMTkwNjE1MDAwMDAwWjAiMQswCQYDVQQGEwJQVDETMBEGA1UEAwwK" +
-                "RGV2S2V5UGFpcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAL0mq7LY" +
-                "Vj1cyKwKQlWUvIHcLg/i9mgn/V8CNcXfqoeRTlo4n2Rqwor1wDxPe2xDQauq8Y1z" +
-                "HKGPXuECULlyokr8GA7BKGPru4bsX+WjI1kR1uiBIVbUGVEBTS/BL8k1MVRL6ON7" +
-                "Vo/v9rixg8Rb0lOhZH9wr8Lr0kzBo7PcU1kR9hkuapL0oe6AVODGWnwEnBn7mDGC" +
-                "17cgX3QinWnOUQNkrYaMtu4FcSL30omXZjO8wknfwiu6I40zsaSgJmpznf8jeI+4" +
-                "cSg+loIyp+E4PYM57QvoJu9govIR9F4sVAblpsJdrB5X9v0TO+9SXS7bhG4BODMQ" +
-                "ssCDwYbaGw4f4iECAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAi4NjsZAEHXLK6mOh" +
-                "GgkI7dFYKQN8l+N7IwwqAwaj0QumXd4e6V8OxAD5QbnIP+JNaVeinRCYfeEsg+bx" +
-                "mRmKIOEjLzZwkZo6BoF7JiCfSKpoi0+1gWSr2E+zu4YMu3KzyhQGio/oZg9jDhTn" +
-                "9uXShDtnQs3slqbsjqTSBoxpO1449IOnsXJPZbupCM3LUhtEUjNscO0nQlW2Z4nC" +
-                "+rFzOssOJwfmsIl5TGtM1Fg8hla6/VBORvSi8eZMLeGfelOLaGAYAqDd4olXyBQP" +
-                "cZw7+Beq0rWCxEQ0CVrujnKWPJu0OyMMhiQHtapDPi52s6tI4abSdqGHwuNJvRyy" +
-                "NyWaWA==";
+//        String certificateBase64Str = "MIIC0DCCAbigAwIBAgIIAJvBVAAAEpMwDQYJKoZIhvcNAQELBQAwLjELMAkGA1UE" +
+//                "BhMCUFQxHzAdBgNVBAMMFk1ORlN1YkNBIERldmljZSBTaWduZXIwHhcNMTgwNjE1" +
+//                "MDAwMDAwWhcNMTkwNjE1MDAwMDAwWjAiMQswCQYDVQQGEwJQVDETMBEGA1UEAwwK" +
+//                "RGV2S2V5UGFpcjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAL0mq7LY" +
+//                "Vj1cyKwKQlWUvIHcLg/i9mgn/V8CNcXfqoeRTlo4n2Rqwor1wDxPe2xDQauq8Y1z" +
+//                "HKGPXuECULlyokr8GA7BKGPru4bsX+WjI1kR1uiBIVbUGVEBTS/BL8k1MVRL6ON7" +
+//                "Vo/v9rixg8Rb0lOhZH9wr8Lr0kzBo7PcU1kR9hkuapL0oe6AVODGWnwEnBn7mDGC" +
+//                "17cgX3QinWnOUQNkrYaMtu4FcSL30omXZjO8wknfwiu6I40zsaSgJmpznf8jeI+4" +
+//                "cSg+loIyp+E4PYM57QvoJu9govIR9F4sVAblpsJdrB5X9v0TO+9SXS7bhG4BODMQ" +
+//                "ssCDwYbaGw4f4iECAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAi4NjsZAEHXLK6mOh" +
+//                "GgkI7dFYKQN8l+N7IwwqAwaj0QumXd4e6V8OxAD5QbnIP+JNaVeinRCYfeEsg+bx" +
+//                "mRmKIOEjLzZwkZo6BoF7JiCfSKpoi0+1gWSr2E+zu4YMu3KzyhQGio/oZg9jDhTn" +
+//                "9uXShDtnQs3slqbsjqTSBoxpO1449IOnsXJPZbupCM3LUhtEUjNscO0nQlW2Z4nC" +
+//                "+rFzOssOJwfmsIl5TGtM1Fg8hla6/VBORvSi8eZMLeGfelOLaGAYAqDd4olXyBQP" +
+//                "cZw7+Beq0rWCxEQ0CVrujnKWPJu0OyMMhiQHtapDPi52s6tI4abSdqGHwuNJvRyy" +
+//                "NyWaWA==";
+
+        String certificateBase64Str = "" +
+                "MIIDejCCAmICCQDxmreWEtPOsTANBgkqhkiG9w0BAQsFADB/MQswCQYDVQQGEwJD\n" +
+                "TjERMA8GA1UECAwIc2hhbmdoYWkxETAPBgNVBAcMCHNoYW5naGFpMQ0wCwYDVQQK\n" +
+                "DARTdW1pMQ0wCwYDVQQLDARTdW1pMQ0wCwYDVQQDDARTdW1pMR0wGwYJKoZIhvcN\n" +
+                "AQkBFg5xaS5zdUBzdW1pLmNvbTAeFw0yMzExMDEwNzMwNTBaFw0yNDEwMzEwNzMw\n" +
+                "NTBaMH8xCzAJBgNVBAYTAkNOMREwDwYDVQQIDAhzaGFuZ2hhaTERMA8GA1UEBwwI\n" +
+                "c2hhbmdoYWkxDTALBgNVBAoMBFN1bWkxDTALBgNVBAsMBFN1bWkxDTALBgNVBAMM\n" +
+                "BFN1bWkxHTAbBgkqhkiG9w0BCQEWDnFpLnN1QHN1bWkuY29tMIIBIjANBgkqhkiG\n" +
+                "9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzxCBDMD62C+jFVUEI6dnTIEVUT3T+0LcCapa\n" +
+                "nJFwROVAjgNFkyBZ/qz64Ys9wTFyAvzBO9znmEIq8557cOEVrGR5+hzSN+imz3Xa\n" +
+                "ZdsSI9Q4XH8drNn2y0euM02TszwH1YO9hKQ3HU/TqiZutPojUd+dVSBKz8OQ0lL6\n" +
+                "u0Gn+XGCTz9ln0HEGa1sBS/5/t2PXhCgfYG5c5hjWgteylp0c3tkEW+Yo4PZH/Kx\n" +
+                "Y3iU5rKYf1YcFToOXjpNhLUy2+qnSVpQ9GLMIpPQNdyBOEB2i/ZfgMOOWLbLzKYP\n" +
+                "PfwqApHu9Z84PHLWuUZJADeKnFCjZDqub0l/mMTDY/4SJag4YQIDAQABMA0GCSqG\n" +
+                "SIb3DQEBCwUAA4IBAQAHOX+r/aj4PhRkEn/sisxl5xxLAxdMmTs0D+KJW0R1Do9B\n" +
+                "jU47lkUAa92xCrhURTe0OvajRQfCfFaSJ+QVKfMHA5EY0DGjoN4xIc37D4uwNmvJ\n" +
+                "od7Tu0Cs1kD3acTEYngxl+Y2pWRSb7A83T7nG2WBFG8M+zidSpB16YtvG4wPdb3u\n" +
+                "BWttXCHBv5I8sOCBumvr8NFL1KtGOp+c6JeYoXTCfUXy49vy8inUgO1W4KTHlSdV\n" +
+                "RGGtvZV9/I6ywbDNXRsSi4iQAPDIyC9gF6NBJqe9iFcu1G4MT0DWTUcpkw9w7UUH\n" +
+                "6njFcIM4lWqG+vr5EFWsLxVFLBMo+7HGGj583eRA";
         CertificateFactory certificateFactory = CertificateFactory.getInstance("X.509");
         Certificate certificate = certificateFactory.generateCertificate(new ByteArrayInputStream(Base64Utils.decode(certificateBase64Str)));
         X509Certificate x509Certificate = (X509Certificate) certificate;
@@ -450,8 +472,10 @@ public class RsaUtils {
     }
 
     public static void test7() {
-        String data =
-                "DE7436D0556F31AD154C1AF340DF9648B0120B1TX01S0100KS18FF041112345678E00000BA64D05DB" +
+        String data = "DE7436D0556F31AD154C1AF340DF9648"+
+                "423031323042315458303153303130304B533138464" +
+                        "6303431313132333435363738453030303030"+
+                "BA64D05DB" +
                 "BF2E1E5A8D98DF53B8DDDE28C630A59662DE05BD83F1EBB54744710E96F6B0AD9046D0CBA23086122" +
                 "D05DFD4D46FCFE4D5C0A1D06214615920C1B3848D2F7B05E88F2FE7C00598445E1037D9F033497F7F" +
                 "232316BFC783507D16A727FBF1BA75EA26D8306F8654A514B6319DABD1633FB4C50945C97323F30F7" +
@@ -491,6 +515,12 @@ public class RsaUtils {
         byte[] bytes = signByPrivateKey(Base64Utils.decode(privateKeyBase64Str), ByteUtil.hexStr2Bytes(data));
         System.out.println("PrivateKey signInfo:" + ByteUtil.bytes2HexStr(bytes));
 
+    }
+
+    public static void test8() {
+        String hexStr = "30820122300D06092A864886F70D01010105000382010F003082010A0282010100BD21D29F76EC537EB643A8237B89EDC59C379F45F62E89DA72F02701EE20385CF576C0B8B1D70C7A391729FD241DF37C0CC61D2603E891D7078EDAAC2EA01B954576BB48AE6D06AA9733F4BB0562BB9B7D830624D6685B3DF1FB34437D2187A27E984407E99076A0613927126735507DA510466BE08CE4DD4B93436C7E9AF18B8DCDC00CAFE8DD3AE9581086C5A0EB9941D8003F54EB4832842066E03BFB63F6BD01A665E61A59656677A10BE0C044F5491170E3CC96FBB30137D143C60A520B98B61E9482DECF3F0598F85AC00BFFC9393D5831128075E5B5F285B66EF3FC4E16E88F1F674F5113BD2E5EAA8B164221F3F8A8A69E529B08451550CB5C2FB2870203010001";
+        byte[] bytes = encryptByPublicKey(ByteUtil.hexStr2Bytes(hexStr), ByteUtil.hexStr2Bytes("9B75B9EC8CA2DA7534DA4546F2FE34832C32204F102FD943"));
+        System.out.println("Encrypted:" + ByteUtil.bytes2HexStr(bytes));
     }
 
 
