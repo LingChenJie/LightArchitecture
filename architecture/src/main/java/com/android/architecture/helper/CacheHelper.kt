@@ -18,8 +18,8 @@ object CacheHelper {
         }
     }
 
-    fun getString(key: String): String {
-        return instance.decodeString(key) ?: ""
+    fun getString(key: String, defaultValue: String = ""): String {
+        return instance.decodeString(key) ?: defaultValue
     }
 
     fun saveFlag(key: String, flag: Boolean) {
