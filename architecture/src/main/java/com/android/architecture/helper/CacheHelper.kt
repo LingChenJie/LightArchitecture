@@ -18,8 +18,24 @@ object CacheHelper {
         }
     }
 
+    fun getString(key: String): String {
+        return instance.decodeString(key, "") ?: ""
+    }
+
     fun getString(key: String, defaultValue: String = ""): String {
         return instance.decodeString(key, defaultValue) ?: defaultValue
+    }
+
+    fun saveBool(key: String, flag: Boolean) {
+        instance.encode(key, flag)
+    }
+
+    fun getBool(key: String) {
+        instance.decodeBool(key, false)
+    }
+
+    fun getBool(key: String, defaultValue: Boolean = false) {
+        instance.decodeBool(key, defaultValue)
     }
 
     fun saveFlag(key: String, flag: Boolean) {
@@ -32,6 +48,10 @@ object CacheHelper {
 
     fun saveInt(key: String, value: Int) {
         instance.encode(key, value)
+    }
+
+    fun getInt(key: String): Int {
+        return instance.decodeInt(key, 0)
     }
 
     fun getInt(key: String, defaultValue: Int = 0): Int {
