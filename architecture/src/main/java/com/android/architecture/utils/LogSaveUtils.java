@@ -1,6 +1,7 @@
 package com.android.architecture.utils;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -21,8 +22,8 @@ public class LogSaveUtils {
     private static final int WARING_LEVER = 2;
     private static final int ERROR_LEVER = 3;
 
-    private static final String LOG_DIR_NAME = "LightArchitectureApp";
-    private static int SAVE_LOG_COUNT = 7;// 日志保存的数量，默认为7
+    private static String LOG_DIR_NAME = "APP_LOG";
+    private static int SAVE_LOG_COUNT = 10;// 日志保存的数量，默认为7
     private static final String LOG_PREFIX = "app_";
     private static final String LOG_SUFFIX = ".log";
 
@@ -46,6 +47,16 @@ public class LogSaveUtils {
             mLogLever = logLever;
         }
     }
+
+    /**
+     * 设置保存日志的目录
+     *
+     * @param dirName
+     */
+    public static void setSaveLogDir(String dirName) {
+        LOG_DIR_NAME = dirName;
+    }
+
 
     /**
      * 设置保存日志的数量
@@ -126,6 +137,10 @@ public class LogSaveUtils {
                     .getExternalStorageState())) {
                 String sdPath = FileUtils.getSDCardRootPath();
                 String logPath = sdPath + "/" + LOG_DIR_NAME + "/" + AppUtils.getApp().getPackageName() + "/";
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {// Android10.0以上系统
+                    sdPath = AppUtils.getApp().getExternalFilesDir(null).getAbsolutePath();
+                    logPath = sdPath + "/" + "Log" + "/";
+                }
                 File file = new File(logPath);
                 boolean mkdirs = true;
                 if (!file.exists()) {
