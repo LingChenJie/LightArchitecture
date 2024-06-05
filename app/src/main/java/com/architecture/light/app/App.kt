@@ -5,11 +5,13 @@ import androidx.core.content.ContextCompat
 import com.android.architecture.app.BaseApplication
 import com.android.architecture.constant.ErrorCode
 import com.android.architecture.helper.Logger
+import com.android.architecture.utils.DeviceInfoUtils
 import com.architecture.light.R
 import com.architecture.light.config.ToastStyle
 import com.architecture.light.config.glide.GlideApp
 import com.architecture.light.constant.AppErrorCode
 import com.architecture.light.constant.Constant
+import com.architecture.light.constant.Constant.TAG
 import com.architecture.light.ui.view.SmartBallPulseFooter
 import com.hjq.toast.ToastUtils
 import com.scwang.smart.refresh.header.MaterialHeader
@@ -59,6 +61,8 @@ class App : BaseApplication() {
 
         // 初始化吐司
         ToastUtils.init(this, ToastStyle())
+        val deviceInfo = DeviceInfoUtils.getDeviceInfo()
+        Logger.e(TAG, "deviceInfo: $deviceInfo")
     }
 
     override fun onLowMemory() {
