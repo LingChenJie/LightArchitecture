@@ -18,8 +18,8 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 34
-        versionCode 19
-        versionName "1.1.11"
+        versionCode 20
+        versionName "1.1.12"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -57,7 +57,7 @@ dependencies {
     //api fileTree(dir: "libs", include: ["*.jar", "*.aar"])
     api files('libs/commons-codec-1.15-ext.jar')
 
-    api 'androidx.appcompat:appcompat:1.7.0'
+    api 'androidx.appcompat:appcompat:1.6.1'
     api "androidx.navigation:navigation-runtime-ktx:2.7.7"
     api 'androidx.constraintlayout:constraintlayout:2.1.4'
     api 'androidx.recyclerview:recyclerview:1.3.2'
@@ -75,8 +75,8 @@ dependencies {
     api 'com.github.KunMinX:UnPeek-LiveData:v7.6.0'
     api 'com.github.KunMinX:Smooth-Navigation:v4.0.0'
 
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1"
 
     api 'com.tencent:mmkv-static:1.3.0'
 
@@ -95,7 +95,7 @@ dependencies {
 
     api 'com.github.getActivity:ToastUtils:11.2'
     api 'com.github.getActivity:XXPermissions:16.8'
-    api 'com.github.getActivity:ShapeView:9.0'
+    api 'com.github.getActivity:ShapeView:8.3'
 
 
     testImplementation 'junit:junit:4.13.2'
