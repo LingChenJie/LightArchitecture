@@ -18,6 +18,7 @@ import com.architecture.light.databinding.ActivityBrowserBinding
 import com.architecture.light.ui.view.BrowserView
 import com.architecture.light.ui.view.StatusLayout
 import com.hjq.bar.OnTitleBarListener
+import com.hjq.bar.TitleBar
 import com.scwang.smart.refresh.layout.api.RefreshLayout
 import com.scwang.smart.refresh.layout.listener.OnRefreshListener
 
@@ -51,14 +52,14 @@ class BrowserActivity : AppActivity(), StatusAction, OnRefreshListener {
     override fun initView() {
         setContentView(binding.root)
         binding.titleBar.setOnTitleBarListener(object : OnTitleBarListener {
-            override fun onLeftClick(view: View?) {
+            override fun onLeftClick(titleBar: TitleBar?) {
                 finish()
             }
 
-            override fun onTitleClick(view: View?) {
+            override fun onTitleClick(titleBar: TitleBar?) {
             }
 
-            override fun onRightClick(view: View?) {
+            override fun onRightClick(titleBar: TitleBar?) {
             }
         })
         binding.browserView.setLifecycleOwner(this)

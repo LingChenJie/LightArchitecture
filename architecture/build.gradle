@@ -3,7 +3,8 @@ import java.text.SimpleDateFormat
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'kotlin-kapt'
+//    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
 }
 
 static def buildDate() {
@@ -66,7 +67,8 @@ dependencies {
 
     api "androidx.room:room-runtime:2.6.1"
     api "androidx.room:room-ktx:2.6.1"
-    kapt "androidx.room:room-compiler:2.6.1"
+    //kapt "androidx.room:room-compiler:2.6.1"
+    ksp "androidx.room:room-compiler:2.6.1"
 
     api 'com.google.android.material:material:1.12.0'
     api 'com.google.code.gson:gson:2.10.1'
@@ -75,8 +77,8 @@ dependencies {
     api 'com.github.KunMinX:UnPeek-LiveData:v7.6.0'
     api 'com.github.KunMinX:Smooth-Navigation:v4.0.0'
 
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1"
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
 
     api 'com.tencent:mmkv-static:1.3.0'
 
@@ -95,7 +97,7 @@ dependencies {
 
     api 'com.github.getActivity:ToastUtils:11.2'
     api 'com.github.getActivity:XXPermissions:16.8'
-    api 'com.github.getActivity:ShapeView:8.3'
+    api 'com.github.getActivity:ShapeView:9.0'
 
 
     testImplementation 'junit:junit:4.13.2'
