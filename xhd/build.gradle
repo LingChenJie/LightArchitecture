@@ -8,6 +8,7 @@ plugins {
 
 android {
     compileSdk 33
+    namespace 'com.architecture.light'
 
     defaultConfig {
         applicationId "com.architecture.light.xhd"
@@ -92,11 +93,18 @@ android {
     }
     buildFeatures {
         viewBinding true
+        aidl true
     }
 
     sourceSets {
         main {
             jniLibs.srcDir 'libs'
+        }
+    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging true
         }
     }
 }

@@ -14,6 +14,7 @@ static def buildDate() {
 
 android {
     compileSdk 34
+    namespace 'com.android.architecture'
 
     defaultConfig {
         minSdk 21
@@ -95,7 +96,7 @@ dependencies {
 
     api 'com.github.getActivity:ToastUtils:11.2'
     api 'com.github.getActivity:XXPermissions:16.8'
-    api 'com.github.getActivity:ShapeView:8.3'
+    api 'com.github.getActivity:ShapeView:9.0'
 
 
     testImplementation 'junit:junit:4.13.2'

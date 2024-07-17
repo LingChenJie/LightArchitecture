@@ -6,7 +6,8 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 34
+    namespace 'com.architecture.light'
 
     defaultConfig {
         applicationId "com.architecture.light.notes"
@@ -73,6 +74,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+
 }
 
 dependencies {
