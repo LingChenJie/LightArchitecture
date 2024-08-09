@@ -30,12 +30,12 @@ object CacheHelper {
         instance.encode(key, flag)
     }
 
-    fun getBool(key: String) {
-        instance.decodeBool(key, false)
+    fun getBool(key: String): Boolean {
+        return instance.decodeBool(key, false)
     }
 
-    fun getBool(key: String, defaultValue: Boolean = false) {
-        instance.decodeBool(key, defaultValue)
+    fun getBool(key: String, defaultValue: Boolean = false): Boolean {
+        return instance.decodeBool(key, defaultValue)
     }
 
     fun saveFlag(key: String, flag: Boolean) {
