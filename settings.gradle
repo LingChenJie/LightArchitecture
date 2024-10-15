@@ -1,22 +1,22 @@
 pluginManagement {
     repositories {
-        gradlePluginPortal()
-        google()
-        mavenCentral()
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://jitpack.io' }
         maven { url "https://mvnrepository.com/artifact/com.itextpdf/itext-asian"}
+        gradlePluginPortal()
+        google()
+        mavenCentral()
     }
 }
 dependencyResolutionManagement {
     //repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
-        google()
-        mavenCentral()
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://jitpack.io' }
         maven { url "https://mvnrepository.com/artifact/com.itextpdf/itext-asian"}
+        google()
+        mavenCentral()
     }
 }
 rootProject.name = "LightArchitecture"
