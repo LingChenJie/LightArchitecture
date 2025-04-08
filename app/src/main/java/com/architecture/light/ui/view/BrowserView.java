@@ -458,7 +458,7 @@ public final class BrowserView extends NestedScrollWebView
             }
 
             XXPermissions.with(activity)
-                    .permission(Permission.Group.STORAGE)
+//                    .permission(Permission.Group.STORAGE)
                     .request(new PermissionCallback() {
                         @Override
                         public void onGranted(List<String> permissions, boolean all) {
