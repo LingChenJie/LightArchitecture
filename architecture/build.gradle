@@ -20,8 +20,8 @@ android {
     defaultConfig {
         minSdk 21
         targetSdk 34
-        versionCode 101017
-        versionName "1.1.17"
+        versionCode 101018
+        versionName "1.1.18"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -58,6 +58,15 @@ android {
         }
     }
 }
+
+afterEvaluate {
+    def metadataTask = tasks.findByName("generateMetadataFileForArchitecturePublication")
+    def bundleTask = tasks.findByName("bundleDebugAar")
+    if (metadataTask != null && bundleTask != null) {
+        metadataTask.dependsOn(bundleTask)
+    }
+}
+
 
 dependencies {
     //api fileTree(dir: "libs", include: ["*.jar", "*.aar"])
