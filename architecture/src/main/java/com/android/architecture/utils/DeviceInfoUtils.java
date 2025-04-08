@@ -58,9 +58,9 @@ public class DeviceInfoUtils {
 
             List<String> permissions = Arrays.asList(packageInfo.requestedPermissions);
 
-            if (permissions.contains(Permission.READ_EXTERNAL_STORAGE) || permissions.contains(Permission.WRITE_EXTERNAL_STORAGE)) {
-                builder.append("\n存储权限：\t").append(XXPermissions.isGranted(AppUtils.getApp(), Permission.Group.STORAGE) ? "已获得" : "未获得");
-            }
+//            if (permissions.contains(Permission.READ_EXTERNAL_STORAGE) || permissions.contains(Permission.WRITE_EXTERNAL_STORAGE)) {
+//                builder.append("\n存储权限：\t").append(XXPermissions.isGranted(AppUtils.getApp(), Permission.Group.STORAGE) ? "已获得" : "未获得");
+//            }
 
             if (permissions.contains(Permission.ACCESS_FINE_LOCATION) || permissions.contains(Permission.ACCESS_COARSE_LOCATION)) {
                 builder.append("\n定位权限：\t");
